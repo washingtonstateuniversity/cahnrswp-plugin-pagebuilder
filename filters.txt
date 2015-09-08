@@ -1,0 +1,3 @@
+cwpb_register_items in class/class-items-pb.php
+array - registered items | obj - WP_Post ( false )
+Allows other plugins to add or remove registered items.
