@@ -14,8 +14,6 @@ class Editor_PB {
 		
 		$settings = $this->get_editor_settings( $post );
 		
-		var_dump( $settings );
-		
 		// Get layout: array of item objects with children set
 		$items = $this->items->get_items_from_content( $post->post_content , 'section' , 'section' , true  );
 		

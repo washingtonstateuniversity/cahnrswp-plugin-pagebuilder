@@ -204,51 +204,6 @@ class Items_PB {
 		
 	} // end get_all_items
 	
-	public function get_content_recursive( $items ){
-		
-		$content = '';
-		
-		foreach( $items as $item ){
-			
-			
-			
-			if ( $item->allowed_children && is_array( $item->children ) ){
-				
-				$content .= $this->get_content_recursive( $item->children );
-				
-			} else {
-				
-				$content .= $item->content;
-				
-			} // end if
-			
-		} // end foreach
-		
-		return $content;
-		
-	} // end get_content_recursive
-	
-	
-	/*public function get_item_forms( $item , $recursive = true ){
-		
-		$forms = array( array( 'form' => $item->the_form() , 'item' => $item ) );
-		
-		if ( $recursive && $item->children ){
-			
-			foreach( $item->children as $child ){
-				
-				$forms = array_merge( $forms , $this->get_item_forms( $child , true ) );
-				
-			} // end foreach
-			
-		} // end if
-		
-		return $forms;
-		
-	} // end get_item_forms_recursive*/
-	
-	
-	
 	
 	/*
    	 * Builds the items and sets $items property. This is done
