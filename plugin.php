@@ -1,8 +1,8 @@
 <?php
 /*
-Plugin Name: CAHNRSWP Pagebuilder (Final)
-Plugin URI: https://web.wsu.edu/
-Description: Builds Stuff
+Plugin Name: CAHNRSWP Pagebuilder Updated
+Plugin URI: https://cahnrs.wsu.edu/communications
+Description: Revised version of CAHNRS Pagebuilder. Pagebuilder allows for highly customizable page layouts
 Author: CAHNRS Communication WSU, Danial Bleile
 Version: 1.0.0
 */
@@ -142,6 +142,7 @@ class CWP_Pagebuilder {
 		die();
 		
 	} // end ajax_request 
+	
 	
 	public function save_layout( $post_id , $post , $update ){
 		
