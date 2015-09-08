@@ -142,20 +142,55 @@ class Save_PB {
 	
 	public function save( $post_id ){
 		
+		// If this is an autosave, our form has not been submitted, so we don't want to do anything.
+		if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) { 
+			
+			return; 
+			
+		} // end if
+		
+		// Check the user's permissions.
+		if ( isset( $_POST['post_type'] ) && 'page' == $_POST['post_type'] ) {
+	
+			if ( ! current_user_can( 'edit_page', $post_id ) ) { 
+			
+			return;
+			
+			} // end if
+	
+		} else {
+	
+			if ( ! current_user_can( 'edit_post', $post_id ) ) {
+				
+				return; 
+				
+			} // end if
+			
+		} // end if
+		
+		
 		if ( ! empty( $_POST['_cpb']['layout'] ) ){
+			
+			$settings = $this->get_settings();
 		
 			$save_items = $this->get_save_array_recursive( $_POST['_cpb']['layout'] );
 			
-			$save_excerpt = $this->item_factory->get_content_recursive( $save_items ); 
+			$content = $this->to_shortcodes_recursive( $save_items );
 			
-			$data = $this->to_shortcodes_recursive( $save_items );
+			$excerpt = $this->get_excerpt( $settings , $content );
 			
-			if ( $data ){
+			foreach( $settings as $key => $value ){
+				
+				update_post_meta( $post_id , $key , $value ); 
+				
+			} // end foreach
+			
+			if ( $content ){
 				
 				$new_post = array(
 					'ID'           => $post_id,
-					'post_content' => $data, 
-					'post_excerpt' => wp_strip_all_tags( wp_trim_words( $save_excerpt , 55 ) ),
+					'post_content' => $content, 
+					'post_excerpt' => $excerpt,
 				);
 				
 				 wp_update_post( $new_post );
@@ -165,5 +200,39 @@ class Save_PB {
 		} // end if
 		
 	} // end save
+	
+	
+	public function get_excerpt( $settings , $content ){
+		
+		if ( isset( $settings['_cpb_m_excerpt'] ) && 'manual' ==  $settings['_cpb_m_excerpt'] ){
+			
+			$excerpt = $settings['_cpb_excerpt'];
+			
+		}  else {
+			
+			$excerpt = $this->clean_excerpt( $content );
+			
+		} // end if
+		
+		return $excerpt;
+		
+	} // end get_excerpt
+	
+	
+	public function clean_excerpt( $content ){
+		
+		$patt = '/\[.*?\]/i';
+		
+		$excerpt = preg_replace( $patt , '', $content );
+		
+		//var_dump( $content ); 
+		
+		//var_dump( $excerpt ); 
+		
+		$excerpt = wp_trim_words( wp_strip_all_tags( $excerpt ) , 55 );
+		
+		return $excerpt; 
+		
+	} // end get_excerpt
 	
 }
