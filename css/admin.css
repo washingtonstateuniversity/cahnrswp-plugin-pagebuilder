@@ -20,6 +20,24 @@
 }
 
 /* 
+* Hooks
+* -------------------------------------------
+*/
+#cwp-pb .cpb-helper-text {
+	font-size: 0.8rem;
+	margin: 0 1rem;
+}
+
+/* 
+* Editor
+* -------------------------------------------
+*/
+#cwp-pb-editor {
+	margin-bottom: 2rem;
+}
+
+
+/* 
 * Section
 * -------------------------------------------
 */
@@ -555,38 +573,35 @@
 	border-top: 1px solid #ddd;
 }
 
-#cwp-pb .cpb-editor-excerpt label{
-	display: inline-block;
-	padding: 0.25rem 0.75rem;
-	vertical-align: bottom;
-	border: 1px solid #bbb;
-	color: #fff;
-	background-color: #ccc;
-	border-radius: 0 3px 3px 0;
+#cwp-pb-options {
+	padding: 1.5rem 0;
 }
 
-#cwp-pb .cpb-editor-excerpt .first label {
-	border-radius: 3px 0 0 3px;
-}
 
-#cwp-pb .cpb-editor-excerpt label.active{
-	background: #2ea2cc;
-    border: 1px solid #0074a2;
-}
 
-#cwp-pb .cpb-editor-excerpt h3{
-	display: inline-block;
-	vertical-align: bottom;
-}
 
-#cwp-pb .cpb-editor-excerpt input{
-	display: none;
-}
+
+
+
+
 
 #cwp-pb .cpb-editor-excerpt textarea {
 	display: block;
 	width: 100%;
 	height: 6rem;
+}
+
+/* 
+* Hooks
+* -------------------------------------------
+*/
+#cwp-pb .cwp-inline{
+	display: inline-block;
+	vertical-align: top;
+}
+
+#cwp-pb .cwp-vabottom{
+	vertical-align: bottom;
 }
 
 
@@ -606,6 +621,30 @@
 * Buttons
 * -------------------------------------------
 */
+
+#cwp-pb .cwp-radio-toggle label{
+	display: inline-block;
+	padding: 0.25rem 0.75rem;
+	vertical-align: bottom;
+	border: 1px solid #bbb;
+	color: #fff;
+	background-color: #ccc;
+	border-radius: 0 3px 3px 0;
+}
+
+#cwp-pb .cwp-radio-toggle.first label {
+	border-radius: 3px 0 0 3px;
+}
+
+#cwp-pb .cwp-radio-toggle label.active{
+	background: #2ea2cc;
+    border: 1px solid #0074a2;
+}
+
+#cwp-pb .cwp-radio-toggle input{
+	display: none;
+}
+
 #cwp-pb .cpb-button {
 	text-decoration: none;
 	background: #2ea2cc;
