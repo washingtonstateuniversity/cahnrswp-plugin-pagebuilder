@@ -19,11 +19,21 @@ class Editor_PB {
 		
 		$html = '<div id="cwp-pb">';
 		
-			$html .= $this->get_layout_editor( $items , $post );
+			$html .= $this->get_init_options( $post , $settings );
 			
-			$html .= $this->get_layout_forms( $items , $post );
+			if ( $settings['_cpb_pagebuilder'] ) {
+		
+				$html .= $this->get_layout_editor( $items , $post );
+				
+				$html .= $this->get_layout_forms( $items , $post );
+				
+				$html .= $this->get_excerpt_form( $post , $settings );
 			
-			$html .= $this->get_excerpt_form( $post , $settings );
+			} else {
+				
+				$html .= $this->get_content_editor( $post , $settings );
+				
+			} // end if
 		
 		$html .= '</div>';
 		
@@ -31,15 +41,55 @@ class Editor_PB {
 		
 	} // end the_editor
 	
+	
+	public function get_init_options( $post , $settings ){
+		
+		$html = '<div id="cwp-pb-options">';
+		
+			$html .= '<h3 class="cwp-inline cwp-vabottom">Layout Builder </h3>'; 
+		
+			$html .= Forms_PB::radio_field( '_cpb_pagebuilder' ,  '0' , $settings['_cpb_pagebuilder'] , 'OFF', 'inline valign-bottom cwp-radio-toggle first');
+			
+			$html .= Forms_PB::radio_field( '_cpb_pagebuilder' ,  '1' , $settings['_cpb_pagebuilder'] , 'ON', 'inline valign-bottom cwp-radio-toggle' );
+			
+			$html .= '<div class="cpb-helper-text">***Please select Save Draft or Update to enable or disable the layout builder.</div>';
+		
+		$html .= '</div>';
+		
+		return $html;
+	
+	} // get_init_options
+	
+	public function get_content_editor( $post , $settings ){
+		
+		$html = '<div id="cwp-pb-content">';
+		
+			ob_start();
+			
+			wp_editor( $post->post_content , 'content' );
+			
+			$html .= ob_get_clean();
+			
+			$html .= '</div>';
+		
+		return $html;
+		
+	} // end get_content_editor
+	
+	
 	public function get_editor_settings( $post ){
 		
 		$st = array();
 		
 		$meta = get_post_meta( $post->ID );
 		
-		$st['_cpb_m_excerpt'] = ( ! empty( $meta['_cpb_m_excerpt'][0] ) )? $meta['_cpb_m_excerpt'][0] : 'auto';
+		$st['_cpb_m_excerpt'] = ( isset( $meta['_cpb_m_excerpt'][0] ) )? $meta['_cpb_m_excerpt'][0] : 'auto';
 		
-		$st['_cpb_excerpt'] = ( ! empty( $meta['_cpb_excerpt'] ) )? $meta['_cpb_excerpt'] : '';
+		$st['_cpb_excerpt'] = ( isset( $meta['_cpb_excerpt'][0] ) )? $meta['_cpb_excerpt'][0] : '';
+		
+		$st['_cpb_pagebuilder'] = ( isset( $meta['_cpb_pagebuilder'][0] ) )? $meta['_cpb_pagebuilder'][0] : 0;
+		
+		//var_dump( $st );
 		
 		return $st;
 		
@@ -51,11 +101,11 @@ class Editor_PB {
 		
 		$html = '<div class="cpb-editor-excerpt">';
 			
-			$html .= '<h3>Summary/Excerpt</h3>';
+			$html .= '<h3 class="cwp-inline cwp-vabottom">Summary/Excerpt</h3>';
 			
-			$html .= Forms_PB::radio_field( '_cpb_m_excerpt' ,  'auto' , $settings['_cpb_m_excerpt'] , 'Auto', 'inline valign-bottom first');
+			$html .= Forms_PB::radio_field( '_cpb_m_excerpt' ,  'auto' , $settings['_cpb_m_excerpt'] , 'Auto', 'inline valign-bottom first cwp-radio-toggle');
 			
-			$html .= Forms_PB::radio_field( '_cpb_m_excerpt' ,  'manual' , $settings['_cpb_m_excerpt'] , 'Custom', 'inline valign-bottom' );
+			$html .= Forms_PB::radio_field( '_cpb_m_excerpt' ,  'manual' , $settings['_cpb_m_excerpt'] , 'Custom', 'inline valign-bottom cwp-radio-toggle' );
 		
 			$html .= '<textarea name="_cpb_excerpt">' . $excerpt . '</textarea>';
 		

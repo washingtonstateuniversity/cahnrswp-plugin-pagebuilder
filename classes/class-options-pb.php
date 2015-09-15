@@ -92,8 +92,6 @@ class Options_PB {
 	
 	public function get_settings( $is_update = false ){
 		
-		
-		
 		$settings = array();
 		
 		if ( $is_update ){
@@ -135,9 +133,9 @@ class Options_PB {
 			
 			foreach( $this->settings['cpb_post_types'] as $type ){
 				
-				//remove_post_type_support( $type, 'editor' );
-				
-				//add_post_type_support( $type, 'excerpt' ); 
+				remove_post_type_support( $type, 'editor' );
+	 
+				remove_post_type_support( $type, 'excerpt' );
 				
 			} // end foreach
 			

@@ -129,13 +129,19 @@ class Save_PB {
 	
 	public function get_settings(){
 		
-		$st = array();
+		$text_fields = array( '_cpb_m_excerpt' , '_cpb_excerpt' , '_cpb_pagebuilder' );
 		
-		if ( isset( $_POST['_cpb_m_excerpt'] ) ) $st['_cpb_m_excerpt'] = sanitize_text_field( $_POST['_cpb_m_excerpt'] );
+		$clean = array();
 		
-		if ( isset( $_POST['_cpb_excerpt'] ) ) $st['_cpb_excerpt'] = sanitize_text_field( $_POST['_cpb_excerpt'] );
+		foreach( $text_fields as $field ){
+			
+			if ( isset( $_POST[$field] ) ) $clean[$field] = sanitize_text_field( $_POST[$field] );
+			
+		} // end foreach
 		
-		return $st;
+		//var_dump( $clean );
+		
+		return $clean;
 		
 	}
 	
@@ -168,22 +174,24 @@ class Save_PB {
 			
 		} // end if
 		
+		$settings = $this->get_settings();
+		
+		foreach( $settings as $key => $value ){
+				
+			update_post_meta( $post_id , $key , $value ); 
+			
+		} // end foreach
+		
 		
 		if ( ! empty( $_POST['_cpb']['layout'] ) ){
 			
-			$settings = $this->get_settings();
+			
 		
 			$save_items = $this->get_save_array_recursive( $_POST['_cpb']['layout'] );
 			
 			$content = $this->to_shortcodes_recursive( $save_items );
 			
 			$excerpt = $this->get_excerpt( $settings , $content );
-			
-			foreach( $settings as $key => $value ){
-				
-				update_post_meta( $post_id , $key , $value ); 
-				
-			} // end foreach
 			
 			if ( $content ){
 				
@@ -223,7 +231,7 @@ class Save_PB {
 		
 		$patt = '/\[.*?\]/i';
 		
-		$excerpt = preg_replace( $patt , '', $content );
+		$excerpt = preg_replace( $patt , ' ', $content );
 		
 		//var_dump( $content ); 
 		
