@@ -11,7 +11,7 @@ main > section img{
 
 .cpb-row {
 	padding-bottom: 1rem;
-	margin: 0 -0.5rem; 
+	margin: 0 -0.75rem; 
 }
 
 .cpb-row.cpb-single { 
@@ -20,6 +20,7 @@ main > section img{
 
 .cpb-column { 
 	float: left;
+	padding-bottom: 1rem;
 }
 
 .cpb-column img{ 
@@ -29,12 +30,6 @@ main > section img{
 
 .cpb-single > .cpb-column { 
 	float: none 
-}
-
-.cpb-column:after {
-	content: '';
-	clear:both;
-	display: block;
 }
 
 
@@ -69,7 +64,9 @@ main > section img{
 }
 
 .cpb-inner-wrap {
-	margin: 0 0.5rem;
+	margin: 0 0.75rem;
+	position: relative;
+	z-index: 3;
 }
 
 .cpb-single .cpb-inner-wrap {
@@ -83,7 +80,7 @@ main > section img{
 }
 
 body.home main > section {
-    margin: 0 1rem !important;
+    margin: 0 2rem !important;
 }
 
 body.home main > section.row {
@@ -116,5 +113,62 @@ body.home main > section.row {
 		margin-bottom: 1rem;
 	}
 	
+}
+
+/*
+* Hooks
+*/
+.no-padding-top {
+	padding-top: 0 !important;
+}
+
+.padding-top .cpb-inner-wrap {
+	padding-top: 1.5rem !important;
+}
+
+.grey-lightest-right-column {
+	position: relative;
+}
+
+.grey-lightest-right-column .cpb-column.two:before {
+	content: '';
+	position: absolute;
+	width: inherit;
+	background-color: #eee;
+	height: 100%;
+	z-index: 2;
+}
+
+.cpb-row.full-bleed {
+	position: relative;
+}
+
+.cpb-row.full-bleed:before {
+	content:'';
+	position: absolute;
+	height: 100%;
+	width: 500%;
+	top:0;
+	background-color: inherit;
+	z-index: 100;
+}
+
+.cpb-row.full-bleed:before {
+	left: -200%;
+}
+
+.cpb-row.full-bleed .cpb-inner-wrap {
+	z-index: 101;
+	position: relative;
+}
+
+/* CAHNRS */
+.cpb-action-button {
+	background-color: #981e32;
+	color: #fff;
+	display: block;
+	padding: 0.5rem 1rem;
+	border-radius: 2px;
+	margin-bottom: 1rem;
 }
 

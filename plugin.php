@@ -70,12 +70,25 @@ class CWP_Pagebuilder {
 			
 		} // end if
 		
+		add_filter( 'the_content' , array( $this , 'fix_wpauto_content_breaks' ), 1 );
+		
 	} // end __construct
+	
+	
+	public function fix_wpauto_content_breaks( $content ){
+		
+		$content = do_shortcode( $content );
+		
+		return $content;
+		
+	} // end fix_wpauto_content_breaks
 	
 	
 	public function enqueue_public_scripts(){
 		
 		wp_enqueue_style( 'cpb-public-layout', CWPPBURL . 'css/layout.css' , array() , '0.0.1' );
+		
+		wp_enqueue_style( 'cahnrs', 'http://m1.wpdev.cahnrs.wsu.edu/global/cahnrs.css', array( 'wsu-spine' ) );
 		
 	} // end enqueue_public_scripts
 	

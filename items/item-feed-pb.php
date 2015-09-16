@@ -33,8 +33,17 @@ class Item_Feed_PB extends Item_PB {
 	
 	public function form( $settings ){
 		
+		
+		$source_sub_form = array(
+			'Basic Feed' => array(
+				'form'  => $this->get_source_form( $settings ),
+				'value' => 'basic',
+			),
+		);
+		
+		
 		$forms = array(
-			'Source' => $this->get_source_form( $settings ),
+			'Source' => Forms_PB::get_sub_form( $source_sub_form , $this->get_name_field('feed_type') , $settings['feed_type'] ),
 			'Display Style' => $this->get_display_form( $settings ),
 		);
 		
@@ -85,11 +94,18 @@ class Item_Feed_PB extends Item_PB {
 		
 		$clean = array();
 		
-		$clean['post_type'] = ( ! empty( $s['post_type'] ) )? sanitize_text_field( $s['post_type'] ) : 'post';
+		$clean['feed_type'] = ( ! empty( $s['basic'] ) )? sanitize_text_field( $s['feed_type'] ) : 'basic';
 		
-		$clean['taxonomy'] = ( ! empty( $s['taxonomy'] ) )? sanitize_text_field( $s['taxonomy'] ) : false;
+		if ( 'basic' == $clean['feed_type'] ){
+			
+			$clean['post_type'] = ( ! empty( $s['post_type'] ) )? sanitize_text_field( $s['post_type'] ) : 'post';
 		
-		$clean['tax_terms'] = ( ! empty( $s['tax_terms'] ) )? sanitize_text_field( $s['tax_terms'] ) : false;
+			$clean['taxonomy'] = ( ! empty( $s['taxonomy'] ) )? sanitize_text_field( $s['taxonomy'] ) : false;
+		
+			$clean['tax_terms'] = ( ! empty( $s['tax_terms'] ) )? sanitize_text_field( $s['tax_terms'] ) : false;
+			
+		} // end if
+
 		
 		$clean['display'] = ( ! empty( $s['display'] ) )? sanitize_text_field( $s['display'] ) : 'list';
 		

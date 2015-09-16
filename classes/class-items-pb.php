@@ -253,6 +253,10 @@ class Items_PB {
 				'class'   => 'Item_Iframe_PB', 
 				'file_path' => CWPPBDIR . 'items/item-iframe-pb.php',
 			),
+			'action'   => array( 
+				'class'   => 'Item_Action_PB', 
+				'file_path' => CWPPBDIR . 'items/item-action-pb.php',
+			),
 			/*'subtitle'    => array( 
 				'class'   => 'Item_Subtitle_CPB', 
 				'file_path' => CWPPBDIR . 'items/item-subtitle-cpb.php', 

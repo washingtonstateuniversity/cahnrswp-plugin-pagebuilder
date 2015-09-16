@@ -11,7 +11,7 @@ class Item_Subtitle_PB extends Item_PB {
 	
 	public function item( $settings , $content ){
 		
-		$html = '<' . $settings['tag'] . '>' . $settings['title'] . '</' . $settings['tag'] . '>';
+		$html = '<' . $settings['tag'] . ' class="' . $settings['csshook'] . '">' . $settings['title'] . '</' . $settings['tag'] . '>';
 		
 		return $html;
 		
@@ -39,7 +39,9 @@ class Item_Subtitle_PB extends Item_PB {
 		
 		$html = Forms_PB::text_field( $this->get_name_field('title') , $settings['title'] , 'Title' );
 		
-		$html .= Forms_PB::select_field( $this->get_name_field('tag') , $settings['tag'] , $tags , 'Tag Type' ); 
+		$html .= Forms_PB::select_field( $this->get_name_field('tag') , $settings['tag'] , $tags , 'Tag Type' );
+		
+		$html .= Forms_PB::text_field( $this->get_name_field('csshook') , $settings['csshook'] , 'CSS Hook' ); 
 		
 		return $html; 
 		
@@ -54,6 +56,8 @@ class Item_Subtitle_PB extends Item_PB {
 		$clean['tag'] = ( ! empty( $s['tag'] ) )? sanitize_text_field( $s['tag'] ) : 'h2';
 		
 		$clean['title'] = ( ! empty( $s['title'] ) )? sanitize_text_field( $s['title'] ) : '';
+		
+		$clean['csshook'] = ( ! empty( $s['csshook'] ) )? sanitize_text_field( $s['csshook'] ) : '';
 		
 		return $clean;
 		

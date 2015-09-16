@@ -16,7 +16,7 @@ class Item_Column_PB extends Item_PB {
 		
 		if ( ! isset( $cpb_column_i ) ) $cpb_column_i = 1;
 		
-		$html = '<div class="cpb-column ' . $this->i_array[ $cpb_column_i - 1 ]  . '"><div class="cpb-inner-wrap">' . $content . '</div></div>';
+		$html = '<div class="' . $settings['csshook'] . ' cpb-column ' . $this->i_array[ $cpb_column_i - 1 ]  . '"><div class="cpb-inner-wrap">' . $content . '</div></div>';
 		
 		$cpb_column_i++;
 		
@@ -33,6 +33,8 @@ class Item_Column_PB extends Item_PB {
 			$html .= '<header class="cpb-item-' . $this->slug . '-header">';
 			
 				$html .= '<h4>' . $title . '</h4>';
+				
+				$html .= '<a href="#" class="cpb-edit-item" data-id="' . $this->id . '"></a>';
 			
 			$html .= '</header>';
 			
@@ -57,12 +59,19 @@ class Item_Column_PB extends Item_PB {
 	} // end editor
 	
 	public function form( $settings ){
+		
+		$html = Forms_PB::text_field( $this->get_name_field('csshook') , $settings['csshook'] , 'CSS Hook' );
+		
+		return $html;
+		
 	} // end form
 	
 	
 	public function clean( $s ){
 		
 		$clean = array();
+		
+		$clean['csshook'] = ( ! empty( $s['csshook'] ) )? sanitize_text_field( $s['csshook'] ) : '';
 		
 		return $clean;
 		

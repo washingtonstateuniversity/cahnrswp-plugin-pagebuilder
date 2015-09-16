@@ -15,7 +15,7 @@ class Item_Row_PB extends Item_PB {
 		
 		$cpb_column_i = 1;
 		
-		$html = '<div class="cpb-row cpb-' . $settings['layout'] . '">' . $content . '<div class="cpb-clearfix"></div></div>';
+		$html = '<div class="' . $settings['csshook'] . ' cpb-row cpb-' . $settings['layout'] . '">' . $content . '<div class="cpb-clearfix"></div></div>';
 		
 		return $html;
 		
@@ -28,6 +28,8 @@ class Item_Row_PB extends Item_PB {
 		$html .= '<header class="cpb-item-' . $this->slug . '-header">';
 		
 			$html .= '<h4>' . $title . '</h4>';
+			
+			$html .= '<a href="#" class="cpb-edit-item" data-id="' . $this->id . '"></a>';
 			
 			$html .= '<a href="#" class="remove-item-action"></a>';
 		
@@ -53,6 +55,8 @@ class Item_Row_PB extends Item_PB {
 		
 		$html = Forms_PB::hidden_field( $this->get_name_field( 'layout' ) , $settings['layout'] );
 		
+		$html .= Forms_PB::text_field( $this->get_name_field('csshook') , $settings['csshook'] , 'CSS Hook' );
+		
 		return $html;
 		
 	} // end form
@@ -64,6 +68,8 @@ class Item_Row_PB extends Item_PB {
 		$clean = array();
 		
 		$clean['layout'] = ( ! empty( $s['layout'] ) ) ? sanitize_text_field( $s['layout'] ) : 'single';
+		
+		$clean['csshook'] = ( ! empty( $s['csshook'] ) )? sanitize_text_field( $s['csshook'] ) : '';
 		
 		return $clean;
 		
