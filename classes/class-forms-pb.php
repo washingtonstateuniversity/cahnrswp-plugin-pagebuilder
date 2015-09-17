@@ -1,6 +1,11 @@
 <?php 
 class Forms_PB {
 	
+	public static $wsu_colors = array(
+		'gray-lightest' => array( 'Gray: Lightest' , '#eff0f1' )
+	);
+	
+	
 	public static function text_field( $name , $value , $label = false , $class = '' ){
 		
 		$html = '<input type="text" name="' . $name . '" value="' . $value . '" />';
@@ -34,12 +39,36 @@ class Forms_PB {
 		
 	} // end input_field
 	
+	public static function checkbox_field( $name , $value , $current_value = false , $label = false , $class = '' ){
+		
+		$active = ( $value == $current_value ) ? ' active' : '';
+		
+		$id = str_replace( array( '[',']' ) , '_' , $name ) . '_' . rand( 0 , 1000000 );
+		
+		$html = '<input type="checkbox" id="' . $id . '" name="' . $name . '" value="' . $value . '" ' . checked( $value , $current_value , false )  . ' />';
+		
+		if ( $label ) $html = $html . '<label for="' . $id . '" class="' . $active . '">' . $label . '</label>' ;
+		
+		return Forms_PB::wrap_field( $html , $class );
+		
+	} // end input_field
+	
 	
 	public static function select_field( $name , $value , $options , $label = false , $class = '' ){
 		
 		$html = '<select name="' . $name . '" >';
 		
 		foreach( $options as $op_value => $op_label ){
+			
+			if ( is_array( $op_label ) ){
+				
+				$c_label = $op_label[0];
+				
+			} else {
+				
+				$c_label = $op_label;
+				
+			} // end if
 			
 			$html .= '<option value="' . $op_value . '" ' . selected( $op_value , $value , false ) . ' >' . $op_label . '</option>';
 			
@@ -192,6 +221,30 @@ class Forms_PB {
 		$html .= '</fieldset>';
 		
 		return $html;
+		
+	}
+	
+	public static function get_wsu_colors( $subset = 'none' ){
+		
+		$colors = array(
+			'' => 'None',
+		);
+		
+		$values	= array(
+			'gray-lightest' => 'Gray: Lightest',
+			'gray-lightly'  => 'Grey: Lightly',
+			'gray-darker'   => 'Grey: Darker',
+		);
+		
+		switch( $subset ){
+			
+			default:
+				$colors = array_merge( $colors , $values );
+				break;
+			
+		} // end switch
+		
+		return $colors;
 		
 	}
 	

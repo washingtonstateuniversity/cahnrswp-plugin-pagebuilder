@@ -16,7 +16,27 @@ class Item_Column_PB extends Item_PB {
 		
 		if ( ! isset( $cpb_column_i ) ) $cpb_column_i = 1;
 		
-		$html = '<div class="' . $settings['csshook'] . ' cpb-column ' . $this->i_array[ $cpb_column_i - 1 ]  . '"><div class="cpb-inner-wrap">' . $content . '</div></div>';
+		$class = 'cpb-column ' . $this->i_array[ $cpb_column_i - 1 ];
+		
+		if ( ! empty( $settings['bgcolor'] ) ){
+			
+			$class .= ' ' . $settings['bgcolor'] . '-back bg-color';
+			
+		} // end if
+		
+		if ( ! empty( $settings['verticalbleed'] ) ){
+			
+			$class .= ' vertical-bleed-bg';
+			
+		} // end if
+		
+		if ( ! empty( $settings['csshook'] ) ){
+			
+			$class .= ' ' . $settings['csshook'];
+			
+		} // end if
+		
+		$html = '<div class="' . $class  . '"><div class="cpb-inner-wrap">' . $content . '</div></div>';
 		
 		$cpb_column_i++;
 		
@@ -62,6 +82,10 @@ class Item_Column_PB extends Item_PB {
 		
 		$html = Forms_PB::text_field( $this->get_name_field('csshook') , $settings['csshook'] , 'CSS Hook' );
 		
+		$html .= Forms_PB::select_field( $this->get_name_field('bgcolor') , $settings['bgcolor'] , Forms_PB::get_wsu_colors() , 'Background Color' );
+		
+		$html .= Forms_PB::checkbox_field( $this->get_name_field('verticalbleed') , 1 , $settings['verticalbleed'] , 'Vertical Bleed Background' );
+		
 		return $html;
 		
 	} // end form
@@ -72,6 +96,10 @@ class Item_Column_PB extends Item_PB {
 		$clean = array();
 		
 		$clean['csshook'] = ( ! empty( $s['csshook'] ) )? sanitize_text_field( $s['csshook'] ) : '';
+		
+		$clean['bgcolor'] = ( ! empty( $s['bgcolor'] ) ) ? sanitize_text_field( $s['bgcolor'] ) : '';
+		
+		$clean['verticalbleed'] = ( ! empty( $s['verticalbleed'] ) ) ? sanitize_text_field( $s['verticalbleed'] ) : 0;
 		
 		return $clean;
 		

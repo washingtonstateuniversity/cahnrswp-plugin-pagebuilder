@@ -1,5 +1,6 @@
 /* CSS Document */
 
+
 main > section img{ 
 	max-width: 100%;
 	height: auto;
@@ -9,9 +10,10 @@ main > section img{
 	clear: both;
 }
 
+
 .cpb-row {
-	padding-bottom: 1rem;
-	margin: 0 -0.75rem; 
+	margin: 0 -0.75rem;
+	overflow: hidden; 
 }
 
 .cpb-row.cpb-single { 
@@ -21,6 +23,10 @@ main > section img{
 .cpb-column { 
 	float: left;
 	padding-bottom: 1rem;
+}
+
+.cpb-column .cpb-inner-wrap {
+	padding: 1rem 0;
 }
 
 .cpb-column img{ 
@@ -171,4 +177,57 @@ body.home main > section.row {
 	border-radius: 2px;
 	margin-bottom: 1rem;
 }
+
+/*
+* Hooks
+* -------------------------------
+*/
+
+/*
+* Color Hooks
+* -------------------------------
+*/
+
+.bg-color {
+	position: relative;
+	padding-top: 1rem;
+}
+
+.bg-color:before,
+.bg-color:before {
+	content: '';
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+	display: block;
+}
+
+.bg-color.full-bleed-bg:before{
+	width: 500%;
+	left: -200%;
+}
+
+.bg-color.vertical-bleed-bg:before{
+	height: 9999rem;
+}
+
+
+.gray-lightest-back:before { background-color: #eff0f1;}
+.gray-darker-back:before { background-color: #2a3033;}
+
+/*
+* Padding & Margin Hooks
+* -------------------------------
+*/
+.tight, .tight > .cpb-inner-wrap {
+	padding: 0 !important;
+}
+
+.vertical-padding {
+	padding: 1rem 0;
+}
+
+
 
