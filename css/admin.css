@@ -1,5 +1,10 @@
 /* CSS Document #cwp-pb*/
 
+#cwp-pb img {
+	height: auto;
+	max-width: 100%;
+}
+
 #cwp-pb h4 {
 	margin: 0;
 	padding: 0;
