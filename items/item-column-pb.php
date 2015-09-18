@@ -16,7 +16,7 @@ class Item_Column_PB extends Item_PB {
 		
 		if ( ! isset( $cpb_column_i ) ) $cpb_column_i = 1;
 		
-		$class = 'cpb-column ' . $this->i_array[ $cpb_column_i - 1 ];
+		$class = 'column ' . $this->i_array[ $cpb_column_i - 1 ];
 		
 		if ( ! empty( $settings['bgcolor'] ) ){
 			
@@ -36,7 +36,7 @@ class Item_Column_PB extends Item_PB {
 			
 		} // end if
 		
-		$html = '<div class="' . $class  . '"><div class="cpb-inner-wrap">' . $content . '</div></div>';
+		$html = '<div class="' . $class  . '">' . $content . '</div>';
 		
 		$cpb_column_i++;
 		

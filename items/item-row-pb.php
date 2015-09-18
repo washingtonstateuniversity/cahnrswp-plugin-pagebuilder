@@ -14,8 +14,24 @@ class Item_Row_PB extends Item_PB {
 		global $cpb_column_i;
 		
 		$cpb_column_i = 1;
-		
-		$html = '<div class="' . $settings['csshook'] . ' cpb-row cpb-' . $settings['layout'] . '">' . $content . '<div class="cpb-clearfix"></div></div>';
+
+		if ( ! empty( $settings['bgcolor'] ) ){
+			$class .= ' ' . $settings['bgcolor'] . '-back';
+		}
+
+		if ( ! empty( $settings['padding'] ) ){
+			$class .= ' ' . $settings['padding'];
+		}
+
+		if ( ! empty( $settings['gutter'] ) ){
+			$class .= ' ' . $settings['gutter'];
+		}
+
+		if ( ! empty( $settings['csshook'] ) ){
+			$class .= ' ' . $settings['csshook'];
+		}
+
+		$html = '<div class="row ' . $settings['layout'] . $class . '">' . $content . '</div>';
 		
 		return $html;
 		
@@ -54,7 +70,13 @@ class Item_Row_PB extends Item_PB {
 	public function form( $settings ){
 		
 		$html = Forms_PB::hidden_field( $this->get_name_field( 'layout' ) , $settings['layout'] );
-		
+
+		$html .= Forms_PB::select_field( $this->get_name_field('bgcolor') , $settings['bgcolor'] , Forms_PB::get_wsu_colors() , 'Background Color' );
+
+		$html .= Forms_PB::select_field( $this->get_name_field('padding'), $settings['padding'], Forms_PB::get_padding(), 'Padding' );
+
+		$html .= Forms_PB::select_field( $this->get_name_field('gutter'), $settings['gutter'], Forms_PB::get_gutters(), 'Gutter' );
+
 		$html .= Forms_PB::text_field( $this->get_name_field('csshook') , $settings['csshook'] , 'CSS Hook' );
 		
 		return $html;
@@ -66,11 +88,17 @@ class Item_Row_PB extends Item_PB {
 	public function clean( $s ){
 		
 		$clean = array();
-		
+
 		$clean['layout'] = ( ! empty( $s['layout'] ) ) ? sanitize_text_field( $s['layout'] ) : 'single';
-		
+
+		$clean['bgcolor'] = ( ! empty( $s['bgcolor'] ) ) ? sanitize_text_field( $s['bgcolor'] ) : '';
+
+		$clean['padding'] = ( ! empty( $s['padding'] ) )? sanitize_text_field( $s['padding'] ) : '';
+
+		$clean['gutter'] = ( ! empty( $s['padding'] ) )? sanitize_text_field( $s['gutter'] ) : '';
+
 		$clean['csshook'] = ( ! empty( $s['csshook'] ) )? sanitize_text_field( $s['csshook'] ) : '';
-		
+
 		return $clean;
 		
 	} // end clean_settings

@@ -223,7 +223,7 @@ class Forms_PB {
 		return $html;
 		
 	}
-	
+
 	public static function get_wsu_colors( $subset = 'none' ){
 		
 		$colors = array(
@@ -291,5 +291,29 @@ class Forms_PB {
 		return $colors;
 		
 	}
-	
+
+	public static function get_padding() {
+
+		$values	= array(
+			'pad-ends'   => 'Pad ends',
+			'pad-top'    => 'Pad top',
+			'pad-bottom' => 'Pad bottom',
+			''           => 'No padding',
+		);
+		
+		return $values;
+		
+	}
+
+	public static function get_gutters() {
+
+		$values	= array(
+			'gutter'     => 'On',
+			'gutterless' => 'Off',
+		);
+		
+		return $values;
+		
+	}
+
 }

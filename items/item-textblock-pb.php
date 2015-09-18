@@ -11,7 +11,7 @@ class Item_Textblock_PB extends Item_PB {
 	
 	public function item( $settings , $content ){
 		
-		$html = '<div class="textblock">' . $content . '</div>';
+		$html = $content;
 		
 		return $html;
 		

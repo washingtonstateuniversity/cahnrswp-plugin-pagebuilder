@@ -64,11 +64,11 @@ class CWP_Pagebuilder {
 		// Adds pagebuilder settings page
 		add_action( 'admin_menu' , array( $this->options , 'add_page' ) );
 		
-		if ( $this->options->settings['cpb_layout_css'] ){
+		/*if ( $this->options->settings['cpb_layout_css'] ){
 			
 			add_action( 'wp_enqueue_scripts', array( $this , 'enqueue_public_scripts' ) );
 			
-		} // end if
+		}*/ // end if
 		
 		add_filter( 'the_content' , array( $this , 'fix_wpauto_content_breaks' ), 1 );
 		
@@ -84,13 +84,13 @@ class CWP_Pagebuilder {
 	} // end fix_wpauto_content_breaks
 	
 	
-	public function enqueue_public_scripts(){
+	/*public function enqueue_public_scripts(){
 		
 		wp_enqueue_style( 'cpb-public-layout', CWPPBURL . 'css/layout.css' , array() , '0.0.1' );
 		
 		wp_enqueue_style( 'cahnrs', 'http://m1.wpdev.cahnrs.wsu.edu/global/cahnrs.css', array( 'wsu-spine' ) );
 		
-	} // end enqueue_public_scripts
+	}*/ // end enqueue_public_scripts
 	
 	/*
 	 * Set up items and shortcodes which are used in both public
