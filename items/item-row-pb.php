@@ -19,6 +19,10 @@ class Item_Row_PB extends Item_PB {
 			$class .= ' ' . $settings['bgcolor'] . '-back';
 		}
 
+		if ( ! empty( $settings['textcolor'] ) ) {
+			$class .= ' ' . $settings['textcolor'] . '-text';
+		}
+
 		if ( ! empty( $settings['padding'] ) ) {
 			$class .= ' ' . $settings['padding'];
 		}
@@ -73,6 +77,8 @@ class Item_Row_PB extends Item_PB {
 
 		$html .= Forms_PB::select_field( $this->get_name_field('bgcolor'), $settings['bgcolor'], Forms_PB::get_wsu_colors(), 'Background Color' );
 
+		$html .= Forms_PB::select_field( $this->get_name_field('textcolor'), $settings['textcolor'], Forms_PB::get_wsu_colors(), 'Text Color' );
+
 		$html .= Forms_PB::select_field( $this->get_name_field('padding'), $settings['padding'], Forms_PB::get_padding(), 'Padding' );
 
 		$html .= Forms_PB::select_field( $this->get_name_field('gutter'), $settings['gutter'], Forms_PB::get_gutters(), 'Gutter' );
@@ -90,6 +96,8 @@ class Item_Row_PB extends Item_PB {
 		$clean['layout'] = ( ! empty( $s['layout'] ) ) ? sanitize_text_field( $s['layout'] ) : 'single';
 
 		$clean['bgcolor'] = ( ! empty( $s['bgcolor'] ) ) ? sanitize_text_field( $s['bgcolor'] ) : '';
+
+		$clean['textcolor'] = ( ! empty( $s['textcolor'] ) ) ? sanitize_text_field( $s['textcolor'] ) : '';
 
 		$clean['padding'] = ( ! empty( $s['padding'] ) ) ? sanitize_text_field( $s['padding'] ) : '';
 
