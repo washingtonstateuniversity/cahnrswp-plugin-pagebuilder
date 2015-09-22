@@ -229,5 +229,45 @@ body.home main > section.row {
 	padding: 1rem 0;
 }
 
+/*
+* Promo Object
+* -------------------------------
+*/
+.cpb-promo {
+	display: block;
+	padding-bottom: 1rem;
+}
+
+.cpb-promo .cpb-image {
+	float: left;
+	width: 150px;
+}
+
+.cpb-promo .cpb-image img {
+	width: 100%;
+	height: auto;
+	display: block;
+}
+
+.cpb-promo.has-image .cpb-caption {
+	margin-left: 165px;
+}
+
+.cpb-promo:after {
+	content:'';
+	display: block;
+	clear:both;
+}
+
+/*
+* Promo Object
+* -------------------------------
+*/
+
+
+
+
+
+
 
 
