@@ -136,7 +136,7 @@ class CWP_Pagebuilder {
 		
 		wp_enqueue_style( 'admin_css', CWPPBURL . 'css/admin.css' , false , '0.0.1' );
 		
-		wp_enqueue_script( 'admin_js', CWPPBURL . 'js/admin.js' , array('jquery-ui-draggable','jquery-ui-droppable') , '0.0.1' );
+		wp_enqueue_script( 'admin_js', CWPPBURL . 'js/admin.js' , array('jquery-ui-draggable','jquery-ui-droppable','jquery-ui-sortable') , '0.0.2' );
 		
 	} // end admin_scripts
 	

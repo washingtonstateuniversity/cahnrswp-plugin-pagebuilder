@@ -13,6 +13,12 @@ class Item_Subtitle_PB extends Item_PB {
 		
 		$html = '<' . $settings['tag'] . ' class="' . $settings['csshook'] . '">' . $settings['title'] . '</' . $settings['tag'] . '>';
 		
+		if ( ! empty( $settings['anchor'] ) ){
+			
+			$html = '<a name="' . $settings['anchor'] . '"></a>' . $html;
+			
+		} // end if
+		
 		return $html;
 		
 	} // end item
@@ -41,6 +47,8 @@ class Item_Subtitle_PB extends Item_PB {
 		
 		$html .= Forms_PB::select_field( $this->get_name_field('tag') , $settings['tag'] , $tags , 'Tag Type' );
 		
+		$html .= Forms_PB::text_field( $this->get_name_field('anchor') , $settings['anchor'] , 'Anchor Link' ); 
+		
 		$html .= Forms_PB::text_field( $this->get_name_field('csshook') , $settings['csshook'] , 'CSS Hook' ); 
 		
 		return $html; 
@@ -58,6 +66,8 @@ class Item_Subtitle_PB extends Item_PB {
 		$clean['title'] = ( ! empty( $s['title'] ) )? sanitize_text_field( $s['title'] ) : '';
 		
 		$clean['csshook'] = ( ! empty( $s['csshook'] ) )? sanitize_text_field( $s['csshook'] ) : '';
+		
+		$clean['anchor'] = ( ! empty( $s['anchor'] ) )? sanitize_text_field( $s['anchor'] ) : '';
 		
 		return $clean;
 		
