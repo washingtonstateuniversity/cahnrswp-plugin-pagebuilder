@@ -287,6 +287,8 @@
 				data,
 				function( response ){
 					
+					//alert( response );
+					
 					s.add.container.append( response.editor );
 					
 					for ( var i = 0; i < response.forms.length ; i++ ){
