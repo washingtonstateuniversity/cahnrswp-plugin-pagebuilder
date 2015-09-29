@@ -31,7 +31,7 @@ class Item_Textblock_PB extends Item_PB {
 
 	public function form( $settings ) {
 
-		$html = $this->wp_editor_field( $this->id, $this->content );
+		$html = $this->wp_editor_field( $this->id, $this->content , false , 'cpb-field-one-column' );
 
 		return $html;
 

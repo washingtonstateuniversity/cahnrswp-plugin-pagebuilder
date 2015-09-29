@@ -38,6 +38,12 @@
 		
 		s.pb.on( 'change', 'input[type=radio]', function(){ s.active_label( $( this ) )});
 		
+		s.pb.on( 'change' , '.cbp-form-subsection > header input', function(){ 
+			
+			s.new_sec( $( this ).closest('.cbp-form-subsection')  );
+			
+		});
+		
 		$('body').on( 'click' , '#cpb-lb-bg' , function(){ s.form_display( $('.cpb-form.active') , 'hide');});
 		
 		
@@ -370,6 +376,16 @@
 			} // end if
 			
 		} // end add_media_uploader
+		
+		s.new_sec = function( sec ){
+			
+			sec.addClass('active').children('div').slideDown('fast' , function(){ sec.addClass('selected') });
+			
+			var sibs = sec.siblings('.cbp-form-subsection')
+			
+			sibs.children('div').slideUp('fast' , function(){ sibs.removeClass('selected') });
+			
+		} // end s.new_sec
 		
 		// Call on Init
 		s.add_media_uploader();

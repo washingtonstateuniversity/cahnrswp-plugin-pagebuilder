@@ -47,7 +47,7 @@ class Forms_PB {
 
 		if ( $label ) $html = $html . '<label for="' . $id . '" class="' . $active . '">' . $label . '</label>' ;
 
-		return Forms_PB::wrap_field( $html, $class );
+		return Forms_PB::wrap_field( $html, $class, 'checkbox' );
 
 	} // end input_field
 
@@ -119,11 +119,11 @@ class Forms_PB {
 
 	} // end wp_editor_field
 
-	public static function wrap_field( $field, $class = false ) {
+	public static function wrap_field( $field, $class = false , $type = '' ) {
 
 		$class = ( $class ) ? $class : '';
 
-		$html = '<div class="cpb-form-field ' . $class . '">' . $field . '</div>';
+		$html = '<div class="cpb-form-field ' . $type . ' ' . $class . '">' . $field . '</div>';
 
 		return $html;
 
@@ -141,7 +141,7 @@ class Forms_PB {
 
 			$tabs .= '<a href="#" class="' . $active . '">' . $label . '</a>';
 
-			$sections .= '<div class="cpb-form-section ' . $active . '"><div>' . $form . '</div></div>';
+			$sections .= '<div class="cpb-form-content ' . $active . '"><div class="cpb-form-content-inner">' . $form . '</div></div>';
 
 			$active = '';
 
@@ -197,6 +197,30 @@ class Forms_PB {
 
 		return $html;
 
+	}
+	
+	public static function get_subform( $subform ){
+		
+		$id = 'subform_' . rand( 0 ,1000000 );
+		
+		$active = ( $subform['val'] == $subform['current_val'] ) ? ' active' : '';
+		
+		$html = '<div class="cbp-form-subsection' . $active . '">';
+		
+			$html .= '<header>';
+			
+            	$html .= '<label for="' . $id . '">' .$subform['title'] . '<br /><span class="cbp-subsection-helper-text">' .$subform['summary'] . '</span></label>';
+            	
+				$html .= '<input type="radio" name="' . $subform['field_name'] . '" id="' . $id . '" />';
+				
+            $html .= '</header>';
+			
+			$html .= '<div class="cpb-form-fields">' . $subform['form'] . '</div>';
+		
+		$html .= '</div>';
+		
+		return $html;
+		
 	}
 
 	public static function wrap_item_form( $id, $form, $width = 'small', $class = '' ) {

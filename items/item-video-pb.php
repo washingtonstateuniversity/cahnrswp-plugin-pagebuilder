@@ -25,24 +25,6 @@ class Item_Video_PB extends Item_PB {
 					break;
 			} // end switch
 
-			/*if ( ! empty( $settings['vid_id'] ) || ! empty( $settings['vimeo_id'] ) ) {
-
-				$html .= '<img src="' . CWPPBURL . 'images/video-spacer.gif" style="width:100%;display:block" />';
-
-				if ( ! empty( $settings['vid_id'] ) ) {
-
-					$html .= '<iframe src="https://www.youtube.com/embed/' . $settings['vid_id'] . '" frameborder="0" allowfullscreen ';
-
-				} else {
-
-					$html .= '<iframe src="//player.vimeo.com/video/' . $settings['vimeo_id'] . '?title=0&amp;byline=0&amp;portrait=0&amp;color=ffffff" frameborder="0" allowfullscreen="allowfullscreen" ';
-
-				} // end if
-
-				$html .= 'style="position:absolute;height:100%;width:100%;top:0;left:0;"></iframe>';
-
-			} // end if*/
-
 		$html .= '</div>';
 
 		return $html;
@@ -105,8 +87,19 @@ class Item_Video_PB extends Item_PB {
 	} // end editor
 
 	public function form( $settings ) {
+		
+		$video_subform = array(
+			'form'        => Forms_PB::text_field( $this->get_name_field('vid_id'), $settings['vid_id'], 'YouTube Video ID' ),
+			'field_name'  => $this->get_name_field('vid_type'),
+			'val'         => 'youtube',
+			'current_val' => $settings['vid_type'],
+			'title'       => 'YouTube Video',
+			'summary'     => 'Display YouTube video by video ID'
+		);
+		
+		$html = Forms_PB::get_subform( $video_subform ); 
 
-		$sub_form = array(
+		/*$sub_form = array(
 			'YouTube' => array(
 				'form'  => Forms_PB::text_field( $this->get_name_field('vid_id'), $settings['vid_id'], 'YouTube Video ID' ),
 				'value' => 'youtube',
@@ -115,9 +108,9 @@ class Item_Video_PB extends Item_PB {
 				'form'  => Forms_PB::text_field( $this->get_name_field('vimeo_id'), $settings['vimeo_id'], 'Vimeo Video ID' ),
 				'value' => 'vimeo',
 			),
-		);
+		);*/
 
-		$html = Forms_PB::get_sub_form( $sub_form, $this->get_name_field('vid_type'), $settings['vid_type'] );
+		//$html = Forms_PB::get_sub_form( $sub_form, $this->get_name_field('vid_type'), $settings['vid_type'] );
 
 		return $html;
 

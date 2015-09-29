@@ -373,25 +373,31 @@
 	width: 100%;
 }
 
+
+#cwp-pb-options .cpb-form-field {
+	display: inline-block;
+}
+
 /*
 * Forms
 * -------------------------------------------
 */
 
-#cwp-pb .cpb-form {
+#cwp-pb-forms .cpb-form {
 	position: absolute;
 	top: -9999px;
 	left: 0;
 	width: 100%;
 }
 
-#cwp-pb .cpb-form-frame {
+#cwp-pb-forms .cpb-form-frame {
 	margin: 0 auto;
 	position: relative;
+	left: -90px;
 	z-index: 10000;
 }
 
-#cwp-pb .cpb-form-frame > a {
+#cwp-pb-forms .cpb-form-frame > a {
 	position: absolute;
 	top: 0;
 	right: 0;
@@ -401,31 +407,114 @@
 	z-index: 9999;
 }
 
-#cwp-pb .cpb-form nav {
+#cwp-pb-forms .cpb-form nav {
 	position: relative;
 	top: 1px;
 }
 
-#cwp-pb .cpb-form nav a {
-	background: #fff;
-	padding: 0.25rem 1rem;
+#cwp-pb-forms .cpb-form nav a {
 	display: inline-block;
-	vertical-align: bottom;
-	position: relative;
-	z-index: 1;
-	border-radius: 4px 4px 0 0;
+	background-color: #ccc;
+	padding: 1rem 1.5rem;
+	color: #555;
 	text-decoration: none;
+	margin-right: 0.1rem;
+	position: relative;
+	font-size: 0.9rem;
 }
 
-#cwp-pb .cpb-form nav a.active {
+#cwp-pb-forms .cpb-form nav a:after {
+	content: '';
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	height: 6px;
+	background: -moz-linear-gradient(top,  rgba(255,255,255,0) 0%, rgba(160,160,160,0.72) 100%);
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(255,255,255,0)), color-stop(100%,rgba(160,160,160,0.72)));
+	background: -webkit-linear-gradient(top,  rgba(255,255,255,0) 0%,rgba(160,160,160,0.72) 100%);
+	background: -o-linear-gradient(top,  rgba(255,255,255,0) 0%,rgba(160,160,160,0.72) 100%);
+	background: -ms-linear-gradient(top,  rgba(255,255,255,0) 0%,rgba(160,160,160,0.72) 100%);
+	background: linear-gradient(to bottom,  rgba(255,255,255,0) 0%,rgba(160,160,160,0.72) 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00ffffff', endColorstr='#b8a0a0a0',GradientType=0 );
+
+}
+
+#cwp-pb-forms .cpb-form nav a.active { background-color: #ddd; }
+
+#cwp-pb-forms .cpb-form nav a.active:after { background: none; }
+
+
+
+
+
+
+/*#cwp-pb .cpb-form nav a.active {
 	background-color: #eee;
 	z-index: 3;
 	border-top: 1px solid #777;
 	border-left: 1px solid #777;
 	border-right: 1px solid #777;
+}*/
+
+#cwp-pb-forms .cpb-form-content {
+	background-color: #ddd;
+	padding: 2rem 0;
 }
 
-#cwp-pb .cpb-form .cpb-form-section {
+#cwp-pb-forms .cpb-form-content-inner {
+	margin: 0 1.25rem;
+	min-height: 100px;
+}
+
+#cwp-pb-forms .cpb-form-field {
+	display: inline-block;
+	width: 48%;
+	margin-right: 2%;
+	padding-bottom: 0.75rem;
+}
+
+#cwp-pb-forms .cpb-form-field input[type=text], #cwp-pb-forms .cpb-form-field select {
+	width: 95%;
+}
+
+#cwp-pb-forms .cpb-form-field label {
+	font-weight: bold;
+	display: block;
+	padding-bottom: 0.25rem;
+	font-size: 0.8rem;
+}
+
+#cwp-pb-forms .cpb-form-field.checkbox label {
+	display: inline;
+	padding-left: 0.25rem;
+}
+
+/* Field Hooks */
+#cwp-pb-forms .cpb-form-field.cpb-field-one-column {
+	width: 98%;
+}
+
+#cwp-pb-forms .cpb-form-field.cpb-inline-field  {
+	display: inline-block;
+	vertical-align: bottom;
+}
+
+#cwp-pb-forms .cpb-form-field.cpb-inline-field label  {
+	display: inline-block;
+	padding-right: 0.25rem;
+}
+
+#cwp-pb-forms .cpb-form-field.cpb-inline-field input {
+	width: auto;
+}
+
+#cwp-pb-forms .cpb-form-field.cpb-small-field input {
+	max-width: 60px;
+}
+
+
+/*#cwp-pb .cpb-form .cpb-form-section {
 	padding: 1rem 0;
 	background-color: #eee;
 	border-left: 1px solid #777;
@@ -465,32 +554,39 @@
 #cwp-pb .cpb-form-field label {
 	display: block;
 	font-weight: bold;
-}
+}*/
 
 /* field hooks */
-#cwp-pb .cpb-form-field.inline {
+/*#cwp-pb .cpb-form-field.inline {
 	display: inline-block;
 	vertical-align: top;
 }
 
 #cwp-pb .cpb-form-field.valign-bottom {
 	vertical-align: bottom;
+}*/
+
+#cwp-pb-forms .cpb-form footer {
+	background-color: #eee;
+	padding: 1rem 0;
+	text-align: center;
+	text-transform: uppercase;
 }
 
 /* Form Sizes */
-#cwp-pb .cpb-form-small .cpb-form-frame { max-width: 300px;}
-#cwp-pb .cpb-form-medium .cpb-form-frame { max-width: 500px; }
-#cwp-pb .cpb-form-large .cpb-form-frame { max-width: 700px; }
+#cwp-pb-forms .cpb-form-small .cpb-form-frame { max-width: 400px;}
+#cwp-pb-forms .cpb-form-medium .cpb-form-frame { max-width: 500px; }
+#cwp-pb-forms .cpb-form-large .cpb-form-frame { max-width: 700px; }
 
-#cwp-pb .cpb-form-100 input,
+/*#cwp-pb .cpb-form-100 input,
 #cwp-pb .cpb-form-100 textarea,
-#cwp-pb .cpb-form-100 select { width: 100%; }
+#cwp-pb .cpb-form-100 select { width: 100%; }*/
 
 /*
 * Subform
 * -------------------------------------------
 */
-#cwp-pb .cpb-subform-nav {
+/*#cwp-pb .cpb-subform-nav {
 	width: 125px;
 	float: left;
 }
@@ -530,6 +626,54 @@
 
 #cwp-pb .cpb-subform-inner {
 	margin-left: 1rem;
+}*/
+
+.cbp-form-subsection {
+	border: 1px solid #ccc;
+	background: -moz-linear-gradient(top,  rgba(238,238,238,0.7) 0%, rgba(255,255,255,0) 100%);
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(238,238,238,0.7)), color-stop(100%,rgba(255,255,255,0)));
+	background: -webkit-linear-gradient(top,  rgba(238,238,238,0.7) 0%,rgba(255,255,255,0) 100%);
+	background: -o-linear-gradient(top,  rgba(238,238,238,0.7) 0%,rgba(255,255,255,0) 100%);
+	background: -ms-linear-gradient(top,  rgba(238,238,238,0.7) 0%,rgba(255,255,255,0) 100%);
+	background: linear-gradient(to bottom,  rgba(238,238,238,0.7) 0%,rgba(255,255,255,0) 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b3eeeeee', endColorstr='#00ffffff',GradientType=0 );
+}
+
+.cbp-form-subsection header input {
+	display: none;
+}
+
+.cbp-form-subsection header label {
+	display: block;
+	font-size: 1.2rem;
+	font-weight: bold;
+	padding: 1rem 40px 1rem 1rem;
+	border-bottom: 1px solid #ccc;
+	background-color: #eee;
+	background-image: url(unchecked.png);
+	background-repeat: no-repeat;
+	background-position: right center;
+	cursor: pointer;
+}
+
+.cbp-form-subsection.selected header label {
+	background-image: url(checked.png);
+}
+
+.cbp-form-subsection header label span {
+	display: inline-block;
+	font-size: 0.75rem;
+	font-weight: normal;
+}
+
+.cbp-form-subsection > div{
+	display: none;
+	margin: 0 1rem;
+	padding: 1rem 0 0;
+}
+
+.cbp-form-subsection.selected > div{
+	display: block;
 }
 
 /*

@@ -83,7 +83,7 @@ class Item_Column_PB extends Item_PB {
 
 		$html .= Forms_PB::select_field( $this->get_name_field('bgcolor'), $settings['bgcolor'], Forms_PB::get_wsu_colors(), 'Background Color' );
 
-		$html .= Forms_PB::checkbox_field( $this->get_name_field('verticalbleed'), 1, $settings['verticalbleed'], 'Vertical Bleed Background' );
+		$html .= Forms_PB::checkbox_field( $this->get_name_field('verticalbleed'), 1, $settings['verticalbleed'], 'Vertical Bleed' );
 
 		return $html;
 
