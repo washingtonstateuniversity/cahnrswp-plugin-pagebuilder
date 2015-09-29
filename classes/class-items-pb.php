@@ -249,19 +249,15 @@ class Items_PB {
 				'class'   => 'Item_Action_PB',
 				'file_path' => CWPPBDIR . 'items/item-action-pb.php',
 			),
-<<<<<<< HEAD
+
 			'postgallery'   => array( 
 				'class'   => 'Item_Postgallery_PB', 
 				'file_path' => CWPPBDIR . 'items/item-postgallery-pb.php',
 			),
-			/*'subtitle'    => array( 
-				'class'   => 'Item_Subtitle_CPB', 
-				'file_path' => CWPPBDIR . 'items/item-subtitle-cpb.php', 
-=======
 			/*'subtitle'    => array(
 				'class'   => 'Item_Subtitle_CPB',
 				'file_path' => CWPPBDIR . 'items/item-subtitle-cpb.php',
->>>>>>> spine-markup
+
 			),
 			'promo'       => array(
 				'class'   => 'Item_Promo_CPB',

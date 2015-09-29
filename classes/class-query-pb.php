@@ -1,6 +1,5 @@
 <?php
 class Query_PB {
-<<<<<<< HEAD
 	
 	protected $args;	
 	
@@ -288,11 +287,6 @@ class Query_PB {
 	
 	/*public static function get_local_query_args( $settings ){
 		
-=======
-
-	public static function get_local_query_args( $settings ) {
-
->>>>>>> spine-markup
 		$query = array();
 
 		// Post Pagation
@@ -355,15 +349,9 @@ class Query_PB {
 				} // end if
 
 				the_excerpt();*/
-<<<<<<< HEAD
 					
 				/*$feed[$i]['title'] = $the_query->post->post_title; 
 					
-=======
-
-				$feed[$i]['title'] = $the_query->post->post_title;
-
->>>>>>> spine-markup
 				$feed[$i]['link'] = get_post_permalink();
 
 				$img_size = ( ! empty( $settings['img_size'] ) ) ? $settings['img_size'] : 'thumbnail';
@@ -379,13 +367,7 @@ class Query_PB {
 		} // end if
 
 		return $feed;
-<<<<<<< HEAD
 		
 	} // end get_local_object*/ 
 	
-=======
-
-	} // end get_local_object
-
->>>>>>> spine-markup
 }

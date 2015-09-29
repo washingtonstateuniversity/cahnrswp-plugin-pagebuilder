@@ -8,7 +8,6 @@ class Item_Feed_PB extends Item_PB {
 	public $desc = 'Dynamically Feed Content';
 
 	public $form_size = 'medium';
-<<<<<<< HEAD
 	
 	public function item( $settings , $content ){
 		
@@ -30,17 +29,6 @@ class Item_Feed_PB extends Item_PB {
 		
 		$html = Display_PB::get_display( $feed , $settings );*/
 		
-=======
-
-	public function item( $settings, $content ) {
-
-		$args = Query_PB::get_local_query_args( $settings );
-
-		$feed = Query_PB::get_local_feed_objs( $args );
-
-		$html = Display_PB::get_display( $feed, $settings );
-
->>>>>>> spine-markup
 		return $html;
 
 	} // end item
@@ -54,22 +42,15 @@ class Item_Feed_PB extends Item_PB {
 		return $html;
 
 	} // end editor
-<<<<<<< HEAD
-	
-	public function form( $settings ){
-		
-=======
 
 	public function form( $settings ) {
 
->>>>>>> spine-markup
 		$source_sub_form = array(
 			'Basic Feed' => array(
 				'form'  => $this->get_source_form( $settings ),
 				'value' => 'basic',
 			),
 		);
-<<<<<<< HEAD
 		
 		$display_form = array(
 			'Promo' => array(
@@ -83,18 +64,13 @@ class Item_Feed_PB extends Item_PB {
 			'Source' => Forms_PB::get_sub_form( $source_sub_form , $this->get_name_field('feed_type') , $settings['feed_type'] ),
 			//'Display Style' => $this->get_display_form( $settings ),
 			'Display Style' => Forms_PB::get_sub_form( $display_form , $this->get_name_field('display_type') , $settings['display_type'] )
-=======
 
-		$forms = array(
-			'Source' => Forms_PB::get_sub_form( $source_sub_form, $this->get_name_field('feed_type'), $settings['feed_type'] ),
-			'Display Style' => $this->get_display_form( $settings ),
->>>>>>> spine-markup
 		);
 
 		return $forms;
 
 	} // end form
-<<<<<<< HEAD
+
 	
 	private function get_promo_form( $settings ){
 		
@@ -107,11 +83,6 @@ class Item_Feed_PB extends Item_PB {
 	
 	private function get_source_form( $settings ){
 		
-=======
-
-	private function get_source_form( $settings ) {
-
->>>>>>> spine-markup
 		$p_types = get_post_types();
 
 		$post_types = array( 'any' => 'Any' );
@@ -162,7 +133,6 @@ class Item_Feed_PB extends Item_PB {
 			$clean['tax_terms'] = ( ! empty( $s['tax_terms'] ) ) ? sanitize_text_field( $s['tax_terms'] ) : false;
 
 		} // end if
-<<<<<<< HEAD
 		
 		if ( ! empty( $s['posts_per_page'] ) ) $clean['posts_per_page'] = sanitize_text_field( $s['posts_per_page'] );
 		
@@ -170,13 +140,7 @@ class Item_Feed_PB extends Item_PB {
 		
 		$clean['excerpt_length'] = ( ! empty( $s['excerpt_length'] ) )? sanitize_text_field( $s['excerpt_length'] ) : '';
 		
-=======
 
-		$clean['display'] = ( ! empty( $s['display'] ) ) ? sanitize_text_field( $s['display'] ) : 'list';
-
-		if ( ! empty( $s['posts_per_page'] ) ) $clean['posts_per_page'] = sanitize_text_field( $s['posts_per_page'] );
-
->>>>>>> spine-markup
 		return $clean;
 
 	} // end clean
