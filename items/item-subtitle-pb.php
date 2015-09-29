@@ -1,17 +1,18 @@
 <?php
 class Item_Subtitle_PB extends Item_PB {
-	
+
 	public $slug = 'subtitle';
-	
+
 	public $name = 'Subtitle';
-	
+
 	public $desc = 'Add a new headding';
-	
+
 	public $form_size = 'small';
-	
-	public function item( $settings , $content ){
-		
+
+	public function item( $settings, $content ) {
+
 		$html = '<' . $settings['tag'] . ' class="' . $settings['csshook'] . '">' . $settings['title'] . '</' . $settings['tag'] . '>';
+<<<<<<< HEAD
 		
 		if ( ! empty( $settings['anchor'] ) ){
 			
@@ -19,22 +20,25 @@ class Item_Subtitle_PB extends Item_PB {
 			
 		} // end if
 		
+=======
+
+>>>>>>> spine-markup
 		return $html;
-		
+
 	} // end item
-	
-	public function editor( $settings , $editor_content ){
-		
+
+	public function editor( $settings, $editor_content ) {
+
 		$title = ( $settings['title'] ) ? $settings['title'] : 'Add Subtitle';
-		
+
 		$html = '<h2>' . $title . '</h2>';
-		
+
 		return $html;
-		
+
 	} // end editor
-	
-	public function form( $settings ){
-		
+
+	public function form( $settings ) {
+
 		$tags = array(
 			'h2' => 'H2',
 			'h3' => 'H3',
@@ -42,6 +46,7 @@ class Item_Subtitle_PB extends Item_PB {
 			'h5' => 'H5',
 			'h6' => 'H6',
 		);
+<<<<<<< HEAD
 		
 		$html = Forms_PB::text_field( $this->get_name_field('title') , $settings['title'] , 'Title' );
 		
@@ -53,13 +58,23 @@ class Item_Subtitle_PB extends Item_PB {
 		
 		return $html; 
 		
+=======
+
+		$html = Forms_PB::text_field( $this->get_name_field('title'), $settings['title'], 'Title' );
+
+		$html .= Forms_PB::select_field( $this->get_name_field('tag'), $settings['tag'], $tags, 'Tag Type' );
+
+		$html .= Forms_PB::text_field( $this->get_name_field('csshook'), $settings['csshook'], 'CSS Hook' );
+
+		return $html;
+
+>>>>>>> spine-markup
 	} // end form
-	
-	
-	
-	public function clean( $s ){
-		
+
+	public function clean( $s ) {
+
 		$clean = array();
+<<<<<<< HEAD
 		
 		$clean['tag'] = ( ! empty( $s['tag'] ) )? sanitize_text_field( $s['tag'] ) : 'h2';
 		
@@ -69,8 +84,17 @@ class Item_Subtitle_PB extends Item_PB {
 		
 		$clean['anchor'] = ( ! empty( $s['anchor'] ) )? sanitize_text_field( $s['anchor'] ) : '';
 		
+=======
+
+		$clean['tag'] = ( ! empty( $s['tag'] ) ) ? sanitize_text_field( $s['tag'] ) : 'h2';
+
+		$clean['title'] = ( ! empty( $s['title'] ) ) ? sanitize_text_field( $s['title'] ) : '';
+
+		$clean['csshook'] = ( ! empty( $s['csshook'] ) ) ? sanitize_text_field( $s['csshook'] ) : '';
+
+>>>>>>> spine-markup
 		return $clean;
-		
+
 	} // end clean
-	
+
 }

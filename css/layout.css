@@ -1,7 +1,7 @@
 /* CSS Document */
 
 
-main > section img{ 
+main > section img{
 	max-width: 100%;
 	height: auto;
 }
@@ -13,14 +13,14 @@ main > section img{
 
 .cpb-row {
 	margin: 0 -0.75rem;
-	overflow: hidden; 
+	overflow: hidden;
 }
 
-.cpb-row.cpb-single { 
-	margin: 0; 
+.cpb-row.cpb-single {
+	margin: 0;
 }
 
-.cpb-column { 
+.cpb-column {
 	float: left;
 	padding-bottom: 1rem;
 }
@@ -29,13 +29,13 @@ main > section img{
 	padding: 1rem 0;
 }
 
-.cpb-column img{ 
+.cpb-column img{
 	max-width: 100%;
 	height: auto;
 }
 
-.cpb-single > .cpb-column { 
-	float: none 
+.cpb-single > .cpb-column {
+	float: none
 }
 
 
@@ -50,13 +50,13 @@ main > section img{
 .cpb-thirds > .cpb-column { width: 33.33% }
 
 .cpb-thirds-half-left > .cpb-column.one { width: 50%}
-.cpb-thirds-half-left > .cpb-column.two { width: 25%} 
+.cpb-thirds-half-left > .cpb-column.two { width: 25%}
 .cpb-thirds-half-left > .cpb-column.three { width: 25%}
 
 .cpb-thirds-half-right > .cpb-column.one { width: 25%}
-.cpb-thirds-half-right > .cpb-column.two { width: 25%} 
-.cpb-thirds-half-right > .cpb-column.three { width: 50%}  
-  
+.cpb-thirds-half-right > .cpb-column.two { width: 25%}
+.cpb-thirds-half-right > .cpb-column.three { width: 50%}
+
 .cpb-quarters > .cpb-column { width: 25% }
 
 .cpb-triptych > .cpb-column.one { width: 25%}
@@ -64,9 +64,9 @@ main > section img{
 .cpb-triptych > .cpb-column.three { width: 25%}
 
 @media only screen and ( max-width: 700px ) {
-	
+
 	.cpb-quarters > .cpb-column { width: 50% }
-	
+
 }
 
 .cpb-inner-wrap {
@@ -82,7 +82,7 @@ main > section img{
 
 /* WSU Theme Overrides */
 .cpb-row {
-	width: auto !important; 
+	width: auto !important;
 }
 
 body.home main > section {
@@ -105,20 +105,20 @@ body.home main > section.row {
 .cpb-list span { }
 
 @media only screen and ( max-width: 700px ) {
-	
+
 	.cpb-quarters > .cpb-column { width: 50%; margin-bottom: 1rem; }
-	
+
 }
 
 @media only screen and ( max-width: 550px ) {
 	.cpb-quarters > .cpb-column,
 	.cpb-halves > .cpb-column,
-	.cpb-thirds > .cpb-column { 
+	.cpb-thirds > .cpb-column {
 		width: auto;
 		float: none;
 		margin-bottom: 1rem;
 	}
-	
+
 }
 
 /*

@@ -1,22 +1,22 @@
 <?php
 class Item_Video_PB extends Item_PB {
-	
+
 	public $slug = 'video';
-	
+
 	public $name = 'Video';
-	
+
 	public $desc = 'Add Youtube Video';
-	
+
 	public $form_size = 'medium';
-	
+
 	public $vid_style = 'position:absolute;height:100%;width:100%;top:0;left:0;';
-	
-	public function item( $settings , $content ){
-		
+
+	public function item( $settings, $content ) {
+
 		$html = '<div class="cpb-video-wrapper" style="position: relative">';
-		
-			switch( $settings['vid_type'] ){
-				
+
+			switch( $settings['vid_type'] ) {
+
 				case 'vimeo':
 					$html .= $this->get_vimeo_embed( $settings );
 					break;
@@ -24,120 +24,117 @@ class Item_Video_PB extends Item_PB {
 					$html .= $this->get_youtube_embed( $settings );
 					break;
 			} // end switch
-		
-			/*if ( ! empty( $settings['vid_id'] ) || ! empty( $settings['vimeo_id'] ) ){
-			
+
+			/*if ( ! empty( $settings['vid_id'] ) || ! empty( $settings['vimeo_id'] ) ) {
+
 				$html .= '<img src="' . CWPPBURL . 'images/video-spacer.gif" style="width:100%;display:block" />';
-				
-				if ( ! empty( $settings['vid_id'] ) ){
-			
+
+				if ( ! empty( $settings['vid_id'] ) ) {
+
 					$html .= '<iframe src="https://www.youtube.com/embed/' . $settings['vid_id'] . '" frameborder="0" allowfullscreen ';
-				
+
 				} else {
-					
+
 					$html .= '<iframe src="//player.vimeo.com/video/' . $settings['vimeo_id'] . '?title=0&amp;byline=0&amp;portrait=0&amp;color=ffffff" frameborder="0" allowfullscreen="allowfullscreen" ';
-					
+
 				} // end if
-				
+
 				$html .= 'style="position:absolute;height:100%;width:100%;top:0;left:0;"></iframe>';
-			
+
 			} // end if*/
-		
+
 		$html .= '</div>';
-		
+
 		return $html;
-		
+
 	} // end item
-	
-	public function get_vimeo_embed( $settings ){
-		
+
+	public function get_vimeo_embed( $settings ) {
+
 		$html = '';
-		
-		if ( ! empty( $settings['vimeo_id'] ) ){
-			
+
+		if ( ! empty( $settings['vimeo_id'] ) ) {
+
 			$html .= '<img src="' . CWPPBURL . 'images/video-spacer.gif" style="width:100%;display:block" />';
-			
+
 			$html .= '<iframe src="//player.vimeo.com/video/' .  $settings['vimeo_id'] . '?title=0&amp;byline=0&amp;portrait=0&amp;color=ffffff" frameborder="0" allowfullscreen="allowfullscreen" style="' . $this->vid_style . '"></iframe>';
-			
+
 		} // end if
-		
+
 		return $html;
-		
+
 	} // end get_vimeo_embed
-	
-	public function get_youtube_embed( $settings ){
-		
+
+	public function get_youtube_embed( $settings ) {
+
 		$html = '';
-		
-		if ( ! empty( $settings['vid_id'] ) ){
-			
+
+		if ( ! empty( $settings['vid_id'] ) ) {
+
 			$html .= '<img src="' . CWPPBURL . 'images/video-spacer.gif" style="width:100%;display:block" />';
-			
+
 			$html .= '<iframe src="https://www.youtube.com/embed/' . $settings['vid_id'] . '" frameborder="0" allowfullscreen style="' . $this->vid_style . '"></iframe>';
-			
+
 		} // end if
-		
+
 		return $html;
-		
+
 	} // end get_vimeo_embed
-	
-	
-	public function editor( $settings , $editor_content ){
-		
+
+
+	public function editor( $settings, $editor_content ) {
+
 		$html = '';
-		
-		if ( ! empty( $settings['vid_id'] ) ){
-			
-			
+
+		if ( ! empty( $settings['vid_id'] ) ) {
+
 			$html .= '<img src="http://img.youtube.com/vi/' . $settings['vid_id'] . '/default.jpg" style="width: 100%; display: block;" />';
-			
+
 		} else if ( ! empty( $settings['vid_id'] ) ) {
-			
+
 			 $html .= '<div class="cpb-empty-editor">No Video Set</div>';
-			 
+
 		} else {
-			
+
 			$html .= '<div class="cpb-empty-editor">No Video Set</div>';
-			
+
 		}// end if
-		
+
 		return $html;
-		
+
 	} // end editor
-	
-	public function form( $settings ){
-		
+
+	public function form( $settings ) {
+
 		$sub_form = array(
 			'YouTube' => array(
-				'form'  => Forms_PB::text_field( $this->get_name_field('vid_id') , $settings['vid_id'] , 'YouTube Video ID' ),
+				'form'  => Forms_PB::text_field( $this->get_name_field('vid_id'), $settings['vid_id'], 'YouTube Video ID' ),
 				'value' => 'youtube',
 			),
 			'Vimeo' => array(
-				'form'  => Forms_PB::text_field( $this->get_name_field('vimeo_id') , $settings['vimeo_id'] , 'Vimeo Video ID' ),
+				'form'  => Forms_PB::text_field( $this->get_name_field('vimeo_id'), $settings['vimeo_id'], 'Vimeo Video ID' ),
 				'value' => 'vimeo',
 			),
 		);
-		
-		$html = Forms_PB::get_sub_form( $sub_form , $this->get_name_field('vid_type') , $settings['vid_type'] );
-		
+
+		$html = Forms_PB::get_sub_form( $sub_form, $this->get_name_field('vid_type'), $settings['vid_type'] );
+
 		return $html;
-		
+
 	} // end form
-	
-	
-	
-	public function clean( $s ){
-		
+
+	public function clean( $s ) {
+
 		$clean = array();
-		
-		$clean['vid_id'] = ( ! empty( $s['vid_id'] ) )? sanitize_text_field( $s['vid_id'] ) : '';
-		
-		$clean['vimeo_id'] = ( ! empty( $s['vimeo_id'] ) )? sanitize_text_field( $s['vimeo_id'] ) : '';
-		
-		$clean['vid_type'] = ( ! empty( $s['vid_type'] ) )? sanitize_text_field( $s['vid_type'] ) : 'youtube';
-		
+
+		$clean['vid_id'] = ( ! empty( $s['vid_id'] ) ) ? sanitize_text_field( $s['vid_id'] ) : '';
+
+		$clean['vimeo_id'] = ( ! empty( $s['vimeo_id'] ) ) ? sanitize_text_field( $s['vimeo_id'] ) : '';
+
+		$clean['vid_type'] = ( ! empty( $s['vid_type'] ) ) ? sanitize_text_field( $s['vid_type'] ) : 'youtube';
+
 		return $clean;
-		
+
 	} // end clean
-	
+
 }

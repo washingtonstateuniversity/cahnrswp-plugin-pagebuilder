@@ -1,5 +1,10 @@
 /* CSS Document #cwp-pb*/
 
+#cwp-pb img {
+	height: auto;
+	max-width: 100%;
+}
+
 #cwp-pb h4 {
 	margin: 0;
 	padding: 0;
@@ -39,7 +44,7 @@
 	background-image:url(../images/edit-action-medium.png)
 }
 
-/* 
+/*
 * Hooks
 * -------------------------------------------
 */
@@ -48,7 +53,7 @@
 	margin: 0 1rem;
 }
 
-/* 
+/*
 * Editor
 * -------------------------------------------
 */
@@ -57,7 +62,7 @@
 }
 
 
-/* 
+/*
 * Section
 * -------------------------------------------
 */
@@ -128,7 +133,7 @@
 	padding: 0.5rem 0 0;
 }*/
 
-/* 
+/*
 * Row
 * -------------------------------------------
 */
@@ -178,15 +183,15 @@
 #cwp-pb .cpb-row > .cpb-item-set {
 	margin: 0 -4px;
 	padding: 0;
-} 
+}
 
 #cwp-pb .cpb-item-set > .cpb-column {
-	display: inline-block; 
+	display: inline-block;
 	vertical-align: top;
 }
 
 #cwp-pb .cpb-item-set.cpb-single > .cpb-column {
-	display: block; 
+	display: block;
 	vertical-align: top;
 }
 
@@ -201,22 +206,22 @@
 #cwp-pb .cpb-item-set.cpb-thirds > .cpb-column { width: 33.33%; }
 
 #cwp-pb .cpb-item-set.cpb-thirds-half-left > .cpb-column.one { width: 50%}
-#cwp-pb .cpb-item-set.cpb-thirds-half-left > .cpb-column.two { width: 25%} 
+#cwp-pb .cpb-item-set.cpb-thirds-half-left > .cpb-column.two { width: 25%}
 #cwp-pb .cpb-item-set.cpb-thirds-half-left > .cpb-column.three { width: 25%}
 
 #cwp-pb .cpb-item-set.cpb-thirds-half-right > .cpb-column.one { width: 25%}
-#cwp-pb .cpb-item-set.cpb-thirds-half-right > .cpb-column.two { width: 25%} 
+#cwp-pb .cpb-item-set.cpb-thirds-half-right > .cpb-column.two { width: 25%}
 #cwp-pb .cpb-item-set.cpb-thirds-half-right > .cpb-column.three { width: 50%}
 
 #cwp-pb .cpb-item-set.cpb-triptych > .cpb-column.one,
 #cwp-pb .cpb-item-set.cpb-triptych > .cpb-column.three { width: 25%; }
-#cwp-pb .cpb-item-set.cpb-triptych > .cpb-column.two { width: 50%; } 
+#cwp-pb .cpb-item-set.cpb-triptych > .cpb-column.two { width: 50%; }
 
 #cwp-pb .cpb-item-set.cpb-quarters > .cpb-column { width: 25%; }
 
 
 
-/* 
+/*
 * Column
 * -------------------------------------------
 */
@@ -273,7 +278,7 @@
 	padding: 1rem 0;
 }*/
 
-/* 
+/*
 * Item
 * -------------------------------------------
 */
@@ -353,14 +358,14 @@
 	line-height: 22px;
 	color: #999;
 }*/
-/* 
+/*
 * Textblock
 * -------------------------------------------
 */
 #cwp-pb .cpb-textblock .cpb-item-content > .cpb-empty {
 	padding: 1rem 0;
 }
-/* 
+/*
 * Image
 * -------------------------------------------
 */
@@ -368,7 +373,7 @@
 	width: 100%;
 }
 
-/* 
+/*
 * Forms
 * -------------------------------------------
 */
@@ -481,7 +486,7 @@
 #cwp-pb .cpb-form-100 textarea,
 #cwp-pb .cpb-form-100 select { width: 100%; }
 
-/* 
+/*
 * Subform
 * -------------------------------------------
 */
@@ -524,10 +529,10 @@
 }
 
 #cwp-pb .cpb-subform-inner {
-	margin-left: 1rem; 
+	margin-left: 1rem;
 }
 
-/* 
+/*
 * Add Item Form
 * -------------------------------------------
 */
@@ -551,7 +556,7 @@
 
 #form_cpb_add_item label {
 	background-color: #fff;
-	display: block; 
+	display: block;
 	margin: 0 0.4rem;
 	border: 1px solid #555;
 	border-radius: 6px;
@@ -568,14 +573,14 @@
 }
 
 #form_cpb_add_item label span{
-	display: block; 
+	display: block;
 	font-size: 0.7rem;
 	line-height: 1rem;
 }
 
 #form_cpb_add_item .cpb-item-icon.cpb-textblock label { background-image: url(../images/textblock-icon.png);}
 
-/* 
+/*
 * Add Row Form
 * -------------------------------------------
 */
@@ -611,7 +616,7 @@
 
 #form_cpb_add_row .cpb-layout.cpb-halves label{ background-image:url(../images/layout-halves.png);}
 
-/* 
+/*
 * Additional Settings
 * -------------------------------------------
 */
@@ -639,7 +644,7 @@
 	height: 6rem;
 }
 
-/* 
+/*
 * Hooks
 * -------------------------------------------
 */
@@ -654,7 +659,7 @@
 
 
 
-/* 
+/*
 * Media Insert
 * -------------------------------------------
 */
@@ -665,7 +670,7 @@
 }
 
 
-/* 
+/*
 * Buttons
 * -------------------------------------------
 */
@@ -741,7 +746,7 @@
 	background-position: center center;
 }
 
-/* 
+/*
 * Lightbox
 * -------------------------------------------
 */
