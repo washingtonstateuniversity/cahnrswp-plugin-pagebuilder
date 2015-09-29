@@ -70,6 +70,24 @@ class Options_PB {
 					$html .= '</td>';
 
         		$html .= '</tr>';
+				
+				$html .= '<tr valign="top">';
+
+        			$html .= '<th scope="row">Style Options:</th>';
+
+        			$html .= '<td>';
+
+						$html .= '<input id="cpb_global_css" type="checkbox" name="cpb_global_css" ';
+
+						if ( ! empty( $settings['cpb_global_css'] ) ) $html .= 'checked="checked" ';
+
+						$html .= 'value="1" />';
+
+						$html .= '<label for="cpb_global_css">Use CAHNRS Global CSS</label><br>';
+
+					$html .= '</td>';
+
+        		$html .= '</tr>';
 
 			$html .= '</table>';
 
@@ -101,6 +119,8 @@ class Options_PB {
 			$settings['cpb_post_types'] = $p_types;
 
 			$settings['cpb_layout_css'] = ( ! empty( $_POST['cpb_layout_css'] ) ) ? sanitize_text_field( $_POST['cpb_layout_css'] ) : false;
+			
+			$settings['cpb_global_css'] = ( isset( $_POST['cpb_global_css'] ) ) ? sanitize_text_field( $_POST['cpb_global_css'] ) : 0;
 
 			foreach( $settings as $key => $value ) {
 
@@ -113,6 +133,8 @@ class Options_PB {
 			$settings['cpb_post_types'] = get_option('cpb_post_types', array('page') );
 
 			$settings['cpb_layout_css'] = get_option('cpb_layout_css', true );
+			
+			$settings['cpb_global_css'] = get_option('cpb_global_css', 0 );
 
 		}// end if
 

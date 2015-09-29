@@ -99,9 +99,9 @@ class Item_Row_PB extends Item_PB {
 
 		$clean['textcolor'] = ( ! empty( $s['textcolor'] ) ) ? sanitize_text_field( $s['textcolor'] ) : '';
 
-		$clean['padding'] = ( ! empty( $s['padding'] ) ) ? sanitize_text_field( $s['padding'] ) : '';
+		$clean['padding'] = ( ! isset( $s['padding'] ) ) ? sanitize_text_field( $s['padding'] ) : 'pad-top';
 
-		$clean['gutter'] = ( ! empty( $s['padding'] ) ) ? sanitize_text_field( $s['gutter'] ) : '';
+		$clean['gutter'] = ( ! empty( $s['gutter'] ) ) ? sanitize_text_field( $s['gutter'] ) : 'gutter';
 
 		$clean['csshook'] = ( ! empty( $s['csshook'] ) ) ? sanitize_text_field( $s['csshook'] ) : '';
 

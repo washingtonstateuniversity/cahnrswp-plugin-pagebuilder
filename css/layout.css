@@ -1,7 +1,9 @@
 /* CSS Document */
+main > section.row {
+    margin: 0 !important;
+}
 
-
-main > section img{
+/*main > section img{
 	max-width: 100%;
 	height: auto;
 }
@@ -77,11 +79,11 @@ main > section img{
 
 .cpb-single .cpb-inner-wrap {
 	margin: 0;
-}
+}*/
 
 
 /* WSU Theme Overrides */
-.cpb-row {
+/*.cpb-row {
 	width: auto !important;
 }
 
@@ -91,12 +93,12 @@ body.home main > section {
 
 body.home main > section.row {
     padding-top: 1rem; !important;
-}
+}*/
 
 /*
 * Display Options
 */
-.cpb-list {
+/*.cpb-list {
 	list-style-type: none;
 	margin: 0;
 	padding: 0;
@@ -119,12 +121,12 @@ body.home main > section.row {
 		margin-bottom: 1rem;
 	}
 
-}
+}*/
 
 /*
 * Hooks
 */
-.no-padding-top {
+/*.no-padding-top {
 	padding-top: 0 !important;
 }
 
@@ -169,14 +171,14 @@ body.home main > section.row {
 }
 
 /* CAHNRS */
-.cpb-action-button {
+/*.cpb-action-button {
 	background-color: #981e32;
 	color: #fff;
 	display: block;
 	padding: 0.5rem 1rem;
 	border-radius: 2px;
 	margin-bottom: 1rem;
-}
+}*/
 
 /*
 * Hooks
@@ -188,7 +190,7 @@ body.home main > section.row {
 * -------------------------------
 */
 
-.bg-color {
+/*.bg-color {
 	position: relative;
 	padding-top: 1rem;
 }
@@ -216,24 +218,24 @@ body.home main > section.row {
 
 .gray-lightest-back:before { background-color: #eff0f1;}
 .gray-darker-back:before { background-color: #2a3033;}
-
+*/
 /*
 * Padding & Margin Hooks
 * -------------------------------
 */
-.tight, .tight > .cpb-inner-wrap {
+/*.tight, .tight > .cpb-inner-wrap {
 	padding: 0 !important;
 }
 
 .vertical-padding {
 	padding: 1rem 0;
-}
+}*/
 
 /*
 * Promo Object
 * -------------------------------
 */
-.cpb-promo {
+/*.cpb-promo {
 	display: block;
 	padding-bottom: 1rem;
 }
@@ -257,7 +259,7 @@ body.home main > section.row {
 	content:'';
 	display: block;
 	clear:both;
-}
+}*/
 
 /*
 * Promo Object
