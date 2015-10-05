@@ -123,7 +123,7 @@
 			
 			ic.addClass('active').siblings().removeClass('active');
 			
-			ic.closest('.cpb-form-frame').find('.cpb-form-section').eq( ic.index() ).addClass('active').siblings().removeClass('active'); 
+			ic.closest('.cpb-form-frame').find('.cpb-form-content').eq( ic.index() ).addClass('active').siblings().removeClass('active'); 
 			
 		} // end tab_form
 		

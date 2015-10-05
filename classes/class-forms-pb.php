@@ -78,6 +78,8 @@ class Forms_PB {
 		return Forms_PB::wrap_field( $html, $class );
 
 	} // end select
+	
+	
 
 	public static function insert_media( $base_name, $settings, $class = '' ) {
 
@@ -98,6 +100,72 @@ class Forms_PB {
 		return $html;
 
 	} // end insert_media
+	
+	public static function local_feed( $base_name , $settings ){
+		
+		$tax = get_taxonomies( array( 'public' => true ) );
+		
+		$taxonomies = array( 'na' => 'NA' );
+		
+		foreach( $tax as $name => $id ){
+			
+			if ( $name == 'post_tag' ) $name = 'Tag';
+			
+			$name = str_replace( '_' , ' ' , $name );
+			
+			$name = ucwords( $name );
+			
+			$taxonomies[ $id ] = $name;
+			
+		} // end foreach
+		
+		$html = Forms_PB::select_field( $base_name . '[post_type]', $settings['post_type'] , Forms_PB::get_post_types() , 'Content Type:' );
+		
+		$html .= Forms_PB::select_field( $base_name . '[taxonomy]', $settings['taxonomy'] , $taxonomies , 'Feed By:' );
+		
+		$html .= Forms_PB::text_field( $base_name . '[terms]', $settings['terms'] , 'Terms (Name)' );
+		
+		$html .= Forms_PB::text_field( $base_name . '[posts_per_page]', $settings['posts_per_page'] , 'Count:' , 'cpb-small-field' );
+		
+		return $html;
+		
+	}
+	
+	public static function remote_feed( $base_name , $settings ){
+		
+		$html = Forms_PB::text_field( $base_name . '[remote_url]', $settings['remote_url'] , 'Site URL (Homepage)' , 'cpb-field-one-column' );
+		
+		$html .= Forms_PB::text_field( $base_name . '[remote_post_type]', $settings['remote_post_type'] , 'Post Type (slug)');
+		
+		$html .= Forms_PB::text_field( $base_name . '[remote_taxonomy]', $settings['remote_taxonomy'] , 'Feed By (slug)');
+		
+		$html .= Forms_PB::text_field( $base_name . '[remote_terms]', $settings['remote_terms'] , 'Terms (Name)');
+		
+		$html .= Forms_PB::text_field( $base_name . '[remote_posts_per_page]', $settings['remote_posts_per_page'] , 'Count' , 'cpb-small-field' );
+		
+		return $html;
+		
+	}
+	
+	public static function get_post_types( $add_any = true ){
+		
+		$p_types = get_post_types();
+		
+		if ( $add_any ){
+		
+			$post_types = array( 'any' => 'Any' );
+		
+		} // end if
+		
+		foreach( $p_types as $type ){
+			
+			$post_types[ $type ] = ucfirst( $type );
+			
+		} // end foreach
+		
+		return $post_types;
+		
+	} // end get_post_types
 
 	public function button( $title, $action, $class = 'cwp-standard-button' ) {
 
@@ -203,7 +271,7 @@ class Forms_PB {
 		
 		$id = 'subform_' . rand( 0 ,1000000 );
 		
-		$active = ( $subform['val'] == $subform['current_val'] ) ? ' active' : '';
+		$active = ( $subform['val'] == $subform['current_val'] ) ? ' selected' : '';
 		
 		$html = '<div class="cbp-form-subsection' . $active . '">';
 		
@@ -211,7 +279,7 @@ class Forms_PB {
 			
             	$html .= '<label for="' . $id . '">' .$subform['title'] . '<br /><span class="cbp-subsection-helper-text">' .$subform['summary'] . '</span></label>';
             	
-				$html .= '<input type="radio" name="' . $subform['field_name'] . '" id="' . $id . '" />';
+				$html .= '<input type="radio" name="' . $subform['field_name'] . '" id="' . $id . '" value="' . $subform['val'] . '" ' . checked( $subform['val'] , $subform['current_val'] , false )  . ' />';
 				
             $html .= '</header>';
 			

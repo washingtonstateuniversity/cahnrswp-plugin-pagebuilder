@@ -11,17 +11,17 @@ class Item_Postgallery_PB extends Item_PB {
 	
 	public function item( $settings , $content ){
 		
-		require_once CWPPBDIR . 'classes/class-query-pb.php';
+		$html .= '';
 		
-		require_once CWPPBDIR . 'classes/class-display-pb.php';
-		
-		$query = new Query_PB( $settings );
-		
-		$display = new Display_PB( $settings );
+		if ( ! empty( $settings['title'] ) ){
 			
-		$items = $query->get_query_items();
+			$html .= '<' . $settings['tag'] . '>' . $settings['title'] . '</' . $settings['tag'] . '>';
+			
+		} // end if
+			
+		$items = Query_PB::get_query_items( $settings , array( 'image_size' => 'medium' ) );
 		
-		$html = $display->get_display( $items );
+		$html .= Display_PB::get_display( $items , $settings );
 		
 		return $html;
 		
@@ -39,7 +39,45 @@ class Item_Postgallery_PB extends Item_PB {
 	
 	public function form( $settings ){
 		
-		$source = array(
+		$feed_source = array(
+			'form'        => Forms_PB::local_feed( $this->get_name_field() , $settings ),
+			'field_name'  => $this->get_name_field('source'),
+			'val'         => 'feed',
+			'current_val' => $settings['source'],
+			'title'       => 'Feed (This Site)',
+			'summary'     => 'I want to dynamically include other posts/pages from this site based on categories, tages, or content type.'
+		);
+		
+		$ext_feed_source = array(
+			'form'        => Forms_PB::remote_feed( $this->get_name_field() , $settings ),
+			'field_name'  => $this->get_name_field('source'),
+			'val'         => 'remote_feed',
+			'current_val' => $settings['source'],
+			'title'       => 'Feed (Another Site)',
+			'summary'     => 'I want to dynamically include posts/pages from another site.'
+		);
+		
+		$source .= Forms_PB::get_subform( $feed_source ); 
+		
+		$source .= Forms_PB::get_subform( $ext_feed_source ); 
+		
+		$display = Forms_PB::text_field( $this->get_name_field('title') , $settings['title'] , 'Title' );
+		
+		$display .= Forms_PB::select_field( $this->get_name_field('tag') , $settings['tag'] , array('h2' => 'H2','h3'=>'H3','h4'=>'H4' ) , 'Tag Type' );
+		
+		$display .= Forms_PB::checkbox_field( $this->get_name_field('hide_excerpt'), 1, $settings['hide_excerpt'], 'Hide Summary' );
+		
+		$display .= Forms_PB::checkbox_field( $this->get_name_field('hide_image'), 1, $settings['hide_image'], 'Hide Image' );
+		
+		$display .= Forms_PB::checkbox_field( $this->get_name_field('hide_link'), 1, $settings['hide_link'], 'Remove Link' );
+		
+		$form = array( 
+			'Source' => $source,
+			'Display Style' => $display,
+		);
+		
+		
+		/*$source = array(
 			'Basic Feed' => array(
 				'form' => $this->get_basic_feed( $settings ),
 				'value' => 'feed',
@@ -151,35 +189,35 @@ class Item_Postgallery_PB extends Item_PB {
 		
 		$clean['display_columns'] = '4';
 		
-		$clean['excerpt_length'] = ( isset( $s['excerpt_length'] ) )? sanitize_text_field( $s['excerpt_length'] ) : 25;
+		$clean['title'] = ( ! empty( $s['title'] ) ) ? $s['title'] : '';
 		
-		$clean['feed_source'] = ( ! empty( $s['feed_source'] ) )? sanitize_text_field( $s['feed_source'] ) : 'feed';
+		$clean['tag'] = ( ! empty( $s['tag'] ) ) ? $s['tag'] : 'h2';
 		
-		if ( 'feed' == $clean['feed_source'] ){
+		$clean['hide_excerpt'] = ( ! empty( $s['hide_excerpt'] ) ) ? $s['hide_excerpt'] : '';
+		
+		$clean['hide_image'] = ( ! empty( $s['hide_image'] ) ) ? $s['hide_image'] : '';
+		
+		$clean['hide_link'] = ( ! empty( $s['hide_link'] ) ) ? $s['hide_link'] : '';
+		
+		if ( ! empty( $s['source'] ) ) $clean['source'] = sanitize_text_field( $s['source'] );
+		
+		if ( ! empty( $s['post_type'] ) ) $clean['post_type'] = sanitize_text_field( $s['post_type'] );
+		
+		if ( ! empty( $s['taxonomy'] ) ) $clean['taxonomy'] = sanitize_text_field( $s['taxonomy'] );
+		
+		if ( ! empty( $s['terms'] ) ) $clean['terms'] = sanitize_text_field( $s['terms'] );
+				
+		$clean['posts_per_page'] =  ( ! empty( $s['posts_per_page'] ) ) ? sanitize_text_field( $s['posts_per_page'] ) : 5;
 			
-			$clean['post_type'] = ( ! empty( $s['post_type'] ) )? sanitize_text_field( $s['post_type'] ) : 'post';
+		if ( ! empty( $s['remote_url'] ) ) $clean['remote_url'] = sanitize_text_field( $s['remote_url'] );
 		
-			$clean['taxonomy'] = ( ! empty( $s['taxonomy'] ) )? sanitize_text_field( $s['taxonomy'] ) : false;
+		if ( ! empty( $s['remote_post_type'] ) ) $clean['remote_post_type'] = sanitize_text_field( $s['remote_post_type'] );
 		
-			$clean['tax_terms'] = ( ! empty( $s['tax_terms'] ) )? sanitize_text_field( $s['tax_terms'] ) : false;
-			
-		} // end if
+		if ( ! empty( $s['remote_taxonomy'] ) ) $clean['remote_taxonomy'] = sanitize_text_field( $s['remote_taxonomy'] );
+
+		if ( ! empty( $s['remote_terms'] ) ) $clean['remote_terms'] = sanitize_text_field( $s['remote_terms'] );
 		
-		if ( 'external' == $clean['feed_source'] ){
-			
-			$clean['ext_source'] = ( ! empty( $s['ext_source'] ) )? sanitize_text_field( $s['ext_source'] ) : '';
-			
-			$clean['post_type'] = ( ! empty( $s['post_type'] ) )? sanitize_text_field( $s['post_type'] ) : 'post';
-			
-			if ( ! empty( $s['ext_post_type'] ) ) $clean['post_type'] = sanitize_text_field( $s['ext_post_type'] );
-		
-			$clean['taxonomy'] = ( ! empty( $s['ext_taxonomy'] ) )? sanitize_text_field( $s['ext_taxonomy'] ) : false;
-		
-			$clean['tax_terms'] = ( ! empty( $s['ext_tax_terms'] ) )? sanitize_text_field( $s['ext_tax_terms'] ) : false;
-			
-		} // end if
-		
-		if ( ! empty( $s['posts_per_page'] ) ) $clean['posts_per_page'] = sanitize_text_field( $s['posts_per_page'] );
+		$clean['remote_posts_per_page'] = ( ! empty( $s['remote_posts_per_page'] ) ) ? sanitize_text_field( $s['remote_posts_per_page'] ) : 5;
 		
 		return $clean;
 		

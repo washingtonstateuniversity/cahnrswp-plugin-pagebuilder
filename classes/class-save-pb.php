@@ -11,8 +11,6 @@ class Save_PB {
 
 	public function get_save_array_recursive( $save_str ) {
 
-		//var_dump( $save_str );
-
 		$items = array();
 
 		$save_items = explode( ',', $save_str );
@@ -20,8 +18,6 @@ class Save_PB {
 		foreach( $save_items as $item_id ) {
 
 			$item_post = ( ! empty( $_POST['_cpb'][$item_id] ) ) ?  $_POST['_cpb'][$item_id] : false;
-
-			//var_dump( $item_post );
 
 			if ( $item_post ) {
 
@@ -90,8 +86,6 @@ class Save_PB {
 
 		$data = '';
 
-		//var_dump( $save_items );
-
 		foreach( $save_items as $item ) {
 
 			if ( isset( $item->children ) && is_array( $item->children ) && $item->children ) {
@@ -126,8 +120,6 @@ class Save_PB {
 
 		} // end foreach
 
-		//var_dump( $clean );
-
 		return $clean;
 
 	}
@@ -159,6 +151,8 @@ class Save_PB {
 			} // end if
 
 		} // end if
+		
+		define( 'CAHNRSWPPBSAVE' , true );
 
 		$settings = $this->get_settings();
 
@@ -213,10 +207,6 @@ class Save_PB {
 		$patt = '/\[.*?\]/i';
 
 		$excerpt = preg_replace( $patt, ' ', $content );
-
-		//var_dump( $content );
-
-		//var_dump( $excerpt );
 
 		$excerpt = wp_trim_words( wp_strip_all_tags( $excerpt ), 55 );
 

@@ -1,29 +1,20 @@
 <?php
 class Display_PB {
 	
-	public $settings = array();
 	
-	public function __construct( $settings = array() ){
-		
-		if ( ! is_array( $settings ) ) $settings = array();
-		
-		$this->settings = $settings;
-		
-	} // end __construct
-	
-	public function get_display( $items ){
+	public static function get_display( $items , $settings ){
 		
 		$html = '';
 		
-		$display = ( ! empty( $this->settings['display_type'] ) ) ? $this->settings['display_type'] : 'promo';
+		$display = ( ! empty( $settings['display_type'] ) ) ? $settings['display_type'] : 'promo';
 		
 		switch ( $display ){
 			case 'gallery':
-				$html .= $this->get_gallery( $items );
+				$html .= Display_PB::get_gallery( $items , $settings );
 				break;
 				
 			default:
-				$html .= $this->get_promos( $items );
+				$html .= Display_PB::get_promos( $items , $settings );
 				break;
 
 		} // end switch
@@ -33,50 +24,25 @@ class Display_PB {
 	} // end get_display
 
 	
-	public function get_gallery( $items ){
+	public static function get_gallery( $items , $settings ){
 		
-		$layout_classes = array('not-set','one-column','two-column','three-column','four-column','five-column' );
+		$style = '<style type="text/css" scoped>
+				.cpb-gallery-set {margin: 0 -0.5rem;}
+				.cpb-gallery-set .cpb-gallery-item {display:inline-block;vertical-align:top;}
+				.cpb-gallery-set.quarters .cpb-gallery-item {width:25%}
+				.cpb-gallery-item article { margin: 0 0.5rem; padding-bottom: 1rem; }
+				.cpb-gallery-item article > img, .cpb-gallery-item article > a > img {width:100%;display:block;background-repeat:no-repeat;background-size:cover;background-position:center center;}
+				</style>';
 		
-		$display = ( ! empty( $this->settings['display_columns'] ) ) ? $this->settings['display_columns'] : 4;
+		$columns = ( ! empty( $settings['columns'] ) ) ? $settings['columns'] : 'quarters'; 
 		
-		$html = '<div class="cpb-gallery-set cpb-item ' . $layout_classes[ $display ] . '">';
+		$html = '<div class="cpb-gallery-set cpb-item ' . $columns . '">';
 		
-		$html .= '<style type="text/css" scoped>
-			.cpb-gallery-set{margin: 0 -1rem;} 
-			.cpb-gallery-item {margin-bottom: 1rem}
-			.cpb-gallery-item .cpb-image {background-color: #ddd; background-repeat: no-repeat;background-size:cover;background-position: center center}
-			.cpb-gallery-item .cpb-image img {display:block;width:100%;height:auto;}
-			.cpb-gallery-item .cpb-image,.cpb-gallery-item .cpb-caption {margin: 0 1rem;}
-			.cpb-gallery-set.four-column .cpb-gallery-item {display:inline-block;width: 25%;vertical-align:top}
-			.cpb-gallery-set:after{content:"";display: block;clear:both;margin: 0 -0.5rem;}
-			</style>';
+		$html .= $style;
 		
 		foreach( $items as $item ){
 			
-			$image_class = ( ! empty( $item['img'] ) ) ? 'has-image ':'';
-			
-			if ( ! empty( $item['link'] ) ){
-				
-				$l_start = '<a href="' . $item['link'] . '" >';
-				
-				$l_end = '</a>';
-				
-			} else {
-				
-				$l_start = '';
-				
-				$l_end = '';
-				
-			} // end if
-
-			$html .= '<article class="' . $image_class . 'cpb-gallery-item">';
-				
-			$html .= $this->get_image( $item , $l_start , $l_end );
-			
-			$html .= $this->get_caption( $item , $l_start , $l_end );
-			
-			
-			$html .= '</article>';
+			$html .= Display_PB::get_summary_view( $item , 'cpb-gallery' ); 
 			
 		} // end foreach
 		
@@ -88,7 +54,7 @@ class Display_PB {
 	
 	
 	
-	public function get_promos( $items ){
+	public static function get_promo( $items, $settings ){
 		
 		$html = '<div class="cpb-promo-set cpb-item">';
 		
@@ -96,31 +62,7 @@ class Display_PB {
 			
 			$image_class = ( ! empty( $item['img'] ) ) ? 'has-image ':'';
 			
-			if ( ! empty( $item['link'] ) ){
-				
-				$l_start = '<a href="' . $item['link'] . '" >';
-				
-				$l_end = '</a>';
-				
-			} else {
-				
-				$l_start = '';
-				
-				$l_end = '';
-				
-			} // end if
-
-			$html .= '<article class="' . $image_class . 'cpb-promo">';
-			
-			if ( ! empty( $item['img'] ) ){
-				
-				$html .= $this->get_image( $item , $l_start , $l_end );
-			
-			} // end if
-			
-			$html .= $this->get_caption( $item , $l_start , $l_end );	
-			
-			$html .= '</article>';
+			$html .= Display_PB::get_summary_view( $item , 'cpb-promo' , $image_class ); 
 			
 		} // end foreach
 		
@@ -131,31 +73,53 @@ class Display_PB {
 	} // end get_promos
 	
 	
-	public function get_image( $item , $l_start = '' , $l_end = '' , $class = '' ){
+	public static function get_summary_view( $item , $type , $class = '' ){
+		
+		if ( ! empty( $item['link'] ) ){
 			
-		$html = '<div class="cpb-image" style="background-image:url(' . $item['img'] . ');">';
+			$ls = '<a href="' . $item['link'] . '">';
+			
+			$le = '</a>';
+			
+		} else {
+			
+			$ls = '';
+			
+			$le = '';
+			
+		} // end if
 		
-			$html .= $l_start . '<img src="' . CWPPBURL . 'images/3x4spacer.png" />' . $l_end;
+		$html .= '<div class="cpb-summary-item ' . $type . '-item ' . $class . '">';
 		
-		$html .= '</div>';
+			$html .= '<article>';
+				
+				// Add Image
+				if ( ! empty( $item['image'] ) ){
 		
-		return $html;
-		
-	} // end get_image
-	
-	
-	public function get_caption( $item , $l_start = '' , $l_end = '' , $class = '' ){
-		
-		$html = '<div class="cpb-caption ' . $class . '">';
+						$html .= $ls . '<img src="' . CWPPBURL . 'images/3x4spacer.png" style="background-image:url(' . $item['image'] . ');" />' . $le;
 					
-			$html .= '<h3>' . $l_start . $item['title'] . $l_end . '</h3>';
+				} // end if
+				
+				if ( ! empty( $item['title'] ) || ! empty( $item['excerpt'] ) || ! empty( $item['link'] ) ){
+				
+					$html .= '<div class="cpb-caption ' . $class . '">';
+						
+						$html .= '<h5>' . $ls . $item['title'] . $le. '</h5>';
+						
+						$html .= $item['excerpt'];
+					
+					$html .= '</div>';
+				
+				} // end if
 			
-			$html .= '<div class="cpb-excerpt">' . $item['excerpt'] . '</div>';
+			$html .= '</article>';
 		
 		$html .= '</div>';
 		
 		return $html;
 		
-	} // end get_caption
+	}
+	
+	
 	
 }

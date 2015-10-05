@@ -86,8 +86,6 @@ class Editor_PB {
 
 		$st['_cpb_pagebuilder'] = ( isset( $meta['_cpb_pagebuilder'][0] ) ) ? $meta['_cpb_pagebuilder'][0] : 0;
 
-		//var_dump( $st );
-
 		return $st;
 
 	} // end get_editor_settings

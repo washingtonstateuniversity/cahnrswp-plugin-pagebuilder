@@ -160,8 +160,6 @@ class Items_PB {
 
 		} // end foreach
 
-		//var_dump( $flat );
-
 		return $flat;
 
 	}

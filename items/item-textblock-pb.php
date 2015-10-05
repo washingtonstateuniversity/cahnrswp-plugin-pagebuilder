@@ -10,8 +10,8 @@ class Item_Textblock_PB extends Item_PB {
 	public $form_size = 'large';
 
 	public function item( $settings, $content ) {
-
-		$html = $content;
+		
+		$html = wpautop( $content );
 
 		return $html;
 

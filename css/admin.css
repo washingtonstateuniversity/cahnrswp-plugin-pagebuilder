@@ -460,6 +460,11 @@
 #cwp-pb-forms .cpb-form-content {
 	background-color: #ddd;
 	padding: 2rem 0;
+	display: none;
+}
+
+#cwp-pb-forms .cpb-form-content.active {
+	display: block;
 }
 
 #cwp-pb-forms .cpb-form-content-inner {
@@ -650,14 +655,14 @@
 	padding: 1rem 40px 1rem 1rem;
 	border-bottom: 1px solid #ccc;
 	background-color: #eee;
-	background-image: url(unchecked.png);
+	background-image:url(../images/unchecked.png);
 	background-repeat: no-repeat;
 	background-position: right center;
 	cursor: pointer;
 }
 
 .cbp-form-subsection.selected header label {
-	background-image: url(checked.png);
+	background-image: url(../images/checked.png);
 }
 
 .cbp-form-subsection header label span {
@@ -669,7 +674,7 @@
 .cbp-form-subsection > div{
 	display: none;
 	margin: 0 1rem;
-	padding: 1rem 0 0;
+	padding: 1rem 0;
 }
 
 .cbp-form-subsection.selected > div{

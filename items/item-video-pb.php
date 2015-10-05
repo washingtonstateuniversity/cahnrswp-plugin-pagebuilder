@@ -94,10 +94,21 @@ class Item_Video_PB extends Item_PB {
 			'val'         => 'youtube',
 			'current_val' => $settings['vid_type'],
 			'title'       => 'YouTube Video',
-			'summary'     => 'Display YouTube video by video ID'
+			'summary'     => 'Display YouTube video by ID'
+		);
+		
+		$vimeo_subform = array(
+			'form'        => Forms_PB::text_field( $this->get_name_field('vimeo_id'), $settings['vimeo_id'], 'Vimeo Video ID' ),
+			'field_name'  => $this->get_name_field('vid_type'),
+			'val'         => 'vimeo',
+			'current_val' => $settings['vid_type'],
+			'title'       => 'Vimeo Video',
+			'summary'     => 'Display Vimeo video by ID'
 		);
 		
 		$html = Forms_PB::get_subform( $video_subform ); 
+		
+		$html .= Forms_PB::get_subform( $vimeo_subform );
 
 		/*$sub_form = array(
 			'YouTube' => array(

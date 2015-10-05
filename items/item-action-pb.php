@@ -11,13 +11,19 @@ class Item_Action_PB extends Item_PB {
 
 	public function item( $settings, $content ) {
 
-		$html = '';
+		$html = '<div class="cpb-item cpb-action-button">';
 
 		if ( ! empty( $settings['label'] ) ) {
 
-			$html = '<a href="' . $settings['link'] . '" class="cpb-action-button ' . $settings['csshook'] . '">' . $settings['label'] . '</a>';
+			$html .= '<a href="' . $settings['link'] . '" class="cpb-action-button-item ' . $settings['csshook'] . '">' . $settings['label'] . '</a>';
+			
+			$html .= '<style type="text/css" scoped>
+				.cpb-action-button-item {display: block; background: #981e32; color: #fff; padding: 0.5rem 1rem; border-radius: 2px; margin-bottom: 0.5rem;}
+				</style>';
 
 		} // end if
+		
+		$html .= '</div>';
 
 		return $html;
 

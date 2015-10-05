@@ -40,8 +40,16 @@ class Item_PB extends Forms_PB {
 		$clean_set = array();
 
 		if ( method_exists( $this, 'clean' ) ) {
-
-			$clean_set = $this->clean( $settings );
+			
+			if ( defined( 'CAHNRSWPPBSAVE' ) && CAHNRSWPPBSAVE && method_exists( $this, 'clean_save' ) ){
+				
+				$clean_set = $this->clean_save( $settings );
+				
+			} else {
+				
+				$clean_set = $this->clean( $settings );
+				
+			}// end if
 
 		} // end if
 
