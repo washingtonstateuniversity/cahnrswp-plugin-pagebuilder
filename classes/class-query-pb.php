@@ -1,17 +1,40 @@
 <?php
 class Query_PB {
 	
-	public static function get_query_items( $settings , $args = array( 'img_size' => 'thumbnail' ) ){
+	public $settings;
+	
+	public $supports = array(
+		'title',
+		'content',
+		'excerpt',
+		'link',
+		'image', 
+		);
 		
-		if ( ! empty( $settings['source'] ) ){
+	public function __construct( $settings , $supports = array() ){
+		
+		$this->settings = $settings;
+		
+		if ( ! empty( $supports ) ){
 			
-			switch( $settings['source'] ){
+			$this->supports = $supports;
+			
+		} // end if
+		
+	} // end __construct
+		
+	
+	public function get_query_items(){
+		
+		if ( ! empty( $this->settings['source'] ) ){
+			
+			switch( $this->settings['source'] ){
 				
 				case 'feed':
-					$items = Query_PB::get_feed_items( $settings , $args );
+					$items = $this->get_feed_items();
 					break;
 				case 'remote_feed':
-					$items = Query_PB::get_remote_feed_items( $settings , $args );
+					$items = $this->get_remote_feed_items();
 					break;
 				default:
 					$items = array();
@@ -30,13 +53,84 @@ class Query_PB {
 	} // end do_query
 	
 	
-	public static function get_remote_feed_items( $settings , $args ){
+	
+	
+	public function get_feed_items(){
 		
 		$items = array();
 		
-		if ( ! empty( $settings['remote_url'] ) ){
+		$query_args = $this->build_local_query();
+		
+		$query = new WP_Query( $query_args );
+		
+		while ( $query->have_posts() ) {
 			
-			$response = wp_remote_get( Query_PB::build_remote_query( $settings , $args ) );
+			$query->the_post();
+			
+			$item = array();
+			
+			// Set the title
+			if ( in_array( 'title' , $this->supports ) ) {
+				
+				$item['title'] = get_the_title();
+				
+			} // end if
+			
+			// Set the content
+			if ( in_array( 'content' , $this->supports ) ) {
+
+				$item['content'] = get_the_content();
+				
+			} // end if
+			
+			// Set the excerpt
+			if ( in_array( 'excerpt' , $this->supports ) ) {
+
+				$item['excerpt'] = get_the_excerpt();
+				
+			} // end if
+			
+			// Set the excerpt
+			if ( in_array( 'link' , $this->supports ) ) {
+
+				$item['link'] = get_permalink();
+				
+			} // end if
+			
+			// Set the image
+			if ( in_array( 'image' , $this->supports ) ) {
+				
+				$this->set_image_size();
+				
+				$image = wp_get_attachment_image_src( get_post_thumbnail_id( $query->post->ID ), $this->settings['img_size'] );
+				
+				if ( $image ) {
+
+					$item['image'] = $image[0];
+					
+				} // end if
+				
+			} // end if
+			
+			$items[ 'post' . '-' . $query->post->ID ] = $item;
+			
+		} // end while
+		
+		/* Restore original Post Data */
+		wp_reset_postdata();
+		
+		return $items;
+		
+	} // end get_feed_items
+	
+	
+	public function get_remote_feed_items(  ){
+		
+		$items = array();
+		
+		if ( ! empty( $this->settings['remote_url'] ) ){
+			
+			$response = wp_remote_get( $this->build_remote_query(  ) );
 			
 			if ( is_array( $response ) ){
 				
@@ -45,23 +139,13 @@ class Query_PB {
 				$json = json_decode( $body , true );
 			
 				if ( is_array( $json ) && $json ){
-					
-					if ( ! empty( $args['supports'] ) ) { 
-					
-						$supports = $args['supports'];
-						
-					} else {
-						
-						$supports = array('title','content','excerpt','link','image' );
-						
-					} // end if 
 				
 					foreach( $json as $post ){
 						
 						$item = array();
 						
 						// Set the title
-						if ( in_array( 'title' , $supports ) ) {
+						if ( in_array( 'title' , $this->supports ) ) {
 							
 							$item['title'] = $post['title'];
 							
@@ -69,46 +153,38 @@ class Query_PB {
 							
 			
 						// Set the content
-						if ( in_array( 'content' , $supports ) ) {
+						if ( in_array( 'content' , $this->supports ) ) {
 			
 							$item['content'] = $post['content'];
 							
 						} // end if
 			
 						// Set the excerpt
-						if ( in_array( 'excerpt' , $supports ) && empty( $settings['hide_excerpt'] ) ) {
+						if ( in_array( 'excerpt' , $this->supports ) && empty( $this->settings['hide_excerpt'] ) ) {
 			
 							$item['excerpt'] = $post['excerpt'];
 							
 						} // end if
 			
 						// Set the link
-						if ( in_array( 'link' , $supports ) && empty( $settings['hide_link'] ) ) {
+						if ( in_array( 'link' , $this->supports ) && empty( $this->settings['hide_link'] ) ) {
 			
 							$item['link'] = $post['link'];
 							
 						} // end if
 			
 						// Set the image
-						if ( in_array( 'image' , $supports ) && empty( $settings['hide_image'] ) ) {
+						if ( in_array( 'image' , $this->supports ) && empty( $this->settings['hide_image'] ) ) {
 							
-							if ( ! empty( $args['image_size'] ) ){
-								
-								$image_size = $args['image_size'];
-								
-							} else {
-								
-								$image_size = 'thumbnail';
-								
-							} // end if
+							$this->set_image_size();
 							
 							if ( ! empty( $post['featured_image']['attachment_meta']['sizes'] ) ) {
 								
 								$image_meta = $post['featured_image']["attachment_meta"]['sizes'];
 								
-								if ( array_key_exists( $image_size , $image_meta ) ){
+								if ( array_key_exists( $this->settings['img_size'] , $image_meta ) ){
 									
-									$image = $image_meta[ $image_size ];
+									$image = $image_meta[ $this->settings['img_size'] ];
 									
 								} else {
 									
@@ -139,42 +215,123 @@ class Query_PB {
 		
 	}
 	
-	public static function build_remote_query( $settings , $args ){
+	public function build_remote_query(  ){
 		
 		$query = array();
 		
 		// Handle post type
-		if ( ! empty( $settings['remote_post_type'] ) ){
+		if ( ! empty( $this->settings['remote_post_type'] ) ){
 			
-			$query[] = 'type=' . $settings['remote_post_type'];
+			$query[] = 'type=' . $this->settings['remote_post_type'];
 			
 		} // end if
 		
 		// Handle posts per page
-		if ( ! empty( $settings['remote_posts_per_page'] ) ){
+		if ( ! empty( $this->settings['remote_posts_per_page'] ) ){
 			
-			$query[] = 'filter[posts_per_page]=' . $settings['remote_posts_per_page'];
-			
-		} // end if
-		
-		if ( ! empty( $settings['remote_taxonomy'] ) && ! empty( $settings['remote_terms'] ) ){
-			
-			$query[] = 'filter[taxonomy]=' . $settings['remote_taxonomy'];
-			
-			$query[] = 'filter[term]=' . $settings['remote_terms'];
-			
+			$query[] = 'filter[posts_per_page]=' . $this->settings['remote_posts_per_page'];
 			
 		} // end if
 		
-		return $settings['remote_url'] . '/wp-json/posts?' . implode( '&' , $query );
+		if ( ! empty( $this->settings['remote_taxonomy'] ) && ! empty( $this->settings['remote_terms'] ) ){
+			
+			$query[] = 'filter[taxonomy]=' . $this->settings['remote_taxonomy'];
+			
+			$query[] = 'filter[term]=' . $this->settings['remote_terms'];
+			
+			
+		} // end if
+		
+		return $this->settings['remote_url'] . '/wp-json/posts?' . implode( '&' , $query );
 		
 	} // end build_remote_query
 	
-	/*public static function get_remote_items( $query_args , $supports = array() , $image_size = 'thumbnail' ){
+	
+	public function build_local_query(){
+		
+		$query_args = array();
+		
+		// Handle Posts Per page
+		if ( isset( $this->settings['posts_per_page'] ) ){
+			
+			$query_args['posts_per_page'] = $this->settings['posts_per_page'];
+			
+		} else {
+			
+			$query_args['posts_per_page'] = get_option( 'posts_per_page' );
+			
+		}// end if
+		
+		// Handle Post Types
+		if ( isset( $this->settings['post_type'] ) ){
+			
+			$query_args['post_type'] = $this->settings['post_type'];
+			
+		} else {
+			
+			$query_args['post_type'] = $this->settings['any'];
+			
+		}// end if
+		
+		/*$query_args['tax_query'] = array(
+			array(
+				'taxonomy' => 'category',
+				'field'    => 'name',
+				'terms'    => 'Test',
+			),
+		);*/
+		
+		// Handle Taxonomy Query 
+		if ( ! empty( $this->settings['taxonomy'] ) && ! empty( $this->settings['terms'] ) ){
+			
+			$tax_query = array();
+			
+			$tax_query['taxonomy'] = $this->settings['taxonomy'];
+			
+			$tax_query['field'] = 'id';
+			
+			$terms = explode( ',' , $this->settings['terms'] ); 
+			
+			foreach( $terms as $term ){
+				
+				$wp_term = get_term_by( 'name', trim( $term ), $this->settings['taxonomy'] );
+				
+				//$tax_query['terms'][] = trim( $term );
+				
+				$tax_query['terms'][] = $wp_term->term_id;
+				
+			} // end foreach
+			
+			if ( ! empty( $this->settings['term_operator'] ) ){
+				
+				$tax_query['operator'] = $this->settings['term_operator'];
+				
+			} // end if
+			
+			$query_args['tax_query'] = array( $tax_query );
+			
+		} // end if
+		
+		return $query_args;
+		
+	} // end 
+	
+	public function set_image_size(){
+		
+		if ( empty( $this->settings['img_size'] ) ){
+			
+			$this->settings['img_size'] = 'thumbnail';
+			
+		} // end if
+		
+	} // end get_image_size
+	
+	
+	/*public function get_remote_items( $query_args , $supports = array() , $image_size = 'thumbnail' ){
 		
 		$items = array();
 		
-		$query_url = Query_PB::build_remote_query_url( $query_args );
+		$query_url = $this->build_remote_query_url( $query_args );
 		
 		$response = wp_remote_get( $query_url );
 		
@@ -209,9 +366,9 @@ class Query_PB {
 		
 						$item['excerpt'] = $post['excerpt'];
 						
-						if ( isset( Query_PB::args['excerpt_length'] ) ){
+						if ( isset( $this->args['excerpt_length'] ) ){
 							
-							$item['excerpt'] = wp_trim_words( $item['excerpt'] , Query_PB::args['excerpt_length'] , '' );
+							$item['excerpt'] = wp_trim_words( $item['excerpt'] , $this->args['excerpt_length'] , '' );
 							
 						} // end if
 						
@@ -263,7 +420,7 @@ class Query_PB {
 	
 	
 	
-	public static function get_items( $query_args , $supports = array() , $image_size = 'thumbnail' ){
+	public function get_items( $query_args , $supports = array() , $image_size = 'thumbnail' ){
 		
 		$items = array();
 		
@@ -294,9 +451,9 @@ class Query_PB {
 
 				$item['excerpt'] = get_the_excerpt();
 				
-				if ( isset( Query_PB::args['excerpt_length'] ) ){
+				if ( isset( $this->args['excerpt_length'] ) ){
 					
-					$item['excerpt'] = wp_trim_words( $item['excerpt'] , Query_PB::args['excerpt_length'] , '' );
+					$item['excerpt'] = wp_trim_words( $item['excerpt'] , $this->args['excerpt_length'] , '' );
 					
 				} // end if
 				
@@ -330,7 +487,7 @@ class Query_PB {
 		
 	} // end  get_query
 	
-	public static function build_remote_query_url( $query_args ){
+	public function build_remote_query_url( $query_args ){
 		
 		$params = array();
 		
@@ -353,26 +510,26 @@ class Query_PB {
 	}
 	
 	
-	public static function get_query_args(){
+	public function get_query_args(){
 		
 		$query = array();
 		
-		if ( ! empty( Query_PB::args['ext_source'] ) ){
+		if ( ! empty( $this->args['ext_source'] ) ){
 			
-			$query['source'] = Query_PB::args['ext_source'];
+			$query['source'] = $this->args['ext_source'];
 			
 		} // end if
 		
 		// Get count args
-		$query['posts_per_page'] = Query_PB::get_post_per_page();
+		$query['posts_per_page'] = $this->get_post_per_page();
 		
 		// Get post type args
-		$query['post_type'] = Query_PB::get_post_type();
+		$query['post_type'] = $this->get_post_type();
 		
 		// Get taxonomy args
-		if ( ! empty( Query_PB::args['taxonomy'] ) && ! empty( Query_PB::args['terms'] ) ) {
+		if ( ! empty( $this->args['taxonomy'] ) && ! empty( $this->args['terms'] ) ) {
 			
-			$query['tax_query'] = Query_PB::get_tax_query();
+			$query['tax_query'] = $this->get_tax_query();
 			
 		} // end if
 		
@@ -381,11 +538,11 @@ class Query_PB {
 	} // get_query_args
 	
 	
-	public static function get_post_per_page() {
+	public function get_post_per_page() {
 		
-		if ( ! empty( Query_PB::args['posts_per_page'] ) ){
+		if ( ! empty( $this->args['posts_per_page'] ) ){
 			
-			$n = Query_PB::args['posts_per_page'];
+			$n = $this->args['posts_per_page'];
 			
 		} else {
 			
@@ -398,24 +555,24 @@ class Query_PB {
 	} // end get_post_per_page
 	
 	
-	public static function get_post_type(){
+	public function get_post_type(){
 		
-		$type = ( ! empty( Query_PB::args['post_type'] ) ) ? $type = Query_PB::args['post_type'] : 'post';
+		$type = ( ! empty( $this->args['post_type'] ) ) ? $type = $this->args['post_type'] : 'post';
 			
 		return $type;
 		
 	} // end get_post_type
 	
 	
-	public static function get_tax_query(){
+	public function get_tax_query(){
 		
 		$tax_query = array();
 			
-		$tax_query['taxonomy'] = Query_PB::args['taxonomy'];
+		$tax_query['taxonomy'] = $this->args['taxonomy'];
 			
 		$tax_query['field'] = 'name';
 		
-		Query_PB::args['terms'] = explode( ',' , Query_PB::args['terms'] );	
+		$this->args['terms'] = explode( ',' , $this->args['terms'] );	
 		
 		return array( $tax_query );
 		
@@ -424,29 +581,29 @@ class Query_PB {
 	
 	
 	
-	/*public static static function get_local_query_args( $settings ){
+	/*public static function get_local_query_args( $this->settings ){
 		
 		$query = array();
 
 		// Post Pagation
 
-		if ( ! empty( $settings['posts_per_page'] ) ) $query['posts_per_page'] = $settings['posts_per_page'];
+		if ( ! empty( $this->settings['posts_per_page'] ) ) $query['posts_per_page'] = $this->settings['posts_per_page'];
 
 		// Post Type ---------------------------------------
 
-		$query['post_type'] = ( ! empty( $settings['post_type'] ) ) ? $settings['post_type'] : 'page' ;
+		$query['post_type'] = ( ! empty( $this->settings['post_type'] ) ) ? $this->settings['post_type'] : 'page' ;
 
 		// Taxonomy ---------------------------------------
 
-		if ( ! empty( $settings['taxonomy'] ) && ! empty( $settings['terms'] ) ) {
+		if ( ! empty( $this->settings['taxonomy'] ) && ! empty( $this->settings['terms'] ) ) {
 
 			$tax_query = array();
 
-			$tax_query['taxonomy'] = $settings['taxonomy'];
+			$tax_query['taxonomy'] = $this->settings['taxonomy'];
 
 			$tax_query['field'] = 'name';
 
-			if ( ! empty( $settings['terms'] ) ) $tax_query['terms'] = explode( ',', $settings['terms'] );
+			if ( ! empty( $this->settings['terms'] ) ) $tax_query['terms'] = explode( ',', $this->settings['terms'] );
 
 			$query['tax_query'] = array( $tax_query );
 
@@ -457,7 +614,7 @@ class Query_PB {
 
 	} // end get_local_query_args
 
-	public static static function get_local_feed_objs( $args, $settings = array( 'img_size' => 'thumbnail' ) ) {
+	public static function get_local_feed_objs( $args, $this->settings = array( 'img_size' => 'thumbnail' ) ) {
 
 		global $wp_filter;
 
@@ -491,7 +648,7 @@ class Query_PB {
 					
 				$feed[$i]['link'] = get_post_permalink();
 
-				$img_size = ( ! empty( $settings['img_size'] ) ) ? $settings['img_size'] : 'thumbnail';
+				$img_size = ( ! empty( $this->settings['img_size'] ) ) ? $this->settings['img_size'] : 'thumbnail';
 
 				$img = wp_get_attachment_image_src( get_post_thumbnail_id( $the_query->post->ID ), $img_size );
 

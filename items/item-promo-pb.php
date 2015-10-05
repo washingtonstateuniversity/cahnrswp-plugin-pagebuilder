@@ -1,11 +1,11 @@
 <?php
-class Item_Postgallery_PB extends Item_PB {
+class Item_Promo_PB extends Item_PB {
 	
-	public $slug = 'postgallery';
+	public $slug = 'promo';
 	
-	public $name = 'Post Gallery';
+	public $name = 'Promo';
 	
-	public $desc = 'Add gallery of posts/pages';
+	public $desc = 'Adds Promo Objects';
 	
 	public $form_size = 'medium';
 	
@@ -69,6 +69,12 @@ class Item_Postgallery_PB extends Item_PB {
 		
 		$display .= Forms_PB::select_field( $this->get_name_field('tag') , $settings['tag'] , array('h2' => 'H2','h3'=>'H3','h4'=>'H4' ) , 'Tag Type' );
 		
+		$display .= '<hr />';
+		
+		$display .= Forms_PB::select_field( $this->get_name_field('headline_tag') , $settings['headline_tag'] , array('h2' => 'H2','h3'=>'H3','h4'=>'H4','h5'=>'H5' ) , 'Headline Tag' );
+		
+		$display .= '<hr />';
+		
 		$display .= Forms_PB::checkbox_field( $this->get_name_field('hide_excerpt'), 1, $settings['hide_excerpt'], 'Hide Summary' );
 		
 		$display .= Forms_PB::checkbox_field( $this->get_name_field('hide_image'), 1, $settings['hide_image'], 'Hide Image' );
@@ -78,104 +84,11 @@ class Item_Postgallery_PB extends Item_PB {
 		$form = array( 
 			'Source' => $source,
 			'Display Style' => $display,
-		);
-		
-		
-		/*$source = array(
-			'Basic Feed' => array(
-				'form' => $this->get_basic_feed( $settings ),
-				'value' => 'feed',
-			),
-			'External Feed' => array(
-				'form' => $this->get_remote_feed( $settings ),
-				'value' => 'external',
-			),
-		);
-		
-		$form = array(
-			'Source' => Forms_PB::get_sub_form( $source , $this->get_name_field('feed_source') , $settings['feed_source'] ),
-			'Display Style' => $this->get_display_form( $settings ),
-		);
-		
-		/*$tags = array(
-			'h2' => 'H2',
-			'h3' => 'H3',
-			'h4' => 'H4',
-			'h5' => 'H5',
-			'h6' => 'H6',
-		);
-		
-		$html = Forms_PB::text_field( $this->get_name_field('title') , $settings['title'] , 'Title' );
-		
-		$html .= Forms_PB::select_field( $this->get_name_field('tag') , $settings['tag'] , $tags , 'Tag Type' );
-		
-		$html .= Forms_PB::text_field( $this->get_name_field('csshook') , $settings['csshook'] , 'CSS Hook' );*/ 
+		); 
 		
 		return $form; 
 		
 	} // end form
-	
-	
-	public function get_basic_feed( $settings ){
-		
-		$p_types = get_post_types();
-		
-		$post_types = array( 'any' => 'Any' );
-		
-		foreach( $p_types as $type ){
-			
-			$post_types[ $type ] = ucfirst( $type );
-			
-		} // end foreach
-		
-		$taxonomies = array(
-			'post_tag' => 'Tags',
-			'category' => 'Categories',
-		);
-		
-		$html = Forms_PB::select_field( $this->get_name_field('post_type') , $settings['post_type'] , $post_types , 'Content Type' );
-		
-		$html .= Forms_PB::select_field( $this->get_name_field('taxonomy') , $settings['taxonomy'] , $taxonomies , 'Type' ); 
-		
-		$html .= Forms_PB::text_field( $this->get_name_field('tax_terms') , $settings['tax_terms'] , 'Terms' );
-		
-		$html .= Forms_PB::text_field( $this->get_name_field('posts_per_page') , $settings['posts_per_page'] , 'Count' );
-		
-		return $html;
-		
-	} // end get_basic_feed
-	
-	
-	public function get_remote_feed( $settings ){
-		
-		$taxonomies = array(
-			'post_tag' => 'Tags',
-			'category' => 'Categories',
-		);
-		
-		$html .= Forms_PB::text_field( $this->get_name_field('ext_source') , $settings['ext_source'] , 'Source (Homepage URL)' );
-		
-		$html .= Forms_PB::text_field( $this->get_name_field('ext_post_type') , $settings['post_type'] , 'Content Type (post,page,etc...)' );
-		
-		$html .= Forms_PB::select_field( $this->get_name_field('ext_taxonomy') , $settings['taxonomy'] , $taxonomies , 'Type' ); 
-		
-		$html .= Forms_PB::text_field( $this->get_name_field('ext_tax_terms') , $settings['tax_terms'] , 'Terms' );
-		
-		$html .= Forms_PB::text_field( $this->get_name_field('ext_posts_per_page') , $settings['posts_per_page'] , 'Count' );
-		
-		return $html;
-		
-	} // end get_basic_feed
-	
-	
-	
-	public function get_display_form( $settings ){
-		
-		$html = Forms_PB::text_field( $this->get_name_field('excerpt_length') , $settings['excerpt_length'] , 'Excerpt Length (# Words)' );
-		
-		return $html;
-		
-	} // end get_display_form
 	
 	
 	
@@ -189,13 +102,13 @@ class Item_Postgallery_PB extends Item_PB {
 		
 		$clean['csshook'] = ( ! empty( $s['csshook'] ) )? sanitize_text_field( $s['csshook'] ) : '';*/
 		
-		$clean['display_type'] = 'gallery';
-		
-		$clean['display_columns'] = '4';
+		$clean['display_type'] = 'promo';
 		
 		$clean['title'] = ( ! empty( $s['title'] ) ) ? $s['title'] : '';
 		
 		$clean['tag'] = ( ! empty( $s['tag'] ) ) ? $s['tag'] : 'h2';
+		
+		$clean['headline_tag'] = ( ! empty( $s['headline_tag'] ) ) ? $s['headline_tag'] : 'h5';
 		
 		$clean['hide_excerpt'] = ( ! empty( $s['hide_excerpt'] ) ) ? $s['hide_excerpt'] : '';
 		

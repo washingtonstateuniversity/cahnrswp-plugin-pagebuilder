@@ -11,10 +11,6 @@ class Item_Feed_PB extends Item_PB {
 	
 	public function item( $settings , $content ){
 		
-		require_once CWPPBDIR . 'classes/class-query-pb.php';
-		
-		require_once CWPPBDIR . 'classes/class-display-pb.php';
-		
 		$query = new Query_PB( $settings );
 		
 		$display = new Display_PB( $settings );
@@ -22,12 +18,6 @@ class Item_Feed_PB extends Item_PB {
 		$items = $query->get_query_items();
 		
 		$html = $display->get_display( $items );
-		
-		/*$args = Query_PB::get_local_query_args( $settings );
-		
-		$feed = Query_PB::get_local_feed_objs( $args );
-		
-		$html = Display_PB::get_display( $feed , $settings );*/
 		
 		return $html;
 

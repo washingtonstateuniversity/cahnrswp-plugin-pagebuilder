@@ -252,15 +252,16 @@ class Items_PB {
 				'class'   => 'Item_Postgallery_PB', 
 				'file_path' => CWPPBDIR . 'items/item-postgallery-pb.php',
 			),
+			'promo'       => array(
+				'class'   => 'Item_Promo_PB',
+				'file_path' => CWPPBDIR . 'items/item-promo-pb.php',
+			),
 			/*'subtitle'    => array(
 				'class'   => 'Item_Subtitle_CPB',
 				'file_path' => CWPPBDIR . 'items/item-subtitle-cpb.php',
 
 			),
-			'promo'       => array(
-				'class'   => 'Item_Promo_CPB',
-				'file_path' => CWPPBDIR . 'items/item-promo-cpb.php',
-			),
+			
 			'insertpost'  => array(
 				'class'   => 'Item_Insertpost_CPB',
 				'file_path' => CWPPBDIR . 'items/item-insertpost-cpb.php',

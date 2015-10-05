@@ -105,7 +105,7 @@ class Forms_PB {
 		
 		$tax = get_taxonomies( array( 'public' => true ) );
 		
-		$taxonomies = array( 'na' => 'NA' );
+		$taxonomies = array( '0' => 'NA' );
 		
 		foreach( $tax as $name => $id ){
 			
@@ -126,6 +126,8 @@ class Forms_PB {
 		$html .= Forms_PB::text_field( $base_name . '[terms]', $settings['terms'] , 'Terms (Name)' );
 		
 		$html .= Forms_PB::text_field( $base_name . '[posts_per_page]', $settings['posts_per_page'] , 'Count:' , 'cpb-small-field' );
+		
+		$html .= Forms_PB::checkbox_field( $base_name . '[term_operator]', 'AND', $settings['term_operator'], 'Require All Terms' );
 		
 		return $html;
 		
