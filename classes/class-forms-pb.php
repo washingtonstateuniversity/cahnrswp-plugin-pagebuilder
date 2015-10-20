@@ -37,7 +37,7 @@ class Forms_PB {
 
 	} // end input_field
 
-	public static function checkbox_field( $name, $value, $current_value = false, $label = false, $class = '' ) {
+	public static function checkbox_field( $name, $value, $current_value = false, $label = false, $class = '' , $text = '' ) {
 
 		$active = ( $value == $current_value ) ? ' active' : '';
 
@@ -45,7 +45,9 @@ class Forms_PB {
 
 		$html = '<input type="checkbox" id="' . $id . '" name="' . $name . '" value="' . $value . '" ' . checked( $value, $current_value, false )  . ' />';
 
-		if ( $label ) $html = $html . '<label for="' . $id . '" class="' . $active . '">' . $label . '</label>' ;
+		if ( $label ) $html .= '<label for="' . $id . '" class="' . $active . '">' . $label . '</label>' ;
+		
+		if ( $text ) $html .= '<br /><span class=".cpb-helper-text">' . $text . '</span>' ;
 
 		return Forms_PB::wrap_field( $html, $class, 'checkbox' );
 

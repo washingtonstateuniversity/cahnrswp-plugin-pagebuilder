@@ -1,11 +1,11 @@
 <?php
-class Item_Promo_PB extends Item_PB {
+class Item_List_PB extends Item_PB {
 	
-	public $slug = 'promo';
+	public $slug = 'list';
 	
-	public $name = 'Promo';
+	public $name = 'List';
 	
-	public $desc = 'Adds Promo Objects';
+	public $desc = 'Adds a List of Posts, Pages, etc...';
 	
 	public $form_size = 'medium';
 	
@@ -71,19 +71,24 @@ class Item_Promo_PB extends Item_PB {
 		
 		$display .= '<hr />';
 		
-		$display .= Forms_PB::select_field( $this->get_name_field('headline_tag') , $settings['headline_tag'] , array('h2' => 'H2','h3'=>'H3','h4'=>'H4','h5'=>'H5' ,'strong' => 'Bold' ) , 'Headline Tag' );
+		$display .= Forms_PB::select_field( $this->get_name_field('headline_tag') , $settings['headline_tag'] , array('h2' => 'H2','h3'=>'H3','h4'=>'H4','h5'=>'H5' ,'strong' => 'Bold' , 'span' => 'None' ) , 'Headline Tag' );
+		
+		$display .= Forms_PB::checkbox_field( $this->get_name_field('display_accordion'), 1, $settings['display_accordion'], 'Display as Accordion' );
 		
 		$display .= '<hr />';
 		
-		$display .= Forms_PB::checkbox_field( $this->get_name_field('hide_excerpt'), 1, $settings['hide_excerpt'], 'Hide Summary' );
+		$display .= Forms_PB::text_field( $this->get_name_field('csshook') , $settings['csshook'] , 'CSS Hook' );
 		
-		$display .= Forms_PB::checkbox_field( $this->get_name_field('hide_image'), 1, $settings['hide_image'], 'Hide Image' );
+		$adv = Forms_PB::checkbox_field( $this->get_name_field('hide_excerpt'), 1, $settings['hide_excerpt'], 'Hide Summary' );
 		
-		$display .= Forms_PB::checkbox_field( $this->get_name_field('hide_link'), 1, $settings['hide_link'], 'Remove Link' );
+		$adv .= Forms_PB::checkbox_field( $this->get_name_field('hide_link'), 1, $settings['hide_link'], 'Remove Link' );
+		
+		$adv .= Forms_PB::checkbox_field( $this->get_name_field('bg_image'), 1, $settings['bg_image'], 'Image as Background','','***Not supported by all displays.' );
 		
 		$form = array( 
 			'Source' => $source,
-			'Display Style' => $display,
+			'Display' => $display,
+			'Advanced' => $adv,
 		); 
 		
 		return $form; 
@@ -102,7 +107,22 @@ class Item_Promo_PB extends Item_PB {
 		
 		$clean['csshook'] = ( ! empty( $s['csshook'] ) )? sanitize_text_field( $s['csshook'] ) : '';*/
 		
-		$clean['display_type'] = 'promo';
+		
+		$clean['display_type'] = 'list';
+		
+		$clean['img_size'] = 'large';
+		
+		if ( ! empty( $s['display_accordion'] ) ){
+			
+			$clean['display_accordion'] = sanitize_text_field( $s['display_accordion'] );
+			
+			$clean['display_type'] = 'accordion';
+			
+		} else {
+			
+			$clean['display_accordion'] = '';
+			
+		}// end if
 		
 		$clean['title'] = ( ! empty( $s['title'] ) ) ? $s['title'] : '';
 		
@@ -112,11 +132,15 @@ class Item_Promo_PB extends Item_PB {
 		
 		$clean['hide_excerpt'] = ( ! empty( $s['hide_excerpt'] ) ) ? $s['hide_excerpt'] : '';
 		
-		$clean['hide_image'] = ( ! empty( $s['hide_image'] ) ) ? $s['hide_image'] : '';
-		
 		$clean['hide_link'] = ( ! empty( $s['hide_link'] ) ) ? $s['hide_link'] : '';
 		
 		$clean['posts_per_page'] =  ( ! empty( $s['posts_per_page'] ) ) ? sanitize_text_field( $s['posts_per_page'] ) : 5;
+		
+		$clean['display_accordion'] =  ( ! empty( $s['display_accordion'] ) ) ? sanitize_text_field( $s['display_accordion'] ) : '';
+		
+		$clean['csshook'] = ( ! empty( $s['csshook'] ) ) ? sanitize_text_field( $s['csshook'] ) : '';
+		
+		$clean['bg_image'] = ( ! empty( $s['bg_image'] ) ) ? sanitize_text_field( $s['bg_image'] ) : '';
 		
 		if ( ! empty( $s['source'] ) ) $clean['source'] = sanitize_text_field( $s['source'] );
 		

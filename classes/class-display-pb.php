@@ -21,6 +21,10 @@ class Display_PB {
 			case 'gallery':
 				$html .= $this->get_gallery( $items );
 				break;
+			
+			case 'accordion':
+				$html .= $this->get_accordions( $items );
+				break;
 				
 			default:
 				$html .= $this->get_promo( $items );
@@ -31,6 +35,51 @@ class Display_PB {
 		return $html;
 
 	} // end get_display
+	
+	public function get_accordions( $items ){
+		
+		$id = 'cpb-accordions-' . rand( 0 , 10000000 );
+		
+		$html = '<div id="' . $id . '" class="cahnrs-accordion-set ' . $this->settings['csshook'] . '">';
+		
+		foreach( $items as $item ){
+			
+			$style = ( ! empty( $this->settings['bg_image'] ) ) ? 'background-image:url(' . $item['image'] . ');' : '';
+		
+			$html .= '<dl class="cahnrs-accordion" style="' . $style . '">';
+	
+				$html .= '<dt><h2>' . $item['title'] . '</h2></dt>';
+								
+				$html .= '<dd style="display: none;">'; 
+				
+				$html .= '<p>' . $item['content'] . '</p>';
+				
+				$html .= '<p class="more-button center"><a title="Visit the 4-H website" href="http://4h.wsu.edu/" target="_blank">Visit the website</a></p>';
+					
+				$html .= '</dd>';
+				
+			$html .= '</dl>';
+		
+		} // end foreach
+		
+		/*
+		if (typeof jQuery != "undefined") {
+			jQuery("#' . $id . '").on("click",".cahnrs-accordion dt",function(){
+				var p = jQuery( this ).closest(".cahnrs-accordion");
+				p.find("dd").stop().slideToggle("fast");
+				p.siblings(".cahnrs-accordion").find("dd").stop().slideUp("fast");
+			}); 
+		}
+		*/
+		
+		$script = '<script>/*"undefined"!=typeof jQuery&&jQuery("#' . $id . '").on("click",".cahnrs-accordion dt",function(){var d=jQuery(this).closest(".cahnrs-accordion");
+					d.find("dd").stop().slideToggle("fast"),d.siblings(".cahnrs-accordion").find("dd").stop().slideUp("fast")});*/</script>';
+		
+		$html .= '</div>';
+		
+		return $html;
+		
+	} // endget_accordions
 
 	
 	public function get_gallery( $items ){
@@ -70,6 +119,7 @@ class Display_PB {
 				.cpb-promo-item article.has-image > .cpb-caption{ margin-left: 175px;}
 				.cpb-promo-item article:after {content:"";display: block;clear:both;}
 				.cpb-promo-item article{padding-bottom: 1.5rem;}
+				.cpb-promo-item .cpb-caption > strong {display:block;}
 				.cpb-promo-item h2,.cpb-promo-item h3,.cpb-promo-item h4,.cpb-promo-item h5 {padding-top: 0;}
 				</style>';
 		
@@ -123,7 +173,7 @@ class Display_PB {
 				
 					$html .= '<div class="cpb-caption ' . $class . '">';
 					
-						$tag = ( ! empty( $this->settings['headline_tag'] ) ) ? $this->settings['headline_tag'] : 'h5';
+						$tag = ( ! empty( $this->settings['headline_tag'] ) ) ? $this->settings['headline_tag'] : 'strong';
 						
 						$html .= '<' . $tag . '>' . $ls . $item['title'] . $le. '</' . $tag . '>';
 						

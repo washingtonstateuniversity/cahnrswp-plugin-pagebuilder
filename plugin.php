@@ -79,6 +79,14 @@ class CWP_Pagebuilder {
 		add_filter( 'the_content', array( $this, 'fix_empty_p' ), 99 );
 
 	} // end __construct
+	
+	
+	public function init(){
+	} // end init
+	
+	
+	
+	
 
 	public function fix_wpauto_content_breaks( $content ) {
 
@@ -132,6 +140,9 @@ class CWP_Pagebuilder {
 	public function editor( $post ) {
 
 		if ( $this->check_post_type( $post->post_type ) ) {
+			
+			// Display classes
+			require_once 'forms/form-add-item-pb.php';
 
 			require_once 'classes/class-editor-pb.php';
 
@@ -153,6 +164,7 @@ class CWP_Pagebuilder {
 		
 		wp_enqueue_script( 'admin_js', CWPPBURL . 'js/admin.js' , array('jquery-ui-draggable','jquery-ui-droppable','jquery-ui-sortable') , '0.0.2' );
 		
+		wp_enqueue_script( 'cycle2', CWPPBURL . 'js/cycle2.js' , false , '0.0.1' );
 
 	} // end admin_scripts
 

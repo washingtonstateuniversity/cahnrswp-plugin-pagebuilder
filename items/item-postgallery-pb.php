@@ -27,7 +27,7 @@ class Item_Postgallery_PB extends Item_PB {
 		
 		$html .= $display->get_display( $items , $settings );
 		
-		return $html;
+		return apply_filters( 'cpb_return_postgallery' , $html , $items , $settings );
 		
 	} // end item
 	

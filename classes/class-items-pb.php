@@ -256,6 +256,10 @@ class Items_PB {
 				'class'   => 'Item_Promo_PB',
 				'file_path' => CWPPBDIR . 'items/item-promo-pb.php',
 			),
+			'list'       => array(
+				'class'   => 'Item_List_PB',
+				'file_path' => CWPPBDIR . 'items/item-list-pb.php',
+			),
 			/*'subtitle'    => array(
 				'class'   => 'Item_Subtitle_CPB',
 				'file_path' => CWPPBDIR . 'items/item-subtitle-cpb.php',
