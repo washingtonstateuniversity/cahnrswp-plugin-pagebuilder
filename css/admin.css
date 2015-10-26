@@ -407,12 +407,12 @@
 	z-index: 9999;
 }
 
-#cwp-pb-forms .cpb-form nav {
+#cwp-pb-forms .cpb-form .cpb-form-frame > nav {
 	position: relative;
 	top: 1px;
 }
 
-#cwp-pb-forms .cpb-form nav a {
+#cwp-pb-forms .cpb-form .cpb-form-frame > nav a {
 	display: inline-block;
 	background-color: #ccc;
 	padding: 1rem 1.5rem;
@@ -423,7 +423,7 @@
 	font-size: 0.9rem;
 }
 
-#cwp-pb-forms .cpb-form nav a:after {
+#cwp-pb-forms .cpb-form .cpb-form-frame > nav a:after {
 	content: '';
 	position: absolute;
 	bottom: 0;
@@ -440,9 +440,9 @@
 
 }
 
-#cwp-pb-forms .cpb-form nav a.active { background-color: #ddd; }
+#cwp-pb-forms .cpb-form .cpb-form-frame > nav a.active { background-color: #ddd; }
 
-#cwp-pb-forms .cpb-form nav a.active:after { background: none; }
+#cwp-pb-forms .cpb-form .cpb-form-frame > nav a.active:after { background: none; }
 
 
 
@@ -698,7 +698,7 @@
 
 #form_cpb_add_item .cpb-item-icon {
 	display: inline-block;
-	width: 33.33%;
+	width: 25%;
 	vertical-align: top;
 	padding-bottom: 0.5rem;
 }
@@ -729,6 +729,100 @@
 
 #form_cpb_add_item .cpb-item-icon.cpb-textblock label { background-image: url(../images/textblock-icon.png);}
 
+/* New Form */
+
+#form_cpb_add_item .cpb-form-slide {
+	display: none;
+	width: 100%;
+}
+
+#form_cpb_add_item .cpb-form-slide.active {
+	display: block;
+}
+
+#form_cpb_add_item .cpb-form-items-set {
+}
+
+#form_cpb_add_item .cpb-add-item-wrapper {
+	display: inline-block;
+	width: 23%;
+	vertical-align: top;
+	margin: 0 1% 8px;
+	background: #ffffff;
+	padding: 0 0 5px;
+	border-bottom: 8px solid #f1f1f1;
+	min-height: 160px;
+	cursor: pointer;
+}
+
+#form_cpb_add_item .cpb-add-item-wrapper.selected {
+	border-bottom: 8px solid #0074a2;
+}
+
+
+#form_cpb_add_item .cpb-add-item-wrapper img {
+	display: block;
+	width: 100%;
+	height: auto;
+}
+
+#form_cpb_add_item .cpb-add-item-wrapper .cpb-add-item-icon {
+	position: relative;
+}
+
+#form_cpb_add_item .cpb-add-item-wrapper .cpb-add-item-title,
+#form_cpb_add_item .cpb-add-item-wrapper .cpb-add-item-desc {
+	margin: 0 8px;
+}
+
+#form_cpb_add_item .cpb-add-item-wrapper .cpb-add-item-desc {
+	font-size: 0.7rem;
+	color: #777;
+	line-height: 1rem;
+}
+
+#form_cpb_add_item .cpb-add-item-wrapper .cpb-add-item-select-box {
+	width: 15px;
+	height: 15px;
+	position: absolute;
+	top: 6px;
+	left: 6px;
+	background-color: #fff;
+	border-radius: 3px;
+	background-image: url(../images/select-box-gray.jpg);
+	background-position: center center;
+	background-repeat: no-repeat;
+}
+
+#form_cpb_add_item .cpb-add-item-wrapper.selected .cpb-add-item-select-box {
+	background-image: url(../images/select-box-blue.jpg);
+}
+
+#form_cpb_add_item .cpb-form-add-items-nav {
+	text-align: center;
+}
+
+#form_cpb_add_item .cpb-form-add-items-nav > a,
+#form_cpb_add_item .cpb-form-add-items-nav > div {
+	display: inline-block;
+	vertical-align: middle;
+	padding: 0 5px;
+	text-decoration: none;
+}
+
+#form_cpb_add_item .cpb-form-add-items-nav span {
+	display: inline-block;
+	width: 8px;
+	height: 8px;
+	border-radius: 4px;
+	margin: 0 2px;
+	background: #fff;
+	font-size: 0;
+}
+
+#form_cpb_add_item .cpb-form-add-items-nav span.cycle-pager-active {
+	background: #0074a2
+}
 /*
 * Add Row Form
 * -------------------------------------------
@@ -736,7 +830,7 @@
 #form_cpb_add_row .cpb-layout{
 	display: block;
 	float: left;
-	width: 33.33%;
+	width: 25%;
 	position: relative;
 }
 

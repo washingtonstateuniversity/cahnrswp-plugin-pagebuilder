@@ -24,7 +24,7 @@
 		
 		s.pb.on( 'click' , '.add-part-action' , function( event ){ event.preventDefault(); s.add_part( $( this ) ); });
 		
-		s.pb.on( 'click' , '.ajax-part-action' , function( event ){ event.preventDefault(); s.ajax_part( $( this ) ); }); 
+		s.pb.on( 'click' , '.ajax-add-item-action ,.ajax-part-action' , function( event ){ event.preventDefault(); s.ajax_part( $( this ) ); }); 
 		
 		s.pb.on( 'click' , '.remove-item-action' , function( event ){ event.preventDefault(); s.remove_item( $( this ) ); });
 		
@@ -33,6 +33,8 @@
 		s.pb.on( 'click' , '.cpb-form-frame nav a' , function( event ){ event.preventDefault(); s.tab_form( $( this ) ); });
 		
 		s.pb.on( 'click' , '.cpb-subform-nav label' , function(){ s.subform_section( $( this ) ); });
+		
+		s.pb.on( 'click' , 'ul.cpb-add-item-wrapper' , function(){ $( this ).toggleClass('selected').siblings().removeClass('selected'); });
 		
 		//s.pb.on( 'click', '.cpb-form-frame .cpb-layout label', function(){ $(this).toggleClass('active').siblings().removeClass('active');});
 		
@@ -284,9 +286,15 @@
 			
 			var form = ic.closest( '.cpb-form');
 			
-			var data = form.serialize();
-			
-			data += '&action=cpb_ajax&service=add_part';
+			if ( s.add.type == 'item' ){
+				
+				var data = 'item_slug=' + form.find('.cpb-add-item-wrapper.selected').first().data('type') + '&action=cpb_ajax&service=add_part'
+				
+			} else {
+				
+				var data = form.serialize() + '&action=cpb_ajax&service=add_part'
+				
+			}// end if
 			
 			$.post(
 				ajaxurl,
@@ -325,9 +333,69 @@
 				'json'
 			);
 			
+			form.find('ul.cpb-add-item-wrapper.selected').removeClass('selected');
+			
 			s.form_display( form , 'hide' );
 			
 		} // end ajax_part
+		
+		
+		
+		
+		/*s.ajax_item = function(ic){
+			
+			var form = ic.closest( '.cpb-form');
+			
+			var sel = form.find('.cpb-add-item-wrapper.selected');
+			
+			if ( sel.length > 0 ) {
+				
+				var type = sel.first().data('type');
+				
+				data = 'part=' + type + '&action=cpb_ajax&service=add_part';
+				
+				$.post(
+				ajaxurl,
+				data,
+				function( response ){
+					
+					s.add.container.append( response.editor );
+					
+					for ( var i = 0; i < response.forms.length ; i++ ){
+						
+						if ( response.forms[i].type == 'textblock' ){
+							
+							var editor = s.pb.find( '.cpb-extra-editor' ).first();
+							
+							editor.removeClass( 'cpb-extra-editor' );
+							
+							editor.attr( 'id' , 'form_' + response.forms[i].id );
+							
+							editor.find( 'textarea').attr( 'name' , '_content_' + response.forms[i].id );
+							
+						} else {
+							
+							s.pbf.append( response.forms[i].form );
+							
+						}// end if
+						
+					} // end for
+					
+					console.log( response );
+					
+					s.set_children();
+					
+				},
+				'json'
+			);
+				
+			} // end if
+			
+		} // end ajax_item*/
+		
+		
+		
+		
 		
 		s.add_lightbox_bg = function(){
 			
