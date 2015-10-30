@@ -4,7 +4,7 @@ Plugin Name: CAHNRSWP Pagebuilder Updated
 Plugin URI: https://cahnrs.wsu.edu/communications
 Description: Revised version of CAHNRS Pagebuilder. Pagebuilder allows for highly customizable page layouts
 Author: CAHNRS Communication WSU, Danial Bleile
-Version: 1.1.2
+Version: 1.2.0
 */
 
 //Start plugin class
@@ -162,7 +162,7 @@ class CWP_Pagebuilder {
 		
 		wp_enqueue_style( 'admin_css', CWPPBURL . 'css/admin.css' , false , '0.0.1' );
 		
-		wp_enqueue_script( 'admin_js', CWPPBURL . 'js/admin.js' , array('jquery-ui-draggable','jquery-ui-droppable','jquery-ui-sortable') , '0.0.2' );
+		wp_enqueue_script( 'admin_js', CWPPBURL . 'js/admin-2.js' , array('jquery-ui-draggable','jquery-ui-droppable','jquery-ui-sortable') , '0.0.2' );
 		
 		wp_enqueue_script( 'cycle2', CWPPBURL . 'js/cycle2.js' , false , '0.0.1' );
 

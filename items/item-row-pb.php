@@ -46,12 +46,16 @@ class Item_Row_PB extends Item_PB {
 		$title = ( ! empty( $settings['title'] ) ) ? $settings['title'] : $this->name;
 
 		$html .= '<header class="cpb-item-' . $this->slug . '-header">';
+			
+			$html .= '<nav>';
 
-			$html .= '<h4>' . $title . '</h4>';
+				$html .= '<div class="title">' . $title . '</div>';
 
-			$html .= '<a href="#" class="cpb-edit-item" data-id="' . $this->id . '"></a>';
+				$html .= '<a href="#" class="cpb-edit-item" data-id="' . $this->id . '"></a>';
 
-			$html .= '<a href="#" class="remove-item-action"></a>';
+				$html .= '<a href="#" class="remove-item-action"></a>';
+			
+			$html .= '</nav>';
 
 		$html .= '</header>';
 

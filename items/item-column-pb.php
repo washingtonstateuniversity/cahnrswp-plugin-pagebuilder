@@ -47,13 +47,15 @@ class Item_Column_PB extends Item_PB {
 
 		$title = ( ! empty( $settings['title'] ) ) ? $settings['title'] : $this->name;
 
-		$html .= '<div class="inner-wrapper">';
-
 			$html .= '<header class="cpb-item-' . $this->slug . '-header">';
-
-				$html .= '<h4>' . $title . '</h4>';
-
-				$html .= '<a href="#" class="cpb-edit-item" data-id="' . $this->id . '"></a>';
+			
+				$html .= '<nav>';
+	
+					$html .= '<div class="title">Column</div>';
+	
+					$html .= '<a href="#" class="cpb-edit-item" data-id="' . $this->id . '"></a>';
+				
+				$html .= '</nav>';
 
 			$html .= '</header>';
 
@@ -66,12 +68,12 @@ class Item_Column_PB extends Item_PB {
 			$html .= Forms_PB::hidden_field( $this->get_name_field( 'children', false  ), implode( ',', $this->get_child_ids() ), 'cpb-input-items-set' );
 
 			$html .= '<footer>';
+			
+				$html .= '<a href="#" class="add-item-action">+ Add Item</a>';
 
-				$html .= '<a href="#" class="add-part-action cpb-button cpb-button-small" data-part="item">+ Add Item</a>';
+				/*$html .= '<a href="#" class="add-part-action cpb-button cpb-button-small" data-part="item">+ Add Item</a>';*/
 
 			$html .= '</footer>';
-
-		$html .= '</div>';
 
 		return $html;
 

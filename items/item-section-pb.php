@@ -8,6 +8,18 @@ class Item_Section_PB extends Item_PB {
 	public $allowed_children = 'row';
 
 	public $default_child = 'row';
+	
+	public $layouts = array(
+		'single'            => 'Single Column',
+		'halves'            => 'Two Column',
+		'side-right'        => 'Sidebar Right',
+		'side-left'         => 'Sidbar Left',
+		'thirds'            => 'Three Column',
+		/*'thirds-half-left'  => 'Three Column: Left 50%',
+		'thirds-half-right' => 'Three Column: Right 50% ',
+		'triptych'          => 'Three Column: Middle 50%',*/
+		'quarters'          => 'Four Column',
+	);
 
 	public function item( $settings, $content ) {
 
@@ -41,15 +53,7 @@ class Item_Section_PB extends Item_PB {
 
 		$title = ( ! empty( $settings['title'] ) ) ? $settings['title'] : $this->name;
 
-		$html .= '<header class="cpb-item-' . $this->slug . '-header">';
-
-			$html .= '<h4>' . $title . '</h4>';
-
-			$html .= '<a href="#" class="cpb-edit-item" data-id="' . $this->id . '"></a>';
-
-		$html .= '</header>';
-
-		$html .= '<div class="cpb-item-set cpb-item-' . $this->slug . '-set">';
+		$html = '<div class="cpb-item-set cpb-item-' . $this->slug . '-set">';
 
 			$html .= $editor_content;
 
@@ -61,11 +65,51 @@ class Item_Section_PB extends Item_PB {
 
 		$html .= '<footer>';
 
-			$html .= '<a href="#" class="add-part-action cpb-button" data-part="row">+ Add Row</a>';
-
-			$html .= '<a href="#" class="add-part-action cpb-darkgrey-button" data-part="section">+ Add Section</a>';
+			$html .= '<div class="cpb-add-row-form">';
+			
+			$html .= '<header>';
+				
+				$html .= 'Add Row';
+			
+			$html .= '</header>';
+			
+			$html .= '<nav>';
+			
+				foreach( $this->layouts as $id => $name ){
+					
+					$html .= '<ul class="cpb-row-option" data-type="row" data-layout="' . $id . '">';
+					
+						$html .= '<li class="cpb-icon"><img src="' . CWPPBURL . 'images/video-spacer.png" /></li>';
+						
+						$html .= '<li class="cpb-title">' . $name . '<input type="hidden" name="settings[layout]" value="' . $id . '" /></li>';
+					
+					$html .= '</ul>';
+					
+				} // end foreach
+			
+				$html .= '</nav>';
+			
+			$html .= '</div>';
 
 		$html .= '</footer>';
+		
+		$html .= '<header class="cpb-item-' . $this->slug . '-header">';
+		
+			$html .= '<div class="cpb-arrow-up"></div>';
+			
+			$html .= '<nav>';
+
+				$html .= '<div class="title">' . $title . '</div>';
+
+				$html .= '<a href="#" class="cpb-edit-item" data-id="' . $this->id . '"></a>';
+
+				$html .= '<a href="#" class="remove-item-action"></a>';
+			
+			$html .= '</nav>';
+			
+			$html .= '<div class="cpb-arrow-down add-section-action">+</div>';
+
+		$html .= '</header>';
 
 		return $html;
 

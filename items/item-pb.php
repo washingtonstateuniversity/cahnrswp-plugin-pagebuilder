@@ -154,10 +154,14 @@ class Item_PB extends Forms_PB {
 				if( ! empty( $settings['title'] ) ) $title = $settings['title'] . ' | ' . $title;
 
 				$html .= '<header class="cpb-item-header">';
+				
+					$html .= '<nav>';
 
-					$html .= '<h4>' . $title . '</h4>';
-
-					$html .= '<a href="#" class="remove-item-action"></a>';
+						$html .= '<div class="title">' . $title . '</div>';
+		
+						$html .= '<a href="#" class="remove-item-action"></a>';
+					
+					$html .= '</nav>';
 
 				$html .= '</header>';
 
@@ -170,6 +174,9 @@ class Item_PB extends Forms_PB {
 					$html .= '</div>';
 
 					$html .= '<a href="#" class="cpb-edit-item" data-id="' . $this->id . '"></a>';
+					
+					$html .= '<div class="cpb-edit-hover-icon"></div>';
+					
 				$html .= '</div>';
 
 				$html .= '<footer>';

@@ -74,7 +74,7 @@ class Form_Add_Item_PB extends Form_PB {
 		
 		if ( ! isset( $item->icon ) ) $item->icon = CWPPBURL . 'images/item-place-holder.jpg';
 		
-		$html = '<ul class="cpb-add-item-wrapper" data-type="' . $item->slug . '">';
+		$html = '<ul class="cpb-add-item-wrapper cpb-toggle-select cpb-radio" data-type="' . $item->slug . '">';
 		
 			$html .= '<li class="cpb-add-item-icon"><img src="'. $item->icon . '" /><div class="cpb-add-item-select-box"></div></li>';
 			
