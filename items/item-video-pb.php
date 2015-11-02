@@ -88,27 +88,36 @@ class Item_Video_PB extends Item_PB {
 
 	public function form( $settings ) {
 		
-		$video_subform = array(
+		/*$video_subform = array(
 			'form'        => Forms_PB::text_field( $this->get_name_field('vid_id'), $settings['vid_id'], 'YouTube Video ID' ),
 			'field_name'  => $this->get_name_field('vid_type'),
 			'val'         => 'youtube',
 			'current_val' => $settings['vid_type'],
 			'title'       => 'YouTube Video',
 			'summary'     => 'Display YouTube video by ID'
-		);
+		);*/
 		
-		$vimeo_subform = array(
-			'form'        => Forms_PB::text_field( $this->get_name_field('vimeo_id'), $settings['vimeo_id'], 'Vimeo Video ID' ),
-			'field_name'  => $this->get_name_field('vid_type'),
-			'val'         => 'vimeo',
-			'current_val' => $settings['vid_type'],
-			'title'       => 'Vimeo Video',
-			'summary'     => 'Display Vimeo video by ID'
-		);
+		//$html = Forms_PB::get_subform( $video_subform ); 
 		
-		$html = Forms_PB::get_subform( $video_subform ); 
+		//$html .= Forms_PB::get_subform( $vimeo_subform );
 		
-		$html .= Forms_PB::get_subform( $vimeo_subform );
+		$html = $this->accordion_radio( 
+			$this->get_name_field('vid_type') , 
+			'youtube' , 
+			$settings['vid_type'] , 
+			'YouTube Video' , 
+			Forms_PB::text_field( $this->get_name_field('vid_id'), $settings['vid_id'], 'YouTube Video ID' ),
+			'Display YouTube video by ID' 
+			); 
+		
+		$html .= $this->accordion_radio( 
+			$this->get_name_field('vid_type') , 
+			'vimeo' , 
+			$settings['vid_type'] , 
+			'Vimeo Video' , 
+			Forms_PB::text_field( $this->get_name_field('vimeo_id'), $settings['vimeo_id'], 'Vimeo Video ID' ),
+			'Display Vimeo video by ID' 
+			); 
 
 		/*$sub_form = array(
 			'YouTube' => array(

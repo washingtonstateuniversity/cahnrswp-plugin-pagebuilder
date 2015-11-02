@@ -1,7 +1,11 @@
 <?php
-class Item_PB extends Forms_PB {
 
-	public $layout_types = array('section','row','column');
+require_once CWPPBDIR. 'forms/form-pb.php';
+
+class Item_PB extends Form_PB {
+/*class Item_PB extends Forms_PB {*/
+
+	public $layout_types = array('section','row','column','pagebreak');
 
 	public $i_array = array('one','two','three','four');
 

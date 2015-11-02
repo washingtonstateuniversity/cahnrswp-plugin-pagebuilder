@@ -1,5 +1,6 @@
 <?php
-class Forms_PB {
+
+class Forms_PB{
 
 	public static $wsu_colors = array(
 		'gray-lightest' => array( 'Gray: Lightest', '#eff0f1' )
@@ -211,9 +212,9 @@ class Forms_PB {
 
 		foreach( $forms as $label => $form ) {
 
-			$tabs .= '<a href="#" class="' . $active . '">' . $label . '</a>';
+			$tabs .= '<a href="#" class="cpb-tab ' . $active . '">' . $label . '</a>';
 
-			$sections .= '<div class="cpb-form-content ' . $active . '"><div class="cpb-form-content-inner">' . $form . '</div></div>';
+			$sections .= '<div class="cpb-form-content cpb-tab-content ' . $active . '"><div class="cpb-form-content-inner">' . $form . '</div></div>';
 
 			$active = '';
 
@@ -297,7 +298,7 @@ class Forms_PB {
 
 	public static function wrap_item_form( $id, $form, $width = 'small', $class = '' ) {
 
-		$html = '<fieldset class="cpb-form cpb-form-' . $width . ' ' . $class . '" id="form_' . $id . '">';
+		$html = '<fieldset class="cpb-form cpb-tab-container cpb-form-' . $width . ' ' . $class . '" id="form_' . $id . '">';
 
 			$html .= '<div class="cpb-form-frame">';
 

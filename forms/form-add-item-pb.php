@@ -6,7 +6,7 @@ class Form_Add_Item_PB extends Form_PB {
 	
 	private $items;
 	
-	private $exc = array('section','row','column');
+	private $exc = array('section','row','column','pagebreak','widget');
 	
 	public function __construct( $items ){
 		
@@ -36,6 +36,8 @@ class Form_Add_Item_PB extends Form_PB {
 				$i = 0;
 			
 				foreach ( $this->items as $item ){
+					
+					if ( in_array( $item->slug , $this->exc ) ) continue;
 					
 					$html .= $this->get_item_icon( $item );
 					

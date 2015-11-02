@@ -5,7 +5,7 @@ class Item_Section_PB extends Item_PB {
 
 	public $name = 'Page Section';
 
-	public $allowed_children = 'row';
+	public $allowed_children = array('row','pagebreak');
 
 	public $default_child = 'row';
 	
@@ -19,6 +19,7 @@ class Item_Section_PB extends Item_PB {
 		'thirds-half-right' => 'Three Column: Right 50% ',
 		'triptych'          => 'Three Column: Middle 50%',*/
 		'quarters'          => 'Four Column',
+		'pagebreak'          => 'Page Break',
 	);
 
 	public function item( $settings, $content ) {
@@ -65,35 +66,11 @@ class Item_Section_PB extends Item_PB {
 
 		$html .= '<footer>';
 
-			$html .= '<div class="cpb-add-row-form">';
-			
-			$html .= '<header>';
-				
-				$html .= 'Add Row';
-			
-			$html .= '</header>';
-			
-			$html .= '<nav>';
-			
-				foreach( $this->layouts as $id => $name ){
-					
-					$html .= '<ul class="cpb-row-option" data-type="row" data-layout="' . $id . '">';
-					
-						$html .= '<li class="cpb-icon"><img src="' . CWPPBURL . 'images/video-spacer.png" /></li>';
-						
-						$html .= '<li class="cpb-title">' . $name . '<input type="hidden" name="settings[layout]" value="' . $id . '" /></li>';
-					
-					$html .= '</ul>';
-					
-				} // end foreach
-			
-				$html .= '</nav>';
-			
-			$html .= '</div>';
+			$html .= $this->add_row_form( $settings );
 
 		$html .= '</footer>';
 		
-		$html .= '<header class="cpb-item-' . $this->slug . '-header">';
+		/*$html .= '<header class="cpb-item-' . $this->slug . '-header">';
 		
 			$html .= '<div class="cpb-arrow-up"></div>';
 			
@@ -109,7 +86,7 @@ class Item_Section_PB extends Item_PB {
 			
 			$html .= '<div class="cpb-arrow-down add-section-action">+</div>';
 
-		$html .= '</header>';
+		$html .= '</header>';*/
 
 		return $html;
 
@@ -117,7 +94,7 @@ class Item_Section_PB extends Item_PB {
 
 	public function form( $settings ) {
 
-		$html = $this->text_field( $this->get_name_field( 'title' ), $settings['title'], 'Title', 'cpb-form-100' );
+		$html = Forms_PB::text_field( $this->get_name_field( 'title' ), $settings['title'], 'Title', 'cpb-form-100' );
 
 		$html .= Forms_PB::select_field( $this->get_name_field('bgcolor'), $settings['bgcolor'], Forms_PB::get_wsu_colors(), 'Background Color' );
 
@@ -128,6 +105,79 @@ class Item_Section_PB extends Item_PB {
 		return $html;
 
 	} // end form
+	
+	
+	/*
+	 * Builds form for adding rows and pagebreak object
+	*/
+	public function add_row_form( $settings ){
+		
+		$sid = 'cpb-add-row-' . rand( 0 , 10000000 );
+		
+		$html = '<div class="cpb-add-row-form" id="' . $sid . '">';
+			
+		$html .= '<header>';
+			
+			$html .= 'Add Row';
+		
+		$html .= '</header>';
+		
+		$html .= '<nav class="cycle-slideshow" 
+			data-cycle-fx="scrollHorz" 
+			data-cycle-timeout="0" 
+			data-cycle-slides="> div"
+			data-cycle-prev="#cpb-pager-prev-' . $sid . '"
+			data-cycle-pager="#cpb-pager-' . $sid . '"
+        	data-cycle-next="#cpb-pager-next-' . $sid . '">';
+			
+			$html .= '<div class="cpb-slide">';
+			
+				$i = 0;
+		
+				foreach( $this->layouts as $slug => $name ){
+					
+					if ( $i == 6 ){
+						
+						$html .= '</div><div class="cpb-slide">';
+						
+						$i = 0;
+						
+					} // end if
+					
+					$html .= '<ul class="cpb-row-option" data-type="row" data-layout="' . $slug . '">';
+					
+						$type = ( 'pagebreak' == $slug )? 'pagebreak' : 'row';
+					
+						$html .= '<li class="cpb-icon"><img src="' . CWPPBURL . 'images/video-spacer.png" /></li>';
+						
+						$html .= '<li class="cpb-title">' . $name . '<input type="hidden" name="settings[layout]" value="' . $slug . '" /><input type="hidden" name="item_slug" value="' . $type . '" /></li>';
+						
+					
+					$html .= '</ul>';
+					
+					$i++;
+					
+				} // end foreach
+			
+			$html .= '</div>';
+		
+			$html .= '</nav>';
+			
+			$html .= '<div class="cpb-pager">';
+			
+				$html .= '<a href="#" id="cpb-pager-prev-' . $sid . '" class="cpb-pager-prev"><span>Prev</span></a>';
+				
+				$html .= '<div id="cpb-pager-' . $sid . '" class="cpb-pager-bullets"></div>';
+				
+				$html .= '<a href="#" id="cpb-pager-next-' . $sid . '" class="cpb-pager-next"><span>Next</span></a>';
+			
+			$html .= '</div>';
+		
+		$html .= '</div>';
+		
+		return $html;
+		
+	} // end add_row_form
 
 	public function clean( $s ) {
 

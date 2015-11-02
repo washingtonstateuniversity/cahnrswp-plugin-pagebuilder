@@ -86,4 +86,46 @@ class Form_PB {
 		
 	} // end get_form_sections
 	
+	
+	public function cpb_is_selected( $a , $b ){
+		
+		if ( $a == $b ){
+			
+			return ' selected';
+			
+		} else {
+			
+			return '';
+			
+		} // end if
+		
+	} // end cpb_is_selected
+	
+	
+	public function radio_toggle_button( $name , $value , $current_value , $label , $class = '' ){
+		
+		$html = '<a href="#" class="cpb-radio-button' . $this->cpb_is_selected( $value , $current_value ) . ' ' . $class . '">';
+		
+		$html .= $label . '<input type="radio" name="' . $name . '" value="' . $value . '" ' . checked( $value , $current_value , false ) . '/></a>';
+		
+		return $html;
+		
+	} // end radio_toggle_button
+	
+	public function accordion_radio( $name , $value , $current_value , $label , $form , $summary = '' , $class = '' ){
+		
+		$html = '<a href="#" class="cpb-accordion' . $this->cpb_is_selected( $value , $current_value ) . ' ' . $class . '">' . $label;
+		
+			if ( $summary ) $html .= '<span class="cpb-summary">' . $summary . '</span>';
+		
+			$html .= '<input type="radio" value="' . $value . '" name="' . $name . '" ' . checked( $value , $current_value , false ) . ' />';
+		
+		$html .= '</a>';
+		
+		$html .= '<div class="cpb-accordion-content' . $this->cpb_is_selected( $value , $current_value ) . '">' . $form . '</div>';
+		
+		return $html;
+		
+	}
+	
 }

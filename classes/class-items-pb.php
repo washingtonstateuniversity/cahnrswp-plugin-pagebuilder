@@ -207,6 +207,10 @@ class Items_PB {
 				'class'   => 'Item_Section_PB',
 				'file_path' => CWPPBDIR . 'items/item-section-pb.php',
 			),
+			'pagebreak'         => array(
+				'class'   => 'Item_Pagebreak_PB',
+				'file_path' => CWPPBDIR . 'items/item-pagebreak-pb.php',
+			),
 			'row'         => array(
 				'class'   => 'Item_Row_PB',
 				'file_path' => CWPPBDIR . 'items/item-row-pb.php',
@@ -235,10 +239,10 @@ class Items_PB {
 				'class'   => 'Item_Video_PB',
 				'file_path' => CWPPBDIR . 'items/item-video-pb.php',
 			),
-			'feed'   => array(
+			/*'feed'   => array(
 				'class'   => 'Item_Feed_PB',
 				'file_path' => CWPPBDIR . 'items/item-feed-pb.php',
-			),
+			),*/
 			'cwpiframe'   => array(
 				'class'   => 'Item_Iframe_PB',
 				'file_path' => CWPPBDIR . 'items/item-iframe-pb.php',

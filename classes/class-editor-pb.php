@@ -1,4 +1,9 @@
 <?php
+
+require_once CWPPBDIR. 'forms/form-builder-options-pb.php';
+
+require_once CWPPBDIR. 'forms/form-excerpt-pb.php';
+
 class Editor_PB {
 
 	public $items;
@@ -12,13 +17,17 @@ class Editor_PB {
 	public function the_editor( $post ) {
 
 		$settings = $this->get_editor_settings( $post );
+		
+		$opts_form = new Form_Builder_Options_PB( $settings );
+		
+		$excerpt_form = new Form_Excerpt_PB( $settings , $post );
 
 		// Get layout: array of item objects with children set
 		$items = $this->items->get_items_from_content( $post->post_content, 'section', 'section', true  );
 
 		$html = '<div id="cwp-pb">';
 
-			$html .= $this->get_init_options( $post, $settings );
+			$html .= $opts_form->get_form();
 
 			if ( $settings['_cpb_pagebuilder'] ) {
 
@@ -26,7 +35,7 @@ class Editor_PB {
 
 				$html .= $this->get_layout_forms( $items, $post );
 
-				$html .= $this->get_excerpt_form( $post, $settings );
+				$html .= $excerpt_form->get_form();
 
 			} else {
 
@@ -40,23 +49,6 @@ class Editor_PB {
 
 	} // end the_editor
 
-	public function get_init_options( $post, $settings ) {
-
-		$html = '<div id="cwp-pb-options">';
-
-			$html .= '<h3 class="cwp-inline cwp-vabottom">Layout Builder </h3>';
-
-			$html .= Forms_PB::radio_field( '_cpb_pagebuilder',  '0', $settings['_cpb_pagebuilder'], 'OFF', 'inline valign-bottom cwp-radio-toggle first');
-
-			$html .= Forms_PB::radio_field( '_cpb_pagebuilder',  '1', $settings['_cpb_pagebuilder'], 'ON', 'inline valign-bottom cwp-radio-toggle' );
-
-			$html .= '<div class="cpb-helper-text">***Please select Save Draft or Update to enable or disable the layout builder.</div>';
-
-		$html .= '</div>';
-
-		return $html;
-
-	} // get_init_options
 
 	public function get_content_editor( $post, $settings ) {
 
@@ -195,7 +187,7 @@ class Editor_PB {
 
 	public function add_item_form( $items ) {
 
-		$structure_array = array('section','row','column');
+		$structure_array = array('section','row','column','pagebreak');
 
 		$form = array();
 

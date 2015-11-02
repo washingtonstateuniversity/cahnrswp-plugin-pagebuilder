@@ -37,11 +37,11 @@
 }*/
 
 #cwp-pb header .remove-item-action {
-	background-image:url(../images/remove-action-medium.png)
+	background-image:url(../images/remove-action.png)
 }
 
 #cwp-pb header .cpb-edit-item {
-	background-image:url(../images/edit-action-medium.png)
+	background-image:url(../images/edit-action.png)
 }
 
 /*
@@ -59,6 +59,111 @@
 */
 #cwp-pb-editor {
 	margin-bottom: 2rem;
+}
+
+/*
+* #cwp-pb-options
+* -------------------------------------------
+*/
+#cwp-pb-options {
+	border-bottom: 1px solid #ccc;
+	padding-bottom: 1rem;
+	margin-bottom: 1rem;
+}
+
+
+#cwp-pb-options .cpb-title-text {
+	display: inline-block;
+	padding-right: 1rem;
+	height: 40px;
+	line-height: 40px;
+	font-size: 1.2rem;
+	font-weight: bold;
+	color: #555;
+}
+
+#cwp-pb-options .cpb-edit-format-action {
+	padding: 0 1.5rem;
+	height: 40px;
+	line-height: 40px;
+	/*text-transform: uppercase;*/
+	font-size: 1.2rem;
+	font-weight: bold;
+}
+
+/*
+* #cpb-excerpt
+* -------------------------------------------
+*/
+#cpb-excerpt {
+	padding-bottom: 2rem;
+}
+
+#cpb-excerpt .cpb-title-text {
+	display: inline-block;
+	vertical-align: top;
+	height: 25px;
+	line-height: 25px;
+	font-weight: bold;
+	padding-right: 0.5rem;
+}
+
+#cpb-excerpt textarea {
+	display: block;
+	width: 100%;
+	height: 6rem;
+	margin-top: 0.5rem;
+}
+
+/*
+* Pagebreak
+* -------------------------------------------
+*/
+
+#cwp-pb .cpb-pagebreak {
+	padding: 2rem 0 3.5rem;
+}
+
+#cwp-pb .cpb-pagebreak:after {
+	content: '';
+	display: block;
+	margin: 0 auto;
+	width: 0; 
+	height: 0; 
+	border-left: 20px solid transparent;
+	border-right: 20px solid transparent;
+	border-top: 20px solid #555;;
+}
+
+#cwp-pb .cpb-pagebreak:before {
+	content: '';
+	display: block;
+	margin: 0 auto;
+	width: 0; 
+	height: 0; 
+	border-bottom: 20px solid #555;; 
+	border-left: 20px solid transparent;
+	border-right: 20px solid transparent;
+}
+
+#cwp-pb .cpb-pagebreak > header {
+	background: #555;
+	color: #ccc;
+	text-transform: uppercase;
+	padding: 0 1rem;
+	height: 25px;
+	line-height: 25px;
+	position: relative;
+}
+
+#cwp-pb .cpb-pagebreak > header a {
+	display: block;
+	position: absolute;
+	top: 0;
+	right: 0;
+	height: 25px;
+	width: 25px;
+	border-left: 1px solid #777;
 }
 
 
@@ -200,6 +305,8 @@
 	background-color: #f1f1f1;
 	position: relative;
 	margin: 0 0.1rem;
+	background-size: contain;
+	background-position: center center;
 }
 
 #cwp-pb .cpb-row > .cpb-item-set {
@@ -474,7 +581,10 @@
 	left: 0.5rem;
 	width: 35px;
 	height: 35px;
-	background:url(../images/edit-pen-icon.png) no-repeat center center;
+	background-image:url(../images/edit-action.png);
+	background-repeat: no-repeat;
+	background-position: center center;
+	background-size: 25px 25px;
 	z-index: 3;
 	display: none;
 }
@@ -1276,3 +1386,147 @@
 	background-color: rgba( 0,0,0,0.6 );
 	z-index: 9999;
 }
+/*
+* Forms 2.0
+* ----------------------------------------------
+*/
+
+/* Subforms */
+.cpb-form-content-inner > .cpb-accordion {
+	font-size: 1.4rem;
+	font-weight: bold;
+	border: 1px solid #999;
+	background-color: #eee;
+	padding-right: 40px;
+	background-image: url(../images/unchecked.png);
+	background-repeat: no-repeat;
+	background-position: center right;
+}
+
+.cpb-form-content-inner > .cpb-accordion.selected {
+	background-image: url(../images/checked.png);
+}
+
+.cpb-form-content-inner > .cpb-accordion span{
+	display: block;
+	font-size: 0.8rem;
+	line-height: 1rem;
+}
+
+.cpb-form-content-inner > .cpb-accordion-content.selected{
+	display: block;
+}
+
+/* Radio Button */
+.cpb-radio-button {
+	background: #ccc;
+	color: #fff;
+	padding: 0 1rem;
+	height: 25px;
+	line-height: 25px;
+	display: inline-block;
+	vertical-align: top;
+	text-decoration: none;
+}
+
+.cpb-radio-button input {
+	display: none;
+}
+
+.cpb-radio-button.selected {
+	background: #2ea2cc;
+	color: #fff;
+}
+
+.cpb-radio-button:hover {
+	color: #fff;
+}
+
+/*
+* cpb accordion
+* -------------------------------------------
+*/
+.cpb-accordion {
+	display: block;
+	padding: 1rem 1rem;
+	text-decoration: none;
+	color: #333;
+}
+
+.cpb-accordion input {
+	display: none;
+}
+
+.cpb-accordion-content {
+	display: none;
+	padding: 0.5rem 0 1rem;
+}
+
+/*
+* Basic Form Pager
+*/
+nav.cycle-slideshow{}
+
+nav.cycle-slideshow .cpb-slide {
+	width: 100%;
+	display: none;
+}
+
+nav.cycle-slideshow .cpb-slide:first-child {
+	width: 100%;
+	display: block;
+}
+
+.cpb-pager {
+	/*text-align: center;*/
+}
+
+.cpb-pager a,
+.cpb-pager div {
+	display: inline-block;
+	vertical-align: middle;
+	padding: 0 0.25rem;
+}
+
+.cpb-pager div span {
+	display: inline-block;
+	vertical-align: top;
+	width: 10px;
+	height: 10px;
+	background: #ccc;
+	border-radius: 5px;
+	margin: 0 0.1rem;
+	font-size: 0;
+}
+.cpb-pager div span.cycle-pager-active {
+	background: #0074a2;
+}
+
+/* Add Row Pager */
+.cpb-add-row-form .cpb-pager {
+	margin: 0 1rem;
+	padding: 0 0 0.5rem;
+}
+
+.cpb-add-row-form .cpb-pager a span {
+	display: inline-block;
+	font-size: 0;
+}
+
+.cpb-add-row-form .cpb-pager-next span{
+	width: 0; 
+	height: 0; 
+	border-top: 8px solid transparent;
+	border-bottom: 8px solid transparent;
+	border-left: 8px solid #0074a2;
+}
+
+.cpb-add-row-form .cpb-pager-prev span{
+	width: 0; 
+	height: 0; 
+	border-top: 8px solid transparent;
+	border-bottom: 8px solid transparent;
+	border-right: 8px solid #0074a2;
+}
+
+
