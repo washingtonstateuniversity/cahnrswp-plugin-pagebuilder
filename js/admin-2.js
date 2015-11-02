@@ -194,6 +194,13 @@ jQuery(document).ready(function(){
 		l.apply_sort = function( bounds ){
 			
 			// Sort Columns
+			bounds.find('.cpb-section > .cpb-item-set').sortable({ 
+				handle: '.cpb-item-row-header .title, .cpb-item-pagebreak-header .title',
+				//connectWith: '.cpb-section > .cpb-item-set',
+				stop: function(){ l.set_children(); l.class_columns(); }, 
+			});
+			
+			// Sort Columns
 			bounds.find('.cpb-row > .cpb-item-set').sortable({ 
 				handle: '.cpb-item-column-header .title',
 				stop: function(){ l.set_children(); l.class_columns(); }, 
