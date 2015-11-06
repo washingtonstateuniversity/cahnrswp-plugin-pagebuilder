@@ -206,38 +206,47 @@ class Items_PB {
 			'section'     => array(
 				'class'   => 'Item_Section_PB',
 				'file_path' => CWPPBDIR . 'items/item-section-pb.php',
+				'priority'  => 0,
 			),
 			'pagebreak'         => array(
 				'class'   => 'Item_Pagebreak_PB',
 				'file_path' => CWPPBDIR . 'items/item-pagebreak-pb.php',
+				'priority'  => 0,
 			),
 			'row'         => array(
 				'class'   => 'Item_Row_PB',
 				'file_path' => CWPPBDIR . 'items/item-row-pb.php',
+				'priority'  => 0,
 			),
 			'column'      => array(
 				'class'   => 'Item_Column_PB',
 				'file_path' => CWPPBDIR . 'items/item-column-pb.php',
+				'priority'  => 0,
 			),
 			'textblock'   => array(
 				'class'   => 'Item_Textblock_PB',
 				'file_path' => CWPPBDIR . 'items/item-textblock-pb.php',
+				'priority'  => 2,
 			),
 			'widget'   => array(
 				'class'   => 'Item_Widget_PB',
 				'file_path' => CWPPBDIR . 'items/item-widget-pb.php',
+				'priority'  => 0,
 			),
 			'image'   => array(
 				'class'   => 'Item_Image_PB',
 				'file_path' => CWPPBDIR . 'items/item-image-pb.php',
+				'priority'  => 5,
 			),
 			'subtitle'   => array(
 				'class'   => 'Item_Subtitle_PB',
 				'file_path' => CWPPBDIR . 'items/item-subtitle-pb.php',
+				'priority'  => 3,
 			),
 			'video'   => array(
 				'class'   => 'Item_Video_PB',
 				'file_path' => CWPPBDIR . 'items/item-video-pb.php',
+				'priority'  => 4,
 			),
 			/*'feed'   => array(
 				'class'   => 'Item_Feed_PB',
@@ -246,23 +255,28 @@ class Items_PB {
 			'cwpiframe'   => array(
 				'class'   => 'Item_Iframe_PB',
 				'file_path' => CWPPBDIR . 'items/item-iframe-pb.php',
+				'priority'  => 9,
 			),
 			'action'   => array(
 				'class'   => 'Item_Action_PB',
 				'file_path' => CWPPBDIR . 'items/item-action-pb.php',
+				'priority'  => 5,
 			),
 
 			'postgallery'   => array( 
 				'class'   => 'Item_Postgallery_PB', 
 				'file_path' => CWPPBDIR . 'items/item-postgallery-pb.php',
+				'priority'  => 6,
 			),
 			'promo'       => array(
 				'class'   => 'Item_Promo_PB',
 				'file_path' => CWPPBDIR . 'items/item-promo-pb.php',
+				'priority'  => 7,
 			),
 			'list'       => array(
 				'class'   => 'Item_List_PB',
 				'file_path' => CWPPBDIR . 'items/item-list-pb.php',
+				'priority'  => 8,
 			),
 			/*'subtitle'    => array(
 				'class'   => 'Item_Subtitle_CPB',
@@ -283,8 +297,20 @@ class Items_PB {
 				'file_path' => CWPPBDIR . 'items/item-figure-cpb.php',
 			),*/
 		);
+		
+		$items = apply_filters( 'cwpb_register_items', $registered_items, $post );
+		
+		uasort( $items , function( $a , $b ){ 
+		
+			if ( empty( $a['priority'] ) ) $a['priority'] = 100;
+			
+			if ( empty( $b['priority'] ) ) $b['priority'] = 100; 
+			
+			return $a['priority'] - $b['priority'];
+			 
+		}); // end usort
 
-		$this->items = apply_filters( 'cwpb_register_items', $registered_items, $post );
+		$this->items = $items;
 
 	} // end register_items
 

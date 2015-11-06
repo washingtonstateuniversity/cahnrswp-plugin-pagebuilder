@@ -1,4 +1,7 @@
 <?php
+
+require_once CWPPBDIR . 'classes/class-parse-shortcode-pb.php';
+
 class Item_Row_PB extends Item_PB {
 
 	public $slug = 'row';
@@ -10,33 +13,49 @@ class Item_Row_PB extends Item_PB {
 	public $default_child = 'column';
 
 	public function item( $settings, $content ) {
-
+		
 		global $cpb_column_i;
 
 		$cpb_column_i = 1;
-
-		if ( ! empty( $settings['bgcolor'] ) ) {
-			$class .= ' ' . $settings['bgcolor'] . '-back';
-		}
-
-		if ( ! empty( $settings['textcolor'] ) ) {
-			$class .= ' ' . $settings['textcolor'] . '-text';
-		}
-
-		if ( ! empty( $settings['padding'] ) ) {
-			$class .= ' ' . $settings['padding'];
-		}
-
-		if ( ! empty( $settings['gutter'] ) ) {
-			$class .= ' ' . $settings['gutter'];
-		}
-
-		if ( ! empty( $settings['csshook'] ) ) {
-			$class .= ' ' . $settings['csshook'];
-		}
-
-		$html = '<div class="row ' . $settings['layout'] . $class . '">' . $content . '</div>';
-
+		
+		$class = $this->get_classes();
+		
+		$parse_shortcode = new Parse_Shortcode_PB( $content );
+		
+		$columns = $parse_shortcode->get_shortcode_array( $content , array('column') );
+		
+		if ( $this->settings['layout'] == 'side-right' ) {
+			
+			$is_empty = array( '',' ','[textblock ][/textblock]' , '[textblock ] [/textblock]' );
+			
+			if ( in_array( $columns[1]['content'] , $is_empty ) ){
+				
+				$layout = 'single'; 
+				
+				unset( $columns[1] );
+				
+			} else {
+				
+				$layout = $this->settings['layout'];
+				
+			} // end if
+			
+		} else {
+			
+			$layout = $this->settings['layout'];
+			
+		} // end if
+		
+		$html = '<div class="row ' . $layout . $class . '">';
+		
+			foreach( $columns as $index => $column ){
+				
+				$html .= do_shortcode( $column['fullcontent'] );
+				
+			} // end if
+		
+		$html .= '</div>';
+		
 		return $html;
 
 	} // end item
@@ -92,6 +111,14 @@ class Item_Row_PB extends Item_PB {
 		return $html;
 
 	} // end form
+	
+	public function the_item() {
+
+		$html = $this->item( $this->settings, $this->content );
+
+		return $html;
+
+	}
 
 	public function clean( $s ) {
 
@@ -112,5 +139,34 @@ class Item_Row_PB extends Item_PB {
 		return $clean;
 
 	} // end clean_settings
+	
+	
+	private function get_classes(){
+		
+		$class = '';
+		
+		if ( ! empty( $this->settings['bgcolor'] ) ) {
+			$class .= ' ' . $this->settings['bgcolor'] . '-back';
+		}
+
+		if ( ! empty( $this->settings['textcolor'] ) ) {
+			$class .= ' ' . $this->settings['textcolor'] . '-text';
+		}
+
+		if ( ! empty( $this->settings['padding'] ) ) {
+			$class .= ' ' . $this->settings['padding'];
+		}
+
+		if ( ! empty( $this->settings['gutter'] ) ) {
+			$class .= ' ' . $this->settings['gutter'];
+		}
+
+		if ( ! empty( $this->settings['csshook'] ) ) {
+			$class .= ' ' . $this->settings['csshook'];
+		}
+		
+		return $class;
+		
+	} 
 
 }

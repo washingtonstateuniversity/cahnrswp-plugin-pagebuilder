@@ -21,6 +21,8 @@ class Editor_PB {
 		$opts_form = new Form_Builder_Options_PB( $settings );
 		
 		$excerpt_form = new Form_Excerpt_PB( $settings , $post );
+		
+		if ( '' == $post->post_content ) $post->post_content = '[row layout="side-right"][/row]';
 
 		// Get layout: array of item objects with children set
 		$items = $this->items->get_items_from_content( $post->post_content, 'section', 'section', true  );
