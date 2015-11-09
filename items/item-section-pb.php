@@ -69,24 +69,6 @@ class Item_Section_PB extends Item_PB {
 			$html .= $this->add_row_form( $settings );
 
 		$html .= '</footer>';
-		
-		/*$html .= '<header class="cpb-item-' . $this->slug . '-header">';
-		
-			$html .= '<div class="cpb-arrow-up"></div>';
-			
-			$html .= '<nav>';
-
-				$html .= '<div class="title">' . $title . '</div>';
-
-				$html .= '<a href="#" class="cpb-edit-item" data-id="' . $this->id . '"></a>';
-
-				$html .= '<a href="#" class="remove-item-action"></a>';
-			
-			$html .= '</nav>';
-			
-			$html .= '<div class="cpb-arrow-down add-section-action">+</div>';
-
-		$html .= '</header>';*/
 
 		return $html;
 
@@ -144,7 +126,7 @@ class Item_Section_PB extends Item_PB {
 						
 					} // end if
 					
-					$html .= '<ul class="cpb-row-option" data-type="row" data-layout="' . $slug . '">';
+					$html .= '<ul class="cpb-row-option cpb-row-' . $slug . '" data-type="row" data-layout="' . $slug . '">';
 					
 						$type = ( 'pagebreak' == $slug )? 'pagebreak' : 'row';
 					

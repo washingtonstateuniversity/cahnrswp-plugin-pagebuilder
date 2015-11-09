@@ -26,6 +26,8 @@ class Item_PB extends Form_PB {
 	public $allowed_children = false;
 
 	public $default_child = false;
+	
+	public $enclosed = true;
 
 	public $i = 0;
 
@@ -116,8 +118,16 @@ class Item_PB extends Form_PB {
 	}
 
 	public function to_shortcode( $content ) {
+		
+		if ( $this->enclosed ){
 
-		$code = '[' . $this->slug . $this->encode_settings() . ']' . $content . '[/' . $this->slug . ']';
+			$code = '[' . $this->slug . $this->encode_settings() . ']' . $content . '[/' . $this->slug . ']';
+		
+		} else {
+			
+			
+			
+		} // end if
 
 		return $code;
 
@@ -218,14 +228,30 @@ class Item_PB extends Form_PB {
 	} // end get_child_ids
 
 	public function encode_settings() {
+		
+		if ( method_exists( $this, 'clean' ) ) {
+				
+			$default = $this->clean( array() );
 
+		} else {
+			
+			$default = array();
+			
+		}// end if
+		
 		$sets = array();
 
-		foreach( $this->settings as $key => $value ) {
-
-			$sets[] = $key . '="' . $value . '"';
+		foreach( $this->settings as $key => $value ) { 
+			
+			if ( ! ( isset( $default[ $key ] ) && $default[ $key ] == $value ) ) { 
+				
+				$sets[] = $key . '="' . $value . '"';
+			
+			} // end if
 
 		} // end foreach
+		
+		//var_dump( $sets );
 
 		return ' ' . implode( ' ', $sets );
 
