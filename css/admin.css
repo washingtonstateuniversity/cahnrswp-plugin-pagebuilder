@@ -724,11 +724,24 @@
 	display: block;
 }
 
-.cpb-add-row-form nav ul li.cpb-icon {
-	background: #555;
+.cpb-add-row-form nav ul li.cpb-icon { 
 	padding: 0;
 	margin: 0;
+	background-repeat: no-repeat;
+	background-size: contain;
+	background-position: center center;
+	border-left: 1px solid #ccc;
+	border-right: 1px solid #ccc;
+	border-top: 1px solid #ccc;
 }
+
+.cpb-add-row-form nav ul.cpb-row-single li.cpb-icon { background-image:url(../images/row-single-icon.jpg);}
+.cpb-add-row-form nav ul.cpb-row-halves li.cpb-icon { background-image:url(../images/row-halves-icon.jpg); }
+.cpb-add-row-form nav ul.cpb-row-side-right li.cpb-icon { background-image:url(../images/row-sidebar-right-icon.jpg);}
+.cpb-add-row-form nav ul.cpb-row-side-left li.cpb-icon { background-image:url(../images/row-side-left-icon.jpg);}
+.cpb-add-row-form nav ul.cpb-row-thirds li.cpb-icon { background-image:url(../images/row-thirds-icon.jpg);}
+.cpb-add-row-form nav ul.cpb-row-quarters li.cpb-icon { background-image:url(../images/row-quarters-icon.jpg);}
+.cpb-add-row-form nav ul.cpb-row-pagebreak li.cpb-icon { background-image:url(../images/pagebreak-icon.jpg);}
 
 .cpb-add-row-form nav ul li.cpb-title {
 	background: #fff;

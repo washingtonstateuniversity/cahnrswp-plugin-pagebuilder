@@ -1,7 +1,6 @@
 <?php
 
 require_once CWPPBDIR. 'forms/form-builder-options-pb.php';
-
 require_once CWPPBDIR. 'forms/form-excerpt-pb.php';
 
 class Editor_PB {
@@ -22,7 +21,7 @@ class Editor_PB {
 		
 		$excerpt_form = new Form_Excerpt_PB( $settings , $post );
 		
-		if ( '' == $post->post_content ) $post->post_content = '[row layout="side-right"][/row]';
+		if ( '' == $post->post_content && $settings['_cpb_pagebuilder'] ) $post->post_content = '[row layout="side-right"][/row]';
 
 		// Get layout: array of item objects with children set
 		$items = $this->items->get_items_from_content( $post->post_content, 'section', 'section', true  );
