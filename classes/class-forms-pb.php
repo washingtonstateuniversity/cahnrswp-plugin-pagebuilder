@@ -202,6 +202,7 @@ class Forms_PB{
 
 	} // end wrap_field
 
+	// Deprecated
 	public static function get_item_form( $forms, $action = 'close-form-action', $action_label = 'Done' ) {
 
 		$tabs = '';
@@ -233,6 +234,40 @@ class Forms_PB{
 		return $html;
 
 	} // end get_item_form
+	
+	
+	public static function tabbed_form( $forms, $action = 'close-form-action', $action_label = 'Done' ){
+		
+		$tabs = '';
+
+		$sections = '';
+
+		$active = 'active';
+
+		foreach( $forms as $label => $form ) {
+
+			$tabs .= '<a href="#" class="cpb-tab ' . $active . '">' . $label . '</a>';
+
+			$sections .= '<div class="cpb-form-content cpb-tab-content ' . $active . '"><div class="cpb-form-content-inner">' . $form . '</div></div>';
+
+			$active = '';
+
+		} // end foreach
+
+		$html = '<nav>' . $tabs . '</nav>';
+
+		$html .= $sections;
+
+		$html .= '<footer>';
+
+			$html .= '<a href="#" class="cpb-button ' . $action . '" >' . $action_label . '</a>';
+
+		$html .= '</footer>';
+
+		return $html;
+		
+	} // end tabbed_form
+	
 
 	public static function get_sub_form( $form_array, $name = '', $value = 'na' ) {
 
@@ -404,6 +439,20 @@ class Forms_PB{
 
 		return $values;
 
+	}
+	
+	public static function get_header_tags(){
+		
+		$tags = array(
+			'h2' => 'H2',
+			'h3' => 'H3',
+			'h4' => 'H4',
+			'h5' => 'H5',
+			'strong' => 'Bold',
+		);
+		
+		return $tags;
+		
 	}
 
 }

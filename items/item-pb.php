@@ -6,6 +6,8 @@ class Item_PB extends Form_PB {
 /*class Item_PB extends Forms_PB {*/
 
 	public $layout_types = array('section','row','column','pagebreak');
+	
+	public $is_layout = false;
 
 	public $i_array = array('one','two','three','four');
 
@@ -133,17 +135,21 @@ class Item_PB extends Form_PB {
 
 	} // end to_shortcode
 
-	public function get_name_field( $field = 'na', $is_setting = true ) {
+	public function get_name_field( $field = 'na', $is_setting = true , $is_array = false ) {
 
 		$name = '_cpb[' . $this->id . ']';
 
 		if ( $is_setting ) $name .= '[settings]';
 
-		if ( $field != 'na' ) {
+		if ( $field != 'na' && ! $is_array ) {
 
 			$name .= '[' . $field . ']';
 
-		} // end if
+		} else if ( $is_array ){
+			
+			$name .= $field;
+			
+		}// end if
 
 		return $name;
 

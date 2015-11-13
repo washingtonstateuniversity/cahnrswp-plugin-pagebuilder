@@ -8,6 +8,8 @@ class Item_Column_PB extends Item_PB {
 	public $allowed_children = 'all';
 
 	public $default_child = 'textblock';
+	
+	public $is_layout = true;
 
 	public function item( $settings, $content ) {
 

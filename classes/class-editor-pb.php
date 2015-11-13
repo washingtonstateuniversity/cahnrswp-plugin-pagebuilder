@@ -152,17 +152,11 @@ class Editor_PB {
 		
 		$form_add_items = new Form_Add_Item_PB( $this->items->get_all_items() );
 
-		$item_form = $this->add_item_form( $this->items->get_all_items() );
-
 		$row_form = $this->add_row_form( array('single' => array( 'label' => 'Single Column' ) ) );
-
-		//$html = Forms_PB::wrap_item_form( 'cpb_add_item', $item_form, 'large'  );
+		
+		$html .= Forms_PB::wrap_item_form( 'cpb_add_item', $form_add_items->get_form(), 'large'  );
 
 		$html .= Forms_PB::wrap_item_form( 'cpb_add_row', $row_form, 'large'  );
-		
-		$html .= $form_add_items->get_form();
-		
-		//$html .= Forms_PB::wrap_item_form( 'cpb_add_item', $form_items->get_form(), 'large'  );
 
 		return $html;
 

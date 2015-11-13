@@ -230,7 +230,7 @@ class Items_PB {
 			),
 			'widget'   => array(
 				'class'   => 'Item_Widget_PB',
-				'file_path' => CWPPBDIR . 'items/item-widget-pb.php',
+				'file_path' => CWPPBDIR . 'classes/class-item-widget-pb.php',
 				'priority'  => 0,
 			),
 			'image'   => array(
@@ -277,6 +277,11 @@ class Items_PB {
 				'class'   => 'Item_List_PB',
 				'file_path' => CWPPBDIR . 'items/item-list-pb.php',
 				'priority'  => 8,
+			),
+			'tabs'       => array(
+				'class'   => 'Item_Tabs_PB',
+				'file_path' => CWPPBDIR . 'items/item-tabs-pb.php',
+				'priority'  => 9,
 			),
 			/*'subtitle'    => array(
 				'class'   => 'Item_Subtitle_CPB',

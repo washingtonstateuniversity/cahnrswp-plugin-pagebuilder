@@ -66,12 +66,15 @@ jQuery(document).ready(function(){
 				data,
 				function( response ){
 					
+					alert( response );
+					
 					s.layout.add_part( response.editor , s.add.add_loc );
 					
 					s.forms.add_forms( response.forms );
 					
 				},
 				'json'
+				
 			);
 			
 			console.log(data);
@@ -255,9 +258,10 @@ jQuery(document).ready(function(){
 		
 		a.add_item_data = function( form ){
 			
-			var data = 'item_slug=' + form.find('.cpb-add-item-wrapper.selected').first().data('type') + '&action=cpb_ajax&service=add_part';
+			//var data = 'item_slug=' + form.find('.cpb-add-item-wrapper.selected').first().data('type') + '&action=cpb_ajax&service=add_part';
 			
-			return data;
+			return 'action=cpb_ajax&' + form.find('.cpb-add-item-wrapper.selected input').serialize();
+			
 			
 		} // end add_item_data
 		

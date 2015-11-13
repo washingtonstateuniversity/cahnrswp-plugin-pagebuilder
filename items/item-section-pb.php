@@ -9,6 +9,8 @@ class Item_Section_PB extends Item_PB {
 
 	public $default_child = 'row';
 	
+	public $is_layout = true;
+	
 	public $layouts = array(
 		'single'            => 'Single Column',
 		'halves'            => 'Two Column',

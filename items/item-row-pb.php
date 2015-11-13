@@ -11,6 +11,8 @@ class Item_Row_PB extends Item_PB {
 	public $allowed_children = 'column';
 
 	public $default_child = 'column';
+	
+	public $is_layout = true;
 
 	public function item( $settings, $content ) {
 		
@@ -96,19 +98,25 @@ class Item_Row_PB extends Item_PB {
 
 	public function form( $settings ) {
 
-		$html = Forms_PB::hidden_field( $this->get_name_field( 'layout' ), $settings['layout'] );
+		$basic = Forms_PB::hidden_field( $this->get_name_field( 'layout' ), $settings['layout'] );
+		
+		$basic .= Forms_PB::text_field( $this->get_name_field('title'), $settings['title'], 'Title' );
+		
+		$basic .= Forms_PB::select_field( $this->get_name_field('title_tag'), $settings['title_tag'], Forms_PB::get_header_tags() , 'Title Tag' );
+		
+		$basic .= Forms_PB::select_field( $this->get_name_field('padding'), $settings['padding'], Forms_PB::get_padding(), 'Padding' );
 
-		$html .= Forms_PB::select_field( $this->get_name_field('bgcolor'), $settings['bgcolor'], Forms_PB::get_wsu_colors(), 'Background Color' );
+		$basic .= Forms_PB::select_field( $this->get_name_field('gutter'), $settings['gutter'], Forms_PB::get_gutters(), 'Gutter' );
 
-		$html .= Forms_PB::select_field( $this->get_name_field('textcolor'), $settings['textcolor'], Forms_PB::get_wsu_colors(), 'Text Color' );
+		$advanced = Forms_PB::select_field( $this->get_name_field('bgcolor'), $settings['bgcolor'], Forms_PB::get_wsu_colors(), 'Background Color' );
 
-		$html .= Forms_PB::select_field( $this->get_name_field('padding'), $settings['padding'], Forms_PB::get_padding(), 'Padding' );
+		$advanced .= Forms_PB::select_field( $this->get_name_field('textcolor'), $settings['textcolor'], Forms_PB::get_wsu_colors(), 'Text Color' );
 
-		$html .= Forms_PB::select_field( $this->get_name_field('gutter'), $settings['gutter'], Forms_PB::get_gutters(), 'Gutter' );
+		$advanced .= Forms_PB::text_field( $this->get_name_field('csshook'), $settings['csshook'], 'CSS Hook' );
+		
+		//$advanced .= Forms_PB::checkbox_field( $this->get_name_field('is_tab'), 1, $settings['is_tab'], 'Display as Tab' );
 
-		$html .= Forms_PB::text_field( $this->get_name_field('csshook'), $settings['csshook'], 'CSS Hook' );
-
-		return $html;
+		return array( 'Basic' => $basic , 'Advanced' => $advanced );
 
 	} // end form
 	
@@ -123,6 +131,10 @@ class Item_Row_PB extends Item_PB {
 	public function clean( $s ) {
 
 		$clean = array();
+		
+		$clean['title'] = ( isset( $s['title'] ) ) ? sanitize_text_field( $s['title'] ) : '';
+		
+		$clean['title_tag'] = ( isset( $s['title_tag'] ) ) ? sanitize_text_field( $s['title_tag'] ) : 'h2';
 
 		$clean['layout'] = ( ! empty( $s['layout'] ) ) ? sanitize_text_field( $s['layout'] ) : 'single';
 
@@ -135,6 +147,8 @@ class Item_Row_PB extends Item_PB {
 		$clean['gutter'] = ( ! empty( $s['gutter'] ) ) ? sanitize_text_field( $s['gutter'] ) : 'gutter';
 
 		$clean['csshook'] = ( ! empty( $s['csshook'] ) ) ? sanitize_text_field( $s['csshook'] ) : '';
+		
+		//$clean['is_tab'] = ( isset( $s['is_tab'] ) ) ? sanitize_text_field( $s['is_tab'] ) : 0;
 
 		return $clean;
 

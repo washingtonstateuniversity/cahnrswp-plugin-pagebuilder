@@ -4,6 +4,8 @@ class Item_Pagebreak_PB extends Item_PB {
 	public $slug = 'pagebreak';
 
 	public $name = 'Page Break';
+	
+	public $is_layout = true;
 
 
 	public function item( $settings, $content ) {
