@@ -4,7 +4,7 @@ Plugin Name: CAHNRSWP Pagebuilder Updated
 Plugin URI: https://cahnrs.wsu.edu/communications
 Description: Revised version of CAHNRS Pagebuilder. Pagebuilder allows for highly customizable page layouts
 Author: CAHNRS Communication WSU, Danial Bleile
-Version: 1.4.0
+Version: 1.4.1
 */
 
 //Start plugin class
@@ -14,8 +14,24 @@ class CWP_Pagebuilder {
 	public $items;
 
 	public $options;
+	
+	public $item_factory;
+	
+	public $ajax_update_editor;
 
 	public function __construct() {
+		
+		require_once 'classes/class-item-factory-pb.php';
+		
+		$this->item_factory = new Item_Factory_PB();
+		
+		if ( is_admin ){
+			
+			require_once 'classes/class-ajax-update-editor-pb.php';
+			
+			$this->ajax_update_editor = new AJAX_Update_Editor_PB( $this->item_factory );
+			
+		}
 
 		// Constant for plugin URI
 		define( 'CWPPBURL', plugin_dir_url( __FILE__ ) ); // Plugin Base url
@@ -57,6 +73,9 @@ class CWP_Pagebuilder {
 
 		// Handle AJAX calls
 		add_action( 'wp_ajax_cpb_ajax', array( $this, 'ajax_request' ) );
+		
+		// Handle AJAX calls
+		//add_action( 'wp_ajax_cpb_update_editor', array( $this, 'ajax_update_editor' ) );
 
 		// Save the post
 		add_action( 'save_post', array( $this, 'save_layout' ), 10, 3 );
@@ -77,12 +96,29 @@ class CWP_Pagebuilder {
 		//add_filter( 'the_content', array( $this, 'fix_wpauto_content_breaks' ), 1 );
 		
 		add_filter( 'the_content', array( $this, 'fix_empty_p' ), 99 );
+		
+		
 
 	} // end __construct
 	
 	
 	public function init(){
+		
+		if ( is_admin() ){
+			
+			$this->ajax_update_editor->init_actions();
+			
+		} // end if
+		
 	} // end init
+	
+	/*public function ajax_update_editor(){
+		
+		echo 'test';
+
+		die();
+		
+	}*/
 	
 	
 	
@@ -130,6 +166,12 @@ class CWP_Pagebuilder {
 
 		// Temp: Remove editor from pagebuilder post types
 		$this->options->remove_editor();
+		
+		if ( is_admin() ){
+			
+			$this->ajax_update_editor->init_actions();
+			
+		} // end if
 
 	} // end init_plugin
 
@@ -163,6 +205,8 @@ class CWP_Pagebuilder {
 		wp_enqueue_style( 'admin_css', CWPPBURL . 'css/admin.css' , false , '0.0.1' );
 		
 		wp_enqueue_script( 'admin_js', CWPPBURL . 'js/admin-2.js' , array('jquery-ui-draggable','jquery-ui-droppable','jquery-ui-sortable') , '0.0.2' );
+		
+		wp_enqueue_script( 'admin_js_3', CWPPBURL . 'js/admin-3.js' , array('jquery-ui-draggable','jquery-ui-droppable','jquery-ui-sortable') , '0.0.1' , true );
 		
 		wp_enqueue_script( 'cycle2', CWPPBURL . 'js/cycle2.js' , false , '0.0.1' );
 

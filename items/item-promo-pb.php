@@ -43,7 +43,25 @@ class Item_Promo_PB extends Item_PB {
 	
 	public function form( $settings ){
 		
-		$feed_source = array(
+		$source .= $this->accordion_radio( 
+			$this->get_name_field('source') , 
+			'feed' , 
+			$settings['source'] , 
+			'Feed (This Site)' , 
+			Forms_PB::local_feed( $this->get_name_field() , $settings ),
+			'I want to dynamically include other posts/pages from this site based on categories, tages, or content type.' 
+			); 
+			
+		$source .= $this->accordion_radio( 
+			$this->get_name_field('source') , 
+			'remote_feed' , 
+			$settings['source'] , 
+			'Feed (Another Site)' , 
+			Forms_PB::remote_feed( $this->get_name_field() , $settings ),
+			'I want to dynamically include posts/pages from another site.' 
+			);
+		
+		/*$feed_source = array(
 			'form'        => Forms_PB::local_feed( $this->get_name_field() , $settings ),
 			'field_name'  => $this->get_name_field('source'),
 			'val'         => 'feed',
@@ -59,11 +77,11 @@ class Item_Promo_PB extends Item_PB {
 			'current_val' => $settings['source'],
 			'title'       => 'Feed (Another Site)',
 			'summary'     => 'I want to dynamically include posts/pages from another site.'
-		);
+		);*/
 		
-		$source .= Forms_PB::get_subform( $feed_source ); 
+		//$source .= Forms_PB::get_subform( $feed_source ); 
 		
-		$source .= Forms_PB::get_subform( $ext_feed_source ); 
+		//$source .= Forms_PB::get_subform( $ext_feed_source ); 
 		
 		$display = Forms_PB::text_field( $this->get_name_field('title') , $settings['title'] , 'Title' );
 		

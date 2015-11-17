@@ -25,6 +25,9 @@ class Display_PB {
 			case 'accordion':
 				$html .= $this->get_accordions( $items );
 				break;
+			case 'list':
+				$html .= $this->get_list( $items );
+				break;
 				
 			default:
 				$html .= $this->get_promo( $items );
@@ -35,6 +38,46 @@ class Display_PB {
 		return $html;
 
 	} // end get_display
+	
+	public function get_list( $items ){
+		
+		
+		
+		$id = 'cpb-accordions-' . rand( 0 , 10000000 );
+		
+		$html = '<ul id="' . $id . '" class="cahnrs-accordion-set ' . $this->settings['csshook'] . '">';
+		
+		foreach( $items as $item ){
+			
+			if ( ! empty( $item['link'] ) ){
+			
+				$ls = '<a href="' . $item['link'] . '">';
+				
+				$le = '</a>';
+				
+			} else {
+				
+				$ls = '';
+				
+				$le = '';
+				
+			} // end if
+		
+			$html .= '<li class="cahnrs-list">';
+	
+				$html .= '<' . $this->settings['tag'] . '>' . $ls . $item['title'] . $le. '</' . $this->settings['tag'] . '>';
+				
+				if ( ! empty( $item['excerpt'] ) ) $html .= '<span>' . $item['excerpt'] . '</span>';
+				
+			$html .= '</li>';
+		
+		} // end foreach
+		
+		$html .= '</ul>';
+		
+		return $html;
+		
+	}
 	
 	public function get_accordions( $items ){
 		

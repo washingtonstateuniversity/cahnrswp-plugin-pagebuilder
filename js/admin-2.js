@@ -66,8 +66,6 @@ jQuery(document).ready(function(){
 				data,
 				function( response ){
 					
-					alert( response );
-					
 					s.layout.add_part( response.editor , s.add.add_loc );
 					
 					s.forms.add_forms( response.forms );

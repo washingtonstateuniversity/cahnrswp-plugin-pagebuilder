@@ -30,6 +30,8 @@ class Item_PB extends Form_PB {
 	public $default_child = false;
 	
 	public $enclosed = true;
+	
+	public $allow_ajax_update = false;
 
 	public $i = 0;
 
@@ -114,8 +116,12 @@ class Item_PB extends Form_PB {
 			$forms = array( 'Settings' => $forms );
 
 		} // end if
+		
+		$actions = 'close-form-action';
+		
+		if ( $this->allow_ajax_update ) $actions .= ' update_item_editor';
 
-		return Forms_PB::get_item_form( $forms );
+		return Forms_PB::get_item_form( $forms , $actions );
 
 	}
 
@@ -163,7 +169,7 @@ class Item_PB extends Form_PB {
 
 		$item_class = ( $is_item ) ? 'cpb-item cpb-column-item ' : 'cpb-item ';
 
-		$html = '<div class="cpb-item ' . $item_class . 'cpb-' . $this->slug . ' ' . $this->i_array[ $this->i ] . '" data-id="' .  $this->id . '">';
+		$html = '<div class="cpb-item ' . $this->id . ' ' . $item_class . 'cpb-' . $this->slug . ' ' . $this->i_array[ $this->i ] . '" data-id="' .  $this->id . '">';
 
 		$html .= Forms_PB::hidden_field( $this->get_name_field( 'type', false ), $this->slug );
 

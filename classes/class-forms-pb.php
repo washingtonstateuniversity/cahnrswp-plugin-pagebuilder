@@ -333,7 +333,7 @@ class Forms_PB{
 
 	public static function wrap_item_form( $id, $form, $width = 'small', $class = '' ) {
 
-		$html = '<fieldset class="cpb-form cpb-tab-container cpb-form-' . $width . ' ' . $class . '" id="form_' . $id . '">';
+		$html = '<fieldset class="cpb-form cpb-tab-container cpb-form-' . $width . ' ' . $class . '" id="form_' . $id . '" data-id="' . $id . '">';
 
 			$html .= '<div class="cpb-form-frame">';
 

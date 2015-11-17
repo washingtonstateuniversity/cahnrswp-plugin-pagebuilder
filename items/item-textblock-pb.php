@@ -8,6 +8,8 @@ class Item_Textblock_PB extends Item_PB {
 	public $desc = 'Add additional text/html';
 
 	public $form_size = 'large';
+	
+	//public $allow_ajax_update = true;
 
 	public function item( $settings, $content ) {
 		

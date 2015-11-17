@@ -44,9 +44,9 @@ class Item_Widget_PB extends Item_PB {
 
 	public function editor( $settings, $editor_content ) {
 
-		$html = $settings['widget_type'];
+		//$html = $settings['widget_type'];
 
-		return $html;
+		return $this->widget->name; 
 
 	} // end editor
 

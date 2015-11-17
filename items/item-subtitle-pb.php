@@ -8,6 +8,8 @@ class Item_Subtitle_PB extends Item_PB {
 	public $desc = 'Add a new headding';
 
 	public $form_size = 'small';
+	
+	public $allow_ajax_update = true;
 
 	public function item( $settings, $content ) {
 

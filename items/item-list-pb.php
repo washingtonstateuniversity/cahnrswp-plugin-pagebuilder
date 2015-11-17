@@ -33,37 +33,34 @@ class Item_List_PB extends Item_PB {
 	
 	public function editor( $settings , $editor_content ){
 		
-		$title = ( $settings['title'] ) ? $settings['title'] : 'Add Subtitle';
 		
-		$html = '<h2>' . $title . '</h2>';
-		
-		return $html;
+		return '&nbsp;';
 		
 	} // end editor
 	
 	public function form( $settings ){
 		
-		$feed_source = array(
-			'form'        => Forms_PB::local_feed( $this->get_name_field() , $settings ),
-			'field_name'  => $this->get_name_field('source'),
-			'val'         => 'feed',
-			'current_val' => $settings['source'],
-			'title'       => 'Feed (This Site)',
-			'summary'     => 'I want to dynamically include other posts/pages from this site based on categories, tages, or content type.'
-		);
+		$source .= $this->accordion_radio( 
+			$this->get_name_field('source') , 
+			'feed' , 
+			$settings['source'] , 
+			'Feed (This Site)' , 
+			Forms_PB::local_feed( $this->get_name_field() , $settings ),
+			'I want to dynamically include other posts/pages from this site based on categories, tages, or content type.' 
+			); 
+			
+		$source .= $this->accordion_radio( 
+			$this->get_name_field('source') , 
+			'remote_feed' , 
+			$settings['source'] , 
+			'Feed (Another Site)' , 
+			Forms_PB::remote_feed( $this->get_name_field() , $settings ),
+			'I want to dynamically include posts/pages from another site.' 
+			);
 		
-		$ext_feed_source = array(
-			'form'        => Forms_PB::remote_feed( $this->get_name_field() , $settings ),
-			'field_name'  => $this->get_name_field('source'),
-			'val'         => 'remote_feed',
-			'current_val' => $settings['source'],
-			'title'       => 'Feed (Another Site)',
-			'summary'     => 'I want to dynamically include posts/pages from another site.'
-		);
+		//$source .= Forms_PB::get_subform( $feed_source ); 
 		
-		$source .= Forms_PB::get_subform( $feed_source ); 
-		
-		$source .= Forms_PB::get_subform( $ext_feed_source ); 
+		//$source .= Forms_PB::get_subform( $ext_feed_source ); 
 		
 		$display = Forms_PB::text_field( $this->get_name_field('title') , $settings['title'] , 'Title' );
 		
