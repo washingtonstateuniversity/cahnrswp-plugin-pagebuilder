@@ -164,7 +164,7 @@ class Options_PB {
 							) );
 
 							update_post_meta( $post->ID, '_cpb_excerpt', $pieces[0] );
-							// Set pagebuilder as on (not sure if this is right or if we want to do it unless PB is enabled for posts). 
+							// Set pagebuilder as on (not sure if we want to do this unless PB is enabled for posts). 
 							//add_post_meta( $post->ID, '_cpb_pagebuilder', array( 1 ) );
 
 							// Delete the meta data.
@@ -226,12 +226,18 @@ class Options_PB {
 								if ( 'show' == $layout_meta['slideshow'] && $dynamic_meta['wipHomeArray'] ) {
 									$pb_content .= '[row layout="single" padding="" gutter=""]';
 									$slideshow_content_types = explode( ',', $dynamicMeta['wipHomeArray'] );
-									// Maybe just do it for posts (links are really the only other viable content type, though).
 									foreach( $slideshow_content_types as $content_type ) {
+										// Posts.
 										if ( 'cTypePosts' == substr( $content_type, 0, 10 ) ) {
 											$count = $dynamicMeta[$content_type.'_number'] ? $dynamicMeta[$content_type.'_number'] : 5;
 											$category = $dynamicMeta[$content_type.'_category'] ? get_term_by( 'id', $dynamicMeta[$content_type.'_category'], 'category') : '';
 											$pb_content .= '[feed feed_type="basic" post_type="post" taxonomy="category" tax_terms="' . $category->name . '" display="list" posts_per_page="' . $count . '"][/feed]';
+										}
+										// Links.
+										if ( 'cTypeLinks' == substr( $content_type, 0, 10 ) ) {
+											$count = $dynamicMeta[$content_type.'_number'] ? $dynamicMeta[$content_type.'_number'] : 5;
+											$category = $dynamicMeta[$content_type.'_category'] ? get_term_by( 'id', $dynamicMeta[$content_type.'_category'], 'category') : '';
+											$pb_content .= '[feed feed_type="basic" post_type="link" taxonomy="category" tax_terms="' . $category->name . '" display="list" posts_per_page="' . $count . '"][/feed]';
 										}
 									}
 									$pb_content .= '[/row]';
@@ -241,11 +247,22 @@ class Options_PB {
 								if ( $dynamic_meta['wipMainArray'] ) {
 									$pb_content .= '[column verticalbleed="0"][textblock]'. "\n\n";
 									$column_one_content_types = explode( ',', $dynamicMeta['wipMainArray'] );
-									// Maybe just do page content.
 									foreach( $column_one_content_types as $content_type ) {
+										// Page content.
 										if ( 'cTypePage' == substr( $content_type, 0, 10 ) ) {
-											//$pb_content .= $pieces[0] . "\n\n";
 											$pb_content .= $pieces[substr( $content_type, 11 )] . "\n\n";
+										}
+										// Posts
+										if ( 'cTypePosts' == substr( $content_type, 0, 10 ) ) {
+											$count = $dynamicMeta[$content_type.'_number'] ? $dynamicMeta[$content_type.'_number'] : 5;
+											$category = $dynamicMeta[$content_type.'_category'] ? get_term_by( 'id', $dynamicMeta[$content_type.'_category'], 'category') : '';
+											$pb_content .= '[feed feed_type="basic" post_type="post" taxonomy="category" tax_terms="' . $category->name . '" display="list" posts_per_page="' . $count . '"][/feed]';
+										}
+										// Links
+										if ( 'cTypeLinks' == substr( $content_type, 0, 10 ) ) {
+											$count = $dynamicMeta[$content_type.'_number'] ? $dynamicMeta[$content_type.'_number'] : 5;
+											$category = $dynamicMeta[$content_type.'_category'] ? get_term_by( 'id', $dynamicMeta[$content_type.'_category'], 'category') : '';
+											$pb_content .= '[feed feed_type="basic" post_type="link" taxonomy="category" tax_terms="' . $category->name . '" display="list" posts_per_page="' . $count . '"][/feed]';
 										}
 									}
 									$pb_content .= '[/textblock][/column]';
@@ -256,9 +273,21 @@ class Options_PB {
 									$pb_content .= '[column verticalbleed="0"][textblock]'. "\n\n";
 									$column_two_content_types = explode( ',', $dynamicMeta['wipSecondaryArray'] );
 									foreach( $column_two_content_types as $content_type ) {
+										// Page content.
 										if ( 'cTypePage' == substr( $content_type, 0, 10 ) ) {
-											//$pb_content .= $pieces[0] . "\n\n";
 											$pb_content .= $pieces[substr( $content_type, 11 )] . "\n\n";
+										}
+										// Posts
+										if ( 'cTypePosts' == substr( $content_type, 0, 10 ) ) {
+											$count = $dynamicMeta[$content_type.'_number'] ? $dynamicMeta[$content_type.'_number'] : 5;
+											$category = $dynamicMeta[$content_type.'_category'] ? get_term_by( 'id', $dynamicMeta[$content_type.'_category'], 'category') : '';
+											$pb_content .= '[feed feed_type="basic" post_type="post" taxonomy="category" tax_terms="' . $category->name . '" display="list" posts_per_page="' . $count . '"][/feed]';
+										}
+										// Links
+										if ( 'cTypeLinks' == substr( $content_type, 0, 10 ) ) {
+											$count = $dynamicMeta[$content_type.'_number'] ? $dynamicMeta[$content_type.'_number'] : 5;
+											$category = $dynamicMeta[$content_type.'_category'] ? get_term_by( 'id', $dynamicMeta[$content_type.'_category'], 'category') : '';
+											$pb_content .= '[feed feed_type="basic" post_type="link" taxonomy="category" tax_terms="' . $category->name . '" display="list" posts_per_page="' . $count . '"][/feed]';
 										}
 									}
 									$pb_content .= '[/textblock][/column]';
@@ -269,9 +298,21 @@ class Options_PB {
 									$pb_content .= '[column verticalbleed="0"][textblock]'. "\n\n";
 									$column_three_content_types = explode( ',', $dynamicMeta['wipAdditionalArray'] );
 									foreach( $column_three_content_types as $content_type ) {
+										// Page content.
 										if ( 'cTypePage' == substr( $content_type, 0, 10 ) ) {
-											//$pb_content .= $pieces[0] . "\n\n";
 											$pb_content .= $pieces[substr( $content_type, 11 )] . "\n\n";
+										}
+										// Posts
+										if ( 'cTypePosts' == substr( $content_type, 0, 10 ) ) {
+											$count = $dynamicMeta[$content_type.'_number'] ? $dynamicMeta[$content_type.'_number'] : 5;
+											$category = $dynamicMeta[$content_type.'_category'] ? get_term_by( 'id', $dynamicMeta[$content_type.'_category'], 'category') : '';
+											$pb_content .= '[feed feed_type="basic" post_type="link" taxonomy="category" tax_terms="' . $category->name . '" display="list" posts_per_page="' . $count . '"][/feed]';
+										}
+										// Links
+										if ( 'cTypeLinks' == substr( $content_type, 0, 10 ) ) {
+											$count = $dynamicMeta[$content_type.'_number'] ? $dynamicMeta[$content_type.'_number'] : 5;
+											$category = $dynamicMeta[$content_type.'_category'] ? get_term_by( 'id', $dynamicMeta[$content_type.'_category'], 'category') : '';
+											$pb_content .= '[feed feed_type="basic" post_type="link" taxonomy="category" tax_terms="' . $category->name . '" display="list" posts_per_page="' . $count . '"][/feed]';
 										}
 									}
 									$pb_content .= '[/textblock][/column]';
@@ -282,9 +323,21 @@ class Options_PB {
 									$pb_content .= '[column verticalbleed="0"][textblock]'. "\n\n";
 									$column_four_content_types = explode( ',', $dynamicMeta['wipFourthArray'] );
 									foreach( $column_four_content_types as $content_type ) {
+										// Page content.
 										if ( 'cTypePage' == substr( $content_type, 0, 10 ) ) {
-											//$pb_content .= $pieces[0] . "\n\n";
 											$pb_content .= $pieces[substr( $content_type, 11 )] . "\n\n";
+										}
+										// Posts
+										if ( 'cTypePosts' == substr( $content_type, 0, 10 ) ) {
+											$count = $dynamicMeta[$content_type.'_number'] ? $dynamicMeta[$content_type.'_number'] : 5;
+											$category = $dynamicMeta[$content_type.'_category'] ? get_term_by( 'id', $dynamicMeta[$content_type.'_category'], 'category') : '';
+											$pb_content .= '[feed feed_type="basic" post_type="post" taxonomy="category" tax_terms="' . $category->name . '" display="list" posts_per_page="' . $count . '"][/feed]';
+										}
+										// Links
+										if ( 'cTypeLinks' == substr( $content_type, 0, 10 ) ) {
+											$count = $dynamicMeta[$content_type.'_number'] ? $dynamicMeta[$content_type.'_number'] : 5;
+											$category = $dynamicMeta[$content_type.'_category'] ? get_term_by( 'id', $dynamicMeta[$content_type.'_category'], 'category') : '';
+											$pb_content .= '[feed feed_type="basic" post_type="link" taxonomy="category" tax_terms="' . $category->name . '" display="list" posts_per_page="' . $count . '"][/feed]';
 										}
 									}
 									$pb_content .= '[/textblock][/column]';
@@ -335,7 +388,7 @@ class Options_PB {
 					}
 				}
 
-				if ( ( ! empty( $legacy_layout_posts ) && ! empty( $legacy_layout_pages ) ) || isset( $_POST['cpb_legacy_layout_update'] ) ) :
+				if ( ! empty( $legacy_layout_posts ) || ! empty( $legacy_layout_pages ) || isset( $_POST['cpb_legacy_layout_update'] ) ) :
 
 				$html .= '<tr valign="top">';
 
