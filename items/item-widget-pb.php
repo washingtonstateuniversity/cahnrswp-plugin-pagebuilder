@@ -46,7 +46,11 @@ class Item_Widget_PB extends Item_PB {
 
 		//$html = $settings['widget_type'];
 
-		return $this->widget->name; 
+		//return $this->widget->name; 
+		
+		$html = $this->get_dynamic_editor( $this->the_item() );
+		
+		return $html;
 
 	} // end editor
 

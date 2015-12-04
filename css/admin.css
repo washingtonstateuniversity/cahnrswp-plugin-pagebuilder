@@ -1386,6 +1386,14 @@
 	background-position: center center;
 }
 
+#cwp-pb textarea.cpb-dynamic-editor {
+	display: none;
+}
+
+#cwp-pb iframe.cpb-dynamic-editor {
+	width: 100%;
+}
+
 /*
 * Lightbox
 * -------------------------------------------

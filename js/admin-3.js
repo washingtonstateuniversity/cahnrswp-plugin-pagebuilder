@@ -17,8 +17,14 @@ var CWPB = {
 			var form = new CWPB.forms.cpb_form( jQuery( this ) );
 			CWPB.ajax.update_editor( form ) 
 			})
+			
+		CWPB.editor.iframe.on_load( CWPB.wrap )
+		
+		CWPB.editor.iframe.resize()
 		
 		},
+		
+		
 		
 	
 	};
@@ -78,6 +84,44 @@ CWPB.forms = {
 		}
 		
 	}
+	
+}
+
+CWPB.editor = {
+	
+	iframe: {
+		
+		on_load: function( w ){
+			w.find( 'iframe.cpb-dynamic-editor').each(
+			 function(){
+				 jQuery( this ).load( function(){ CWPB.editor.iframe.update( jQuery( this ) ); }); 
+				
+				}
+			 )
+			}, 
+		
+		update:function( f ){
+			var t = f.siblings('textarea');
+			f.contents().find('body > main').html( t.val() );
+			CWPB.editor.iframe.size( f );
+		},
+		
+		size:function(f){
+			var h = f.contents().find('body > main').height();
+			f.height( h );
+		},
+		
+		resize:function(){
+			jQuery( window ).resize( function(){
+				CWPB.wrap.find( 'iframe.cpb-dynamic-editor' ).each( function(){
+					CWPB.editor.iframe.size( jQuery( this ) );
+				})
+			})
+		}
+		
+		
+		
+	},
 	
 }
 

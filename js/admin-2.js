@@ -239,6 +239,8 @@ jQuery(document).ready(function(){
 			
 			loc.append( part );
 			
+			CWPB.editor.iframe.on_load( loc );
+			
 			l.set_children();
 			
 		} // end add part

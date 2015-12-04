@@ -55,11 +55,15 @@ class Item_Widget_PB extends Item_PB {
 	
 	public function editor( $settings, $editor_content ) {
 		
-		if ( $this->widget ){
+		//if ( $this->widget ){
 			
-		} // end if
+		//} // end if
 
-		return 'widget';
+		//return 'widget';
+		
+		$html = $this->get_dynamic_editor( $this->the_item() );
+		
+		return $html;
 
 	} // end editor
 	

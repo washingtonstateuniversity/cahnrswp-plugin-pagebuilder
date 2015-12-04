@@ -27,9 +27,10 @@ class Item_Subtitle_PB extends Item_PB {
 
 	public function editor( $settings, $editor_content ) {
 
-		$title = ( $settings['title'] ) ? $settings['title'] : 'Add Subtitle';
+		//$title = ( $settings['title'] ) ? $settings['title'] : 'Add Subtitle';
 
-		$html = '<h2>' . $title . '</h2>';
+		
+		$html = $this->get_dynamic_editor( $this->the_item() );
 
 		return $html;
 
