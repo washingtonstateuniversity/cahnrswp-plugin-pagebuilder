@@ -268,5 +268,22 @@ class Item_PB extends Form_PB {
 		return ' ' . implode( ' ', $sets );
 
 	} // encode_settings
+	
+	
+	public function get_dynamic_editor( $content = false , $filters = false ){
+		
+		$content = ( $content ) ? $content : $this->content;
+		
+		if ( $filters ) $content = apply_filters( 'the_content' , $content );
+		
+		//$content = wp_kses_post( $content );
+		
+		$html = '<textarea class="cpb-dynamic-editor" style="display:none">' . $content . '</textarea>';
+		
+		$html .= '<iframe class="cpb-dynamic-editor" src="' . home_url() . '?cpb-dynamic-editor=true" scrolling="no"></iframe>';
+		
+		return $html;
+		
+	}
 
 }

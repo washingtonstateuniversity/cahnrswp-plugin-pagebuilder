@@ -1,10 +1,10 @@
 <?php
 /*
-Plugin Name: CAHNRSWP Pagebuilder Updated
+Plugin Name: CAHNRSWP Pagebuilder 2.0
 Plugin URI: https://cahnrs.wsu.edu/communications
 Description: Revised version of CAHNRS Pagebuilder. Pagebuilder allows for highly customizable page layouts
 Author: CAHNRS Communication WSU, Danial Bleile
-Version: 1.4.1
+Version: 1.5.0
 */
 
 //Start plugin class
@@ -96,6 +96,12 @@ class CWP_Pagebuilder {
 		//add_filter( 'the_content', array( $this, 'fix_wpauto_content_breaks' ), 1 );
 		
 		add_filter( 'the_content', array( $this, 'fix_empty_p' ), 99 );
+		
+		if ( isset( $_GET['cpb-dynamic-editor'] ) ) {
+			
+			add_filter( 'template_include' , array( $this , 'dynamic_editor' ), 99 );
+			
+		} // end if
 		
 		
 
@@ -268,6 +274,12 @@ class CWP_Pagebuilder {
 		} // end if
 
 	} // end check_post_type
+	
+	public function dynamic_editor( $template){
+		
+		return CWPPBDIR . 'dynamic-editor.php';
+		
+	}
 
 } // end CWP_Pagebuilder
 

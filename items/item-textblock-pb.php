@@ -22,11 +22,19 @@ class Item_Textblock_PB extends Item_PB {
 	public function editor( $settings, $editor_content ) {
 
 		$empty = array( ' ', '&nbsp;' );
+		
+		$content = ( in_array( $this->content, $empty ) ) ? '<div class="cpb-empty">Click to add text ...</div>':false;
 
-		$content = ( $this->content && ! in_array( $this->content, $empty ) ) ? $this->content : '<div class="cpb-empty">Click to add text ...</div>';
+		//$content = ( $this->content && ! in_array( $this->content, $empty ) ) ? $this->content : '<div class="cpb-empty">Click to add text ...</div>';
 
-		$html = $content;
-
+		//$html = $content;
+		
+		//$html = '<textarea class="cpb-dynamic-editor" style="display:none">' . apply_filters( 'the_content' , $content ) . '</textarea>';
+		
+		//$html .= '<iframe class="cpb-dynamic-editor" src="' . home_url() . '?cpb-dynamic-editor=true" scrolling="no"></iframe>';
+		
+		$html = $this->get_dynamic_editor( $content , true );
+		
 		return $html;
 
 	} // end editor

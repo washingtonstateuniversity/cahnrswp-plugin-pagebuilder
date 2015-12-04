@@ -31,10 +31,12 @@ class Item_Action_PB extends Item_PB {
 
 	public function editor( $settings, $editor_content ) {
 
-		$title = ( $settings['title'] ) ? $settings['title'] : 'Add Subtitle';
+		//$title = ( $settings['title'] ) ? $settings['title'] : 'Add Subtitle';
 
-		$html = '<a href="' . $settings['link'] . '" class="cpb-action-button ' . $settings['csshook'] . '">' . $settings['label'] . '</a>';
-
+		//$html = '<a href="' . $settings['link'] . '" class="cpb-action-button ' . $settings['csshook'] . '">' . $settings['label'] . '</a>';
+		
+		$html = $this->get_dynamic_editor( $this->the_item() );
+		
 		return $html;
 
 	} // end editor
