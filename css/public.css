@@ -1,0 +1,121 @@
+/*
+* Actio Button
+* ------------------------------------------
+*/
+.cpb-action-button {
+	display: block;
+	padding: 1rem;
+	background: #981e32; /* To Do: move to cahnrs stylesheet */
+	color: #fff; /* To Do: move to cahnrs stylesheet */
+	margin-bottom: 1rem;
+	font-weight: bold; /* To Do: move to cahnrs stylesheet */
+}
+
+
+/*
+* Promo CSS
+* ------------------------------------------
+*/
+
+.cpb-promo {
+	padding: 0.75rem 0;
+}
+
+.cpb-promo > img,
+.cpb-promo > a > img {
+	display: block;
+	width: 160px;
+	float: left;
+}
+
+.cpb-promo.small > img,
+.cpb-promo.small > a > img {
+	width: 100px;
+}
+
+.cpb-promo.cpb-image-promo > div {
+	margin-left: 175px;
+}
+
+.cpb-promo.cpb-image-promo.small > div {
+	margin-left: 115px;
+}
+
+.cpb-promo:after {
+	content:'';
+	display: block;
+	clear: both;
+}
+
+
+/*
+* Row CSS
+* ------------------------------------------
+*/
+.row.full-bleed-img > .cpb-bg-image {
+	position: absolute;
+	width: 100%;
+	left:0;
+	height: 200px;
+	background-repeat: no-repeat;
+	background-position: center center;
+	background-size: cover;
+}
+
+/*
+* CSS Hooks
+* ------------------------------------------
+*/
+.cpb-pad {
+	padding-top: 1rem;
+	padding-bottom: 1rem;
+}
+
+.cpb-pad-more {
+	padding-top: 2rem;
+	padding-bottom: 2rem;
+}
+
+.cpb-pad-bottom-more {
+	padding-bottom: 2rem;
+}
+
+.cpb-pad-top-more {
+	padding-top: 2rem;
+}
+
+.cpb-splash h2 {
+	font-size: 60px;
+    font-weight: bold;
+    padding: 0 0 3rem;
+    text-align: center;
+    text-transform: uppercase;
+	text-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5)
+}
+
+.cpb-splash h3 {
+	font-size: 2.5rem;
+    font-weight: normal;
+    padding: 0 0 4rem;
+	text-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5)
+}
+
+
+
+/*
+* Move to CAHNRS CSS
+* ------------------------------------------
+*/
+.tribe-events-list-widget ol {
+	list-style-type: none;
+	padding: 0;
+}
+
+.tribe-events-list-widget h4 {
+	font-size: 0.9rem;
+}
+
+.tribe-events-list-widget li {
+	font-size: 0.9rem;
+}
+

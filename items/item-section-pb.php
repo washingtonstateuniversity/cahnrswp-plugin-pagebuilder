@@ -5,7 +5,7 @@ class Item_Section_PB extends Item_PB {
 
 	public $name = 'Page Section';
 
-	public $allowed_children = array('row','pagebreak');
+	public $allowed_children = array('row','pagebreak','bannerrow');
 
 	public $default_child = 'row';
 	
@@ -130,7 +130,9 @@ class Item_Section_PB extends Item_PB {
 					
 					$html .= '<ul class="cpb-row-option cpb-row-' . $slug . '" data-type="row" data-layout="' . $slug . '">';
 					
-						$type = ( 'pagebreak' == $slug )? 'pagebreak' : 'row';
+						$advanced = array('pagebreak','bannerrow');
+					
+						$type = ( in_array( $slug , $advanced ) )? $slug : 'row';
 					
 						$html .= '<li class="cpb-icon"><img src="' . CWPPBURL . 'images/video-spacer.png" /></li>';
 						

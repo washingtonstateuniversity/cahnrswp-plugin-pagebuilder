@@ -20,35 +20,36 @@ class Item_Row_PB extends Item_PB {
 
 		$cpb_column_i = 1;
 		
-		$class = $this->get_classes();
-		
 		$parse_shortcode = new Parse_Shortcode_PB( $content );
 		
 		$columns = $parse_shortcode->get_shortcode_array( $content , array('column') );
 		
-		if ( $this->settings['layout'] == 'side-right' ) {
+		if ( ! empty( $settings['bg_src'] ) && strpos( $settings['bg_src'] , ',' ) ){
 			
-			$is_empty = array( '',' ','[textblock ][/textblock]' , '[textblock ] [/textblock]' );
+			$bgs = explode ( ',' , $settings['bg_src'] );
 			
-			if ( in_array( $columns[1]['content'] , $is_empty ) ){
-				
-				$layout = 'single'; 
-				
-				unset( $columns[1] );
-				
-			} else {
-				
-				$layout = $this->settings['layout'];
-				
-			} // end if
+			$key = array_rand ( $bgs );
 			
-		} else {
-			
-			$layout = $this->settings['layout'];
+			$settings['bg_src'] = $bgs[ $key ];
 			
 		} // end if
 		
-		$html = '<div class="row ' . $layout . $class . '">';
+		$html = $this->get_row_start( $settings , $columns );
+		
+		if ( ! empty( $settings['bg_src'] ) && ! empty( $settings['full_bleed'] ) ) {
+			
+			$html .= $this->get_full_bg( $settings );
+			
+		} // end if
+		
+		//$html = '<div class="row ' . $layout . $class . '">';
+		
+			//if ( ! empty( $settings['bg_src'] ) ){
+				
+				//$html .= '<div style="position:absolute;left:0;background-image:url(' . $settings['bg_src'] . ');height: 200px;width:100%;"></div>';
+				
+			//} // end if
+		
 		
 			foreach( $columns as $index => $column ){
 				
@@ -107,16 +108,24 @@ class Item_Row_PB extends Item_PB {
 		$basic .= Forms_PB::select_field( $this->get_name_field('padding'), $settings['padding'], Forms_PB::get_padding(), 'Padding' );
 
 		$basic .= Forms_PB::select_field( $this->get_name_field('gutter'), $settings['gutter'], Forms_PB::get_gutters(), 'Gutter' );
+		
+		$basic .= Forms_PB::select_field( $this->get_name_field('textcolor'), $settings['textcolor'], Forms_PB::get_wsu_colors(), 'Text Color' );
+		
+		$basic .= Forms_PB::text_field( $this->get_name_field('csshook'), $settings['csshook'], 'CSS Hook' );
 
-		$advanced = Forms_PB::select_field( $this->get_name_field('bgcolor'), $settings['bgcolor'], Forms_PB::get_wsu_colors(), 'Background Color' );
+		$bg = Forms_PB::select_field( $this->get_name_field('bgcolor'), $settings['bgcolor'], Forms_PB::get_wsu_colors(), 'Background Color' );
+		
+		$bg .= Forms_PB::checkbox_field( $this->get_name_field('full_bleed'), 1, $settings['full_bleed'], 'Full Bleed Color' );
+		
+		$bg .= Forms_PB::text_field( $this->get_name_field('bg_src'), $settings['bg_src'], 'Background Image URL' );
+		
+		$adv = Forms_PB::text_field( $this->get_name_field('min_height'), $settings['min_height'], 'Minimum Height (px)' );
 
-		$advanced .= Forms_PB::select_field( $this->get_name_field('textcolor'), $settings['textcolor'], Forms_PB::get_wsu_colors(), 'Text Color' );
-
-		$advanced .= Forms_PB::text_field( $this->get_name_field('csshook'), $settings['csshook'], 'CSS Hook' );
+		
 		
 		//$advanced .= Forms_PB::checkbox_field( $this->get_name_field('is_tab'), 1, $settings['is_tab'], 'Display as Tab' );
 
-		return array( 'Basic' => $basic , 'Advanced' => $advanced );
+		return array( 'Basic' => $basic , 'Background' => $bg , 'Advanced' => $adv );
 
 	} // end form
 	
@@ -147,6 +156,12 @@ class Item_Row_PB extends Item_PB {
 		$clean['gutter'] = ( ! empty( $s['gutter'] ) ) ? sanitize_text_field( $s['gutter'] ) : 'gutter';
 
 		$clean['csshook'] = ( ! empty( $s['csshook'] ) ) ? sanitize_text_field( $s['csshook'] ) : '';
+		
+		if ( ! empty( $s['full_bleed'] ) ) $clean['full_bleed'] = sanitize_text_field( $s['full_bleed'] );
+		
+		if ( ! empty( $s['bg_src'] ) ) $clean['bg_src'] = sanitize_text_field( $s['bg_src'] );
+		
+		if ( ! empty( $s['min_height'] ) ) $clean['min_height'] = sanitize_text_field( $s['min_height'] );
 		
 		//$clean['is_tab'] = ( isset( $s['is_tab'] ) ) ? sanitize_text_field( $s['is_tab'] ) : 0;
 
@@ -179,8 +194,104 @@ class Item_Row_PB extends Item_PB {
 			$class .= ' ' . $this->settings['csshook'];
 		}
 		
+		if ( ! empty( $this->settings['full_bleed'] ) ) {
+			
+			if ( ! empty( $this->settings['bg_src'] ) ){
+				
+				$class .= ' full-bleed-img';
+				
+			} else {
+				
+				$class .= ' full-bleed';
+				
+			} // end if
+		}
+		
 		return $class;
 		
 	} 
+	
+	private function get_row_start( $sett , $columns ){
+		
+		$class = array();
+		
+		$class[] = $this->get_layout( $sett , $columns );
+		
+		$class[] = $this->get_classes();
+		
+		$html = '<div class="row ' . implode( ' ' , $class ) . '" style="' . $this->get_style( $sett ) . '" >';
+		
+		return $html;
+		
+	}
+	
+	
+	private function get_layout( $sett , $columns ){
+		
+		if ( $sett['layout'] == 'side-right' ) {
+			
+			$is_empty = array( '',' ','[textblock ][/textblock]' , '[textblock ] [/textblock]' );
+			
+			if ( in_array( $columns[1]['content'] , $is_empty ) ){
+				
+				$layout = 'single'; 
+				
+				unset( $columns[1] );
+				
+			} else {
+				
+				$layout = $sett['layout'];
+				
+			} // end if
+			
+		} else {
+			
+			$layout = $sett['layout'];
+			
+		} // end if
+		
+		return $layout;
+		
+	}
+	
+	
+	private function get_style( $sett ){
+		
+		$style = '';
+		
+		if ( ! empty( $sett['bg_src'] ) /*&& empty( $sett['full_bleed'] )*/ ){
+			
+			$style .= 'background-image:url(' . $sett['bg_src'] . ');';
+			
+		} // end if
+		
+		if ( ! empty( $sett['min_height'] ) /*&& empty( $sett['full_bleed'] )*/ ){
+			
+			$style .= 'min-height:' . $sett['min_height'] . 'px;';
+			
+		} // end if
+		
+		return $style;
+		
+	}
+	
+	
+	private function get_full_bg( $settings ){
+		
+		$html .= '<div class="cpb-bg-image" style="';
+		
+		$html .= 'background-image:url(' . $settings['bg_src'] . ');';
+		
+		if ( ! empty( $settings['min_height'] ) /*&& empty( $sett['full_bleed'] )*/ ){
+			
+			$html .= 'min-height:' . $settings['min_height'] . 'px;';
+			
+		} // end if
+		
+		$html .= '"></div>';
+		
+		return $html;
+		
+	}
 
 }

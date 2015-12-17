@@ -111,11 +111,11 @@ jQuery(document).ready(function(){
 				
 			if ( typeof wp !== 'undefined' && wp.media && wp.media.editor) {
 				
-				$('body').on('click', '.add-media-action', function(event) {
+				jQuery('body').on('click', '.add-media-action', function(event) {
 					
 					event.preventDefault();
 					
-					var wrap = $(this).closest( '.cwp-add-media-wrap');
+					var wrap = jQuery(this).closest( '.cwp-add-media-wrap');
 					
 					var id = wrap.find('.cpb-add-media-id');
 					
@@ -145,6 +145,8 @@ jQuery(document).ready(function(){
 			} // end if
 			
 		} // end add_media_uploader
+		
+		s.add_media_uploader();
 		
 	} // end cpb
 	

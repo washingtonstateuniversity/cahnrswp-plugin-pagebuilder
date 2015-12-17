@@ -444,6 +444,7 @@
 	border: 1px solid #ddd;
 	background: #777;
 	margin: 0 5px;
+	position: relative;
 }
 
 #cwp-pb .cpb-column > header > nav > .title {
@@ -453,6 +454,17 @@
 	text-transform: uppercase;
 	color: #ddd;
 	font-weight: bold;
+}
+
+#cwp-pb .cpb-column > header a {
+	display:block;
+	width: 25px;
+	height: 26px;
+	position: absolute;
+	top: 0;
+	right: 5px;
+	background-size: contain;
+	background-position: center center;
 }
 
 #cwp-pb .cpb-column > .cpb-item-set {

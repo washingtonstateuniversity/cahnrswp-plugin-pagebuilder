@@ -118,7 +118,7 @@ class Item_Tabs_PB extends Item_PB {
 
 	public function editor( $settings, $editor_content ) {
 
-		$html = 'tabs';
+		$html = $this->get_dynamic_editor();
 
 		return $html;
 

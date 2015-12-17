@@ -21,11 +21,25 @@ class Item_Promo_PB extends Item_PB {
 		
 		$query = new Query_PB( $settings );
 		
-		$display = new Display_PB( $settings );
-			
-		$items = $query->get_query_items();
+		$promos = $query->get_query_items();
 		
-		$html .= $display->get_display( $items , $settings );
+		if ( $promos ){
+			
+			foreach( $promos as $promo ){
+				
+				$html .= $this->get_promo( $promo , $settings );
+				
+			} // end foreach
+			
+		} // end if
+		
+		
+		
+		//$display = new Display_PB( $settings );
+			
+		//$items = $query->get_query_items();
+		
+		//$html .= $display->get_display( $items , $settings );
 		
 		return $html;
 		
@@ -93,17 +107,18 @@ class Item_Promo_PB extends Item_PB {
 		
 		$display .= Forms_PB::select_field( $this->get_name_field('headline_tag') , $settings['headline_tag'] , array('h2' => 'H2','h3'=>'H3','h4'=>'H4','h5'=>'H5' ,'strong' => 'Bold' ) , 'Headline Tag' );
 		
-		$display .= '<hr />';
+		$display .= Forms_PB::select_field( $this->get_name_field('promo_class') , $settings['promo_class'] , array('large' => 'Large','small'=>'Small','full'=> 'Full' ) , 'Promo Style' );
 		
-		$display .= Forms_PB::checkbox_field( $this->get_name_field('hide_excerpt'), 1, $settings['hide_excerpt'], 'Hide Summary' );
+		$adv = Forms_PB::checkbox_field( $this->get_name_field('hide_excerpt'), 1, $settings['hide_excerpt'], 'Hide Summary' );
 		
-		$display .= Forms_PB::checkbox_field( $this->get_name_field('hide_image'), 1, $settings['hide_image'], 'Hide Image' );
+		$adv .= Forms_PB::checkbox_field( $this->get_name_field('hide_image'), 1, $settings['hide_image'], 'Hide Image' );
 		
-		$display .= Forms_PB::checkbox_field( $this->get_name_field('hide_link'), 1, $settings['hide_link'], 'Remove Link' );
+		$adv .= Forms_PB::checkbox_field( $this->get_name_field('hide_link'), 1, $settings['hide_link'], 'Remove Link' );
 		
 		$form = array( 
-			'Source' => $source,
-			'Display Style' => $display,
+			'Source'   => $source,
+			'Display'  => $display,
+			'Advanced' => $adv
 		); 
 		
 		return $form; 
@@ -128,13 +143,15 @@ class Item_Promo_PB extends Item_PB {
 		
 		$clean['tag'] = ( ! empty( $s['tag'] ) ) ? $s['tag'] : 'h2';
 		
-		$clean['headline_tag'] = ( ! empty( $s['headline_tag'] ) ) ? $s['headline_tag'] : 'h5';
+		$clean['headline_tag'] = ( ! empty( $s['headline_tag'] ) ) ? $s['headline_tag'] : 'strong';
 		
 		$clean['hide_excerpt'] = ( ! empty( $s['hide_excerpt'] ) ) ? $s['hide_excerpt'] : '';
 		
 		$clean['hide_image'] = ( ! empty( $s['hide_image'] ) ) ? $s['hide_image'] : '';
 		
 		$clean['hide_link'] = ( ! empty( $s['hide_link'] ) ) ? $s['hide_link'] : '';
+		
+		if ( ! empty( $s['promo_class'] ) ) $clean['promo_class'] = sanitize_text_field( $s['promo_class'] );
 		
 		$clean['posts_per_page'] =  ( ! empty( $s['posts_per_page'] ) ) ? sanitize_text_field( $s['posts_per_page'] ) : 5;
 		
@@ -161,5 +178,67 @@ class Item_Promo_PB extends Item_PB {
 		return $clean;
 		
 	} // end clean
+	
+	private function get_promo( $promo , $settings ){
+		
+		$link_start = ( ! empty( $promo['link'] ) ) ? '<a href="' . $promo['link'] . '">' : '';
+		
+		$link_end = ( ! empty( $promo['link'] ) ) ? '</a>' : '';
+		
+		$html = '<article class="cpb-promo ' . implode( ' ' , $this->get_promo_class( $promo , $settings ) ). '">';
+		
+		if ( ! empty( $promo['image'] ) ) {
+			
+			$html .= $link_start . '<img src="' . CWPPBURL . 'images/3x4spacer.png" style="background-image:url(' . $promo['image'] . ');" />' . $link_end;
+			
+		} // end if
+		
+		$html .= '<div>';
+		
+		if ( ! empty( $promo['title'] ) ) {
+			
+			$tag = ( ! empty( $this->settings['headline_tag'] ) ) ? $this->settings['headline_tag'] : 'strong';
+						
+			$html .= '<' . $tag . '>' . $link_start . $promo['title'] . $link_end . '</' . $tag . '>';
+			
+			if ( 'strong' == $tag ) $html .= '<br />';
+			
+		} // end if
+		
+		if ( ! empty( $promo['excerpt'] ) ) {
+			
+			$html .= $this->get_excerpt( $promo , $settings );
+			
+		} // end if
+		
+		$html .= '</div>';
+		
+		$html .= '</article>';
+		
+		return $html;
+		
+	}
+	
+	private function get_promo_class( $promo , $settings ){
+		
+		$class = array();
+		
+		if ( ! empty( $promo['image'] ) ) $class[] = 'cpb-image-promo';
+		
+		if ( ! empty( $settings['promo_class'] ) ) $class[] = $settings['promo_class'];
+		
+		return $class;
+		
+	}
+	
+	private function get_excerpt( $promo , $settings ){
+		
+		$text = wp_strip_all_tags( strip_shortcodes( $promo['excerpt'] ) );
+		
+		$excerpt = wp_trim_words( $text , 25 );
+		
+		return $excerpt;
+		
+	}
 	
 }

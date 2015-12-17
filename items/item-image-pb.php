@@ -8,16 +8,8 @@ class Item_Image_PB extends Item_PB {
 	public $form_size = 'small';
 
 	public function item( $settings, $content ) {
-
-		$html .= '<div class="cpb-image">';
-
-			if ( ! empty( $settings['url'] ) ) $html .= '<a href="' . $settings['url'] . '">';
-
-			$html .= ( ! empty( $settings['img_src'] ) ) ? '<img src="' . $settings['img_src'] . '" style="width: 100%;display:block" />' : '';
-
-			if ( ! empty( $settings['url'] ) ) $html .= '</a>';
-
-		$html.= '</div>';
+			
+		$html = $this->get_image( $settings );
 
 		return $html;
 
@@ -25,7 +17,9 @@ class Item_Image_PB extends Item_PB {
 
 	public function editor( $settings, $editor_content ) {
 
-		$html = ( ! empty( $settings['img_src'] ) ) ? '<img src="' . $settings['img_src'] . '" />' : '<div class="cpb-image-item-empty">Set Image</div>';
+		//$html = ( ! empty( $settings['img_src'] ) ) ? '<img src="' . $settings['img_src'] . '" />' : '<div class="cpb-image-item-empty">Set Image</div>';
+		
+		$html = $this->get_dynamic_editor();
 
 		return $html;
 
@@ -33,11 +27,18 @@ class Item_Image_PB extends Item_PB {
 
 	public function form( $settings ) {
 
-		$html = Forms_PB::insert_media( $this->get_name_field(), $settings );
+		$basic = Forms_PB::insert_media( $this->get_name_field(), $settings );
 
-		$html .= Forms_PB::text_field( $this->get_name_field('url'), $settings['url'], 'Link' );
+		$basic .= Forms_PB::text_field( $this->get_name_field('url'), $settings['url'], 'Link' );
+		
 
-		return $html;
+		
+		
+		$form = array( 
+			'Basic' => $basic,
+		);
+
+		return $form;
 
 	} // end form
 
@@ -54,5 +55,23 @@ class Item_Image_PB extends Item_PB {
 		return $clean;
 
 	} // end clean
+	
+	
+	private function get_image( $settings ){
+		
+		$html .= '<div class="cpb-image">';
+
+			if ( ! empty( $settings['url'] ) ) $html .= '<a href="' . $settings['url'] . '">';
+
+			$html .= ( ! empty( $settings['img_src'] ) ) ? '<img src="' . $settings['img_src'] . '" style="width: 100%;display:block" />' : '';
+
+			if ( ! empty( $settings['url'] ) ) $html .= '</a>';
+
+		$html.= '</div>';
+
+		return $html;
+		
+	}
+	
 
 }

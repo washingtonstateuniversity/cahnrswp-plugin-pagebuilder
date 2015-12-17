@@ -21,11 +21,11 @@ class Item_List_PB extends Item_PB {
 		
 		$query = new Query_PB( $settings );
 		
-		$display = new Display_PB( $settings );
+		//$display = new Display_PB( $settings );
 			
 		$items = $query->get_query_items();
 		
-		$html .= $display->get_display( $items , $settings );
+		$html .= $this->display( $items , $settings );
 		
 		return $html;
 		
@@ -33,8 +33,9 @@ class Item_List_PB extends Item_PB {
 	
 	public function editor( $settings , $editor_content ){
 		
+		$html = $this->get_dynamic_editor( $this->the_item() );
 		
-		return '&nbsp;';
+		return $html;
 		
 	} // end editor
 	
@@ -91,6 +92,44 @@ class Item_List_PB extends Item_PB {
 		return $form; 
 		
 	} // end form
+	
+	public function display( $items , $settings ){
+		
+		$id = 'cpb-accordions-' . rand( 0 , 10000000 );
+		
+		$html = '<ul id="' . $id . '" class="' . $settings['csshook'] . '">';
+		
+		foreach( $items as $item ){
+			
+			if ( ! empty( $item['link'] ) ){
+			
+				$ls = '<a href="' . $item['link'] . '">';
+				
+				$le = '</a>';
+				
+			} else {
+				
+				$ls = '';
+				
+				$le = '';
+				
+			} // end if
+		
+			$html .= '<li class="cahnrs-list">';
+	
+				$html .= '<' . $settings['headline_tag'] . '>' . $ls . $item['title'] . $le. '</' . $settings['headline_tag'] . '>';
+				
+				if ( ! empty( $item['excerpt'] ) ) $html .= '<span>' . wp_strip_all_tags( $item['excerpt'] ) . '</span>';
+				
+			$html .= '</li>';
+		
+		} // end foreach
+		
+		$html .= '</ul>';
+		
+		return $html;
+		
+	}
 	
 	
 	

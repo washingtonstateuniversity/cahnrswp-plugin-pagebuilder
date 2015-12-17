@@ -82,8 +82,24 @@ class Item_PB extends Form_PB {
 	}
 
 	public function the_editor( $editor_content ) {
-
+		
 		$html = '';
+		
+		if ( method_exists( $this, 'editor' ) ) {
+			
+			$html .= $this->editor( $this->settings, $editor_content );
+			
+		} else {
+			
+			$html .= $this->get_dynamic_editor();
+			
+		} // end if
+		
+		$full = ( ! in_array( $this->slug, $this->layout_types ) ) ? true : false;
+
+		return $this->wrap_item( $html, $this->settings, $full ); // end if
+
+		/*$html = '';
 
 		if ( method_exists( $this, 'editor' ) ) {
 
@@ -100,10 +116,10 @@ class Item_PB extends Form_PB {
 			return $html;
 
 		} else {
-
+			
 			return '';
 
-		} // end if
+		} // end if*/
 
 	} // end the_editor
 

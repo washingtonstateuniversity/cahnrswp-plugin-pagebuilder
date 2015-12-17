@@ -142,6 +142,8 @@ class Query_PB {
 				
 					foreach( $json as $post ){
 						
+						var_dump( $post['link'] );
+						
 						$item = array();
 						
 						// Set the title
