@@ -27,16 +27,9 @@ class Item_Image_PB extends Item_PB {
 
 	public function form( $settings ) {
 
-		$basic = Forms_PB::insert_media( $this->get_name_field(), $settings );
+		$form = Forms_PB::insert_media( $this->get_input_name(), $settings );
 
-		$basic .= Forms_PB::text_field( $this->get_name_field('url'), $settings['url'], 'Link' );
-		
-
-		
-		
-		$form = array( 
-			'Basic' => $basic,
-		);
+		$form .= Forms_PB::text_field( $this->get_input_name('url'), $settings['url'], 'Link' );
 
 		return $form;
 

@@ -75,7 +75,7 @@ CWPB.forms = {
 			
 			if ( f.wrap.find('.wp-editor-wrap.tmce-active').length > 0 ){
 				
-				data += '&current_content=' + encodeURIComponent( tinyMCE.get('_content_' + f.id ).getContent() ); 
+				data += '&current_content=' + encodeURIComponent( tinyMCE.get('_cpb_content_' + f.id ).getContent() ); 
 				
 			} // end if
 			
