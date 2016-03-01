@@ -67,6 +67,8 @@ class CAHNRS_Pagebuilder_Plugin {
 		// Register Shortcodes
 		add_action( 'init' , array( $shortcodes , 'add_shortcodes' ), 99 );
 		
+		add_filter( 'the_content', array( $this , 'remove_empty_p' ) , 1 );
+		
 		if ( is_admin() ){
 			
 			// Add the editor
@@ -98,6 +100,14 @@ class CAHNRS_Pagebuilder_Plugin {
 		} // end if
 		
 	} // end init_plugin
+	
+	public function remove_empty_p( $content){
+		
+		return do_shortcode( $content );
+		
+		//$post_object->post_content = do_shortcode( $post_object->post_content );
+		
+	} // end remove_empty_p
 	
 	
 	public function the_editor( $post ){

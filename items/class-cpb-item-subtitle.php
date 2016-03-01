@@ -15,7 +15,7 @@ class CPB_Item_Subtitle extends CPB_Item {
 		
 		$le = ( ! empty( $settings['link'] ) ) ? '</a>' : '';
 		
-		$html = '<' . $settings['tag'] . ' class="' . $settings['csshook'] . '">' . $ls . $settings['title'] . $le . '</' . $settings['tag'] . '>';
+		$html = '<' . $settings['tag'] . ' class="' . $settings['csshook'] . ' ' . $settings['textcolor'] . '-text">' . $ls . $settings['title'] . $le . '</' . $settings['tag'] . '>';
 		
 		if ( ! empty( $settings['anchor'] ) ){
 			
@@ -34,7 +34,9 @@ class CPB_Item_Subtitle extends CPB_Item {
 		
 		$html .= $this->form_fields->select_field( $this->get_input_name('tag') , $settings['tag'] , $this->form_fields->get_header_tags() , 'Tag Type' ); 
 		
-		$adv = $this->form_fields->text_field( $this->get_input_name('link') , $settings['link'] , 'Link' );
+		$adv .= $this->form_fields->select_field( $this->get_input_name('textcolor'), $settings['textcolor'], $this->form_fields->get_wsu_colors(), 'Text Color' );
+		
+		$adv .= $this->form_fields->text_field( $this->get_input_name('link') , $settings['link'] , 'Link' );
 		
 		$adv .= $this->form_fields->text_field( $this->get_input_name('anchor') , $settings['anchor'] , 'Anchor Name' );
 		
@@ -52,6 +54,8 @@ class CPB_Item_Subtitle extends CPB_Item {
 		$clean['tag'] = ( ! empty( $settings['tag'] ) )? sanitize_text_field( $settings['tag'] ) : 'h2';
 		
 		$clean['title'] = ( ! empty( $settings['title'] ) )? sanitize_text_field( $settings['title'] ) : '';
+		
+		$clean['textcolor'] = ( ! empty( $settings['textcolor'] ) )? sanitize_text_field( $settings['textcolor'] ) : '';
 		
 		$clean['csshook'] = ( ! empty( $settings['csshook'] ) )? sanitize_text_field( $settings['csshook'] ) : '';
 		

@@ -169,7 +169,7 @@ class CPB_Item_Promo extends CPB_Item {
 				
 				if ( ! empty( $item['title'] ) ){
 					
-					$html .= '<h3 class="cpb-title">' . $ls . $item['title'] . $le . '</h3>';
+					$html .= '<' . $settings['tag'] . ' class="cpb-title">' . $ls . $item['title'] . $le . '</' . $settings['tag'] . '>';
 					
 				} // end if
 				
@@ -229,6 +229,8 @@ class CPB_Item_Promo extends CPB_Item {
 		$html = $this->form_fields->multi_form( array( $custom_form , $select_form , $feed_form , $remote_feed_form ) );
 		
 		$display .= $this->form_fields->checkbox_field( $this->get_input_name('stack_vertical'), 1, $settings['stack_vertical'], 'Stack Vertical' );
+		
+		$html .= $this->form_fields->select_field( $this->get_input_name('tag') , $settings['tag'] , $this->form_fields->get_header_tags() , 'Tag Type' ); 
 		
 		$display .= '<hr/>';
 		
@@ -319,6 +321,8 @@ class CPB_Item_Promo extends CPB_Item {
 		} // end if
 		
 		$clean['columns'] = ( ! empty( $settings['columns'] ) ) ? sanitize_text_field( $settings['columns'] ) : 4;
+		
+		$clean['tag'] = ( ! empty( $settings['tag'] ) ) ? sanitize_text_field( $settings['tag'] ) : 'strong';
 		
 		$clean['unset_excerpt'] = ( ! empty( $settings['unset_excerpt'] ) ) ? sanitize_text_field( $settings['unset_excerpt'] ) : 0;
 		

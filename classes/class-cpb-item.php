@@ -231,6 +231,10 @@ abstract class CPB_Item {
 	
 	public function the_editor( $settings = false , $content = false ){
 		
+		global $post;
+		
+		$temp_post = $post;
+		
 		$settings = ( $settings ) ? $settings : $this->get_settings();
 		
 		$content = ( $content ) ? $content : $this->get_content();
@@ -264,6 +268,8 @@ abstract class CPB_Item {
 			$html .= '</div>';
 			
 		}// end if
+		
+		$post = $temp_post;
 		
 		return $html;
 		
