@@ -435,6 +435,7 @@ class CPB_Form_Fields {
 		$values	= array(
 			'crimson'         => 'Crimson',
 			'crimson-er'      => 'Crimson: Accent',
+			'white'           => 'White',
 			'gray'            => 'Gray',
 			'gray-er'         => 'Gray: Accent',
 			'gray-lightest'   => 'Gray: Lightest',
