@@ -198,7 +198,7 @@ CPB = {
 			
 			// Make Items Sortable
 			container.find('.cpb-child-set-items').sortable({ 
-				handle: '.cpb-item-title',
+				handle: '.cpb-item-title, .cpb-edit-item-action',
 				connectWith: '.cpb-child-set-items',
 				stop: function( event , ui ){ CPB.layout.set_children(); CPB.layout.set_content( ui.item , true ) }, 
 			});
