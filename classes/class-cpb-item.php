@@ -101,6 +101,8 @@ abstract class CPB_Item {
 		
 		$settings = $this->get_settings();
 		
+		
+		
 		// Check for array's as a value and convert to JSON
 		foreach( $settings as $key => $value ){
 			
@@ -120,13 +122,17 @@ abstract class CPB_Item {
 		
 		foreach ( $settings as $key => $value ){
 			
-			if ( ! array_key_exists( $key , $default_sett ) || $default_sett[ $key ] != $value  ) {
+			if ( ( ! array_key_exists( $key , $default_sett ) ) || ( $default_sett[ $key ] != $value )  ) {
 			
 				$s .= ' ' . $key . '=' . $split . $value . $split;
+				
+				
 			
 			} // end if
 			
 		} // end foreach
+		
+		//var_dump( $s );
 		
 		return $s;
 		
