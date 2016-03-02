@@ -10,14 +10,13 @@
 		
 		if ( strpos ( $style->src , 'wp-admin' ) || strpos ( $style->src , 'wp-includes' ) ) continue;
 		
+		if ( 10 > strlen( $style->src ) ) continue;
+		
 		echo '<link rel="stylesheet" id="' . $key . '"  href="' . $style->src . '" type="text/css" media="all" />';
 		
 	} // end foreach
 	
-	//var_dump( $wp_styles->registered );
 	?>
-
-
 </head>
 <style>
 html {

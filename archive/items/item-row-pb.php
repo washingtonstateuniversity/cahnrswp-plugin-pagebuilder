@@ -87,7 +87,7 @@ class Item_Row_PB extends Item_PB {
 
 		$html .= '</div>';
 
-		$html .= Forms_PB::hidden_field( $this->get_name_field( 'children', false  ), implode( ',', $this->get_child_ids() ), 'cpb-input-items-set' );
+		$html .= Forms_PB::hidden_field( $this->get_input_name( 'children', false  ), implode( ',', $this->get_child_ids() ), 'cpb-input-items-set' );
 
 		$html .= '<footer>';
 
@@ -99,31 +99,31 @@ class Item_Row_PB extends Item_PB {
 
 	public function form( $settings ) {
 
-		$basic = Forms_PB::hidden_field( $this->get_name_field( 'layout' ), $settings['layout'] );
+		$basic = Forms_PB::hidden_field( $this->get_input_name( 'layout' ), $settings['layout'] );
 		
-		$basic .= Forms_PB::text_field( $this->get_name_field('title'), $settings['title'], 'Title' );
+		$basic .= Forms_PB::text_field( $this->get_input_name('title'), $settings['title'], 'Title' );
 		
-		$basic .= Forms_PB::select_field( $this->get_name_field('title_tag'), $settings['title_tag'], Forms_PB::get_header_tags() , 'Title Tag' );
+		$basic .= Forms_PB::select_field( $this->get_input_name('title_tag'), $settings['title_tag'], Forms_PB::get_header_tags() , 'Title Tag' );
 		
-		$basic .= Forms_PB::select_field( $this->get_name_field('padding'), $settings['padding'], Forms_PB::get_padding(), 'Padding' );
+		$basic .= Forms_PB::select_field( $this->get_input_name('padding'), $settings['padding'], Forms_PB::get_padding(), 'Padding' );
 
-		$basic .= Forms_PB::select_field( $this->get_name_field('gutter'), $settings['gutter'], Forms_PB::get_gutters(), 'Gutter' );
+		$basic .= Forms_PB::select_field( $this->get_input_name('gutter'), $settings['gutter'], Forms_PB::get_gutters(), 'Gutter' );
 		
-		$basic .= Forms_PB::select_field( $this->get_name_field('textcolor'), $settings['textcolor'], Forms_PB::get_wsu_colors(), 'Text Color' );
+		$basic .= Forms_PB::select_field( $this->get_input_name('textcolor'), $settings['textcolor'], Forms_PB::get_wsu_colors(), 'Text Color' );
 		
-		$basic .= Forms_PB::text_field( $this->get_name_field('csshook'), $settings['csshook'], 'CSS Hook' );
+		$basic .= Forms_PB::text_field( $this->get_input_name('csshook'), $settings['csshook'], 'CSS Hook' );
 
-		$bg = Forms_PB::select_field( $this->get_name_field('bgcolor'), $settings['bgcolor'], Forms_PB::get_wsu_colors(), 'Background Color' );
+		$bg = Forms_PB::select_field( $this->get_input_name('bgcolor'), $settings['bgcolor'], Forms_PB::get_wsu_colors(), 'Background Color' );
 		
-		$bg .= Forms_PB::checkbox_field( $this->get_name_field('full_bleed'), 1, $settings['full_bleed'], 'Full Bleed Color' );
+		$bg .= Forms_PB::checkbox_field( $this->get_input_name('full_bleed'), 1, $settings['full_bleed'], 'Full Bleed Color' );
 		
-		$bg .= Forms_PB::text_field( $this->get_name_field('bg_src'), $settings['bg_src'], 'Background Image URL' );
+		$bg .= Forms_PB::text_field( $this->get_input_name('bg_src'), $settings['bg_src'], 'Background Image URL' );
 		
-		$adv = Forms_PB::text_field( $this->get_name_field('min_height'), $settings['min_height'], 'Minimum Height (px)' );
+		$adv = Forms_PB::text_field( $this->get_input_name('min_height'), $settings['min_height'], 'Minimum Height (px)' );
 
 		
 		
-		//$advanced .= Forms_PB::checkbox_field( $this->get_name_field('is_tab'), 1, $settings['is_tab'], 'Display as Tab' );
+		//$advanced .= Forms_PB::checkbox_field( $this->get_input_name('is_tab'), 1, $settings['is_tab'], 'Display as Tab' );
 
 		return array( 'Basic' => $basic , 'Background' => $bg , 'Advanced' => $adv );
 
