@@ -12,6 +12,8 @@ class CPB_Item_Textblock extends CPB_Item {
 		
 		$content = do_shortcode( $content );
 		
+		if ( ! empty( $settings['textcolor'] ) ) $content = '<span class="' . $settings['textcolor'] . '-text">' . $content . '</span>';
+		
 		return apply_filters( 'the_content' , $content );
 		
 	}// end item
@@ -23,9 +25,11 @@ class CPB_Item_Textblock extends CPB_Item {
 		
 		wp_editor( $content , '_cpb_content_' . $this->get_id() );
 		
-		$html .= ob_get_clean();
+		$html = ob_get_clean();
 		
-		return $html;
+		$adv = $this->form_fields->select_field( $this->get_input_name('textcolor'), $settings['textcolor'], $this->form_fields->get_wsu_colors(), 'Text Color' );
+		
+		return array('Basic' => $html , 'Advanced' => $adv );
 		
 	} // end form
 	
@@ -34,6 +38,16 @@ class CPB_Item_Textblock extends CPB_Item {
 		return 'Add Text Here';
 		
 	} // end editor_default_html
+	
+	public function clean( $settings ){
+		
+		$clean = array();
+		
+		$clean['textcolor'] = ( ! empty( $settings['textcolor'] ) ) ? sanitize_text_field( $settings['textcolor'] ) : '';
+		
+		return $clean;
+		
+	}
 	
 	
 }

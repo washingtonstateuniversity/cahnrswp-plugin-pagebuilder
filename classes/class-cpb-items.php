@@ -299,6 +299,11 @@ class CPB_Items {
 				'file_path' => plugin_dir_path( dirname ( __FILE__ ) ) . 'items/class-cpb-item-sidebar.php',
 				'priority'  => 8,
 			),
+			'iframe'        => array(
+				'class'   	=> 'CPB_Item_Iframe',
+				'file_path' => plugin_dir_path( dirname ( __FILE__ ) ) . 'items/class-cpb-item-iframe.php',
+				'priority'  => 8,
+			),
 			/*'tabs'        => array(
 				'class'   	=> 'Item_Tabs_PB',
 				'file_path' => CAHNRS_Pagebuilder_Plugin::dir . 'items/item-tabs-pb.php',
