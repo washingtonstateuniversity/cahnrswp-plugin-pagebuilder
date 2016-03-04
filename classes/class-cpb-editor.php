@@ -30,7 +30,13 @@ class CPB_Editor {
 				
 				$html .= $this->get_excerpt_options( $post , $settings );
 			
-			} // end if
+			} // end if 
+			
+			$html .= wp_nonce_field( 'save_cahnrs_pagebuilder_' .  $post->ID , 'cahnrs_pagebuilder_key' , true , false );
+			
+			$html .= '<input type="hidden" name="ajax-nonce" value="' .  wp_create_nonce( 'cahnrs_pb_ajax_'. $post->ID ) . '" />';
+			
+			$html .= '<input type="hidden" name="ajax-post-id" value="' .  $post->ID . '" />';
 		
 		return $html . '</div>';
 		

@@ -19,10 +19,12 @@ class CPB_Ajax {
 			switch( $_POST['service'] ) {
 				
 				case 'get_part':
+					$this->check_nonce();
 					$this->request_part();
 					break;
 				
 				case 'get_content':
+					$this->check_nonce();
 					$this->request_content();
 					break;
 					
@@ -263,5 +265,15 @@ class CPB_Ajax {
 		} // end if
 		
 	} // end remote_request_post_type
+	
+	protected function check_nonce(){ 
+		
+		if ( empty( $_POST['ajax-post-id'] ) ) die();
+		
+		$post_id = $_POST['ajax-post-id'];
+		
+		check_ajax_referer( 'cahnrs_pb_ajax_' . $post_id , 'ajax-nonce' );
+		
+	} // end check nonce
 	
 }

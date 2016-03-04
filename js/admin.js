@@ -422,13 +422,21 @@ CPB = {
 		
 		get_data: function( form ){
 			
-			return form.find( 'input, textarea, select').serialize();
+			var data = CPB.wrap.find( 'input[name="_wp_http_referer"],input[name="ajax-nonce"],input[name="ajax-post-id"]' ).serialize();
+			
+			data += '&' + form.find( 'input, textarea, select').serialize();
+			
+			//alert( data );
+			
+			return data;
 			
 		},
 		
 		get_form_data: function( form , wp_editor ){
 			
-			var data = form.serialize();
+			var data = CPB.wrap.find( 'input[name="_wp_http_referer"],input[name="ajax-nonce"],input[name="ajax-post-id"]' ).serialize();
+			
+			data += '&' + form.serialize();
 				
 			var id = form.attr('id');
 			
