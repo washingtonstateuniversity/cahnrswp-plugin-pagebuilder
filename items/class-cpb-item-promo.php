@@ -149,7 +149,7 @@ class CPB_Item_Promo extends CPB_Item {
 		
 		$html = '';
 		
-		$ls = ( ! empty( $item['link'] ) ) ? '<a href="' . $ls . '" >' : '';
+		$ls = ( ! empty( $item['link'] ) ) ? '<a href="' . $item['link'] . '" >' : '';
 		
 		$le = ( ! empty( $item['link'] ) ) ? '</a>' : '';
 		

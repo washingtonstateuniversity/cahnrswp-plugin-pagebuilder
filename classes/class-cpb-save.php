@@ -102,8 +102,6 @@ class CPB_Save {
 	
 	private function check_can_save( $post_id ){
 		
-		$fail_message = '<h1 style="margin: 200px auto; max-width: 600px; color: #555;">Sorry, something went wrong. Personally I blame the gremlins.</h1>';
-		
 		// If this is an autosave, our form has not been submitted, so we don't want to do anything.
 		if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
 
@@ -123,8 +121,7 @@ class CPB_Save {
 
 			if ( ! current_user_can( 'edit_page', $post_id ) ) {
 
-				echo $fail_message;
-			 	exit;
+				return false;
 
 			} // end if
 
@@ -132,8 +129,7 @@ class CPB_Save {
 
 			if ( ! current_user_can( 'edit_post', $post_id ) ) {
 
-				echo $fail_message;
-			 	exit;
+				return false;
 
 			} // end if
 
@@ -141,9 +137,6 @@ class CPB_Save {
 		
 		if ( ! isset( $_POST['cahnrs_pagebuilder_key'] ) || ! wp_verify_nonce( $_POST['cahnrs_pagebuilder_key'], 'save_cahnrs_pagebuilder_' .  $post_id ) ) {
 		  
-			 echo $fail_message;
-			 exit;
-			 
 			 return false;
 		  
 		  }

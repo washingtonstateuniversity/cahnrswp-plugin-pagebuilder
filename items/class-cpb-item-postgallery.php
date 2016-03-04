@@ -86,7 +86,7 @@ class CPB_Item_Postgallery extends CPB_Item {
 					
 					if ( ! empty( $item['title'] ) ){
 						
-						$html .= '<h3 class="cpb-title">' . $ls . $item['title'] . $le . '</h3>';
+						$html .= '<h5 class="cpb-title">' . $ls . $item['title'] . $le . '</h5>';
 						
 					} // end if
 					
@@ -140,7 +140,7 @@ class CPB_Item_Postgallery extends CPB_Item {
 		
 		
 		$excerpt_length = array( 'short' => 'Short' , 'medium' => 'Medium' , 'long' => 'Long' , 'full' => 'Full' );
-		$display = $this->form_fields->select_field( $this->get_input_name('excerpt_length') , $settings['excerpt_length'] , $excerpt_length , 'Summary Length' );
+		$display .= $this->form_fields->select_field( $this->get_input_name('excerpt_length') , $settings['excerpt_length'] , $excerpt_length , 'Summary Length' );
 		
 		$display .= '<hr/>';
 		
