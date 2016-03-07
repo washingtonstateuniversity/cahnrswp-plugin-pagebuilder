@@ -1,56 +1,74 @@
 <?php
 
-class CPB_Item_Textblock extends CPB_Item {
+class CPB_Item_FAQ extends CPB_Item {
 	
-	protected $name = 'Text/HTML';
+	protected $name = 'FAQ';
 	
-	protected $slug = 'textblock';
+	protected $slug = 'faq';
 	
 	protected $uses_wp_editor = true;
 	
-	public function item( $settings , $content ){
+	protected function item( $settings , $content ){
 		
-		$html = '';
+		$html = '<dl class="cpb-faq">';
+		
+			$html .= '<dt>' . $settings['title'] . '</dt>';
+			
+  			$html .= '<dd>' . $content . '</dd>';
+		
+		$html .= '</dl>';
 		
 		return $html;
-		
-		//$content = do_shortcode( $content );
-		
-		//if ( ! empty( $settings['textcolor'] ) ) $content = '<span class="' . $settings['textcolor'] . '-text">' . $content . '</span>';
-		
-		//return apply_filters( 'the_content' , $content );
 		
 	}// end item
 	
 	
-	public function form( $settings , $content ){
+	protected function form( $settings , $content ){
 		
+		$html = $this->form_fields->text_field( $this->get_input_name('title'), $settings['title'], 'Title' );
 		
 		ob_start();
 		
 		wp_editor( $content , '_cpb_content_' . $this->get_id() );
 		
-		$html = ob_get_clean();
+		$html .= ob_get_clean();
 		
-		$adv = $this->form_fields->select_field( $this->get_input_name('textcolor'), $settings['textcolor'], $this->form_fields->get_wsu_colors(), 'Text Color' );
+		$adv = $this->form_fields->select_field( 
+			$this->get_input_name('textcolor'), 
+			$settings['textcolor'], 
+			$this->form_fields->get_wsu_colors(), 
+			'Text Color' 
+			);
 		
 		return array('Basic' => $html , 'Advanced' => $adv );
 		
 	} // end form
 	
-	public function editor_default_html(){
+	protected function editor_default_html(){
 		
 		return 'Add Text Here';
 		
 	} // end editor_default_html
 	
-	public function clean( $settings ){
+	protected function clean( $settings ){
 		
 		$clean = array();
 		
-		$clean['textcolor'] = ( ! empty( $settings['textcolor'] ) ) ? sanitize_text_field( $settings['textcolor'] ) : '';
+		$clean['title'] = ( ! empty( $settings['title'] ) ) ? sanitize_text_field( $settings['title'] ) : '';
 		
 		return $clean;
+		
+	}
+	
+	protected function css() {
+		
+		$style = '.cpb-faq { background: #fff;}';
+		
+		$style .= '.cpb-faq dt { display: block; margin:0;padding: 1rem; font-size: 1.1rem;color:#981e32;cursor:pointer;border: 1px solid #981e32; }';
+		
+		$style .= '.cpb-faq dd { margin: 0; padding: 1rem 1.5rem; border-left: 1px solid #ddd;border-right: 1px solid #ddd;border-bottom: 1px solid #ddd; }';
+		
+		return $style;
 		
 	}
 	

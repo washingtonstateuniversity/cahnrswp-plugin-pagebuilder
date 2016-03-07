@@ -21,11 +21,13 @@ class CPB_Item_Textblock extends CPB_Item {
 	
 	public function form( $settings , $content ){
 		
+		$html = $this->form_fields->text_field( $this->get_input_name('title'), $settings['title'], 'Title' );
+		
 		ob_start();
 		
 		wp_editor( $content , '_cpb_content_' . $this->get_id() );
 		
-		$html = ob_get_clean();
+		$html .= ob_get_clean();
 		
 		$adv = $this->form_fields->select_field( $this->get_input_name('textcolor'), $settings['textcolor'], $this->form_fields->get_wsu_colors(), 'Text Color' );
 		
@@ -43,7 +45,7 @@ class CPB_Item_Textblock extends CPB_Item {
 		
 		$clean = array();
 		
-		$clean['textcolor'] = ( ! empty( $settings['textcolor'] ) ) ? sanitize_text_field( $settings['textcolor'] ) : '';
+		$clean['title'] = ( ! empty( $settings['title'] ) ) ? sanitize_text_field( $settings['title'] ) : '';
 		
 		return $clean;
 		

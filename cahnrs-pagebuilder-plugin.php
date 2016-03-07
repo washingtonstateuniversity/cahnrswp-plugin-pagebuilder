@@ -175,17 +175,25 @@ class CAHNRS_Pagebuilder_Plugin {
 	
 	public function save( $post_id ){
 		
-		// unhook this function so it doesn't loop infinitely
-		remove_action('save_post', array( $this , 'save' ) );
+		if ( isset( $_POST['_cpb_pagebuilder'] ) ){
+			
+			require_once 'classes/class-cpb-save.php';
+			
+			$save = new CPB_Save( $this->items );
+			
+			if ( $save->check_can_save ( $post_id ) ) {
 		
-		require_once 'classes/class-cpb-save.php';
+				// unhook this function so it doesn't loop infinitely
+				remove_action('save_post', array( $this , 'save' ) );
+				
+				$save->save_layout( $post_id );
+				
+				// re-hook this function
+				add_action('save_post', array( $this , 'save' ) );
+			
+			} // end if
 		
-		$save = new CPB_Save( $this->items );
-		
-		$save->save_layout( $post_id );
-		
-		// re-hook this function
-		add_action('save_post', array( $this , 'save' ) );
+		} // end if
 		
 	} // end save
 	

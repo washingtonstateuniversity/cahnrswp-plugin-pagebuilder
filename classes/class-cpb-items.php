@@ -222,12 +222,7 @@ class CPB_Items {
 	private function the_items(){
 		
 		$items = array( 
-			/*'section'     => array(
-				'class'     => 'Item_Section_PB',
-				'file_path' => CAHNRS_Pagebuilder_Plugin::dir . 'items/item-section-pb.php',
-				'priority'  => 0,
-			),
-			'pagebreak'   => array(
+			/*'pagebreak'   => array(
 				'class'     => 'Item_Pagebreak_PB',
 				'file_path' => CAHNRS_Pagebuilder_Plugin::dir . 'items/item-pagebreak-pb.php',
 				'priority'  => 0,
@@ -267,12 +262,7 @@ class CPB_Items {
 				'class'   	=> 'CPB_Item_Video',
 				'file_path' => plugin_dir_path( dirname ( __FILE__ ) ) . 'items/class-cpb-item-video.php',
 				'priority'  => 4,
-			),/*
-			'cwpiframe'   => array(
-				'class'   	=> 'Item_Iframe_PB',
-				'file_path' => CAHNRS_Pagebuilder_Plugin::dir . 'items/item-iframe-pb.php',
-				'priority'  => 9,
-			),*/
+			),
 			'action'   	  => array(
 				'class'   	=> 'CPB_Item_Action',
 				'file_path' => plugin_dir_path( dirname ( __FILE__ ) ) . 'items/class-cpb-item-action.php',
@@ -304,11 +294,11 @@ class CPB_Items {
 				'file_path' => plugin_dir_path( dirname ( __FILE__ ) ) . 'items/class-cpb-item-iframe.php',
 				'priority'  => 8,
 			),
-			/*'tabs'        => array(
-				'class'   	=> 'Item_Tabs_PB',
-				'file_path' => CAHNRS_Pagebuilder_Plugin::dir . 'items/item-tabs-pb.php',
-				'priority'  => 9,
-			),*/
+			'faq'        => array(
+				'class'   	=> 'CPB_Item_FAQ',
+				'file_path' => plugin_dir_path( dirname ( __FILE__ ) ) . 'items/class-cpb-item-faq.php',
+				'priority'  => 8,
+			),
 		);
 		
 		return $items;

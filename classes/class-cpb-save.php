@@ -35,24 +35,16 @@ class CPB_Save {
 	
 	
 	public function save_layout( $post_id ){
-		
-		if ( $this->check_can_save( $post_id ) ){
 			
 			$settings = $this->get_settings();
 			
 			$this->update_meta( $post_id , $settings );
 			
 			$this->update_post( $post_id , $settings );
-			
-		} // end if
-		
-		
 		
 	} // end save_layout
 	
 	private function update_meta( $post_id , $settings ){
-		
-		if ( ! $this->check_can_save ($post_id) ) return;
 		
 		foreach( $settings as $key => $value ){
 			
@@ -64,8 +56,6 @@ class CPB_Save {
 	
 	
 	private function update_post( $post_id , $settings  ){
-		
-		if ( ! $this->check_can_save( $post_id ) ) return;
 		
 		if ( ! empty( $_POST['_cpb']['layout'] ) && ! empty( $settings[ '_cpb_pagebuilder' ] ) ){
 		
@@ -100,7 +90,7 @@ class CPB_Save {
 	} // end update_post
 	
 	
-	private function check_can_save( $post_id ){
+	public function check_can_save( $post_id ){
 		
 		// If this is an autosave, our form has not been submitted, so we don't want to do anything.
 		if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
@@ -135,7 +125,7 @@ class CPB_Save {
 
 		} // end if
 		
-		if ( ! isset( $_POST['cahnrs_pagebuilder_key'] ) || ! wp_verify_nonce( $_POST['cahnrs_pagebuilder_key'], 'save_cahnrs_pagebuilder_' .  $post_id ) ) {
+		if ( ! isset( $_POST['cahnrs_pagebuilder_key'] ) || ! wp_verify_nonce( $_POST['cahnrs_pagebuilder_key'], 'save_cahnrs_pagebuilder_' . $post_id ) ) {
 		  
 			 return false;
 		  
