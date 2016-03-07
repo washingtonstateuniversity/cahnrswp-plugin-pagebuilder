@@ -238,9 +238,27 @@ CPB = {
 				
 				var id = jQuery( this ).data( 'id' );
 				
+				var id_data = id.split( '_' );
+				
 				if ( jQuery('#' + id ).length == 0 ){
 				
 					var editor = jQuery('.cpb-blank-editor').first();
+					
+					editor.find('input.cpb-form-item-id').val( id_data[0] );
+					
+					editor.find('input','select').each( function(){
+						
+						var inpt_n = jQuery( this ).attr('name');
+						
+						if ( inpt_n ){
+						
+							inpt_n = inpt_n.replace( /_cpb\[.*?\]/g , '_cpb[' + id + ']' );
+							
+							jQuery( this ).attr('name' , inpt_n );
+						
+						} // end if
+						
+					});
 					
 					var textarea = editor.find('textarea');
 					
