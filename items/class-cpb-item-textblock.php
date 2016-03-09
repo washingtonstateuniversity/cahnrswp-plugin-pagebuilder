@@ -10,7 +10,7 @@ class CPB_Item_Textblock extends CPB_Item {
 	
 	public function item( $settings , $content ){
 		
-		$content = do_shortcode( $content );
+		$content = do_shortcode( $this->get_more_content( $content , $settings ) );
 		
 		if ( ! empty( $settings['textcolor'] ) ) $content = '<span class="' . $settings['textcolor'] . '-text">' . $content . '</span>';
 		
@@ -48,6 +48,53 @@ class CPB_Item_Textblock extends CPB_Item {
 		$clean['title'] = ( ! empty( $settings['title'] ) ) ? sanitize_text_field( $settings['title'] ) : '';
 		
 		return $clean;
+		
+	}
+	
+	private function get_more_content( $content , $settings ){
+		
+		if ( strpos( $content , '<span id="more-' ) !== false ){
+			
+			$content_parts = preg_split( '/<span id="more-.*?"><\/span>/' , $content );
+			
+			$link = '<div id="' . $this->get_id() . '" class="cpb-more-button"><a href="#"><span>Continue Reading</span></a></div>';
+			
+			$new_content = '<div class="cpb-more-content">';
+			
+			$new_content .= '<div class="cpb-more-content-intro">' . $content_parts[0] . '</div>';
+			
+			$new_content .= '<div class="cpb-more-content-continue">' . $content_parts[1] . '</div>';
+			
+			$new_content .=  $link . '</div>';
+			
+			$content = $new_content;
+			
+		} // end if
+		
+		return $content;
+		
+	} // end get_more_content
+	
+	protected function css() {
+		
+		$style = '.cpb-more-button::before {content:"";display:block;position:absolute;width:100%;height:1px;top:50%;left:0;background-color:#981e32;}';
+		
+		$style .= '.cpb-more-content {position: relative;}';
+		
+		$style .= '.cpb-more-button {position:relative;' .
+				'background: -moz-linear-gradient(top,  rgba(249,249,249,0) 0%, rgba(249,249,249,1) 100%);' .
+				'background: -webkit-linear-gradient(top,  rgba(249,249,249,0) 0%,rgba(249,249,249,1) 100%);' .
+				'background: linear-gradient(to bottom,  rgba(249,249,249,0) 0%,rgba(249,249,249,1) 100%);' .
+				'filter: progid:DXImageTransform.Microsoft.gradient( startColorstr=\'#00ffffff\', endColorstr=\'#F9F9F9\',GradientType=0 );}';
+		
+		$style .= '.cpb-more-button a {display:block;position:relative;text-align:center;}';
+		
+		$style .= '.cpb-more-button a span {display:inline-block;position:relative;padding:0.25rem 1rem;background-color: rgb(249,249,249);}';
+		
+		$style .= '.cpb-more-content-continue {display:none;}';
+		
+		
+		return $style;
 		
 	}
 	

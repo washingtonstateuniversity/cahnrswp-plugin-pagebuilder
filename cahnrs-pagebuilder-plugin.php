@@ -159,6 +159,8 @@ class CAHNRS_Pagebuilder_Plugin {
 		
 		wp_enqueue_style( 'admin_css', get_site_url() . '?cpb-get-template=stylesheet&cpb-stylesheet=public&codes=' . implode( '_' , $params ) , false , '0.0.1' );
 		
+		wp_enqueue_script( 'public_js', plugin_dir_url( __FILE__ ) . 'js/public.js' , false , '0.0.1' , true );
+		
 	} // end admin_scripts
 	
 	public function admin_ajax(){
