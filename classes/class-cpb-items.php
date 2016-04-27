@@ -299,6 +299,11 @@ class CPB_Items {
 				'file_path' => plugin_dir_path( dirname ( __FILE__ ) ) . 'items/class-cpb-item-faq.php',
 				'priority'  => 8,
 			),
+			'pagebreak'        => array(
+				'class'   	=> 'CPB_Item_Pagebreak',
+				'file_path' => plugin_dir_path( dirname ( __FILE__ ) ) . 'items/class-cpb-item-pagebreak.php',
+				'priority'  => 8,
+			),
 		);
 		
 		return $items;

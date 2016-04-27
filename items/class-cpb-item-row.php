@@ -181,8 +181,16 @@ class CPB_Item_Row extends CPB_Item {
 				);
 		
 		foreach( $items as $class => $data ){
+			
+			$slug = 'row';
+			
+			if ( 'pagebreak' == $class ) { 
 				
-			$icons[] = $this->add_row_icon( 'row' , $data , array( 'layout' => $class ) );
+				$slug = 'pagebreak';
+				
+			} // end if
+				
+			$icons[] = $this->add_row_icon( $slug , $data , array( 'layout' => $class ) );
 			
 		} // end foreach
 		
