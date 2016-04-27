@@ -324,7 +324,7 @@ abstract class CPB_Item {
 		
 		$css = '';
 		
-		if ( $type = 'admin' &&  method_exists( $this , 'admin_css' ) ){
+		if ( $type == 'admin' &&  method_exists( $this , 'admin_css' ) ){
 			
 			$css = $this->admin_css();
 			
