@@ -304,6 +304,13 @@ class CPB_Items {
 				'file_path' => plugin_dir_path( dirname ( __FILE__ ) ) . 'items/class-cpb-item-pagebreak.php',
 				'priority'  => 8,
 			),
+			'figure'        => array(
+				'class'   	=> 'CPB_Item_Figure',
+				'file_path' => plugin_dir_path( dirname ( __FILE__ ) ) . 'items/class-cpb-item-figure.php',
+				'priority'  => 8,
+			),
+			
+			
 		);
 		
 		return $items;
