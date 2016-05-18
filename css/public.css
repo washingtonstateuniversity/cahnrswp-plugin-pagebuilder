@@ -1,0 +1,57 @@
+#pb-lb-bg {
+	position: fixed;
+	width: 100%;
+	height: 100%;
+	z-index: 99998;
+	background-color: rgba( 0, 0, 0, 0.7 );
+	top: 0;
+	left: 0;
+	display: none;
+}
+
+#pb-lb-frame-wrap {
+	position: absolute;
+	width: 100%;
+	z-index: 99999;
+	top: -9999px;*/
+	left: 0;
+	
+}
+
+#pb-lb-frame {
+	max-width: 750px;
+	margin: 0 auto;
+	background-color: #fff;
+	position: relative;
+	border-radius: 3px;
+}
+
+#pb-lb-frame iframe {
+	width: 100%;
+	min-height: 200px;
+	border-radius: 3px;
+}
+
+#cpb-iframe #wrapper{
+	/*margin: 2rem;*/
+	padding: 2rem 0;
+}
+
+#cpb-iframe h1 {
+	margin: 0 2rem;
+}
+
+#pb-lb-frame > a.close-lb {
+	position: absolute;
+	top: 0;
+	right: 0;
+	padding: 0.5rem 1rem;
+	text-transform:uppercase;
+	color: #ccc;
+	background-color: #981e32;
+	font-weight: bold;
+}
+
+
+
+

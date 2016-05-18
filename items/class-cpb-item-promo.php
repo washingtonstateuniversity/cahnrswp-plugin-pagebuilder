@@ -39,6 +39,12 @@ class CPB_Item_Promo extends CPB_Item {
 			
 		} // end if 
 		
+		if ( $html ){
+			
+			$html = '<div class="cpb-promo-wrap">' . $html . '</div>';
+			
+		} // end if
+		
 		return $html;
 		
 	}// end item
@@ -76,9 +82,9 @@ class CPB_Item_Promo extends CPB_Item {
 		
 		if ( $items ){
 			
-			foreach( $items as $item ){
+			foreach( $items as $post_id => $item ){
 				
-				$html .= $this->get_promo_display( $item , $settings );
+				$html .= $this->get_promo_display( $item , $settings , $post_id );
 				
 			} // end foreach
 			
@@ -143,9 +149,23 @@ class CPB_Item_Promo extends CPB_Item {
 		
 	}
 	
-	protected function get_promo_display( $item , $settings){
+	protected function get_promo_display( $item , $settings , $post_id = false ){
 		
 		$item = $this->check_advanced_display( $item , $settings );
+		
+		$class = 'cpb-item cpb-promo cpb-promo-' . $settings['promo_type'];
+		
+		if ( ! empty( $settings['as_lightbox'] ) ){
+			
+			$class .= ' as-lightbox';
+			
+			$request_url = $item['link'] . '?cpb-get-template=lightbox';
+			
+		} else {
+			
+			$request_url = '';
+			
+		} // end if
 		
 		$html = '';
 		
@@ -155,13 +175,11 @@ class CPB_Item_Promo extends CPB_Item {
 		
 		if ( $item ){
 			
-			$class = 'cpb-promo cpb-promo-' . $settings['promo_type'];
-			
 			if ( ! empty( $item['img'] ) ) $class .= ' has-image';
 			
 			if ( ! empty( $settings['stack_vertical'] ) ) $class .= ' stack-vertical';
 			
-			$html .= '<article class="' . $class . '">';
+			$html .= '<article class="' . $class . '" data-requesturl="' . $request_url . '">';
 			
 				if ( ! empty( $item['img'] ) ) {
 					
@@ -260,6 +278,8 @@ class CPB_Item_Promo extends CPB_Item {
 		
 		$display .= $this->form_fields->checkbox_field( $this->get_input_name('unset_link'), 1, $settings['unset_link'], 'Remove Link' );
 		
+		$display .= $this->form_fields->checkbox_field( $this->get_input_name('as_lightbox'), 1, $settings['as_lightbox'], 'Display Lightbox' );
+		
 		return array( 'Source' => $html , 'Display' => $display );
 		
 	} // end form
@@ -355,6 +375,8 @@ class CPB_Item_Promo extends CPB_Item {
 		$clean['unset_link'] = ( ! empty( $settings['unset_link'] ) ) ? sanitize_text_field( $settings['unset_link'] ) : 0;
 		
 		$clean['stack_vertical'] = ( ! empty( $settings['stack_vertical'] ) ) ? sanitize_text_field( $settings['stack_vertical'] ) : 0;
+		
+		$clean['as_lightbox'] = ( ! empty( $settings['as_lightbox'] ) ) ? sanitize_text_field( $settings['as_lightbox'] ) : 0;
 
 		return $clean;
 		
@@ -362,7 +384,11 @@ class CPB_Item_Promo extends CPB_Item {
 	
 	protected function css() {
 		
-		$style .= '.cpb-promo {padding: 1rem 0; overflow: auto;}';
+		$style .= '.cpb-promo-wrap {padding-bottom: 1rem;}';
+		
+		$style .= '.cpb-promo {padding: 1rem 0;}';
+		
+		$style .= '.cpb-promo:after {content:"";clear:both;display:block;}';
 		
 		$style .= '.cpb-promo .cpb-image { width: 160px;height:auto;display:block;float:left;} ';
 		

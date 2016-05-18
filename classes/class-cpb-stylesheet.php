@@ -23,7 +23,11 @@ Class CPB_Stylesheet {
 			
 				include plugin_dir_path( dirname ( __FILE__ ) ) . 'css/admin.php';
 			
-			} // end if
+			} else {
+				
+				echo file_get_contents( plugin_dir_path( dirname ( __FILE__ ) ) . 'css/public.css' );
+				
+			}// end if
 			
 			$items = $this->cpb->items->get_items_objs();
 			

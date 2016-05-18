@@ -31,6 +31,14 @@ class CPB_Item_Row extends CPB_Item {
 		
 		$html = '<div class="row ' . $this->get_item_class( $settings ) . '">';
 		
+			if ( ! empty( $settings['title'] ) ){
+				
+				$html .= '<h2 class="row-title">' . $settings['title'] . '</h2>'; 
+				
+			} // end if
+		
+			$html .= $this->get_row_background( $settings ); 
+		
 			$html .= do_shortcode( $content );
 		
 		$html .= '</div>';
@@ -114,6 +122,16 @@ class CPB_Item_Row extends CPB_Item {
 		
 	} // end admin_css
 	
+	protected function css() {
+		
+		$style = '.row-bg-image {position:absolute !important;top:0;left:0;width:100%;height:100%;background-size:cover;background-position:center center;background-repeat:no-repeat;}';
+		
+		$style .= '.row-title { position: relative;}';
+		
+		return $style;
+		
+	}
+	
 	
 	protected function clean( $settings ){
 		
@@ -146,6 +164,24 @@ class CPB_Item_Row extends CPB_Item {
 		
 		
 	} // end clean
+	
+	
+	public function get_row_background( $settings ){
+		
+		if ( isset( $settings['bg_src'] ) ){
+			
+			$html = '<div class="row-bg-image recto verso unbound" style="background-image:url(' . $settings['bg_src'] . ')"></div>';
+			
+			return $html;
+			
+		} else {
+			
+			return '';
+			
+		} // end if
+		
+	} // end get_row_background
+	
 	
 	public function get_add_row( $post ){
 		

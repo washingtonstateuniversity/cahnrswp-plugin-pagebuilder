@@ -215,6 +215,9 @@ class CAHNRS_Pagebuilder_Plugin {
 			case 'editor-iframe':
 				$template = plugin_dir_path( __FILE__ ) . 'dynamic-editor.php';
 				break;
+			case 'lightbox':
+				$template = plugin_dir_path( __FILE__ ) . 'lightbox.php';
+				break;
 		} // end switch
 		
 		return $template;
