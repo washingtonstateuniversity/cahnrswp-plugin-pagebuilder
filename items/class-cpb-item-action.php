@@ -13,9 +13,13 @@ class CPB_Item_Action extends CPB_Item {
 		
 		$html .= '';
 		
+		$class = array('cpb-action-button' , 'cpb-action-button-item');
+		
+		if ( ! empty( $settings['csshook'] ) ) $class[] = $settings['csshook'];
+		
 		if ( ! empty( $settings['label'] ) ) {
 
-			$html = '<a class="cpb-action-button" href="' . $settings['link'] . '" class="cpb-action-button-item ' . $settings['csshook'] . '">' . $settings['label'] . '</a>';
+			$html = '<a href="' . $settings['link'] . '" class="'. implode( ' ' , $class ) . '">' . $settings['label'] . '</a>';
 
 		} // end if
 		

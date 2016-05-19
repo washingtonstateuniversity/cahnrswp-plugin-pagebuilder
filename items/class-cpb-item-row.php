@@ -43,6 +43,12 @@ class CPB_Item_Row extends CPB_Item {
 		
 		$html .= '</div>';
 		
+		if ( ! empty( $settings['anchor'] ) ){
+			
+			$html = '<a name="' . $settings['anchor'] . '"></a>' . $html;
+			
+		} // end if
+		
 		return $html;
 		
 	}
@@ -106,6 +112,8 @@ class CPB_Item_Row extends CPB_Item {
 		$adv .= $this->form_fields->text_field( $this->get_input_name('bg_src'), $settings['bg_src'], 'Background Image URL' );
 		
 		$adv .= $this->form_fields->text_field( $this->get_input_name('min_height'), $settings['min_height'], 'Minimum Height (px)' );
+		
+		$adv .= $this->form_fields->text_field( $this->get_input_name('anchor') , $settings['anchor'] , 'Anchor Name' );
 
 		
 		return array('Basic' => $basic , 'Advanced' => $adv );
@@ -153,6 +161,8 @@ class CPB_Item_Row extends CPB_Item {
 		$clean['gutter'] = ( ! empty( $settings['gutter'] ) ) ? sanitize_text_field( $settings['gutter'] ) : 'gutter';
 
 		$clean['csshook'] = ( ! empty( $settings['csshook'] ) ) ? sanitize_text_field( $settings['csshook'] ) : '';
+		
+		$clean['anchor'] = ( ! empty( $settings['anchor'] ) )? sanitize_text_field( $settings['anchor'] ) : '';
 		
 		if ( ! empty( $settings['full_bleed'] ) ) $clean['full_bleed'] = sanitize_text_field( $settings['full_bleed'] );
 		

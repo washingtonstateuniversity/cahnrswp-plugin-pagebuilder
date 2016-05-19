@@ -1,3 +1,12 @@
+.cpb-item.pad-bottom-none,
+.pad-bottom-none > .cpb-item,
+.column.pad-bottom-none,
+.row.pad-bottom-none,
+.row.pad-bottom-none .column {
+	padding-bottom: 0 !important;
+}
+
+
 #pb-lb-bg {
 	position: fixed;
 	width: 100%;

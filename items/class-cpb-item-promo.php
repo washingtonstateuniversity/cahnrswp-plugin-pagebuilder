@@ -41,7 +41,9 @@ class CPB_Item_Promo extends CPB_Item {
 		
 		if ( $html ){
 			
-			$html = '<div class="cpb-promo-wrap">' . $html . '</div>';
+			$class = ( ! empty( $settings['csshook'] ) ) ? $settings['csshook'] : '';
+			
+			$html = '<div class="cpb-item cpb-promo-wrap ' . $class . '">' . $html . '</div>';
 			
 		} // end if
 		
@@ -280,7 +282,9 @@ class CPB_Item_Promo extends CPB_Item {
 		
 		$display .= $this->form_fields->checkbox_field( $this->get_input_name('as_lightbox'), 1, $settings['as_lightbox'], 'Display Lightbox' );
 		
-		return array( 'Source' => $html , 'Display' => $display );
+		$adv = $this->form_fields->text_field( $this->get_input_name('csshook'), $settings['csshook'], 'CSS Hook' ); 
+		
+		return array( 'Source' => $html , 'Display' => $display , 'Advanced' => $adv );
 		
 	} // end form
 	
@@ -377,6 +381,8 @@ class CPB_Item_Promo extends CPB_Item {
 		$clean['stack_vertical'] = ( ! empty( $settings['stack_vertical'] ) ) ? sanitize_text_field( $settings['stack_vertical'] ) : 0;
 		
 		$clean['as_lightbox'] = ( ! empty( $settings['as_lightbox'] ) ) ? sanitize_text_field( $settings['as_lightbox'] ) : 0;
+		
+		$clean['csshook'] = ( ! empty( $settings['csshook'] ) ) ? sanitize_text_field( $settings['csshook'] ) : '';
 
 		return $clean;
 		

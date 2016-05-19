@@ -12,9 +12,28 @@ class CPB_Item_Textblock extends CPB_Item {
 		
 		$content = do_shortcode( $this->get_more_content( $content , $settings ) );
 		
-		if ( ! empty( $settings['textcolor'] ) ) $content = '<span class="' . $settings['textcolor'] . '-text">' . $content . '</span>';
+		//if ( ! empty( $settings['textcolor'] ) ) $content = '<span class="' . $settings['textcolor'] . '-text">' . $content . '</span>';
 		
-		return apply_filters( 'the_content' , $content );
+		$html = apply_filters( 'the_content' , $content );
+		
+		if ( ! empty( $settings['is_callout'] ) || ! empty( $settings['bgcolor'] ) || ! empty( $settings['csshook'] ) || ! empty( $settings['textcolor'] ) ) {
+			
+			$class = array();
+			
+			if ( ! empty( $settings['textcolor'] ) ) $class[] = $settings['textcolor'] . '-text';
+			
+			if ( ! empty( $settings['is_callout'] ) ) $class[] = 'is-callout';
+			
+			if ( ! empty( $settings['csshook'] ) ) $class[] = $settings['csshook'];
+			
+			if ( ! empty( $settings['bgcolor'] ) ) $class[] = $settings['bgcolor'] . '-back';
+			 
+			
+			$html = '<div class="cpb-textblock cpb-item ' . implode( ' ' , $class ) . '">' . $html . '</div>';  
+			
+		} // end if
+		
+		return $html;
 		
 	}// end item
 	
@@ -31,6 +50,10 @@ class CPB_Item_Textblock extends CPB_Item {
 		
 		$adv = $this->form_fields->select_field( $this->get_input_name('textcolor'), $settings['textcolor'], $this->form_fields->get_wsu_colors(), 'Text Color' );
 		
+		$adv .= $this->form_fields->select_field( $this->get_input_name('bgcolor'), $settings['bgcolor'], $this->form_fields->get_wsu_colors(), 'Background Color' );
+		
+		$adv .= $this->form_fields->checkbox_field( $this->get_input_name('is_callout'), 1, $settings['is_callout'], 'Is Callout' );
+		
 		return array('Basic' => $html , 'Advanced' => $adv );
 		
 	} // end form
@@ -46,6 +69,12 @@ class CPB_Item_Textblock extends CPB_Item {
 		$clean = array();
 		
 		$clean['title'] = ( ! empty( $settings['title'] ) ) ? sanitize_text_field( $settings['title'] ) : '';
+		
+		$clean['bgcolor'] = ( ! empty( $settings['bgcolor'] ) ) ? sanitize_text_field( $settings['bgcolor'] ) : '';
+		
+		$clean['textcolor'] = ( ! empty( $settings['textcolor'] ) ) ? sanitize_text_field( $settings['textcolor'] ) : '';
+		
+		$clean['is_callout'] = ( ! empty( $settings['is_callout'] ) ) ? sanitize_text_field( $settings['is_callout'] ) : '';
 		
 		return $clean;
 		
@@ -92,6 +121,10 @@ class CPB_Item_Textblock extends CPB_Item {
 		$style .= '.cpb-more-button a span {display:inline-block;position:relative;padding:0.25rem 1rem;background-color: rgb(249,249,249);}';
 		
 		$style .= '.cpb-more-content-continue {display:none;}';
+		
+		$style .= '.cpb-textblock {display:block;}';
+		
+		$style .= '.cpb-textblock.is-callout {box-sizing:border-box;padding: 1.5rem;}';
 		
 		
 		return $style;
