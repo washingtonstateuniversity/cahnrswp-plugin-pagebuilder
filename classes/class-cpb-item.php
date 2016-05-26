@@ -112,7 +112,13 @@ abstract class CPB_Item {
 				
 				$settings[ $key ] = json_encode( $value );
 				
-			} // end if
+			} else {
+				
+				$clean = str_replace( '"', '&quot;' , $value );
+				
+				$settings[ $key ] = $clean;
+				
+			}// end if
 			
 		} // end foreach
 		

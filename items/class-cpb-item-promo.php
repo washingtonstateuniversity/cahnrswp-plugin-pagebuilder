@@ -62,7 +62,9 @@ class CPB_Item_Promo extends CPB_Item {
 		
 		if ( ! empty( $settings['subtitle'] )) $item['subtitle'] = $settings['subtitle'];
 		
-		if ( ! empty( $settings['excerpt'] )) $item['excerpt'] = $settings['excerpt'];
+		if ( ! empty( $settings['excerpt'] )) $item['excerpt'] =   $settings['excerpt'];
+		
+		//if ( ! empty( $settings['excerpt'] )) $item['excerpt'] = $settings['excerpt'];
 		
 		if ( ! empty( $settings['link'] )) $item['link'] = $settings['link'];
 		
@@ -329,11 +331,11 @@ class CPB_Item_Promo extends CPB_Item {
 
 					$clean['link'] = ( ! empty( $settings['link'] ) ) ? sanitize_text_field( $settings['link'] ) : '';
 					
-					$clean['promo_title'] = ( ! empty( $settings['promo_title'] ) ) ? sanitize_text_field( $settings['promo_title'] ) : '';
+					$clean['promo_title'] = ( ! empty( $settings['promo_title'] ) ) ?  sanitize_text_field( $settings['promo_title'] )  : '';
 					
-					$clean['subtitle'] = ( ! empty( $settings['subtitle'] ) ) ? sanitize_text_field( $settings['subtitle'] ) : '';
+					$clean['subtitle'] = ( ! empty( $settings['subtitle'] ) ) ?  sanitize_text_field( $settings['subtitle'] )  : '';
 					
-					$clean['excerpt'] = ( ! empty( $settings['excerpt'] ) ) ? wp_kses_post( $settings['excerpt'] ) : '';
+					$clean['excerpt'] = ( ! empty( $settings['excerpt'] ) ) ?   wp_kses_post( str_replace( '&quot;', '"' , $settings['excerpt'] ) )  : '';
 					
 					break;
 				
