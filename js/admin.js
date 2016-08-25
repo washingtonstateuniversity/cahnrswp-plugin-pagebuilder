@@ -14,6 +14,8 @@ CPB = {
 		
 		CPB.wrap.on( 'click' , '.add-item-action' , function( event ){ CPB.s_event( event ); CPB.forms.show_add_item_form( jQuery( this ) ) } );
 		
+		CPB.wrap.on( 'click' , '.add-part-action' , function( event ){ CPB.s_event( event ); CPB.layout.add_part_basic( jQuery( this ) ) } );
+		
 		CPB.wrap.on( 'click' , '.cpb-remove-item-action' , function( event ){ CPB.s_event( event ); CPB.layout.remove_item( jQuery( this ) ) } );
 		
 		CPB.wrap.on( 'click' , '.cpb-edit-item-action' , function( event ){ CPB.s_event( event ); CPB.forms.edit_item( jQuery( this ) ) } );
@@ -180,11 +182,21 @@ CPB = {
 					
 					CPB.layout.insert_part( response , container );
 					
-					//alert( response );
-					
 				} // end function
 				,'json'
 			);
+			
+		},
+		
+		add_part_basic: function( ic , event ){
+			
+			if ( event ) event.preventDefault();
+			
+			var data = CPB.forms.get_data( ic );
+			
+			var cont = ic.closest('.cpb-item').children('.cpb-child-set');
+			
+			CPB.layout.get_part( data , cont );
 			
 		},
 		
@@ -439,6 +451,18 @@ CPB = {
 		}, // end remove_item
 		
 		get_data: function( form ){
+			
+			var data = CPB.wrap.find( 'input[name="_wp_http_referer"],input[name="ajax-nonce"],input[name="ajax-post-id"]' ).serialize();
+			
+			data += '&' + form.find( 'input, textarea, select').serialize();
+			
+			//alert( data );
+			
+			return data;
+			
+		},
+		
+		get_part_data: function( form ){
 			
 			var data = CPB.wrap.find( 'input[name="_wp_http_referer"],input[name="ajax-nonce"],input[name="ajax-post-id"]' ).serialize();
 			
