@@ -39,9 +39,9 @@ class CPB_Item_Slideshow extends CPB_Item {
 	
 	protected function editor( $settings , $content ){
 		
-		$html = '<div class="cpb-item cpb-sublayout-item cpb-' . $this->get_slug() . ' cpb-layout-item ' . $settings['layout'] . '" data-id="' . $this->get_id() . '">';
+		$html = '<div class="cpb-item cpb-content-item cpb-sublayout-item cpb-' . $this->get_slug() . ' cpb-layout-item ' . $settings['layout'] . '" data-id="' . $this->get_id() . '">';
 		
-			$html .= '<header>' . $this->form_fields->get_edit_item_button() . '<div>Slideshow</div>' . $this->form_fields->get_remove_item_button() . '</header>';
+			$html .= '<header>' . $this->form_fields->get_edit_item_button() . '<div class="cpb-item-title">Slideshow</div>' . $this->form_fields->get_remove_item_button() . '</header>';
 		
 			$html .= '<div class="cpb-child-set cpb-child-set-items">';
 			

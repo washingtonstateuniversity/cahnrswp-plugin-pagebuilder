@@ -268,7 +268,7 @@ class CPB_Item_Slide extends CPB_Item {
 		
 		$adv = $this->form_fields->text_field( $this->get_input_name('csshook'), $settings['csshook'], 'CSS Hook' ); 
 		
-		return array( 'Source' => $html , 'Display' => $display , 'Advanced' => $adv );
+		return array( 'Source' => $html /*, 'Display' => $display , 'Advanced' => $adv */ );
 		
 	} // end form
 	
@@ -382,11 +382,11 @@ class CPB_Item_Slide extends CPB_Item {
 	
 	public function css(){
 		
-		$style = '.cpb-slide.editor-slide {background-color: #ddd; padding: 0.5rem; box-sizing: border-box; border-radius: 3px; margin-bottom: 1rem;}';
+		$style = '.cpb-slide.editor-slide {padding: 0.5rem; box-sizing: border-box; border-radius: 3px; margin-bottom: 1rem;}';
 		
 		$style .= '.cpb-slide.editor-slide:after {content:"";display:block;clear:both;}';
 		
-		$style .= '.cpb-slide.editor-slide img {width: 120px; height: auto; float: left;display:block; background-color: #555;}';
+		$style .= '.cpb-slide.editor-slide img {width: 120px; height: auto; float: left;display:block; background-color: #ddd;}';
 		
 		$style .= '.cpb-slide.editor-slide .copy { margin-left: 135px; color: #555;}';
 		

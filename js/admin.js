@@ -309,6 +309,8 @@ CPB = {
 				
 				set.closest('.cpb-item').children('fieldset').find('input.cpb-children-input').val( children.join(',') );
 				
+				console.log( children );
+				
 			});
 			
 		}, // end set_children

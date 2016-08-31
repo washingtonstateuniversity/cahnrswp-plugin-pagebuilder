@@ -51,13 +51,13 @@ class CPB_Item_Column extends CPB_Item {
 			
 			$html .= '<footer>' . $this->form_fields->get_edit_item_button() . '<a class="cpb-move-item-action cpb-item-title" href="#">Column <span class="cpb-column-index">' . $this->get_index() . '</span></a></footer>';
 			
+			$html .= '</div>';
+			
 			$html .= '<fieldset>';
 				
 				$html .= '<input class="cpb-children-input" type="hidden" name="' . $this->get_input_name( false , false  ) . '[children]" value="' . $this->get_child_ids() . '" >';
 			
 			$html .= '</fieldset>';
-			
-			$html .= '</div>';
 		
 		$html .= '</div>';
 		

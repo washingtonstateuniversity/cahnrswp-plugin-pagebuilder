@@ -38,25 +38,35 @@
 */
 
 #cpb-editor-options {
-	padding: 1.5rem 0 1rem;
+	padding: 2rem 1rem 0;
+    border-bottom: 1px solid #23282d;
+    position: relative;
+    box-sizing: border-box;
+    margin-bottom: 1rem;
 }
 
 #cpb-editor-options label {
     display: inline-block;
     padding: 1rem 2rem;
     vertical-align: middle;
-    margin:0;
+    margin-right:0.5rem;
     font-size: 1.2rem;
     font-weight: bold;
     background: #f5f5f5;
-    border: 1px solid #ccc;
+    border-bottom: 1px solid #23282d;
 	color: #999;
 	text-decoration: none;
-	border-radius: 0 4px 4px 0;
+	/*border-radius: 0 4px 4px 0;*/
+    border-top: 1px solid #999;
+    border-left: 1px solid #999;
+    border-right: 1px solid #999;
+    position: relative;
+    box-sizing: border-box;
+    top: 1px;
 }
 
 #cpb-editor-options label:first-child {
-	border-radius: 4px 0 0 4px;
+	/*border-radius: 4px 0 0 4px;*/
 }
 
 #cpb-editor-options label:hover {
@@ -66,9 +76,13 @@
 }
 
 #cpb-editor-options label.active {
-	background: #2ea2cc;
-    border: 1px solid #0074a2;
-	color: #fff;
+	background: #f1f1f1;
+    /*border: 1px solid #0074a2;*/
+	color: #0074a2;
+    border-top: 1px solid #23282d;
+    border-left: 1px solid #23282d;
+    border-right: 1px solid #23282d;
+    border-bottom: 1px solid #f1f1f1;
 }
 
 #cpb-editor-options input {
@@ -763,7 +777,7 @@ margin-bottom: 1rem;
 }
 
 .cpb-layout-item .cpb-item.cpb-sublayout-item {
-	background-color: #999;
+	background-color: #ddd;
     border-radius: 4px;
 }
 

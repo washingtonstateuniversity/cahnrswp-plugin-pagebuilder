@@ -1,5 +1,5 @@
 .cpb-row {
-	padding-bottom: 2rem;
+	padding-bottom: 0;
 	}
 
 .cpb-row > header {
