@@ -165,9 +165,12 @@ class CPB_Items {
 				$item = $this->get_item( $default_type , array() , $item_content );
 			
 			} else {
+				
+				$item = false;
+				
 			}// end if
 			
-			$items[] = $item;
+			if ( $item ) $items[] = $item;
 			
 		} // end foreach
 			
@@ -312,6 +315,16 @@ class CPB_Items {
 			'table'        => array(
 				'class'   	=> 'CPB_Item_Table',
 				'file_path' => plugin_dir_path( dirname ( __FILE__ ) ) . 'items/class-cpb-item-table.php',
+				'priority'  => 8,
+			),
+			'slideshow'        => array(
+				'class'   	=> 'CPB_Item_Slideshow',
+				'file_path' => plugin_dir_path( dirname ( __FILE__ ) ) . 'items/class-cpb-item-slideshow.php',
+				'priority'  => 8,
+			),
+			'slide'        => array(
+				'class'   	=> 'CPB_Item_Slide',
+				'file_path' => plugin_dir_path( dirname ( __FILE__ ) ) . 'items/class-cpb-item-slide.php',
 				'priority'  => 8,
 			),
 			

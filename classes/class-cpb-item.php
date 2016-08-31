@@ -176,7 +176,7 @@ abstract class CPB_Item {
 		
 	} // end clean
 	
-	public function the_item( $settings = false , $content = false ){
+	public function the_item( $settings = false , $content = false , $is_editor = false ){
 		
 		$settings = ( $settings ) ? $settings : $this->get_settings();
 		
@@ -191,8 +191,16 @@ abstract class CPB_Item {
 				$html .= $this->admin_item( $settings , $content );
 			
 			} else if ( method_exists( $this , 'item' ) ){
+				
+				if ( $is_editor && method_exists( $this , 'item_editor' )  ) {
+					
+					$html .= $this->item_editor( $settings , $content );
+					
+				} else {
 			
-				$html .= $this->item( $settings , $content );
+					$html .= $this->item( $settings , $content , $is_editor );
+				
+				} // end if
 			
 			}// end if
 			
@@ -215,7 +223,15 @@ abstract class CPB_Item {
 			
 			if ( method_exists( $this , 'item' ) ){
 			
-				$html .= $this->item( $settings , $content );
+				if ( $is_editor && method_exists( $this , 'item_editor' )  ) {
+					
+					$html .= $this->item_editor( $settings , $content );
+					
+				} else {
+			
+					$html .= $this->item( $settings , $content , $is_editor );
+				
+				} // end if
 			
 			}// end if
 			

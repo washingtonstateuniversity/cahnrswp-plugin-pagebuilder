@@ -1,9 +1,9 @@
 .cpb-row {
-	padding-bottom: 2rem;
+	padding-bottom: 0;
 	}
 
 .cpb-row > header {
-	background: #ccc;
+	background: #555;
 	padding: 0;
 	height: 35px;
 	line-height: 35px;
@@ -32,7 +32,7 @@
 
 .cpb-row > header .cpb-item-title{
 	display: block;
-	background: #ccc;
+	background: #555;
 	padding: 0 1rem;
 	margin: 0 35px;
 	height: 35px;
@@ -65,4 +65,8 @@
 
 .cpb-row > header .cpb-edit-item-action:hover {
 	background-color: #c1c1c1;
+}
+
+.cpb-row > .cpb-set-wrap {
+	margin: 1rem 0;
 }

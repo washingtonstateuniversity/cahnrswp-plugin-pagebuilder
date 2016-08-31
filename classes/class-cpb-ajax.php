@@ -86,6 +86,8 @@ class CPB_Ajax {
 	
 	public function request_content(){
 		
+		CAHNRS_Pagebuilder_Plugin::$is_editor = true;
+		
 		$items = array();
 		
 		if ( ! empty( $_POST['_cpb']['items'] ) ){
@@ -100,7 +102,7 @@ class CPB_Ajax {
 				
 				if ( $item ){
 					
-					$items[ $id ] = $item->the_item();
+					$items[ $id ] = $item->the_item( false , false , true );
 				
 				} // end if
 				

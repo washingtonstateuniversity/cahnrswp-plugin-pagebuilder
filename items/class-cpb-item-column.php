@@ -37,7 +37,9 @@ class CPB_Item_Column extends CPB_Item {
 		
 		$html = '<div class="cpb-item cpb-column cpb-layout-item column-' . $this->get_index_class( $this->get_index() ) . '" data-id="' . $this->get_id() . '">';
 		
-			$html .= '<header></header>';
+			$html .= '<div class="cpb-column-inner">';
+			
+			$html .= '<header>' . $this->form_fields->get_edit_item_button() . '<a class="cpb-move-item-action cpb-item-title" href="#">Column <span class="cpb-column-index">' . $this->get_index() . '</span></a></header>';
 		
 			$html .= '<div class="cpb-child-set cpb-child-set-items">';
 			
@@ -48,6 +50,8 @@ class CPB_Item_Column extends CPB_Item {
 			$html .= '<a href="#" class="add-item-action">+ Add Item</a>';
 			
 			$html .= '<footer>' . $this->form_fields->get_edit_item_button() . '<a class="cpb-move-item-action cpb-item-title" href="#">Column <span class="cpb-column-index">' . $this->get_index() . '</span></a></footer>';
+			
+			$html .= '</div>';
 			
 			$html .= '<fieldset>';
 				

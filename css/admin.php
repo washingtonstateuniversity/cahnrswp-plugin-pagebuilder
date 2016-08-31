@@ -38,25 +38,35 @@
 */
 
 #cpb-editor-options {
-	padding: 1.5rem 0 1rem;
+	padding: 2rem 1rem 0;
+    border-bottom: 1px solid #23282d;
+    position: relative;
+    box-sizing: border-box;
+    margin-bottom: 1rem;
 }
 
 #cpb-editor-options label {
     display: inline-block;
     padding: 1rem 2rem;
     vertical-align: middle;
-    margin:0;
+    margin-right:0.5rem;
     font-size: 1.2rem;
     font-weight: bold;
     background: #f5f5f5;
-    border: 1px solid #ccc;
+    border-bottom: 1px solid #23282d;
 	color: #999;
 	text-decoration: none;
-	border-radius: 0 4px 4px 0;
+	/*border-radius: 0 4px 4px 0;*/
+    border-top: 1px solid #999;
+    border-left: 1px solid #999;
+    border-right: 1px solid #999;
+    position: relative;
+    box-sizing: border-box;
+    top: 1px;
 }
 
 #cpb-editor-options label:first-child {
-	border-radius: 4px 0 0 4px;
+	/*border-radius: 4px 0 0 4px;*/
 }
 
 #cpb-editor-options label:hover {
@@ -66,9 +76,13 @@
 }
 
 #cpb-editor-options label.active {
-	background: #2ea2cc;
-    border: 1px solid #0074a2;
-	color: #fff;
+	background: #f1f1f1;
+    /*border: 1px solid #0074a2;*/
+	color: #0074a2;
+    border-top: 1px solid #23282d;
+    border-left: 1px solid #23282d;
+    border-right: 1px solid #23282d;
+    border-bottom: 1px solid #f1f1f1;
 }
 
 #cpb-editor-options input {
@@ -132,16 +146,11 @@
 */
 .cpb-content-item {
 	position: relative;
-}
-
-.cpb-content-item:after {
-	content: '';
-	display: block;
-	position: absolute;
-	bottom: 0;
-	width: 60%;
-	left: 20%;
-	border-bottom: 1px dashed #ccc;
+    -webkit-box-shadow: 0px 0px 5px 0px rgba(120,120,120,1);
+-moz-box-shadow: 0px 0px 5px 0px rgba(120,120,120,1);
+box-shadow: 0px 0px 5px 0px rgba(120,120,120,1);
+border-radius: 3px;
+margin-bottom: 1rem;
 }
 
 .cpb-content-item iframe {
@@ -153,7 +162,6 @@
 	height: 30px;
 	line-height: 30px;
 	position: relative;
-	visibility: hidden;
 }
 
 .cpb-content-item.active > header {
@@ -162,29 +170,33 @@
 
 
 .cpb-content-item > header > .cpb-item-title {
-	font-size: 14px;
+	font-size: 12px;
 	text-transform: uppercase;
 	color: #147ba0;
 	font-weight: bold;
 	text-decoration: none;
 	cursor: move;
+    padding: 0 1rem;
+    display: block;
 }
 
 .cpb-content-item > header .cpb-remove-item-action {
 	position: absolute;
 	width: 30px;
 	height: 30px;
-	background: #147ba0;
 	right: 0;
 	top: 0;
 	font-size: 0;
-	background-image: url(<?php echo plugins_url( '/images/close-icon.png', dirname(__FILE__) ); ?>);
+	background-image: url(<?php echo plugins_url( '/images/close-icon-blue.png', dirname(__FILE__) ); ?>);
 	background-position: center center;
+    background-size: 12px 12px;
 	background-repeat: no-repeat;
 }
 
 .cpb-content-item > .cpb-child-set {
 	position: relative;
+    padding: 0 1rem;
+    box-sizing: border-box;
 }
 
 .cpb-content-item .cpb-edit-item-action {
@@ -198,6 +210,10 @@
 	border: 1px solid #147ba0;
 	font-size: 0;
 	display: none;
+    background-image: url(<?php echo plugins_url( '/images/plus-icon.png', dirname(__FILE__) ); ?>);
+	background-position: center center;
+    background-size: 30px 30px;
+	background-repeat: no-repeat;
 }
 
 .cpb-content-item.active  .cpb-edit-item-action {
@@ -710,7 +726,83 @@
     text-align: center;
     text-transform: uppercase;
 }
+
+
+/* Updated Item 
+* ----------------------------------------------------------
+*/
+.cpb-item.cpb-sublayout-item > header {
+	color: #fff;
+	position: relative;
+}
+
+.cpb-item.cpb-sublayout-item > header > div {
+	display: inline-block;
+    height: 25px;
+    line-height: 25px;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    vertical-align: top;
+    padding: 0 0.5rem;
+    font-weight: bold;
+}
+
+.cpb-item.cpb-sublayout-item > header .cpb-edit-item-action {
+    display: inline-block;
+    height: 25px;
+    width: 25px;
+    /* background-color: #999; */
+    border-right: 1px solid #eee;
+    font-size: 0;
+    background-image: url(http://devsite.wpdev.cahnrs.wsu.edu/bees/wp-content/plugins/cahnrswp-plugin-pagebuilder/images/edit-icon.png);
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: 12px auto;
+    vertical-align: top;
+}
+
+.cpb-item.cpb-sublayout-item > header .cpb-remove-item-action {
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 25px;
+    width: 25px;
+    /* background-color: #999; */
+    border-left: 1px solid #bcbcbc;
+    font-size: 0;
+    background-image: url(http://devsite.wpdev.cahnrs.wsu.edu/bees/wp-content/plugins/cahnrswp-plugin-pagebuilder/images/close-icon.png);
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: 12px auto;
+}
+
+.cpb-layout-item .cpb-item.cpb-sublayout-item {
+	background-color: #ddd;
+    border-radius: 4px;
+}
+
+.cpb-item.cpb-sublayout-item > .cpb-child-set {
+	background-color: #fff;
+    margin: 0 8px;
+    border-radius: 3px;
+    padding: 1rem;
+    box-sizing: border-box;
+}
  
+ 
+ .cpb-item.cpb-sublayout-item > .add-part-action {
+    display: inline-block;
+    background: #2ea2cc;
+    border-color: #0074a2;
+    color: #fff;
+    margin: 1rem;
+    text-decoration: none;
+    padding: 0.25rem 1rem;
+    border-radius: 4px;
+    border-bottom: 1px solid #006799;
+    border-top: 1px solid #84CAE4;
+    cursor: pointer;
+}
 
 
 
