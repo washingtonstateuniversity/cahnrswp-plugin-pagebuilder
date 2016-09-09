@@ -156,7 +156,7 @@ class CPB_Item_Row extends CPB_Item {
 
 		$clean['textcolor'] = ( ! empty( $settings['textcolor'] ) ) ? sanitize_text_field( $settings['textcolor'] ) : '';
 
-		$clean['padding'] = ( isset( $settings['padding'] ) ) ? sanitize_text_field( $settings['padding'] ) : 'pad-top';
+		$clean['padding'] = ( isset( $settings['padding'] ) ) ? sanitize_text_field( $settings['padding'] ) : 'pad-bottom';
 
 		$clean['gutter'] = ( ! empty( $settings['gutter'] ) ) ? sanitize_text_field( $settings['gutter'] ) : 'gutter';
 
