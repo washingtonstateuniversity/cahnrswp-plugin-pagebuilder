@@ -91,9 +91,17 @@ class CPB_Items {
 					
 					$children = $this->get_items_from_content( $child_content , $item->get_allowed_children() , $item->get_default_child() );
 					
-					if ( 'row' == $item->get_slug() ) {
+					switch( $item->get_slug() ){
 						
-						$children = $this->get_item_row_columns( $item , $children );
+						case 'row':
+							$children = $this->get_item_row_columns( $item , $children );
+							break;
+						
+					} // end switch
+					
+					if ( method_exists( $item , 'return_parse_children' ) ){
+						
+						$children = $item->return_parse_children( $children );
 						
 					} // end if
 					

@@ -15,13 +15,26 @@ class CPB_Item_Slideshow extends CPB_Item {
 	
 	public function item( $settings , $content ){
 		
-		$html = '<div class="cpb-slideshow ' . $settings['dislay_type'] . '">';
+		global $cpb_slideshow;
 		
-			$html .= '<div class="slides">' . do_shortcode( $content ) . '</div>';
-			
-			$html .= '<nav><a href="#" class="prev">Previous</a><a href="#" class="next">Next</a></nav>';	
+		$cpb_slideshow = array(
+			'type' => $settings['dislay_type'],
+			'i'    => 1,
+		);
 		
-		$html .= '</div>';
+		$slides = do_shortcode( $content );
+		
+		ob_start();
+		
+		include dirname( dirname(__FILE__) ) . '/js/js-item-slideshow-gallery.js';
+		
+		$js = ob_get_clean();
+		
+		ob_start();
+		
+		include dirname( dirname(__FILE__) ) . '/inc/inc-item-slideshow.php';
+		
+		$html = ob_get_clean();
 		
 		return $html;
 		
@@ -78,7 +91,11 @@ class CPB_Item_Slideshow extends CPB_Item {
 	
 	public function css(){
 		
-		$style = '.cpb-slideshow {position: relative}';
+		ob_start();
+		
+		include dirname( dirname(__FILE__) ) . '/css/css-item-slideshow.css';
+		
+		/*$style = '.cpb-slideshow {position: relative}';
 		
 		$style .= '.cpb-slideshow > .slides > .slide {display:none;}';
 		
@@ -88,11 +105,12 @@ class CPB_Item_Slideshow extends CPB_Item {
 		
 		$style .= '.cpb-slideshow.gallery-slideshow > nav a { opacity: 0.5;display: block; width: 50px; height: 50px; position: relative; left: 0; top: -20px;background-color: #ddd;font-size:0;border-radius: 4px;border: 1px solid #ccc;}';
 		
-		$style .= '.cpb-slideshow.gallery-slideshow > nav a.next { position: absolute; right: 0; left:auto;}';
+		$style .= '.cpb-slideshow.gallery-slideshow > nav a.next { position: absolute; right: 0; left:auto;}';*/
+		
+		$style = ob_get_clean();
 		
 		return $style;
 		
 	} // end admin_css
-	
 	
 }

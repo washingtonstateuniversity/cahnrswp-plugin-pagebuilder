@@ -29,8 +29,36 @@ var cahnrs_pagebuilder = {
 	init: function(){
 		
 		cahnrs_pagebuilder.lightbox.init();	
+		cahnrs_pagebuilder.layout.bind_events();
+		cahnrs_pagebuilder.layout.column_css();
 		
 	}, // end init
+	
+	layout:{
+		
+		bind_events:function(){
+			jQuery(window).resize( function(){ cahnrs_pagebuilder.layout.column_css(); });
+		},
+		
+		column_css:function(){
+			
+			jQuery( '.row > .column').each( function(){
+				var c = jQuery( this );
+				c.removeClass('small medium large');
+				var w = c.width();
+				var cls = 'large';
+				if ( w < 450 ){
+					cls = 'small';
+				} else if ( w >= 500 && w < 900 ){
+					cls = 'medium';
+				} // end if
+				
+				c.addClass( cls );
+			});
+			
+		},
+		
+	},
 	
 	lightbox: {
 		
