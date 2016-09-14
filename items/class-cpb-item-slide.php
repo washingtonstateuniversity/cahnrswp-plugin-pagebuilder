@@ -6,10 +6,15 @@ class CPB_Item_Slide extends CPB_Item {
 	
 	protected $slug = 'slide';
 	
+	protected $index;
+	
 	protected $fields = array('title','img','link','excerpt');
 	
 	public function get_fields(){ return $this->fields; }
+	public function get_index() { return $this->index; }
 	
+	
+	public function set_index( $value ) { $this->index = $value; }
 	
 	
 	public function item( $settings , $content , $is_editor = false ){
@@ -40,11 +45,13 @@ class CPB_Item_Slide extends CPB_Item {
 		
 			if ( $items ) {
 				
-				switch( $settings['slide_display'] ){
+				global $cpb_slideshow;
+				
+				switch( $cpb_slideshow['type'] ){
 					
 					case 'gallery':
 					default:
-						$html .= $this->get_gallery_slide_html( $items , $settings );
+						$html .= $this->get_gallery_slide_html( $items , $settings , $cpb_slideshow );
 						break;
 					
 				} // end switch
@@ -58,17 +65,26 @@ class CPB_Item_Slide extends CPB_Item {
 	
 	public function get_gallery_slide_html( $items , $settings ) {
 		
+		global $cpb_slideshow;
+		
 		$html = '';
 		
 		foreach( $items as $item ){
 			
-			$html .= '<div class="slide gallery-slide">';
+			$active = ( $cpb_slideshow['i'] === 1 )? ' active-slide' : '';
+			$bg_image = $item['img'];
+			$img = '<img class="slide_img_bg" src="' . plugins_url( 'images/spacer1x1.gif', dirname(__FILE__) ) . '" style="background-image:url(' . $bg_image . ')" />';
+			$link = ( $item['link'] ) ? '<a href="' . $item['link'] . '" class="slide-link" /></a>' : '';
+			$title = $item['title'];
+			$excerpt = wp_trim_words( $item['excerpt'], 35 );
 			
-				$html .= '<div class="slide-image" style="background-image:url(' . $item['img'] . ')">';
-				
-				$html .= '</div>';
+			ob_start();
 			
-			$html .= '</div>';
+			include dirname( dirname(__FILE__) ) . '/inc/inc-item-slide.php';
+			
+			$html .= ob_get_clean();
+			
+			$cpb_slideshow['i'] = $cpb_slideshow['i'] + 1;
 			
 		} // end foreach
 		
@@ -307,6 +323,8 @@ class CPB_Item_Slide extends CPB_Item {
 		
 		$clean = array();
 		
+		//$clean['index'] = $this->get_index();
+		
 		if ( ! empty( $settings['slide_type'] ) ){
 			
 			$clean['slide_type'] = ( ! empty( $settings['slide_type'] ) ) ? sanitize_text_field( $settings['slide_type'] ) : '';
@@ -380,7 +398,7 @@ class CPB_Item_Slide extends CPB_Item {
 		
 	}
 	
-	public function css(){
+	/*public function css(){
 		
 		$style = '.cpb-slide.editor-slide {padding: 0.5rem; box-sizing: border-box; border-radius: 3px; margin-bottom: 1rem;}';
 		
@@ -410,7 +428,7 @@ class CPB_Item_Slide extends CPB_Item {
 		
 		return $style;
 		
-	} // end admin_css
+	} // end admin_css*/
 	
 	
 }
