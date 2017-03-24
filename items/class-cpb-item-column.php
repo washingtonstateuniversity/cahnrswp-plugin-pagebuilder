@@ -26,7 +26,7 @@ class CPB_Item_Column extends CPB_Item {
 
 		$cpb_column_i++;
 		
-		$html = '<div class="' . $this->get_item_class( $settings )  . '">' . do_shortcode( $content ) . '</div>';
+		$html = '<div class="' . $this->prefix . $this->get_item_class( $settings )  . '">' . do_shortcode( $content ) . '</div>';
 		
 		return $html;
 		

@@ -11,6 +11,8 @@ abstract class CPB_Item {
 	
 	protected $content;
 	
+	protected $prefix = '';
+	
 	protected $name;
 	
 	protected $form_size = 'medium';
@@ -36,6 +38,8 @@ abstract class CPB_Item {
 		
 		$this->content = $content;
 		
+		$this->set_prefix();
+		
 	} // end __construct
 	
 	
@@ -46,6 +50,8 @@ abstract class CPB_Item {
 	public function get_settings() { return $this->settings; }
 	
 	public function get_content() { return $this->content; }
+	
+	public function get_prefix(){ return $this->prefix; }
 	
 	public function get_slug(){ return $this->slug; }
 	
@@ -69,6 +75,17 @@ abstract class CPB_Item {
 		$this->children = $children;
 		
 	} // end set_children
+	
+	
+	protected function set_prefix(){
+		
+		if ( get_theme_mod( 'cpb_spine_style', '' ) == 'disable' ){
+			
+			$this->prefix = 'cpb-';
+			
+		} // end if
+		
+	} // end set_prefix
 	
 	
 	public function the_shortcode(){
