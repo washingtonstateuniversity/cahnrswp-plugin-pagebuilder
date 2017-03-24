@@ -29,7 +29,7 @@ class CPB_Item_Row extends CPB_Item {
 
 		$cpb_column_i = 1;
 		
-		$html = '<div class="row ' . $this->get_item_class( $settings ) . '">';
+		$html = '<div class="' . $this->prefix . 'row ' . $this->get_item_class( $settings ) . '">';
 		
 			if ( ! empty( $settings['title'] ) ){
 				

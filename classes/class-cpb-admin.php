@@ -11,10 +11,21 @@ class CPB_Admin {
 		
 		add_submenu_page( 'options-general.php', 'Pagebuilder Settings','Page Layout', 'manage_options', 'pbsettings', array( $this, 'the_page' ) );
 		
+		add_action( 'admin_init', array( $this, 'register_settings' ) );
+		
 	} // end __construct
 	
 	
+	public function register_settings(){
+		
+		register_setting( 'cpb_settings', 'cpb_spine_style' );
+		
+	} // end register_settings
+	
+	
 	public function the_page(){
+		
+		$html = '';
 		
 		//must check that the user has the required capability
 		if ( ! current_user_can( 'manage_options' ) ) {
@@ -37,6 +48,10 @@ class CPB_Admin {
 	
 	
 	protected function get_the_form(){
+		
+		$use_spine_style = get_option( 'cpb_spine_style', '' );
+		
+		var_dump(  get_option( 'cpb_spine_style', '' ) );
 		
 		$html = '<form method="post" action="">';
 
@@ -86,10 +101,27 @@ class CPB_Admin {
 
 					$html .= '</td>';
 
-        $html .= '</tr>';
-		
+        		$html .= '</tr>';
+				$html .= '<tr valign="top">';
+		  
+					$html .= '<th scope="row">Use Spine Style:</th>';
+		  
+						$html .= '<td>';
+		  
+							$html .= '<select id="cpb_spine_style" name="_cpb_spine_style" >';
+							
+							$html .= '<option value="">Default</option>';
+							$html .= '<option value="enable" ' . selected( 'enable', $use_spine_style, false ) . '>Enable Spine Layout Style</option>';
+							$html .= '<option value="disable" ' . selected( 'disable', $use_spine_style, false ) . '>Disable Spine Layout Style</option>';
+							
+							$html .= '</select>';
+		  
+		  
+						$html .= '</td>';
+		  
+					$html .= '</tr>';
 
-			$html .= '</table>';
+				$html .= '</table>';
 
 			ob_start();
 
@@ -148,6 +180,14 @@ class CPB_Admin {
 				$this->options->set_layout_css( sanitize_text_field( $_POST['cpb_layout_css'] ) );
 				
 				update_option( 'cpb_layout_css', $this->options->get_option_layout_css() );
+			
+			} // end if
+			
+			if ( isset( $_POST['cpb_spine_style'] ) ){ 
+			
+				$value = sanitize_text_field( $_POST['cpb_spine_style'] );
+				
+				add_option( 'cpb_spine_style', $value );
 			
 			} // end if
 		
