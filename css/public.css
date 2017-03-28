@@ -4,7 +4,7 @@
 	max-width: 100%;
 }
 .cpb-row .cpb-column {
-	padding-bottom: 2rem;
+	padding-bottom: 0;
 }
 .cpb-row.halves {display: table; width: 100%; }
 .cpb-row.halves .cpb-column {display: table-cell; width: 50%;}
@@ -13,13 +13,13 @@
 
 .cpb-row.side-right {display: table; width: 100%;}
 .cpb-row.side-right .cpb-column {display: table-cell;}
-.cpb-row.side-right .cpb-column.one {padding-right: 2rem; width: 70%;}
-.cpb-row.side-right .cpb-column.two {padding-left: 2rem; width: 30%;} 
+.cpb-row.side-right .cpb-column.one {padding-right: 2rem; width: 66.66%;}
+.cpb-row.side-right .cpb-column.two {padding-left: 2rem; width: 33.33%;} 
 
 .cpb-row.side-left {display: table; width: 100%;}
 .cpb-row.side-left .cpb-column {display: table-cell;}
-.cpb-row.side-left .cpb-column.one {padding-right: 2rem; width: 30%;}
-.cpb-row.side-left .cpb-column.two {padding-left: 2rem; width: 70%;} 
+.cpb-row.side-left .cpb-column.one {padding-right: 2rem; width: 33.33%;}
+.cpb-row.side-left .cpb-column.two {padding-left: 2rem; width: 66.66%;} 
 
 .cpb-row.thirds {display: table; width: 100%;}
 .cpb-row.thirds .cpb-column {display: table-cell; width: 33.33%;}
