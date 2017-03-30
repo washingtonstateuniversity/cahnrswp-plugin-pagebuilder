@@ -5,6 +5,7 @@
 }
 .cpb-row .cpb-column {
 	padding-bottom: 0;
+	vertical-align: top;
 }
 .cpb-row.halves {display: table; width: 100%; }
 .cpb-row.halves .cpb-column {display: table-cell; width: 50%;}
