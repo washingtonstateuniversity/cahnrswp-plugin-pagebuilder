@@ -26,7 +26,7 @@ class CPB_Item_Column extends CPB_Item {
 
 		$cpb_column_i++;
 		
-		$html = '<div class="' . $this->prefix . $this->get_item_class( $settings )  . '">' . do_shortcode( $content ) . '</div>';
+		$html = '<div class="' . $this->prefix . $this->get_item_class( $settings )  . '"  style="' . implode( ';' , $this->get_item_style( $settings ) ) . '">' . do_shortcode( $content ) . '</div>';
 		
 		return $html;
 		
@@ -66,14 +66,34 @@ class CPB_Item_Column extends CPB_Item {
 	} // end editor
 	
 	protected function form( $settings , $content ){
+		
+		$p_values = array( 'default' => 'Not Set' );
+		
+		$p = 0;
+		
+		while( $p < 4 ){
+			
+			$p_values[ $p . 'rem' ] = $p . 'rem';
+			
+			$p = $p + 0.5;
+			
+		} // end for
 
 		$basic = $this->form_fields->select_field( $this->get_input_name('bgcolor'), $settings['bgcolor'], $this->form_fields->get_wsu_colors(), 'Background Color' );
 
 		$basic .= $this->form_fields->select_field( $this->get_input_name('textcolor'), $settings['textcolor'], $this->form_fields->get_wsu_colors(), 'Text Color' );
 		
+		$layout = $this->form_fields->select_field( $this->get_input_name('padding_top'), $settings['padding_top'], $p_values, 'Padding Top' );
+		
+		$layout .= $this->form_fields->select_field( $this->get_input_name('padding_bottom'), $settings['padding_bottom'], $p_values, 'Padding Bottom' );
+		
+		$layout .= $this->form_fields->select_field( $this->get_input_name('padding_left'), $settings['padding_left'], $p_values, 'Padding Left' );
+		
+		$layout .= $this->form_fields->select_field( $this->get_input_name('padding_right'), $settings['padding_right'], $p_values, 'Padding Right' );
+		
 		$adv = $this->form_fields->text_field( $this->get_input_name('csshook'), $settings['csshook'], 'CSS Hook' );
 		
-		return array( 'Basic' => $basic , 'Advanced' => $adv );
+		return array( 'Basic' => $basic , 'Layout' => $layout,  'Advanced' => $adv );
 		
 	}
 	
@@ -86,6 +106,14 @@ class CPB_Item_Column extends CPB_Item {
 		$clean['bgcolor'] = ( ! empty( $settings['bgcolor'] ) ) ? sanitize_text_field( $settings['bgcolor'] ) : '';
 
 		$clean['textcolor'] = ( ! empty( $settings['textcolor'] ) ) ? sanitize_text_field( $settings['textcolor'] ) : '';
+		
+		$padding = array( 'padding_top', 'padding_bottom', 'padding_left', 'padding_right' );
+		
+		foreach( $padding as $key => $pad ){
+			
+			$clean[ $pad ] = ( ! empty( $settings[ $pad ] ) )? sanitize_text_field( $settings[ $pad ] ) : '';
+			
+		} // end foreach
 
 		return $clean;
 		

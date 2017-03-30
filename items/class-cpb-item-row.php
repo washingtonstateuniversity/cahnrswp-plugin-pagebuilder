@@ -29,7 +29,10 @@ class CPB_Item_Row extends CPB_Item {
 
 		$cpb_column_i = 1;
 		
-		$html = '<div class="' . $this->prefix . 'row ' . $this->get_item_class( $settings ) . '">';
+		$html = '<div class="' . $this->prefix . 'row ' . $this->get_item_class( $settings ) . '" style="' . implode( ';' , $this->get_item_style( $settings ) ) . '">';
+		
+			if ( ! empty( $this->prefix ) ) $html .= '<div class="cpb-row-inner">'; 
+		
 		
 			if ( ! empty( $settings['title'] ) ){
 				
@@ -40,6 +43,8 @@ class CPB_Item_Row extends CPB_Item {
 			$html .= $this->get_row_background( $settings ); 
 		
 			$html .= do_shortcode( $content );
+			
+			if ( ! empty( $this->prefix ) ) $html .= '</div>';
 		
 		$html .= '</div>';
 		
@@ -89,6 +94,18 @@ class CPB_Item_Row extends CPB_Item {
 	
 	protected function form( $settings , $content ){
 		
+		$p_values = array( 'default' => 'Not Set' );
+		
+		$p = 0;
+		
+		while( $p < 4 ){
+			
+			$p_values[ $p . 'rem' ] = $p . 'rem';
+			
+			$p = $p + 0.5;
+			
+		} // end for
+		
 		$basic = '<input type="hidden" name="' . $this->get_input_name('layout') . '" value="' . $settings['layout'] . '" >';
 		
 		$basic .= $this->form_fields->hidden_field( $this->get_input_name( 'layout' ), $settings['layout'] );
@@ -97,26 +114,34 @@ class CPB_Item_Row extends CPB_Item {
 		
 		$basic .= $this->form_fields->select_field( $this->get_input_name('title_tag'), $settings['title_tag'], $this->form_fields->get_header_tags() , 'Title Tag' );
 		
-		$basic .= $this->form_fields->select_field( $this->get_input_name('padding'), $settings['padding'], $this->form_fields->get_padding(), 'Padding' );
-
 		$basic .= $this->form_fields->select_field( $this->get_input_name('bgcolor'), $settings['bgcolor'], $this->form_fields->get_wsu_colors(), 'Background Color' );
+		
+		$basic .= $this->form_fields->checkbox_field( $this->get_input_name('full_bleed'), 1, $settings['full_bleed'], 'Background Full Bleed Color' );
 		
 		$basic .= $this->form_fields->select_field( $this->get_input_name('textcolor'), $settings['textcolor'], $this->form_fields->get_wsu_colors(), 'Text Color' );
 		
-		$basic .= $this->form_fields->text_field( $this->get_input_name('csshook'), $settings['csshook'], 'CSS Hook' );
+		$layout = $this->form_fields->select_field( $this->get_input_name('padding_top'), $settings['padding_top'], $p_values, 'Padding Top' );
+		
+		$layout .= $this->form_fields->select_field( $this->get_input_name('padding_bottom'), $settings['padding_bottom'], $p_values, 'Padding Bottom' );
+		
+		$layout .= $this->form_fields->select_field( $this->get_input_name('padding_left'), $settings['padding_left'], $p_values, 'Padding Left' );
+		
+		$layout .= $this->form_fields->select_field( $this->get_input_name('padding_right'), $settings['padding_right'], $p_values, 'Padding Right' );
+		
+		$layout .= $this->form_fields->select_field( $this->get_input_name('padding'), $settings['padding'], $this->form_fields->get_padding(), 'Padding (Old)' );
 		
 		$adv = $this->form_fields->select_field( $this->get_input_name('gutter'), $settings['gutter'], $this->form_fields->get_gutters(), 'Gutter' );
-		
-		$adv .= $this->form_fields->checkbox_field( $this->get_input_name('full_bleed'), 1, $settings['full_bleed'], 'Full Bleed Color' );
 		
 		$adv .= $this->form_fields->text_field( $this->get_input_name('bg_src'), $settings['bg_src'], 'Background Image URL' );
 		
 		$adv .= $this->form_fields->text_field( $this->get_input_name('min_height'), $settings['min_height'], 'Minimum Height (px)' );
 		
 		$adv .= $this->form_fields->text_field( $this->get_input_name('anchor') , $settings['anchor'] , 'Anchor Name' );
+		
+		$adv .= $this->form_fields->text_field( $this->get_input_name('csshook'), $settings['csshook'], 'CSS Hook' );
 
 		
-		return array('Basic' => $basic , 'Advanced' => $adv );
+		return array('Basic' => $basic , 'Layout' => $layout, 'Advanced' => $adv );
 		
 	} // end form
 	
@@ -163,6 +188,14 @@ class CPB_Item_Row extends CPB_Item {
 		$clean['csshook'] = ( ! empty( $settings['csshook'] ) ) ? sanitize_text_field( $settings['csshook'] ) : '';
 		
 		$clean['anchor'] = ( ! empty( $settings['anchor'] ) )? sanitize_text_field( $settings['anchor'] ) : '';
+		
+		$padding = array( 'padding_top', 'padding_bottom', 'padding_left', 'padding_right' );
+		
+		foreach( $padding as $key => $pad ){
+			
+			$clean[ $pad ] = ( ! empty( $settings[ $pad ] ) )? sanitize_text_field( $settings[ $pad ] ) : '';
+			
+		} // end foreach
 		
 		if ( ! empty( $settings['full_bleed'] ) ) $clean['full_bleed'] = sanitize_text_field( $settings['full_bleed'] );
 		
@@ -333,6 +366,8 @@ class CPB_Item_Row extends CPB_Item {
 		if ( ! empty( $settings['bgcolor'] ) ) {
 			
 			$class .= ' ' . $settings['bgcolor'] . '-back';
+			
+			$class .= ' has-background-color';
 			
 		} // end if
 

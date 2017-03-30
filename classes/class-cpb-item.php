@@ -131,11 +131,15 @@ abstract class CPB_Item {
 				
 			} else {
 				
-				$clean = str_replace( '"', '&quot;' , $value );
+				if ( $value != 'default' ){
 				
-				$settings[ $key ] = $clean;
+					$clean = str_replace( '"', '&quot;' , $value );
 				
-			}// end if
+					$settings[ $key ] = $clean;
+				
+				} // end if
+				
+			} // end if
 			
 		} // end foreach
 		
@@ -146,11 +150,13 @@ abstract class CPB_Item {
 		foreach ( $settings as $key => $value ){
 			
 			if ( ( ! array_key_exists( $key , $default_sett ) ) || ( $default_sett[ $key ] != $value )  ) {
-			
-				$s .= ' ' . $key . '=' . $split . $value . $split;
 				
-				
+				if ( $value != 'default' ){
 			
+					$s .= ' ' . $key . '=' . $split . $value . $split;
+				
+				} // end if
+
 			} // end if
 			
 		} // end foreach
@@ -499,5 +505,34 @@ abstract class CPB_Item {
 		return $item;
 		
 	}
+	
+	
+	protected function get_item_style( $settings ){
+		
+		$style = array();
+		
+		$valid = array(
+			'padding_top' => 'padding-top',
+			'padding_bottom' => 'padding-bottom',
+			'padding_left' => 'padding-left',
+			'padding_right' => 'padding-right',
+			
+		);
+		
+		foreach( $settings as $key => $value ){
+
+			if ( array_key_exists( $key, $valid ) && $value != 'default' ){
+				
+				$css = $valid[ $key ];
+				
+				$style[] = $css . ':' . $value; 
+				
+			} // end if
+			
+		} // end foreach
+		
+		return $style;
+		
+	} // end get_item_style
 	
 }
