@@ -31,6 +31,7 @@ var cahnrs_pagebuilder = {
 		cahnrs_pagebuilder.lightbox.init();	
 		cahnrs_pagebuilder.layout.bind_events();
 		cahnrs_pagebuilder.layout.column_css();
+		cahnrs_pagebuilder.faq.init();
 		
 	}, // end init
 	
@@ -169,23 +170,52 @@ var cahnrs_pagebuilder = {
 			
 		} // end set_content_height
 		
-		/*ajax: function( data , request_url ){
+	}, // end lightbox
+	
+	faq:{
+		
+		init:function(){
 			
-			alert( request_url );
+			cahnrs_pagebuilder.faq.events();
 			
-			jQuery.get(
-				request_url,
-				data,
-				function( response ){
-					
-					alert( response );
-					
-				} 
+		}, // end init
+		
+		events:function(){
+			
+			jQuery('body').on(
+				'click',
+				'.cpb-faq dt',
+				function(){
+				}
 			);
 			
-		} // end ajax*/
+		}, // end events
 		
-	} // end lightbox
+		toggle:function( faq ){
+			
+			var sibs = faq.siblings('.cpb-faq');
+			
+			sibs.find('dt').removeClass('active');
+			
+			sibs.find('dd').slideUp('fast');
+			
+			if ( faq.find('dt').hasClass('active') ){
+				
+				faq.find('dt').removeClass('active');
+			
+				faq.find('dd').slideUp('fast');
+				
+			} else {
+				
+				faq.find('dt').addClass('active');
+			
+				faq.find('dd').slideDown('fast');
+				
+			} // end if
+			
+		}, // end toggle
+		
+	},
 	
 	
 }
