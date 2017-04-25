@@ -161,11 +161,11 @@ class CAHNRS_Pagebuilder_Plugin {
 		
 		$params = $this->items->get_name_versions();
 		
-		wp_enqueue_style( 'public_css', plugin_dir_url( __FILE__ ) . 'css/public.css' , false , '0.0.2' );
+		wp_enqueue_style( 'public_css', plugin_dir_url( __FILE__ ) . 'css/public.css' , false , '0.0.3' );
 		
 		wp_enqueue_style( 'template_css', get_site_url() . '?cpb-get-template=stylesheet&cpb-stylesheet=public&codes=' . implode( '_' , $params ) , false , '0.0.2' );
 		
-		wp_enqueue_script( 'public_js', plugin_dir_url( __FILE__ ) . 'js/public.js' , false , '0.0.2' , true );
+		wp_enqueue_script( 'public_js', plugin_dir_url( __FILE__ ) . 'js/public.js' , false , '0.0.3' , true );
 		
 	} // end admin_scripts
 	
