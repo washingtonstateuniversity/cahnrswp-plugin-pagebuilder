@@ -66,7 +66,7 @@ class CPB_Item_FAQ extends CPB_Item {
 		
 		$style .= '.cpb-faq dt { display: block; margin:0;padding: 1rem; font-size: 1.1rem;color:#981e32;cursor:pointer;border: 1px solid #981e32; }';
 		
-		$style .= '.cpb-faq dd { margin: 0; padding: 1rem 1.5rem; border-left: 1px solid #ddd;border-right: 1px solid #ddd;border-bottom: 1px solid #ddd; }';
+		$style .= '.cpb-faq dd { margin: 0; padding: 1rem 1.5rem; border-left: 1px solid #ddd;border-right: 1px solid #ddd;border-bottom: 1px solid #ddd; display: none; }';
 		
 		return $style;
 		
