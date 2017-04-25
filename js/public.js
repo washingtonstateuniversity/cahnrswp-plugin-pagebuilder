@@ -186,6 +186,7 @@ var cahnrs_pagebuilder = {
 				'click',
 				'.cpb-faq dt',
 				function(){
+					cahnrs_pagebuilder.faq.toggle( jQuery( this ).closest( '.cpb-faq' ) );
 				}
 			);
 			
