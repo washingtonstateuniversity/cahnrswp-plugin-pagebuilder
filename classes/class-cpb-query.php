@@ -51,6 +51,12 @@ class CPB_Query {
 		
 		$args['posts_per_page'] = ( ! empty( $settings[ $prefix . 'count'] ) ) ? $settings[ $prefix . 'count'] : 5;
 		
+		if ( ! empty( $settings[ $prefix . 'offset'] ) ) {
+			
+			$args['offset'] = $settings[ $prefix . 'offset'];
+			
+		} // end if
+		
 		// Handle Taxonomy Query 
 		if ( ! empty( $settings['taxonomy'] ) && ! empty( $settings['terms'] ) ){
 			

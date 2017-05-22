@@ -292,6 +292,8 @@ class CPB_Form_Fields {
 		
 		$form .= $this->text_field( $base_name. '[' . $prefix . 'count]' , $settings[ $prefix . 'count'] , 'Number of Items' );
 		
+		$form .= $this->text_field( $base_name. '[' . $prefix . 'offset]' , $settings[ $prefix . 'offset'] , 'Offset' );
+		
 		return $form;
 		
 	} // end get_form_local_query
@@ -304,6 +306,7 @@ class CPB_Form_Fields {
 		$ca[ $prefix . 'taxonomy'] = ( ! empty( $settings[ $prefix . 'taxonomy'] ) ) ? sanitize_text_field( $settings[ $prefix . 'taxonomy'] ) : '';
 		$ca[ $prefix . 'terms'] = ( ! empty( $settings[ $prefix . 'terms'] ) ) ? sanitize_text_field( $settings[ $prefix . 'terms'] ) : '';
 		$ca[ $prefix . 'count'] = ( ! empty( $settings[ $prefix . 'count'] ) ) ? sanitize_text_field( $settings[ $prefix . 'count'] ) : '';
+		$ca[ $prefix . 'offset'] = ( ! empty( $settings[ $prefix . 'offset'] ) ) ? sanitize_text_field( $settings[ $prefix . 'offset'] ) : '';
 		
 		return $ca;
 		
