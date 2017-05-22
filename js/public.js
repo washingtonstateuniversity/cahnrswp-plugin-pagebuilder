@@ -43,14 +43,14 @@ var cahnrs_pagebuilder = {
 		
 		column_css:function(){
 			
-			jQuery( '.row > .column').each( function(){
+			jQuery( '.row > .column, .cpb-row .cpb-column').each( function(){
 				var c = jQuery( this );
 				c.removeClass('small medium large');
 				var w = c.width();
 				var cls = 'large';
 				if ( w < 450 ){
 					cls = 'small';
-				} else if ( w >= 500 && w < 900 ){
+				} else if ( w >= 450 && w < 900 ){
 					cls = 'medium';
 				} // end if
 				
