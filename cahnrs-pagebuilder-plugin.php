@@ -103,6 +103,8 @@ class CAHNRS_Pagebuilder_Plugin {
 			
 		} // end if
 		
+		include_once 'people/people.php';
+		
 	} // end init_plugin
 	
 	public function remove_empty_p( $content){
