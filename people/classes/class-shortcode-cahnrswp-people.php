@@ -29,17 +29,18 @@ class Shortcode_CAHNRSWP_People {
 		$html = '';
 		
 		$default_atts = array(
-			'display' 		=> '',
-			'taxonomy' 		=> 'post_tags',
-			'terms' 		=> '',
-			'count' 		=> -1,
-			'order' 		=> 'title',
-			'bio' 			=> '',
-			'bio-label' 	=> '',
-			'show_profile' 	=> 1,
-			'link' 			=> 1,
-			'profile' 		=> 0,
-			'tags'			=> '',
+			'display' 			=> '',
+			'taxonomy' 			=> 'post_tags',
+			'terms' 			=> '',
+			'count' 			=> -1,
+			'order' 			=> 'title',
+			'bio' 				=> '',
+			'bio-label' 		=> '',
+			'show_profile' 		=> 1,
+			'link' 				=> 1,
+			'profile' 			=> 0,
+			'tags'				=> '',
+			'classification'	=> 'faculty',
 		);
 		
 		$atts = shortcode_atts( $default_atts, $atts, 'cahnrswp_people' );
