@@ -35,8 +35,6 @@ class Person_CAHNRSWP_People {
 	
 	public function set_the_person( $profile ){
 		
-		var_dump( $profile );
-		
 		$bio_unit = ( ! empty( $profile[ 'bio_unit' ] ) ) ? $profile[ 'bio_unit' ] : '';
 		$this->set_bio_unit( $bio_unit );
 		
