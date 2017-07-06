@@ -15,7 +15,11 @@
     <div class="cwp-table-cell profile-bio">
     	<?php switch( $atts['bio'] ){
 			case 'department':
-				echo $person->get_bio_department();
+				if ( ! empty( $person->get_bio_unit() ) ){
+					echo $person->get_bio_unit();
+				} else {
+					echo $person->get_bio_department();
+				} // End if
 				break;
 		} ?>
     </div>
