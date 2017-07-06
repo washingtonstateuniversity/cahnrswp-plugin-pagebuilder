@@ -335,6 +335,11 @@ class CPB_Items {
 				'file_path' => plugin_dir_path( dirname ( __FILE__ ) ) . 'items/class-cpb-item-slide.php',
 				'priority'  => 8,
 			),
+			'slider'        => array(
+				'class'   	=> 'CPB_Item_Slider',
+				'file_path' => plugin_dir_path( dirname ( __FILE__ ) ) . 'items/slider/class-cpb-item-slider.php',
+				'priority'  => 8,
+			),
 			
 			
 		);
