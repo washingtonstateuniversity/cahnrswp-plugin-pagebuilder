@@ -92,9 +92,11 @@ abstract class CPB_Item {
 		
 		$shortcode = '[' . $this->get_slug() . $this->get_shortcode_settings() . ']';
 		
-		if ( $this->get_children() ) {
+		$children = $this->get_children();
+		
+		if ( ! empty( $children ) ) {
 			
-			foreach( $this->get_children() as $child ) {
+			foreach( $children as $child ) {
 				
 				$shortcode .= $child->the_shortcode();
 				

@@ -11,7 +11,7 @@ class CPB_Item_Action extends CPB_Item {
 	
 	public function item( $settings , $content ){
 		
-		$html .= '';
+		$html = '';
 		
 		$class = array('cpb-action-button' , 'cpb-action-button-item');
 		
@@ -47,9 +47,9 @@ class CPB_Item_Action extends CPB_Item {
 		
 		$clean['label'] = ( ! empty( $settings['label'] ) ) ? sanitize_text_field( $settings['label'] ):'';
 		
-		$clean['link'] = ( ! empty( $settings['label'] ) ) ? sanitize_text_field( $settings['link'] ):'#';
+		$clean['link'] = ( ! empty( $settings['link'] ) ) ? sanitize_text_field( $settings['link'] ):'#';
 		
-		$clean['csshook'] = ( ! empty( $settings['label'] ) ) ? sanitize_text_field( $settings['csshook'] ):'';
+		$clean['csshook'] = ( ! empty( $settings['csshook'] ) ) ? sanitize_text_field( $settings['csshook'] ):'';
 		
 		return $clean;
 		
