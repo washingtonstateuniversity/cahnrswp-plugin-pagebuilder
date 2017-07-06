@@ -3,6 +3,7 @@
 class Person_CAHNRSWP_People {
 	
 	protected $bio_department = '';
+	protected $bio_unit = '';
 	protected $email = '';
 	protected $first_name = '';
 	protected $last_name = '';
@@ -12,6 +13,7 @@ class Person_CAHNRSWP_People {
 	protected $title = '';
 	
 	public function get_bio_department() { return $this->bio_department; }
+	public function get_bio_unit() { return $this->bio_unit; }
 	public function get_email() { return $this->email; }
 	public function get_first_name() { return $this->first_name; }
 	public function get_last_name() { return $this->last_name; }
@@ -21,6 +23,7 @@ class Person_CAHNRSWP_People {
 	public function get_title() { return $this->title; }
 	
 	public function set_bio_department( $value ) { $this->bio_department = $value; }
+	public function set_bio_unit( $value ) { $this->bio_unit = $value; }
 	public function set_email( $value ) { $this->email = $value; }
 	public function set_first_name( $value ) { $this->first_name = $value; }
 	public function set_last_name( $value ) { $this->last_name = $value; }
@@ -32,7 +35,10 @@ class Person_CAHNRSWP_People {
 	
 	public function set_the_person( $profile ){
 		
-		//var_dump( $profile );
+		var_dump( $profile );
+		
+		$bio_unit = ( ! empty( $profile[ 'bio_unit' ] ) ) ? $profile[ 'bio_unit' ] : '';
+		$this->set_bio_unit( $bio_unit );
 		
 		$bio_department = ( ! empty( $profile[ 'bio_department' ] ) ) ? $profile[ 'bio_department' ] : '';
 		$this->set_bio_department( $bio_department );
