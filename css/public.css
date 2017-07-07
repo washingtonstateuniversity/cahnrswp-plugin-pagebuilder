@@ -54,6 +54,20 @@
 .cpb-row.quarters .cpb-column.three {padding-left: 1rem; padding-right: 1rem;}
 .cpb-row.quarters .cpb-column.four {padding-left: 2rem;}
 
+.cpb-row .cpb-column.bg-color {
+	padding-bottom: 1rem;
+	padding-top: 1.5rem;
+	padding-right: 2rem;
+	padding-left: 2rem;
+}
+
+.row .column.bg-color {
+	padding-bottom: 1rem;
+	padding-top: 1.5rem;
+	padding-right: 2rem;
+	padding-left: 2rem;
+}
+
 /* Bleeds --- */ 
 .cpb-row.full-bleed:before, .cpb-row.full-bleed:after {
 	position: absolute;
@@ -294,6 +308,27 @@ cpb-slide.editor-slide {padding: 0.5rem; box-sizing: border-box; border-radius: 
 	
 .column.small .cpb-slideshow .cpb-slide-caption .cpb-slide-excerpt {
 	display: none;
+}
+
+@media (max-width:500px){
+	
+	.cpb-slideshow .cpb-slide-caption .cpb-slide-title {
+		font-size: 18px;
+		font-weight: bold;
+	}
+	
+	.cpb-slideshow .cpb-slide-caption .cpb-slide-excerpt {
+		display: none;
+	}
+		
+	.cpb-slide.editor-slide img {width: 100%; height: auto; float: none; }
+			
+	.cpb-slide.editor-slide .copy { margin-left: 0;}
+			
+	.cpb-slide.editor-slide .copy { font-size: 0;}
+			
+	.cpb-slide.editor-slide .copy  h4 { font-size: 0.7rem; padding: 0.5rem 0;}
+		
 }
 		
 @media (max-width:500px){
