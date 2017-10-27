@@ -47,10 +47,33 @@ class Person_CAHNRSWP_People {
 		$this->set_office( $profile[ 'office' ] );
 		$this->set_phone( $profile[ 'phone' ] );
 		
-		$photo = ( ! empty( $profile[ 'profile_photo' ] ) ) ? $profile[ 'profile_photo' ] : 'https://people.wsu.edu/wp-content/uploads/sites/908/2015/07/HeadShot_Template2.jpg';
+		if ( ! empty( $profile['photos'][0]['thumbnail'] ) ) {
+	
+			$photo = $profile['photos'][0]['thumbnail'];
+
+		} else if ( ! empty( $profile[ 'profile_photo' ] ) ){
+
+			$photo = $profile['profile_photo'];
+
+		} else {
+
+			$photo = 'https://people.wsu.edu/wp-content/uploads/sites/908/2015/07/HeadShot_Template2.jpg';
+
+		}// End if
+		
 		$this->set_photo( $photo );
 		
-		$this->set_title( $profile[ 'position_title' ] );
+		if ( ! empty( $profile['working_titles'][0] ) ) {
+			
+			$position_title = $profile['working_titles'][0];
+			
+		} else {
+			
+			$position_title = ucwords( strtolower( $profile['position_title'] ) );
+			
+		}
+		
+		$this->set_title( $position_title );
 		
 	} // end set_the_person
 	
