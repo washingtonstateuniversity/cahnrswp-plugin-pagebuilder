@@ -110,14 +110,9 @@ abstract class CPB_Item {
 		
 		$shortcode .= '[/' . $this->get_slug() . ']';
 		
-		//var_dump( $_POST );
-		
-		//var_dump( $shortcode );
-		
 		return $shortcode;
 		
 	} // end the_shortcode
-	
 	
 	public function get_shortcode_settings(){
 		
@@ -167,6 +162,8 @@ abstract class CPB_Item {
 			} // end if
 			
 		} // end foreach
+		
+		//var_dump( $s );
 		
 		return $s;
 		
@@ -442,7 +439,7 @@ abstract class CPB_Item {
 			
 			$editor_content .= '<iframe id="item-content-' . $this->get_id() . '" class="cpb-editor-content" data-id="' . $this->get_id() . '" src="about:blank" scrolling="no"></iframe>';
 			
-			$editor_content .= '<textarea style="display:none;">' . htmlspecialchars( $this->the_item( $this->get_settings() , $this->get_content() ) ) . '</textarea>';
+			$editor_content .= '<textarea style="display:none;">' . $this->the_item( $this->get_settings() , $this->get_content() ) . '</textarea>';
 			
 			//$editor_content .= '<iframe id="item-content-' . $this->get_id() . '" class="cpb-editor-content" data-id="' . $this->get_id() . '" src="' . get_site_url() . '?cpb-get-template=editor-iframe" scrolling="no"></iframe>';
 			
@@ -521,13 +518,12 @@ abstract class CPB_Item {
 			'padding_bottom' => 'padding-bottom',
 			'padding_left' => 'padding-left',
 			'padding_right' => 'padding-right',
-			'max_width'		=> 'max-width',
 			
 		);
 		
 		foreach( $settings as $key => $value ){
 
-			if ( array_key_exists( $key, $valid ) && $value != 'default' && $value !== '' ){
+			if ( array_key_exists( $key, $valid ) && $value != 'default' ){
 				
 				$css = $valid[ $key ];
 				

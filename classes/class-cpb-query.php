@@ -57,18 +57,6 @@ class CPB_Query {
 			
 		} // end if
 		
-		if ( ! empty( $settings[ $prefix . 'order_by'] ) ) {
-			
-			$args['orderby'] = $settings[ $prefix . 'order_by'];
-			
-		} // end if
-		
-		if ( ! empty( $settings[ $prefix . 'order'] ) ) {
-			
-			$args['order'] = $settings[ $prefix . 'order'];
-			
-		} // end if
-		
 		// Handle Taxonomy Query 
 		if ( ! empty( $settings['taxonomy'] ) && ! empty( $settings['terms'] ) ){
 			

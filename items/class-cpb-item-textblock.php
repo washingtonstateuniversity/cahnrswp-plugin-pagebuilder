@@ -16,7 +16,7 @@ class CPB_Item_Textblock extends CPB_Item {
 		
 		$html = apply_filters( 'the_content' , $content );
 		
-		if ( ! empty( $settings['is_callout'] ) || ! empty( $settings['bgcolor'] ) || ! empty( $settings['csshook'] ) || ! empty( $settings['textcolor'] ) || ! empty( $settings['list_style'] ) ) {
+		if ( ! empty( $settings['is_callout'] ) || ! empty( $settings['bgcolor'] ) || ! empty( $settings['csshook'] ) || ! empty( $settings['textcolor'] ) ) {
 			
 			$class = array();
 			
@@ -27,9 +27,8 @@ class CPB_Item_Textblock extends CPB_Item {
 			if ( ! empty( $settings['csshook'] ) ) $class[] = $settings['csshook'];
 			
 			if ( ! empty( $settings['bgcolor'] ) ) $class[] = $settings['bgcolor'] . '-back';
-			
-			if ( ! empty( $settings['list_style'] ) ) $class[] = $settings['list_style'];
 			 
+			
 			$html = '<div class="cpb-textblock cpb-item ' . implode( ' ' , $class ) . '">' . $html . '</div>';  
 			
 		} // end if
@@ -40,12 +39,6 @@ class CPB_Item_Textblock extends CPB_Item {
 	
 	
 	public function form( $settings , $content ){
-		
-		$style_array = array(
-			'' 						=> 'Default',
-			'list-style-arrows' 	=> 'Arrows',
-			'list-style-drop-down' 	=> 'Accordion',
-		);
 		
 		$html = $this->form_fields->text_field( $this->get_input_name('title'), $settings['title'], 'Title' );
 		
@@ -58,8 +51,6 @@ class CPB_Item_Textblock extends CPB_Item {
 		$adv = $this->form_fields->select_field( $this->get_input_name('textcolor'), $settings['textcolor'], $this->form_fields->get_wsu_colors(), 'Text Color' );
 		
 		$adv .= $this->form_fields->select_field( $this->get_input_name('bgcolor'), $settings['bgcolor'], $this->form_fields->get_wsu_colors(), 'Background Color' );
-		
-		$adv .= $this->form_fields->select_field( $this->get_input_name('list_style'), $settings['list_style'], $style_array, 'List Style' );
 		
 		$adv .= $this->form_fields->checkbox_field( $this->get_input_name('is_callout'), 1, $settings['is_callout'], 'Is Callout' );
 		
@@ -82,8 +73,6 @@ class CPB_Item_Textblock extends CPB_Item {
 		$clean['bgcolor'] = ( ! empty( $settings['bgcolor'] ) ) ? sanitize_text_field( $settings['bgcolor'] ) : '';
 		
 		$clean['textcolor'] = ( ! empty( $settings['textcolor'] ) ) ? sanitize_text_field( $settings['textcolor'] ) : '';
-		
-		$clean['list_style'] = ( ! empty( $settings['list_style'] ) ) ? sanitize_text_field( $settings['list_style'] ) : '';
 		
 		$clean['is_callout'] = ( ! empty( $settings['is_callout'] ) ) ? sanitize_text_field( $settings['is_callout'] ) : '';
 		

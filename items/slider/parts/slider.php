@@ -1,52 +1,38 @@
 <style>
 .cpb-slider {
 	position: relative;
-	padding: 0 40px;
-	box-sizing: border-box;
+	/*margin: 0 20px;*/
 }
 .cpb-slider .cpb-slider-nav {
-	/*position: absolute;
+	position: absolute;
 	top: 50%;
 	left: 0;
-	right: 0;*/
+	right: 0;
 }
 .cpb-slider .cpb-slider-nav .cpb-slider-nav-prev, 
 .cpb-slider .cpb-slider-nav .cpb-slider-nav-next {
-	/*position: absolute;
+	position: absolute;
 	top: -30px;
 	display: block;
 	background-color: #777;
 	width: 40px;
 	height: 60px;
 	border-radius: 6px;
-	border: 2px solid #ccc;*/
-	position: absolute;
-	top: 0;
-	bottom: 0;
-	width: 30px;
-	background-color: #eee;
-	border: 1px solid #ddd;
+	border: 2px solid #ccc;
 }
 .cpb-slider .cpb-slider-nav .cpb-slider-nav-prev {
-	/*left: -35px;*/
-	left: 0;
-	border-radius: 3px 0 0 3px;
+	left: -20px;
 }
 .cpb-slider .cpb-slider-nav .cpb-slider-nav-next {
-	/*right: -35px;*/
-	right: 0;
-	border-radius: 0 3px 3px 0;
+	right: -20px;
 }
 .cpb-slider .cpb-slider-wrapper {
 	overflow: hidden;
 }
-.cpb-slider .cpb-slider-wrapper > p {
-	display: none;
-}
-.cpb-slider .cpb-slider-slides {
+.cpb-slider-slides {
 	width: 200%;
 }
-.cpb-slider .cpb-slider-slides:after {
+.cpb-slider-slides:after {
 	content: '';
 	clear: both;
 	display: block;

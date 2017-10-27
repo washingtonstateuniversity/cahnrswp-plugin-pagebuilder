@@ -15,29 +15,11 @@ class CPB_Item_Action extends CPB_Item {
 		
 		$class = array('cpb-action-button' , 'cpb-action-button-item');
 		
-		if ( ! empty( $settings['style'] ) ){
-			
-			$class[] = $settings['style'];
-			
-		} // End if
-		
-		if ( ! empty( $settings['caption'] ) ) $class[] = 'has-caption';
-		
 		if ( ! empty( $settings['csshook'] ) ) $class[] = $settings['csshook'];
 		
 		if ( ! empty( $settings['label'] ) ) {
 
-			$html = '<a href="' . $settings['link'] . '" class="'. implode( ' ' , $class ) . '">';
-			
-			$html .= '<span class="link-title">' . $settings['label'] . '</span>';
-			
-			if ( ! empty( $settings['caption'] ) ){
-				
-				$html .= '<span class="link-caption">' . $settings['caption'] . '</span>';
-				
-			} // End if
-			
-			$html .= '</a>';
+			$html = '<a href="' . $settings['link'] . '" class="'. implode( ' ' , $class ) . '">' . $settings['label'] . '</a>';
 
 		} // end if
 		
@@ -48,22 +30,13 @@ class CPB_Item_Action extends CPB_Item {
 	
 	public function form( $settings , $content ){
 		
-		$styles = array(
-			''					=> 'None',
-			'in-page-action'  	=> 'In Page Button',
-		);
-		
 		$html .= $this->form_fields->text_field( $this->get_input_name('label'), $settings['label'], 'Label' );
 
 		$html .= $this->form_fields->text_field( $this->get_input_name('link'), $settings['link'], 'Link' );
 
 		$html .= $this->form_fields->text_field( $this->get_input_name('csshook'), $settings['csshook'], 'CSS Hook' );
 		
-		$html .= $this->form_fields->select_field( $this->get_input_name('style'), $settings['style'], $styles, 'Style' );
-		
-		$adv .= $this->form_fields->textarea_field( $this->get_input_name('caption'), $settings['caption'], 'Link Description' );
-		
-		return array( 'Basic' => $html, 'Advanced' => $adv );
+		return $html;
 		
 	} // end form
 	
@@ -77,10 +50,6 @@ class CPB_Item_Action extends CPB_Item {
 		$clean['link'] = ( ! empty( $settings['link'] ) ) ? sanitize_text_field( $settings['link'] ):'#';
 		
 		$clean['csshook'] = ( ! empty( $settings['csshook'] ) ) ? sanitize_text_field( $settings['csshook'] ):'';
-		
-		$clean['style'] = ( ! empty( $settings['style'] ) )? sanitize_text_field( $settings['style'] ) : '';
-		
-		$clean['caption'] = ( ! empty( $settings['caption'] ) )? sanitize_text_field( $settings['caption'] ) : '';
 		
 		return $clean;
 		

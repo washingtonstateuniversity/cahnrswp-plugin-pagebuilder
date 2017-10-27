@@ -113,15 +113,7 @@ class CPB_Editor {
 			
 				foreach( $items as $item ){
 					
-					if ( is_array( $item ) ){
-						
-						var_dump( $item );
-						
-					} // End if
-					
 					$child_ids[] = $item->get_id();
-					
-					
 					
 					$html .= $item->the_editor();
 					
@@ -133,6 +125,8 @@ class CPB_Editor {
 			
 			$html .= '<fieldset>';
 			
+				
+				
 				$html .= '<input class="cpb-children-input" type="hidden" name="_cpb[layout]" value="' . implode( ',' , $child_ids ) . '" >';
 			
 			$html .= '</fieldset>';
