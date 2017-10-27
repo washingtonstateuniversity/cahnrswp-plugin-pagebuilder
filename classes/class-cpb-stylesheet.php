@@ -25,7 +25,7 @@ Class CPB_Stylesheet {
 			
 			} else {
 				
-				echo file_get_contents( plugin_dir_path( dirname ( __FILE__ ) ) . 'css/public.css' );
+				//echo file_get_contents( plugin_dir_path( dirname ( __FILE__ ) ) . 'css/public.css' );
 				
 			}// end if
 			

@@ -278,6 +278,13 @@ class CPB_Form_Fields {
 	} // end insert_media
 	
 	public function get_form_local_query( $base_name , $settings , $prefix = '' ){
+		
+		$order = array(
+			'' 		=> 'Not Set',
+			'date'	=> 'Date',
+			'rand' 	=> 'Random',
+			'title' => 'Title',
+		);
 
 		if ( empty( $settings[ $prefix . 'post_type'] ) ) $settings[ $prefix . 'post_type'] = '';
 		if ( empty( $settings[ $prefix . 'taxonomy'] ) ) $settings[ $prefix . 'taxonomy'] = '';
@@ -294,6 +301,8 @@ class CPB_Form_Fields {
 		
 		$form .= $this->text_field( $base_name. '[' . $prefix . 'offset]' , $settings[ $prefix . 'offset'] , 'Offset' );
 		
+		$form .= $this->select_field( $base_name. '[' . $prefix . 'order_by]' , $settings[ $prefix . 'order_by'] , $order , 'Order By' );
+		
 		return $form;
 		
 	} // end get_form_local_query
@@ -307,6 +316,7 @@ class CPB_Form_Fields {
 		$ca[ $prefix . 'terms'] = ( ! empty( $settings[ $prefix . 'terms'] ) ) ? sanitize_text_field( $settings[ $prefix . 'terms'] ) : '';
 		$ca[ $prefix . 'count'] = ( ! empty( $settings[ $prefix . 'count'] ) ) ? sanitize_text_field( $settings[ $prefix . 'count'] ) : '';
 		$ca[ $prefix . 'offset'] = ( ! empty( $settings[ $prefix . 'offset'] ) ) ? sanitize_text_field( $settings[ $prefix . 'offset'] ) : '';
+		$ca[ $prefix . 'order_by'] = ( ! empty( $settings[ $prefix . 'order_by'] ) ) ? sanitize_text_field( $settings[ $prefix . 'order_by'] ) : '';
 		
 		return $ca;
 		
@@ -493,8 +503,8 @@ class CPB_Form_Fields {
 				break;
 
 		} // end switch
-
-		return $colors;
+		
+		return apply_filters( 'cahnrswp_pagebuilder_colors', $colors );
 
 	}
 	
@@ -522,7 +532,7 @@ class CPB_Form_Fields {
 
 	}
 	
-	public function get_header_tags(){
+	public function get_header_tags( $include_empty = false ){
 		
 		$tags = array(
 			'h2'     => 'H2',
@@ -533,7 +543,13 @@ class CPB_Form_Fields {
 			'span'   => 'None',
 		);
 		
-		return $tags;
+		if ( $include_empty ){
+			
+			$tags = array_merge( array( '' => 'None'), $tags );
+			
+		} // End if
+		
+		return apply_filters( 'cahnrswp_pagebuilder_header_tags', $tags );
 		
 	}
 	

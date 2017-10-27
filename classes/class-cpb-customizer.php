@@ -19,6 +19,11 @@ class CPB_Customizer {
 			'transport' => 'refresh',
 		) );
 		
+		$wp_customize->add_setting( 'cpb_content_pre_filter' , array(
+			'default'   => '',
+			'transport' => 'refresh',
+		) );
+		
 		// Add Section
 		
 		$wp_customize->add_section( 'cpb_builder' , array(
@@ -40,6 +45,16 @@ class CPB_Customizer {
 					'enable' => 'Enable',
 					'disable'  => 'Disable',
 				),
+			)
+		);
+		
+		$wp_customize->add_control(
+			'cpb_content_pre_filter_control', 
+			array(
+				'label'    => 'Remove Content Pre-filter',
+				'section'  => 'cpb_builder',
+				'settings' => 'cpb_content_pre_filter',
+				'type'     => 'checkbox',
 			)
 		);
 		

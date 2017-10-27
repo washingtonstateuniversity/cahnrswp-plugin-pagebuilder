@@ -72,21 +72,23 @@ class CPB_Item_Postgallery extends CPB_Item {
 			
 			if ( ! empty( $item['img'] ) ) $class .= ' has-image';
 			
-			$html .= '<article class="' . $class . '">';
+			$html .= '<div class="' . $class . '">';
 			
 				$html .= '<div class="cpb-gallery-inner">';
 			
 					if ( ! empty( $item['img'] ) ) {
 						
-						$style = 'background-image:url(' . $item['img'] . ');background-position:center center;background-size:cover;';
+						$html .= '<div class="cpb-image" style="background-image:url(' . $item['img'] . ');background-position:center center;background-size:cover;">';
 						
-						$html .= $ls . '<img style="' . $style . '" src="' . plugins_url( 'images/spacer3x4.gif', dirname(__FILE__) ) . '" />' . $le ;
+						$html .= '</div>';
 						
 					} // end if
 					
+					$html .= '<div class="cpb-caption">';
+					
 					if ( ! empty( $item['title'] ) ){
 						
-						$html .= '<h5 class="cpb-title">' . $ls . $item['title'] . $le . '</h5>';
+						$html .= '<' . $settings['tag'] . ' class="cpb-title">' . $item['title'] . '</' . $settings['tag'] . '>';
 						
 					} // end if
 					
@@ -95,10 +97,15 @@ class CPB_Item_Postgallery extends CPB_Item {
 						$html .= '<div class="cpb-excerpt">' . strip_shortcodes( wp_strip_all_tags( $item['excerpt'] , true ) ) . '</div>';
 						
 					} // end if
+					
+					$html .= '</div>';
+			
 				
 				$html .= '</div>';
 			
-			$html .= '</article>';
+			$html .= '<div class="item-link">' . $ls . $item['title'] . $le . '</div>';
+			
+			$html .= '</div>';
 			
 		} // end if
 		
@@ -141,6 +148,10 @@ class CPB_Item_Postgallery extends CPB_Item {
 		
 		$excerpt_length = array( 'short' => 'Short' , 'medium' => 'Medium' , 'long' => 'Long' , 'full' => 'Full' );
 		$display .= $this->form_fields->select_field( $this->get_input_name('excerpt_length') , $settings['excerpt_length'] , $excerpt_length , 'Summary Length' );
+		
+		$tags = $this->form_fields->get_header_tags();
+		unset( $tags['strong'] );
+		$display .= $this->form_fields->select_field( $this->get_input_name('tag') , $settings['tag'] , $tags , 'Tag Type' ); 
 		
 		$display .= '<hr/>';
 		
@@ -207,6 +218,8 @@ class CPB_Item_Postgallery extends CPB_Item {
 		$clean['unset_link'] = ( ! empty( $settings['unset_link'] ) ) ? sanitize_text_field( $settings['unset_link'] ) : 0;
 		
 		$clean['excerpt_length'] = ( ! empty( $settings['excerpt_length'] ) ) ? sanitize_text_field( $settings['excerpt_length'] ) : 'medium';
+		
+		$clean['tag'] = ( ! empty( $settings['tag'] ) ) ? sanitize_text_field( $settings['tag'] ) : 'h3';
 
 		return $clean;
 		
@@ -230,7 +243,13 @@ class CPB_Item_Postgallery extends CPB_Item {
 		
 		$style .= '.cpb-gallery .cpb-gallery-inner {margin: 0 0.75rem;} ';
 		
-		$style .= '.cpb-gallery .cpb-gallery-inner > a > img, .cpb-gallery .cpb-gallery-inner > img {display:block;width:100%;} ';
+		$style .= '.cpb-gallery .cpb-gallery-inner a > img, .cpb-gallery .cpb-gallery-inner  img {display:block;width:100%;} ';
+		
+		$style .= '.cpb-gallery .cpb-gallery-inner .cpb-image {padding-bottom: 75%;} ';
+		
+		$style .= '@media only screen and (max-width: 850px) { .cpb-gallery-columns-4 { width: 50%;} }';
+		
+		$style .= '@media only screen and (max-width: 450px) { .cpb-gallery-columns-4 { width: auto; display: block;} }';
 		
 		return $style;
 		

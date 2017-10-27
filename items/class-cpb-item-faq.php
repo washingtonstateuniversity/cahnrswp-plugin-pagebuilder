@@ -10,9 +10,13 @@ class CPB_Item_FAQ extends CPB_Item {
 	
 	protected function item( $settings , $content ){
 		
+		$tag_start = ( ! empty( $settings['tag'] ) )? '<' . $settings['tag'] . '>' : '';
+		
+		$tag_end = ( ! empty( $settings['tag'] ) )? '</' . $settings['tag'] . '>' : '';
+		
 		$html = '<dl class="cpb-faq">';
 		
-			$html .= '<dt>' . $settings['title'] . '</dt>';
+			$html .= '<dt>' . $tag_start . $settings['title'] . $tag_end . '</dt>';
 			
   			$html .= '<dd>' . $content . '</dd>';
 		
@@ -25,7 +29,9 @@ class CPB_Item_FAQ extends CPB_Item {
 	
 	protected function form( $settings , $content ){
 		
-		$html = $this->form_fields->text_field( $this->get_input_name('title'), $settings['title'], 'Title' );
+		$html = $this->form_fields->text_field( $this->get_input_name('title'), $settings['title'], 'Title' ); 
+		
+		$html .= $this->form_fields->select_field( $this->get_input_name('tag') , $settings['tag'] , $this->form_fields->get_header_tags( true ), 'Tag Type' ); 
 		
 		ob_start();
 		
@@ -55,6 +61,8 @@ class CPB_Item_FAQ extends CPB_Item {
 		$clean = array();
 		
 		$clean['title'] = ( ! empty( $settings['title'] ) ) ? sanitize_text_field( $settings['title'] ) : '';
+		
+		$clean['tag'] = ( ! empty( $settings['tag'] ) ) ? sanitize_text_field( $settings['tag'] ) : '';
 		
 		return $clean;
 		
