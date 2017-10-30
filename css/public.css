@@ -116,7 +116,7 @@
 	position: absolute;
 	width: 100%;
 	z-index: 99999;
-	top: -9999px;*/
+	top: -9999px;
 	left: 0;
 	
 }
@@ -308,6 +308,27 @@ cpb-slide.editor-slide {padding: 0.5rem; box-sizing: border-box; border-radius: 
 	
 .column.small .cpb-slideshow .cpb-slide-caption .cpb-slide-excerpt {
 	display: none;
+}
+.cpb-faq dt {
+	position: relative;
+	padding-right: 40px;
+	box-sizing: border-box;
+}
+.cpb-faq dt:after {
+	content: '';
+	display: block;
+	position: absolute;
+	right: 0;
+	width: 40px;
+	top: 0;
+	bottom: 0;
+	background-image: url(../images/plus-icon-basic.png);
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: 30px;
+}
+.cpb-faq dt.active:after {
+	background-image: url(../images/minus-icon-basic.png);
 }
 @media only screen and (max-width: 900px) {
 	.cpb-row.quarters > .cpb-row-inner {display: block; width: auto; }
