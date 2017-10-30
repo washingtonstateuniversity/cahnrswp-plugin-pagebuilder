@@ -5,7 +5,7 @@ Plugin URI: http://cahnrs.wsu.edu/communications
 Description: Builds customizable page layouts
 Author: cahnrscommunications, Danial Bleile
 Author URI: http://cahnrs.wsu.edu/communications
-Version: 2.3.17
+Version: 2.3.18
 */
 
 class CAHNRS_Pagebuilder_Plugin {
@@ -149,9 +149,9 @@ class CAHNRS_Pagebuilder_Plugin {
 		
 		$params = $this->items->get_name_versions();
 		
-		wp_enqueue_style( 'admin_css', get_site_url() . '/?cpb-get-template=stylesheet&cpb-stylesheet=admin&codes=' . implode( '_' , $params ) , false , '0.0.3' );
+		wp_enqueue_style( 'cpb_admin_css', get_site_url() . '/?cpb-get-template=stylesheet&cpb-stylesheet=admin&codes=' . implode( '_' , $params ) , false , '0.0.3' );
 		
-		wp_enqueue_script( 'admin_js', plugin_dir_url( __FILE__ ) . 'js/admin.js' , array('jquery-ui-draggable','jquery-ui-droppable','jquery-ui-sortable') , '0.0.3' , true );
+		wp_enqueue_script( 'cpb_admin_js', plugin_dir_url( __FILE__ ) . 'js/admin.js' , array('jquery-ui-draggable','jquery-ui-droppable','jquery-ui-sortable') , '0.0.3' , true );
 		
 		//wp_enqueue_script( 'admin_js_3', CWPPBURL . 'js/admin-3.js' , array('jquery-ui-draggable','jquery-ui-droppable','jquery-ui-sortable') , '0.0.1' , true );
 		
@@ -163,11 +163,11 @@ class CAHNRS_Pagebuilder_Plugin {
 		
 		$params = $this->items->get_name_versions();
 		
-		wp_enqueue_style( 'public_css', plugin_dir_url( __FILE__ ) . 'css/public.css' , false , '0.0.3' );
+		wp_enqueue_style( 'cpb_public_css', plugin_dir_url( __FILE__ ) . 'css/public.css' , false , '0.0.4' );
 		
-		wp_enqueue_style( 'template_css', get_bloginfo('url') . '/?cpb-get-template=stylesheet&cpb-stylesheet=public&codes=' . implode( '_' , $params ) , false , '0.0.2' );
+		wp_enqueue_style( 'cpb_template_css', get_bloginfo('url') . '/?cpb-get-template=stylesheet&cpb-stylesheet=public&codes=' . implode( '_' , $params ) , false , '0.0.2' );
 		
-		wp_enqueue_script( 'public_js', plugin_dir_url( __FILE__ ) . 'js/public.js' , false , '0.0.4' , true );
+		wp_enqueue_script( 'cpb_public_js', plugin_dir_url( __FILE__ ) . 'js/public.js' , false , '0.0.5' , true );
 		
 	} // end admin_scripts
 	

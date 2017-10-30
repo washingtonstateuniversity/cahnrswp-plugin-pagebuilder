@@ -4,7 +4,7 @@ class CPB_Item_Table extends CPB_Item {
 	
 	protected $name = 'Table (Image)';
 	
-	protected $slug = 'table';
+	protected $slug = 'cpb_table';
 	
 	protected $form_size = 'small';
 	

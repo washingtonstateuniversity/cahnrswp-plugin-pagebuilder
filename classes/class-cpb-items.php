@@ -320,7 +320,7 @@ class CPB_Items {
 				'file_path' => plugin_dir_path( dirname ( __FILE__ ) ) . 'items/class-cpb-item-figure.php',
 				'priority'  => 8,
 			),
-			'table'        => array(
+			'cpb_table'        => array(
 				'class'   	=> 'CPB_Item_Table',
 				'file_path' => plugin_dir_path( dirname ( __FILE__ ) ) . 'items/class-cpb-item-table.php',
 				'priority'  => 8,
