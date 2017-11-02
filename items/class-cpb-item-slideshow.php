@@ -44,7 +44,14 @@ class CPB_Item_Slideshow extends CPB_Item {
 	
 	public function form( $settings , $content ){
 		
+		$displays = array(
+			'default' => 'Default',
+			'college' => 'College'
+		);
+		
 		$html = $this->form_fields->text_field( $this->get_input_name('title') , $settings['title'] , 'Title' ); 
+		
+		$html .= $this->form_fields->select_field( $this->get_input_name('display_type') , $settings['display_type'] , $displays , 'Display Type' );
 		
 		return array('Basic' => $html );
 		

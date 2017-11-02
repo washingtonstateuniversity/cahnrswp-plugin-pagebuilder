@@ -57,6 +57,18 @@ class CPB_Query {
 			
 		} // end if
 		
+		if ( ! empty( $settings[ $prefix . 'order_by'] ) ) {
+			
+			$args['orderby'] = $settings[ $prefix . 'order_by'];
+			
+		} // end if
+		
+		if ( ! empty( $settings[ $prefix . 'order'] ) ) {
+			
+			$args['order'] = $settings[ $prefix . 'order'];
+			
+		} // end if
+		
 		// Handle Taxonomy Query 
 		if ( ! empty( $settings['taxonomy'] ) && ! empty( $settings['terms'] ) ){
 			
@@ -192,7 +204,15 @@ class CPB_Query {
 			
 			$query = $this->get_query_args_remote( $settings , $prefix = '' );
 			
-			$url = $settings[ $prefix . 'site_url' ] . '/wp-json/posts' . $query;
+			if ( $query ){
+				
+				$url = $settings[ $prefix . 'site_url' ] . '/wp-json/posts' . $query;
+				
+			} else {
+			
+				$url = $settings[ $prefix . 'site_url' ];
+				
+			} // End if
 			
 			$response = wp_remote_get( $url ) ;
 			
@@ -208,21 +228,23 @@ class CPB_Query {
 					
 						$item = array();
 						
-						if ( in_array( 'title' , $fields ) ) $item['title'] = $json_item['title'];
+						if ( in_array( 'title' , $fields ) ) $item['title'] = $json_item['title']['rendered'];
 				
-						if ( in_array( 'content' , $fields ) ) $item['content'] = $json_item['content'];
+						if ( in_array( 'content' , $fields ) ) $item['content'] = $json_item['content']['rendered'];
 						
-						if ( in_array( 'excerpt' , $fields ) ) $item['excerpt'] = $json_item['excerpt'];
+						if ( in_array( 'excerpt' , $fields ) ) $item['excerpt'] = $json_item['excerpt']['rendered'];
 						
-						if ( in_array( 'img' , $fields ) ) {
+						if ( ! empty( $json_item['post_images'])){
 							
-							 $item['img'] = $this->get_remote_img( $json_item , $settings );
-							 
-						} // end if
+							$item['img'] = $json_item['post_images']['full'];
+							
+							$item['images'] = $json_item['post_images'];
+							
+						} // End if
 						
 						if ( in_array( 'link' , $fields ) ) $item['link'] = $json_item['link'];
 						
-						$items[ $json_item['ID'] ] = $item;
+						$items[ $json_item['id'] ] = $item;
 					
 					} // end foreach
 					
