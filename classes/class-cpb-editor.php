@@ -124,8 +124,6 @@ class CPB_Editor {
 			$html .= '<footer></footer>';
 			
 			$html .= '<fieldset>';
-			
-				
 				
 				$html .= '<input class="cpb-children-input" type="hidden" name="_cpb[layout]" value="' . implode( ',' , $child_ids ) . '" >';
 			
