@@ -5,7 +5,7 @@ Plugin URI: http://cahnrs.wsu.edu/communications
 Description: Builds customizable page layouts
 Author: cahnrscommunications, Danial Bleile
 Author URI: http://cahnrs.wsu.edu/communications
-Version: 2.3.18
+Version: 2.4.0
 */
 
 class CAHNRS_Pagebuilder_Plugin {
@@ -53,6 +53,8 @@ class CAHNRS_Pagebuilder_Plugin {
 		
 		// Static property for is editor
 		CAHNRS_Pagebuilder_Plugin::$is_editor = false;
+		
+		require_once 'lib/functions/public-functions.php';
 		
 		require_once 'classes/class-cpb-customizer.php';
 		$customizer = new CPB_Customizer();
@@ -105,11 +107,26 @@ class CAHNRS_Pagebuilder_Plugin {
 		
 		include_once 'people/people.php';
 		
+		$this->add_items();
+		
 	} // end init_plugin
+	
+	
+	protected function add_items(){
+		
+		require_once 'lib/items/twitter/class-item-twitter-cpb.php';
+		
+	} // End add_items
 	
 	public function remove_empty_p( $content){
 		
-		return do_shortcode( $content );
+		if ( ! get_theme_mod( 'cpb_content_pre_filter', false ) ){
+		
+			$content = do_shortcode( $content );
+			
+		} // End if
+		
+		return $content;
 		
 		//$post_object->post_content = do_shortcode( $post_object->post_content );
 		
