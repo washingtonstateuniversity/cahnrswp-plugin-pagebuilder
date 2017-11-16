@@ -151,7 +151,7 @@ class CPB_Save {
 			
 			$content = ( ! empty( $_POST['_cpb_content_' . $item_id ] ) ) ? $_POST['_cpb_content_' . $item_id ] : '';
 			
-			$item = $this->items->get_item( $item_data[0] , $settings , $content , false );
+			$item = $this->items->get_item( $item_slug , $settings , $content , false );
 			
 			if ( ! empty( $_POST['_cpb'][ $item_id ]['children'] ) ){
 				
