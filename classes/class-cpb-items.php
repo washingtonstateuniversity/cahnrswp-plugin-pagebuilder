@@ -75,55 +75,99 @@ class CPB_Items {
 		
 		$items = $this->get_items();
 		
+		$new_items = cpb_get_registered_items();
+		
 		if ( array_key_exists( $slug , $items ) ){
 			
-			$item_array = $items[ $slug ];
+			return $this->get_item_old( $items, $slug, $settings, $content, $get_children );
 			
-			include_once $item_array['file_path'];
+		} else if ( array_key_exists( $slug , $new_items ) ) {
 			
-			if ( class_exists( $item_array['class'] ) ){
-				
-				$item = new $item_array['class']( $settings , $content );
-				
-				if ( $get_children && $item->get_allowed_children() ){
-					
-					$child_content = $item->get_child_content( $content );
-					
-					$children = $this->get_items_from_content( $child_content , $item->get_allowed_children() , $item->get_default_child() );
-					
-					switch( $item->get_slug() ){
-						
-						case 'row':
-							$children = $this->get_item_row_columns( $item , $children );
-							break;
-						
-					} // end switch
-					
-					if ( method_exists( $item , 'return_parse_children' ) ){
-						
-						$children = $item->return_parse_children( $children );
-						
-					} // end if
-					
-					$item->set_children( $children );
-					
-				} // end if
-				
-				return $item;
-				
-			} else {
-				
-				return false;
-				
-			}// end if
+			return $this->get_item_updated( $slug, $settings, $content, $get_children );
 			
 		} else {
 			
 			return false;
 			
-		} // end if
+		}// end if
 		
 	} // end get_item
+	
+	
+	protected function get_item_old( $items, $slug, $settings = array(), $content = '', $get_children = true ){
+		
+		$item_array = $items[ $slug ];
+			
+		include_once $item_array['file_path'];
+
+		if ( class_exists( $item_array['class'] ) ){
+
+			$item = new $item_array['class']( $settings , $content );
+
+			if ( $get_children && $item->get_allowed_children() ){
+
+				$child_content = $item->get_child_content( $content );
+
+				$children = $this->get_items_from_content( $child_content , $item->get_allowed_children() , $item->get_default_child() );
+
+				switch( $item->get_slug() ){
+
+					case 'row':
+						$children = $this->get_item_row_columns( $item , $children );
+						break;
+
+				} // end switch
+
+				if ( method_exists( $item , 'return_parse_children' ) ){
+
+					$children = $item->return_parse_children( $children );
+
+				} // end if
+
+				$item->set_children( $children );
+
+			} // end if
+
+			return $item;
+
+		} else {
+
+			return false;
+
+		}// end if
+		
+		
+	} // End get_item_old
+	
+	
+	private function get_item_updated( $slug, $settings = array(), $content = '', $get_children = true ){
+		
+		
+		$new_items = cpb_get_registered_items();
+		
+		if ( array_key_exists( $slug , $new_items ) ) {
+		
+			$item = $new_items[ $slug ];
+			
+			if ( $get_children && ! empty( $item['allowed_children'] ) ) {
+
+				$default_child = ( ! empty( $item['default_child'] ) )? $item['default_child'] : false;
+
+				$children = $this->get_items_from_content( $content , $item['allowed_children'] , $default_child );
+
+				$item['children'] = $children;
+
+			} // End if
+
+			return $item;
+			
+		} else {
+			
+			return false;
+			
+		} // End if
+		
+	} // End get_item_updated
 	
 	
 	private function split_content( $content, $regex ){
@@ -146,7 +190,15 @@ class CPB_Items {
 		// Populate this with shortcode later if exists
 		$items = array();
 		
-		if ( in_array( 'all' , $allowed_types ) ) $allowed_types = $this->get_item_slugs();
+		if ( in_array( 'all' , $allowed_types ) ) {
+			
+			$allowed_types = $this->get_item_slugs();
+			
+			//$new_items = array_keys( cpb_get_registered_items( true ) );
+			
+			//$allowed_types = array_merge( $allowed_types, $new_items );
+			
+		}
 		
 		// Get modified regex for parsing shortcodes
 		$regex = $this->get_item_regex( $allowed_types );
@@ -340,11 +392,26 @@ class CPB_Items {
 				'file_path' => plugin_dir_path( dirname ( __FILE__ ) ) . 'items/slider/class-cpb-item-slider.php',
 				'priority'  => 8,
 			),
+			'banner'        => array(
+				'class'   	=> 'CPB_Item_Banner',
+				'file_path' => plugin_dir_path( dirname ( __FILE__ ) ) . 'items/banner/class-cpb-item-banner.php',
+				'priority'  => 8,
+			),
+			'social'        => array(
+				'class'   	=> 'CPB_Item_Social',
+				'file_path' => plugin_dir_path( dirname ( __FILE__ ) ) . 'items/social/class-cpb-item-social.php',
+				'priority'  => 8,
+			),
+			'az_index'        => array(
+				'class'   	=> 'CPB_Item_AZ_Index',
+				'file_path' => plugin_dir_path( dirname ( __FILE__ ) ) . 'items/a-z-index/class-cpb-item-a-z-index.php',
+				'priority'  => 8,
+			),
 			
 			
 		);
 		
-		return $items;
+		return apply_filters( 'cahnrs_pagebuilder_items_array' , $items );
 		
 	} // end set_items
 	
