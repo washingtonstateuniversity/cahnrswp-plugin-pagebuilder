@@ -15,7 +15,27 @@ class CPB_Item_Subtitle extends CPB_Item {
 		
 		$le = ( ! empty( $settings['link'] ) ) ? '</a>' : '';
 		
-		$html = '<' . $settings['tag'] . ' class="' . $settings['csshook'] . ' ' . $settings['textcolor'] . '-text">' . $ls . $settings['title'] . $le . '</' . $settings['tag'] . '>';
+		$classes = array();
+		
+		if ( ! empty( $settings['style'] ) ){
+			
+			$classes[] = $settings['style'];
+			
+		} // End if
+		
+		if ( ! empty( $settings['csshook'] ) ){
+			
+			$classes[] = $settings['csshook'];
+			
+		} // End if
+		
+		if ( ! empty( $settings['textcolor'] ) ){
+			
+			$classes[] = $settings['textcolor'] . '-text';
+			
+		} // End if
+		
+		$html = '<' . $settings['tag'] . ' class="' . implode( ' ', $classes ) . '">' . $ls . $settings['title'] . $le . '</' . $settings['tag'] . '>';
 		
 		if ( ! empty( $settings['anchor'] ) ){
 			
@@ -30,6 +50,12 @@ class CPB_Item_Subtitle extends CPB_Item {
 	
 	public function form( $settings , $content ){
 		
+		$styles = array(
+			'' 									=> 'None',
+			'underline-heading' 				=> 'Underlined Heading',
+			'underline-heading small-heading' 	=> 'Underlined Heading (small font)',
+		);
+		
 		$html = $this->form_fields->text_field( $this->get_input_name('title') , $settings['title'] , 'Title' );
 		
 		$html .= $this->form_fields->select_field( $this->get_input_name('tag') , $settings['tag'] , $this->form_fields->get_header_tags() , 'Tag Type' ); 
@@ -41,6 +67,8 @@ class CPB_Item_Subtitle extends CPB_Item {
 		$adv .= $this->form_fields->text_field( $this->get_input_name('anchor') , $settings['anchor'] , 'Anchor Name' );
 		
 		$adv .= $this->form_fields->text_field( $this->get_input_name('csshook') , $settings['csshook'] , 'CSS Hook' ); 
+		
+		$adv .= $this->form_fields->select_field( $this->get_input_name('style'), $settings['style'], $styles, 'Style' );
 		
 		return array('Basic' => $html , 'Advanced' => $adv );
 		
@@ -62,6 +90,8 @@ class CPB_Item_Subtitle extends CPB_Item {
 		$clean['anchor'] = ( ! empty( $settings['anchor'] ) )? sanitize_text_field( $settings['anchor'] ) : '';
 		
 		$clean['link'] = ( ! empty( $settings['link'] ) )? sanitize_text_field( $settings['link'] ) : '';
+		
+		$clean['style'] = ( ! empty( $settings['style'] ) )? sanitize_text_field( $settings['style'] ) : '';
 		
 		return $clean;
 	}

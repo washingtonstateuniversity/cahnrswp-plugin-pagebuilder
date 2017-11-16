@@ -29,8 +29,14 @@ class CPB_Item_Row extends CPB_Item {
 
 		$cpb_column_i = 1;
 		
-		$html = '<div class="' . $this->prefix . 'row ' . $this->get_item_class( $settings ) . '" style="' . implode( ';' , $this->get_item_style( $settings ) ) . '">';
+		$classes = $this->get_item_class( $settings );
 		
+		if ( isset( $settings['bg_src'] ) ) $classes .= ' has-bg-image';
+		
+		$html = '<div class="' . $this->prefix . 'row ' . $classes . '" style="' . implode( ';' , $this->get_item_style( $settings ) ) . '">';
+		
+			$html .= $this->get_row_background( $settings ); 
+			
 			if ( ! empty( $this->prefix ) ) $html .= '<div class="cpb-row-inner">'; 
 		
 		
@@ -39,8 +45,6 @@ class CPB_Item_Row extends CPB_Item {
 				$html .= '<h2 class="row-title">' . $settings['title'] . '</h2>'; 
 				
 			} // end if
-		
-			$html .= $this->get_row_background( $settings ); 
 		
 			$html .= do_shortcode( $content );
 			
@@ -98,11 +102,11 @@ class CPB_Item_Row extends CPB_Item {
 		
 		$p = 0;
 		
-		while( $p < 4 ){
+		while( $p < 5 ){
 			
 			$p_values[ $p . 'rem' ] = $p . 'rem';
 			
-			$p = $p + 0.5;
+			$p = $p + 0.25;
 			
 		} // end for
 		
@@ -129,6 +133,8 @@ class CPB_Item_Row extends CPB_Item {
 		$layout .= $this->form_fields->select_field( $this->get_input_name('padding_right'), $settings['padding_right'], $p_values, 'Padding Right' );
 		
 		$layout .= $this->form_fields->select_field( $this->get_input_name('padding'), $settings['padding'], $this->form_fields->get_padding(), 'Padding (Old)' );
+		
+		$layout .= $this->form_fields->text_field( $this->get_input_name('max_width'), $settings['max_width'], 'Max Width' );
 		
 		$adv = $this->form_fields->select_field( $this->get_input_name('gutter'), $settings['gutter'], $this->form_fields->get_gutters(), 'Gutter' );
 		
@@ -182,6 +188,8 @@ class CPB_Item_Row extends CPB_Item {
 		$clean['textcolor'] = ( ! empty( $settings['textcolor'] ) ) ? sanitize_text_field( $settings['textcolor'] ) : '';
 
 		$clean['padding'] = ( isset( $settings['padding'] ) ) ? sanitize_text_field( $settings['padding'] ) : 'pad-bottom';
+		
+		$clean['max_width'] = ( ! empty( $settings['max_width'] ) ) ? sanitize_text_field( $settings['max_width'] ) : '';
 
 		$clean['gutter'] = ( ! empty( $settings['gutter'] ) ) ? sanitize_text_field( $settings['gutter'] ) : 'gutter';
 

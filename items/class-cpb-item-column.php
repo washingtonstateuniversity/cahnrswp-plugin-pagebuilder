@@ -71,11 +71,11 @@ class CPB_Item_Column extends CPB_Item {
 		
 		$p = 0;
 		
-		while( $p < 4 ){
+		while( $p < 5 ){
 			
 			$p_values[ $p . 'rem' ] = $p . 'rem';
 			
-			$p = $p + 0.5;
+			$p = $p + 0.25;
 			
 		} // end for
 
