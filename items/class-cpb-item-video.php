@@ -79,7 +79,7 @@ class CPB_Item_Video extends CPB_Item {
 
 			$html .= '<img src="' . plugins_url( 'images/spacer16x9.gif', dirname(__FILE__) ) . '" style="width:100%;display:block" />';
 
-			$html .= '<iframe src="https://www.youtube.com/embed/' . $settings['vid_id'] . '" frameborder="0" allowfullscreen style="' . $vid_style . '"></iframe>';
+			$html .= '<iframe src="https://www.youtube.com/embed/' . $settings['vid_id'] . '?rel=0" frameborder="0" allowfullscreen style="' . $vid_style . '"></iframe>';
 
 		} // end if
 
