@@ -68,6 +68,15 @@ class CPB_Form_Fields {
 		
 	} // end get_lb_form
 	
+	
+	public function get_button( $title, $class ){
+		
+		$html .= '<a href="" class="' . $class . '">' . $title . '</a>';
+		
+		return $html;
+		
+	} // End get_js_button
+	
 	public function text_field( $name, $value, $label = false, $class = '' , $helper_text = '' ) {
 
 		$html = '<input type="text" name="' . $name . '" value="' . $value . '" />';
@@ -130,6 +139,124 @@ class CPB_Form_Fields {
 		return $this->wrap_field( $html, $class );
 
 	} // end select
+	
+	
+	public function multi_select_field( $name, $values, $options, $label = false, $class = '' ) {
+		
+		if ( ! is_array( $values ) ) $values = array();
+		
+		$options_fields_selected = array();
+	
+		$options_fields = array();
+
+		foreach( $options as $op_value => $op_label ) {
+
+			if ( is_array( $op_label ) ) {
+
+				$c_label = $op_label[0];
+
+			} else {
+
+				$c_label = $op_label;
+
+			} // end if
+			
+			$selected = ( in_array( $op_value, $values ) )? 'selected="selected"' : '';
+
+			$option_html = '<option value="' . $op_value . '" ' . $selected . ' >' . $op_label . '</option>';
+			
+			if ( in_array( $op_value, $values ) ){
+				
+				$options_fields_selected[] = $option_html;
+				
+			} else {
+				
+				$options_fields[] = $option_html;
+				
+			} // End if
+
+		} // end foreach
+		
+		$html = '<select multiple name="' . $name . '" >' . implode('', $options_fields_selected ) . implode('', $options_fields ) . '</select>';
+
+		if ( $label ) $html = '<label for="' . $id . '">' . $label . '</label>' . $html;
+
+		return $this->wrap_field( $html, $class );
+
+	} // end select
+	
+	
+	public function select_posts_field( $name, $values, $options, $label = false, $class = '' ) {
+		
+		if ( ! is_array( $values ) ) $values = array();
+	
+		$options_fields = array();
+
+		foreach( $options as $op_value => $op_label ) {
+
+			if ( is_array( $op_label ) ) {
+
+				$c_label = $op_label[0];
+
+			} else {
+
+				$c_label = $op_label;
+
+			} // end if
+
+			$option_html = '<option value="' . $op_value . '" >' . $op_label . '</option>';
+	
+			$options_fields[] = $option_html;
+
+		} // end foreach
+		
+		$html .= '<div class="cpb-select-post" data-basename="' . $name . '[]">';
+		
+		$html .= '<h3>Selected Posts</h3>';
+		
+		$html .= '<div class="cpb-select-post-selected">';
+		
+		foreach( $values as $index => $value ){
+			
+			if ( array_key_exists( $value, $options ) ){
+				
+				$html .= '<label>' . $options[ $value ] . '</label><input type="text" name="' . $name . '[]" value="' . $value . '" />';
+				
+			} // End if
+			
+		} // End foreach
+		
+		$html .= '</div>';
+		
+		$field_html = '<select name="" >' . implode('', $options_fields ) . '</select>';
+
+		if ( $label ) $field_html = '<label for="' . $id . '">' . $label . '</label>' . $field_html;
+		
+		$html .= $field_html;
+		
+		$html .= $this->get_button('Add Post', 'cpb-select-post-updated-action') . '</div>';
+
+		return $this->wrap_field( $html, $class );
+
+	} // end select
+	
+	
+	public function clean_select_posts_field( $posts ){
+		
+		$clean_posts = '';
+		
+		if ( is_array( $posts ) ){
+			
+			$posts = implode( ',', $posts );
+			
+		} // End if
+		
+		$clean_posts = sanitize_text_field( $posts );
+		
+		return $clean_posts;
+		
+	} // End clean_select_posts_field
+	
 	
 	public function checkbox_field( $name, $value, $current_value = false, $label = false, $class = '' , $text = '' ) {
 

@@ -440,9 +440,11 @@ CPB = {
 			
 			CPB.forms.multi_form.init();
 			
-			CPB.forms.load_media()
+			CPB.forms.load_media();
 			
 			CPB.forms.post_search.init();
+			
+			CPB.forms.select_post.init();
 			
 		},
 		
@@ -608,6 +610,49 @@ CPB = {
 			} // end if
 			
 		},
+		
+		select_post:{
+			
+			init: function(){
+				
+				CPB.forms.select_post.bind_events();
+				
+			},
+			
+			bind_events: function(){
+				
+				jQuery('body').on(
+					'click',
+					'.cpb-select-post-updated-action',
+					function( event ){
+						event.preventDefault();
+						CPB.forms.select_post.add_post( jQuery( this ) );
+					}
+				);
+				
+			}, // end bind_events
+			
+			add_post: function( ic ){
+				
+				var wrapper = ic.closest('.cpb-select-post');
+				
+				var basename = wrapper.data('basename');
+				
+				var select = wrapper.find('select');
+				
+				var val = select.val();
+				
+				var text = select.find('option:selected').text();
+				
+				var selected = wrapper.find('.cpb-select-post-selected');
+				
+				var input = '<label>' + text + '</label><input type="text" name="' + basename + '" value="' + val + '" />';
+				
+				selected.append( input );
+				
+			}, // End add_post
+			
+		}, // End select_post
 		
 		multi_form: {
 			

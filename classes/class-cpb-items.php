@@ -372,7 +372,7 @@ class CPB_Items {
 				'file_path' => plugin_dir_path( dirname ( __FILE__ ) ) . 'items/class-cpb-item-figure.php',
 				'priority'  => 8,
 			),
-			'cpb_table'        => array(
+			'cpbtable'        => array(
 				'class'   	=> 'CPB_Item_Table',
 				'file_path' => plugin_dir_path( dirname ( __FILE__ ) ) . 'items/class-cpb-item-table.php',
 				'priority'  => 8,
@@ -402,9 +402,14 @@ class CPB_Items {
 				'file_path' => plugin_dir_path( dirname ( __FILE__ ) ) . 'items/social/class-cpb-item-social.php',
 				'priority'  => 8,
 			),
-			'az_index'        => array(
+			'azindex'        => array(
 				'class'   	=> 'CPB_Item_AZ_Index',
 				'file_path' => plugin_dir_path( dirname ( __FILE__ ) ) . 'items/a-z-index/class-cpb-item-a-z-index.php',
+				'priority'  => 8,
+			),
+			'cpbtabs'        => array(
+				'class'   	=> 'CPB_Item_Tabs',
+				'file_path' => plugin_dir_path( dirname ( __FILE__ ) ) . 'items/tabs/class-cpb-item-tabs.php',
 				'priority'  => 8,
 			),
 			

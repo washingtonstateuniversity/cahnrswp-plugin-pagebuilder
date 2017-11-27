@@ -96,9 +96,15 @@ abstract class CPB_Item {
 		
 		if ( ! empty( $children ) ) {
 			
+			//var_dump( $children );
+			
 			foreach( $children as $child ) {
 				
-				$shortcode .= $child->the_shortcode();
+				if ( $child ){
+					
+					$shortcode .= $child->the_shortcode();
+					
+				} // End if
 				
 			} // end foreach
 			

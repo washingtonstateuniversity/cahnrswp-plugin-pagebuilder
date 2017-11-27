@@ -59,3 +59,50 @@ function cpb_get_registered_items( $exclude_layout = false ){
 	return $items;
 	
 } // End cpb_get_registered_items
+
+
+function cpb_get_public_posts( $post_types = array(), $as_options = false ){
+	
+	$posts = array();
+	
+	if ( empty( $post_types ) ){
+	
+		$post_type_args = array(
+			'publicly_queryable' => true,
+		);
+
+		$post_types = get_post_types( $post_type_args );
+		
+	} // End if
+	
+	$args = array(
+		'post_status' 		=> 'publish',
+		'posts_per_page' 	=> -1,
+		'post_type' 		=> $post_types,
+	);
+	
+	$posts_array = get_posts( $args );
+	
+	//var_dump( $posts_array );
+
+	if ( ! empty( $posts_array ) ) {
+		
+		foreach( $posts_array as $post_item ) {
+
+			if ( $as_options ){
+				
+				$posts[ $post_item->ID ] = $post_item->post_title;
+				
+			} else {
+				
+				$posts[ $$post_item->ID ] = $post_item;
+				
+			} //  End if
+
+		} // End foreacd
+		
+	} // End if
+	
+	return $posts;
+	
+} // End cpb_get_posts

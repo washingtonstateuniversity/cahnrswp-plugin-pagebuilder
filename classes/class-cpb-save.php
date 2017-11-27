@@ -147,11 +147,13 @@ class CPB_Save {
 			
 			$item_data = explode( '_' , $item_id );
 			
+			$item_type = $item_data[0];
+			
 			$settings = ( ! empty( $_POST['_cpb'][ $item_id ]['settings'] ) ) ? $_POST['_cpb'][ $item_id ]['settings'] : array();
 			
 			$content = ( ! empty( $_POST['_cpb_content_' . $item_id ] ) ) ? $_POST['_cpb_content_' . $item_id ] : '';
 			
-			$item = $this->items->get_item( $item_slug , $settings , $content , false );
+			$item = $this->items->get_item( $item_type , $settings , $content , false );
 			
 			if ( ! empty( $_POST['_cpb'][ $item_id ]['children'] ) ){
 				
