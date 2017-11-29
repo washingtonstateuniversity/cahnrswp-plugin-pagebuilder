@@ -384,19 +384,19 @@ class CPB_Form_Fields {
 		
 	}
 	
-	public function insert_media( $base_name, $settings, $class = '' ) {
+	public function insert_media( $base_name, $settings, $class = '', $prefix = '' ) {
 
 		$html = '<div class="cwp-add-media-wrap">';
 
-			$img = ( ! empty( $settings['img_src'] ) ) ? '<img src="' . $settings['img_src'] . '" />' : '<div class="cpb-image-item-empty">No Image Set</div>';
+			$img = ( ! empty( $settings[$prefix . 'img_src'] ) ) ? '<img src="' . $settings[$prefix . 'img_src'] . '" />' : '<div class="cpb-image-item-empty">No Image Set</div>';
 
 			$html .= '<div class="cpb-add-media-img">' . $img . '</div>';
 
 			$html .= $this->button( 'Add Image', 'add-media-action' );
 
-			$html .= $this->hidden_field( $base_name . '[img_src]', $settings['img_src'], 'cpb-add-media-src' );
+			$html .= $this->hidden_field( $base_name . '[' . $prefix . 'img_src]', $settings[ $prefix . 'img_src'], 'cpb-add-media-src' );
 
-			$html .= $this->hidden_field( $base_name . '[img_id]', $settings['img_id'], 'cpb-add-media-id' );
+			$html .= $this->hidden_field( $base_name . '[' . $prefix . 'img_id]', $settings[$prefix . 'img_id'], 'cpb-add-media-id' );
 
 		$html .= '</div>';
 
@@ -430,6 +430,8 @@ class CPB_Form_Fields {
 		
 		$form .= $this->select_field( $base_name. '[' . $prefix . 'order_by]' , $settings[ $prefix . 'order_by'] , $order , 'Order By' );
 		
+		$form .= $this->checkbox_field( $base_name. '[' . $prefix . 'term_operator]', 'AND', $settings[ $prefix . 'term_operator'], 'Use AND Logic' );
+		
 		return $form;
 		
 	} // end get_form_local_query
@@ -444,6 +446,8 @@ class CPB_Form_Fields {
 		$ca[ $prefix . 'count'] = ( ! empty( $settings[ $prefix . 'count'] ) ) ? sanitize_text_field( $settings[ $prefix . 'count'] ) : '';
 		$ca[ $prefix . 'offset'] = ( ! empty( $settings[ $prefix . 'offset'] ) ) ? sanitize_text_field( $settings[ $prefix . 'offset'] ) : '';
 		$ca[ $prefix . 'order_by'] = ( ! empty( $settings[ $prefix . 'order_by'] ) ) ? sanitize_text_field( $settings[ $prefix . 'order_by'] ) : '';
+		
+		$ca[ $prefix . 'term_operator'] = ( ! empty( $settings[ $prefix . 'term_operator'] ) ) ? sanitize_text_field( $settings[ $prefix . 'term_operator'] ) : '';
 		
 		return $ca;
 		

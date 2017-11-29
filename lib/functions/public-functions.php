@@ -61,9 +61,15 @@ function cpb_get_registered_items( $exclude_layout = false ){
 } // End cpb_get_registered_items
 
 
-function cpb_get_public_posts( $post_types = array(), $as_options = false ){
+function cpb_get_public_posts( $post_types = array(), $as_options = false, $include_empty = false ){
 	
 	$posts = array();
+	
+	if ( $include_empty ){
+		
+		$posts[''] = 'None Selected';
+		
+	} // End if
 	
 	if ( empty( $post_types ) ){
 	

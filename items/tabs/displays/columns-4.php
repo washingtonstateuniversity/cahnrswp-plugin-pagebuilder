@@ -1,18 +1,11 @@
-<div class="cpb-item-tabs-sections"><?php foreach( $tabs as $key => $tab ):?>
-		<div class="cpb-item-tabs-section"></div><?php endforeach;?>
-	</div>
-
-<?php foreach( $tabs as $key => $tab ):?>
-		<div class="cpb-item-tabs-section"></div><?php endforeach;?>
-
-<div class="cpb-item cpb-item-tabs cpb-item-display-columns-4">
-	<div class="cpb-item-tabs-nav">
-		<?php foreach( $tabs as $key => $tab ):?><a href=""><?php echo $tab['title'];?></a><?php endforeach;?>
-	</div>
-	<div class="cpb-item-tabs-sections">
-		<?php foreach( $tabs as $key => $tab ):?>
-		<div class="cpb-item-tabs-section">
-			<?php if ( ! empty( $tab['posts'] ) ){
+<div class="cpb-item-tabs-set cpb-item-tabs-columns" style="<?php if ( ! empty( $settings['min_height'] ) ) { echo 'height:' . $settings['min_height']; }?>">
+	<?php foreach( $tabs as $key => $tab ):?>
+		<div class="cpb-item-tab-title cpb-item-tab-column <?php echo $tab['bgcolor'];?>-back <?php echo $settings['textcolor'];?>-text">
+			<?php if ( ! empty( $tab['bgimage'] ) ):?><div class="cpb-item-tab-bgimage" style="background-image: url(<?php echo $tab['bgimage'];?> )"></div><?php endif;?>
+			<div class="cpb-item-tab-inner-content"><h2 class="<?php echo $settings['textcolor'];?>-text"><?php echo $tab['title'];?></h2></div>
+		</div>
+		<div class="cpb-item-tab-content cpb-item-tab-column"><div class="cpb-item-tab-inner-content">
+		<?php if ( ! empty( $tab['posts'] ) ){
 				
 				$post_ids = explode(',', $tab['posts']);
 	
@@ -25,7 +18,6 @@
 				} // end foreach
 	
 			};?>
-		</div>
-		<?php endforeach;?>
-	</div>
+			</div></div>
+	<?php endforeach;?>
 </div>

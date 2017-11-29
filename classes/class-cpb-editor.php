@@ -16,13 +16,27 @@ class CPB_Editor {
 	
 	public function get_editor( $post , $settings ){
 		
+		if ( $settings['_cpb_pagebuilder'] === '0' ){
+			
+			$settings['_cpb_pagebuilder'] = 'default';
+			
+		} else if ( $settings['_cpb_pagebuilder'] === '1' ){
+			
+			$settings['_cpb_pagebuilder'] = 'builder';
+			
+		} else if ( empty( $settings['_cpb_pagebuilder'] ) ) {
+			
+			$settings['_cpb_pagebuilder'] = 'builder';
+			
+		}; // End if
+		
 		$items = $this->items->get_items_from_content( $post->post_content , array( 'row','pagebreak' ) , 'row' );
 		
 		$html = '<div id="cpb-editor">';
 		
 			$html .= $this->get_editor_options( $post , $settings );
 			
-			if ( $settings['_cpb_pagebuilder'] ) {
+			if ( $settings['_cpb_pagebuilder'] == 'builder' ) {
 		
 				$html .= $this->get_layout_editor( $items , $post ); 
 				
@@ -44,7 +58,19 @@ class CPB_Editor {
 	
 	protected function get_editor_options( $post , $settings ){
 		
-		$values = array( 'Default Editor' , 'Layout Editor' );
+		$values = array( 'default' => 'Default Editor' , 'builder' => 'Layout Editor' );
+		
+		var_dump( $settings['_cpb_pagebuilder'] );
+		
+		if ( $settings['_cpb_pagebuilder'] === '0' ){
+			
+			$settings['_cpb_pagebuilder'] = 'default';
+			
+		} else if ( $settings['_cpb_pagebuilder'] === '1' ){
+			
+			$settings['_cpb_pagebuilder'] = 'builder';
+			
+		}; // End if
 		
 		$html .= '<div id="cpb-editor-options">';
 		
