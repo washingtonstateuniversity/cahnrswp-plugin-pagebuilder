@@ -83,6 +83,7 @@ class CPB_Item_Social extends CPB_Item {
 				'type' 		=> 'instagram',
 				'src' 		=> $settings['instagram'],
 				'height' 	=> $settings['height'],
+				'target' 	=> $settings['instagram_target'],
 				'is_link'	=> true,
 				);
 			
@@ -197,7 +198,15 @@ class CPB_Item_Social extends CPB_Item {
 		
 		if ( $is_icon ){
 			
-			$html .= '<div class="cpb-social-icon cpb-social-icon-instagram is-link"><a href="' . $feed['src'] . '">Visit Instagram</a></div>';
+			$html .= '<div class="cpb-social-icon cpb-social-icon-instagram is-link"><a href="' . $feed['src'] . '"';
+			
+			if ( $feed['target'] ) {
+				
+				$html .= ' target="_blank" ';
+				
+			} // End if
+			
+			$html .= ' >Visit Instagram</a></div>';
 			
 		} else {
 			
@@ -223,6 +232,8 @@ class CPB_Item_Social extends CPB_Item {
 		$html .= $this->form_fields->text_field( $this->get_input_name('instagram') , $settings['instagram'] , 'Instagram URL' );
 		
 		$html .= $this->form_fields->text_field( $this->get_input_name('instagram_order') , $settings['instagram_order'] , 'Instagram Order' );
+		
+		$html .= $this->form_fields->checkbox_field( $this->get_input_name('instagram_target'), 1, $settings['instagram_target'] , 'Instagram: Open In New Window' );
 		
 		$html .= $this->form_fields->text_field( $this->get_input_name('height') , $settings['height'] , 'height (no px)' );
 		
@@ -268,6 +279,8 @@ class CPB_Item_Social extends CPB_Item {
 		$clean['instagram'] = ( ! empty( $settings['instagram'] ) )? sanitize_text_field( $settings['instagram'] ) : '';
 		
 		$clean['instagram_order'] = ( ! empty( $settings['instagram_order'] ) )? sanitize_text_field( $settings['instagram_order'] ) : '';
+		
+		$clean['instagram_target'] = ( ! empty( $settings['instagram_target'] ) )? sanitize_text_field( $settings['instagram_target'] ) : '';
 		
 		$clean['height'] = ( ! empty( $settings['height'] ) )? sanitize_text_field( $settings['height'] ) : '';
 		
