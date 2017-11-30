@@ -75,6 +75,19 @@ class CPB_Item_Social extends CPB_Item {
 			
 		} // End if
 		
+		if ( ! empty( $settings['instagram'] ) ){
+			
+			$order = ( ! empty( $settings['instagram_order'] ) )? $settings['instagram_order'] : 4;
+			
+			$feeds[ $order ] = array(
+				'type' 		=> 'instagram',
+				'src' 		=> $settings['instagram'],
+				'height' 	=> $settings['height'],
+				'is_link'	=> true,
+				);
+			
+		} // End if
+		
 		$html = '<div class="cpb-social-item">';
 		
 		ksort( $feeds );
@@ -100,6 +113,10 @@ class CPB_Item_Social extends CPB_Item {
 				case 'twitter':
 					$icon_html .= $this->get_twitter_html( $feed, $i, true );
 					$content_html .= $this->get_twitter_html( $feed, $i );
+					break;
+				case 'instagram':
+					$icon_html .= $this->get_instagram_html( $feed, $i, true );
+					$content_html .= $this->get_instagram_html( $feed, $i );
 					break;
 			} // End 
 			
@@ -172,6 +189,26 @@ class CPB_Item_Social extends CPB_Item {
 		
 	} // End get_facebook_html
 	
+	protected function get_instagram_html( $feed, $i, $is_icon = false ){
+		
+		$html = '';
+		
+		$height = $feed['height'];
+		
+		if ( $is_icon ){
+			
+			$html .= '<div class="cpb-social-icon cpb-social-icon-instagram is-link"><a href="' . $feed['src'] . '">Visit Instagram</a></div>';
+			
+		} else {
+			
+			$html .= '';
+			
+		} // End if
+		
+		return $html;
+		
+	} // End get_facebook_html
+	
 	
 	public function form( $settings , $content ){
 		
@@ -182,6 +219,10 @@ class CPB_Item_Social extends CPB_Item {
 		$html .= $this->form_fields->text_field( $this->get_input_name('facebook') , $settings['facebook'] , 'Facebook URL' );
 		
 		$html .= $this->form_fields->text_field( $this->get_input_name('facebook_order') , $settings['facebook_order'] , 'Facebook Order' );
+		
+		$html .= $this->form_fields->text_field( $this->get_input_name('instagram') , $settings['instagram'] , 'Instagram URL' );
+		
+		$html .= $this->form_fields->text_field( $this->get_input_name('instagram_order') , $settings['instagram_order'] , 'Instagram Order' );
 		
 		$html .= $this->form_fields->text_field( $this->get_input_name('height') , $settings['height'] , 'height (no px)' );
 		
@@ -223,6 +264,10 @@ class CPB_Item_Social extends CPB_Item {
 		$clean['facebook'] = ( ! empty( $settings['facebook'] ) )? sanitize_text_field( $settings['facebook'] ) : '';
 		
 		$clean['facebook_order'] = ( ! empty( $settings['facebook_order'] ) )? sanitize_text_field( $settings['facebook_order'] ) : '';
+		
+		$clean['instagram'] = ( ! empty( $settings['instagram'] ) )? sanitize_text_field( $settings['instagram'] ) : '';
+		
+		$clean['instagram_order'] = ( ! empty( $settings['instagram_order'] ) )? sanitize_text_field( $settings['instagram_order'] ) : '';
 		
 		$clean['height'] = ( ! empty( $settings['height'] ) )? sanitize_text_field( $settings['height'] ) : '';
 		

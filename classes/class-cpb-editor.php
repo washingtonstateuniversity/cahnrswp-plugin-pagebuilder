@@ -60,8 +60,6 @@ class CPB_Editor {
 		
 		$values = array( 'default' => 'Default Editor' , 'builder' => 'Layout Editor' );
 		
-		var_dump( $settings['_cpb_pagebuilder'] );
-		
 		if ( $settings['_cpb_pagebuilder'] === '0' ){
 			
 			$settings['_cpb_pagebuilder'] = 'default';

@@ -69,13 +69,17 @@ var cahnrs_pagebuilder = {
 				
 				var c = jQuery(this);
 				
-				c.addClass('active').siblings().removeClass('active');
+				if ( ! c.hasClass('is-link') ){
 				
-				var wrap = c.closest('.cpb-social-item');
-				
-				var next = wrap.find('.cpb-social-content').eq( c.index() );
-				
-				next.addClass('active').siblings().removeClass('active');
+					c.addClass('active').siblings().removeClass('active');
+
+					var wrap = c.closest('.cpb-social-item');
+
+					var next = wrap.find('.cpb-social-content').eq( c.index() );
+
+					next.addClass('active').siblings().removeClass('active');
+					
+				} // End if
 				
 			});
 			

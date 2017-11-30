@@ -58,6 +58,14 @@ class CPB_Item_Promo extends CPB_Item {
 		
 		if ( ! empty( $settings['img_src'] )) $item['img'] = $settings['img_src'];
 		
+		if ( ! empty( $settings['img_id'] )) {
+			
+			$image_array = cpb_get_image_properties_array( $settings['img_id'] );
+			
+			$item['img_alt'] = $image_array['alt'];
+		
+		} // End if
+		
 		if ( ! empty( $settings['promo_title'] )) $item['title'] = $settings['promo_title'];
 		
 		if ( ! empty( $settings['subtitle'] )) $item['subtitle'] = $settings['subtitle'];
@@ -173,29 +181,33 @@ class CPB_Item_Promo extends CPB_Item {
 		
 		$html = '';
 		
-		$ls = ( ! empty( $item['link'] ) ) ? '<a href="' . $item['link'] . '" >' : '';
-		
-		$le = ( ! empty( $item['link'] ) ) ? '</a>' : '';
-		
 		if ( $item ){
 			
 			if ( ! empty( $item['img'] ) ) $class .= ' has-image';
 			
 			if ( ! empty( $settings['stack_vertical'] ) ) $class .= ' stack-vertical';
 			
-			$html .= '<article class="' . $class . '" data-requesturl="' . $request_url . '">';
+			$html .= '<div class="' . $class . '" data-requesturl="' . $request_url . '">';
 			
 				if ( ! empty( $item['img'] ) ) {
 					
 					$style = 'background-image:url(' . $item['img'] . ');background-position:center center;background-size:cover;';
 					
-					$html .= $ls . '<div class="cpb-image"><img style="' . $style . '" src="' . plugins_url( 'images/' . $settings['img_ratio'] . '.gif', dirname(__FILE__) ) . '" />' . $le . '</div>';
+					$html .= '<div class="cpb-image"><img style="' . $style . '" src="' . plugins_url( 'images/' . $settings['img_ratio'] . '.gif', dirname(__FILE__) ) . '" ';
+					
+					if ( ! empty( $item['img_alt'] ) ) {
+						
+						$html .= 'alt="' . $item['img_alt'] . '"';
+						
+					} // End if
+					
+					$html .= ' /></div>';
 					
 				} // end if
 				
 				if ( ! empty( $item['title'] ) ){
 					
-					$html .= '<' . $settings['tag'] . ' class="cpb-title">' . $ls . $item['title'] . $le . '</' . $settings['tag'] . '>';
+					$html .= '<' . $settings['tag'] . ' class="cpb-title">' . $item['title'] . '</' . $settings['tag'] . '>';
 					
 				} // end if
 				
@@ -213,7 +225,13 @@ class CPB_Item_Promo extends CPB_Item {
 					
 				} // end if
 			
-			$html .= '</article>';
+				if ( ! empty( $item['link'] ) ){
+					
+					$html .= '<div class="cpb-promo-link"><a href="' . $item['link'] . '" >Visit ' . $item['title'] . '</a></div>';
+					
+				} // End if
+			
+			$html .= '</div>';
 			
 		} // end if
 		
@@ -390,7 +408,7 @@ class CPB_Item_Promo extends CPB_Item {
 		
 	}
 	
-	protected function css() {
+	/*protected function css() {
 		
 		$style .= '.cpb-promo-wrap {padding-bottom: 1rem;}';
 		
@@ -412,7 +430,7 @@ class CPB_Item_Promo extends CPB_Item {
 		
 		return $style;
 		
-	}
+	}*/
 	
 	
 }

@@ -1,5 +1,36 @@
 <?php
 
+function cpb_get_image_properties_array( $image_id ){
+	
+	$image_array = array();
+	
+	$image = wp_get_attachment_image_src( $image_id , 'single-post-thumbnail' );
+			
+	$image_array['alt'] = get_post_meta( $image_id, '_wp_attachment_image_alt', true);
+
+	$image_array['src'] = $image[0];
+	
+	return $image_array;
+	
+} // End cpb_get_image_properties_array
+
+function cpb_get_post_image_array( $post_id ){
+	
+	$image_array = array();
+	
+	if ( has_post_thumbnail( $post_id ) ){
+		
+		$image_id = get_post_thumbnail_id( $post_id );
+		
+		$image_array = cpb_get_image_properties_array( $image_id );
+		
+	} // End if
+	
+	return $image_array;
+	
+} // end cpb_get_post_image_array
+
+
 function cpb_plugin_dir( $path = ''){
 	
 	$full_path = CAHNRS_Pagebuilder_Plugin::$dir . $path;

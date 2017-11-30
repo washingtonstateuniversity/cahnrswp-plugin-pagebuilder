@@ -23,13 +23,23 @@ class CPB_Query {
 				
 				$item = array();
 				
+		
+				
 				if ( in_array( 'title' , $fields ) ) $item['title'] = get_the_title();
 				
 				if ( in_array( 'content' , $fields ) ) $item['content'] = get_the_content();
 				
 				if ( in_array( 'excerpt' , $fields ) ) $item['excerpt'] = $this->get_local_excerpt( $the_query->post->ID , $settings );
 				
-				if ( in_array( 'img' , $fields ) ) $item['img'] = $this->get_local_img( $the_query->post->ID , $settings );
+				if ( in_array( 'img' , $fields ) ) {
+					
+					$image = $this->get_local_image_array( $the_query->post->ID , $settings );
+					
+					$item['img'] = $image['src'];
+					
+					$item['img_alt'] = $image['alt'];
+					
+				} // End if
 				
 				if ( in_array( 'link' , $fields ) ) $item['link'] = get_post_permalink();
 				
@@ -121,6 +131,28 @@ class CPB_Query {
 		return $img_src;
 		
 	} // end get_local_img
+	
+	
+	protected function get_local_image_array( $post_id , $settings ){
+		
+		$image_array = array();
+		
+		$img_id = get_post_thumbnail_id( $post_id );
+					
+		if ( $img_id ){
+			
+			$image = wp_get_attachment_image_src( $img_id , 'single-post-thumbnail' );
+			
+			$image_array['alt'] = get_post_meta( $img_id, '_wp_attachment_image_alt', true);
+			
+			$image_array['src'] = $image[0];
+		
+		} // end if
+		
+		return $image_array;
+		
+		
+	} // End get_local_image_array
 	
 	protected function get_local_excerpt( $post_id , $settings ){
 		

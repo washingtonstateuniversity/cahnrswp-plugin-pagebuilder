@@ -51,8 +51,6 @@ class CPB_Admin {
 		
 		$use_spine_style = get_option( 'cpb_spine_style', '' );
 		
-		var_dump(  get_option( 'cpb_spine_style', '' ) );
-		
 		$html = '<form method="post" action="">';
 
 			$html .= '<input type="hidden" value="true" name="is_update" />';
