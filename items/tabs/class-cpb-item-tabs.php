@@ -15,7 +15,7 @@ class CPB_Item_Tabs extends CPB_Item {
 		
 		$tabs = array();
 		
-		for ( $i = 1; $i < 5; $i++ ){
+		for ( $i = 1; $i < 6; $i++ ){
 			
 			$prefix = 'tab' . $i;
 			
@@ -39,7 +39,7 @@ class CPB_Item_Tabs extends CPB_Item {
 		
 		switch( $display ){
 				
-			case 'columns-4':
+			case 'columns':
 				$html .= $this->get_display_columns( $tabs, $settings , $content );
 				break;
 				
@@ -57,7 +57,7 @@ class CPB_Item_Tabs extends CPB_Item {
 		
 		ob_start();
 		
-		include 'displays/columns-4.php';
+		include 'displays/columns.php';
 		
 		$html = ob_get_clean();
 		
@@ -160,7 +160,7 @@ class CPB_Item_Tabs extends CPB_Item {
 		
 		$displays = array(
 			'basic' => 'Basic',
-			'columns-4' => '4 Column',
+			'columns' => 'Columns',
 		);
 		
 		$adv = '';

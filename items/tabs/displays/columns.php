@@ -1,4 +1,4 @@
-<div class="cpb-item-tabs-set cpb-item-tabs-columns" style="<?php if ( ! empty( $settings['min_height'] ) ) { echo 'height:' . $settings['min_height']; }?>">
+<div class="cpb-item-tabs-set cpb-item-tabs-columns tabs-columns-<?php echo count( $tabs );?>" style="<?php if ( ! empty( $settings['min_height'] ) ) { echo 'height:' . $settings['min_height']; }?>">
 	<?php foreach( $tabs as $key => $tab ):?>
 		<div class="cpb-item-tab-title cpb-item-tab-column <?php echo $tab['bgcolor'];?>-back <?php echo $settings['textcolor'];?>-text">
 			<?php if ( ! empty( $tab['bgimage'] ) ):?><div class="cpb-item-tab-bgimage" style="background-image: url(<?php echo $tab['bgimage'];?> )"></div><?php endif;?>
