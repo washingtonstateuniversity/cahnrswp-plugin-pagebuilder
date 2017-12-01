@@ -15,7 +15,7 @@ class CPB_Item_Subtitle extends CPB_Item {
 		
 		$le = ( ! empty( $settings['link'] ) ) ? '</a>' : '';
 		
-		$classes = array();
+		$classes = array('cpb-subtitle');
 		
 		if ( ! empty( $settings['style'] ) ){
 			
