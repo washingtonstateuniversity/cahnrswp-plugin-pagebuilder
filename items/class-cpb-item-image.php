@@ -11,19 +11,17 @@ class CPB_Item_Image extends CPB_Item {
 	
 	public function item( $settings , $content ){
 		
+		$image_array = cpb_get_image_properties_array( $settings['img_id'] );
+		
 		$html = '';
 		
 		if ( $settings['img_src'] ) {
 		
-			$html .= '<div class="cpb-image">';
-
-				if ( ! empty( $settings['url'] ) ) $html .= '<a href="' . $settings['url'] . '">';
-
-				$html .= '<img src="' . $settings['img_src'] . '" style="width: 100%;display:block" />';
-
-				if ( ! empty( $settings['url'] ) ) $html .= '</a>';
-
-			$html.= '</div>';
+			ob_start();
+			
+			include cpb_plugin_dir( 'lib/displays/image/basic.min.php' );
+			
+			$html .= ob_get_clean();
 
 		} // end if
 		
@@ -41,7 +39,6 @@ class CPB_Item_Image extends CPB_Item {
 		$form .= $this->form_fields->text_field( $this->get_input_name('url'), $settings['url'], 'Link Image To:' );
 
 		return $form; 
-		
 		
 	} // end form
 	
