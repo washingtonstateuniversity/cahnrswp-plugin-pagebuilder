@@ -386,7 +386,6 @@ class CPB_Item_Promo extends CPB_Item {
 		
 		$clean['columns'] = ( ! empty( $settings['columns'] ) ) ? sanitize_text_field( $settings['columns'] ) : 4;
 		
-		$clean['tag'] = ( ! empty( $settings['tag'] ) ) ? sanitize_text_field( $settings['tag'] ) : 'h5';
 		
 		$clean['img_ratio'] = ( ! empty( $settings['img_ratio'] ) ) ? sanitize_text_field( $settings['img_ratio'] ) : 'spacer1x1';
 		
