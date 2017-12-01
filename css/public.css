@@ -185,7 +185,7 @@ Items
 .cpb-promo-wrap {padding-bottom: 1rem;}
 		
 .cpb-promo {
-	padding: 18px 0;
+	padding: 22px 0;
 	position: relative;
 }
 		
@@ -212,9 +212,13 @@ Items
 	color: #981e32;
 }
 		
-.cpb-promo.has-image .cpb-title, .cpb-promo.has-image .cpb-copy { margin-left: 175px;}
+.cpb-promo.has-image .cpb-promo-caption { 
+	margin-left: 175px;
+}
 		
-.cpb-promo .cpb-title { margin-top: 0; margin-bottom: 0.5rem;}
+.cpb-promo .cpb-title { 
+	margin-top: 0; 
+}
 		
 .cpb-promo.stack-vertical .cpb-image { width: auto;float:none;}
 		

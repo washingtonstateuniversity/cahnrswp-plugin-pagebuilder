@@ -40,6 +40,15 @@ function cpb_plugin_dir( $path = ''){
 } // End cpb_plugin_dir
 
 
+function cpb_plugin_url( $path = ''){
+	
+	$full_path = CAHNRS_Pagebuilder_Plugin::$url . $path;
+	
+	return $full_path;
+	
+} // End cpb_plugin_dir
+
+
 function cpb_register_item( $slug, $args = array(), $form_callback = false, $shortcode_callback = false, $clean_callback = false ){
 	
 	global $cpb_builder_items;

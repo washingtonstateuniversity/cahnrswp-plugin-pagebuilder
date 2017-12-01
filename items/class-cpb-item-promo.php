@@ -187,7 +187,19 @@ class CPB_Item_Promo extends CPB_Item {
 			
 			if ( ! empty( $settings['stack_vertical'] ) ) $class .= ' stack-vertical';
 			
-			$html .= '<div class="' . $class . '" data-requesturl="' . $request_url . '">';
+			if ( $settings['promo_type'] != 'custom' ) {
+				
+				$item['excerpt'] = wp_trim_words( strip_shortcodes( wp_strip_all_tags( $item['excerpt'] , true ) ) , 35 , '...' );
+				
+			} // End if
+			
+			ob_start();
+			
+			include cpb_plugin_dir( 'lib/displays/promo/basic.min.php' );
+			
+			$html .= ob_get_clean();
+			
+			/*$html .= '<div class="' . $class . '" data-requesturl="' . $request_url . '">';
 			
 				if ( ! empty( $item['img'] ) ) {
 					
@@ -231,7 +243,7 @@ class CPB_Item_Promo extends CPB_Item {
 					
 				} // End if
 			
-			$html .= '</div>';
+			$html .= '</div>';*/
 			
 		} // end if
 		
