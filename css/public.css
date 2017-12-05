@@ -222,7 +222,7 @@ Items
 		
 .cpb-promo.stack-vertical .cpb-image { width: auto;float:none;}
 		
-.cpb-promo.stack-vertical.has-image .cpb-title, .cpb-promo.stack-vertical.has-image .cpb-copy { margin-left: 0;}
+.cpb-promo.stack-vertical.has-image .cpb-promo-caption { margin-left: 0;}
 
 /* Layout 
 --------------------------------------------- */
@@ -548,6 +548,17 @@ cpb-slide.editor-slide {padding: 0.5rem; box-sizing: border-box; border-radius: 
 	
 .column.small .cpb-slideshow .cpb-slide-caption .cpb-slide-excerpt {
 	display: none;
+}
+/* Items: FAQ
+--------------------------------------------- */
+.cpb-faq h2,
+.cpb-faq h3,
+.cpb-faq h4,
+.cpb-faq h5,
+.cpb-faq h6 {
+	color: #981e32;
+	margin: 0;
+	padding: 0;
 }
 .cpb-faq dt {
 	position: relative;
@@ -1066,28 +1077,18 @@ cpb-slide.editor-slide {padding: 0.5rem; box-sizing: border-box; border-radius: 
 	display: block;
 	clear:  both;
 }
-/* Items: FAQ
---------------------------------------------- */
-.cpb-faq h2,
-.cpb-faq h3,
-.cpb-faq h4,
-.cpb-faq h5,
-.cpb-faq h6 {
-	color: #981e32;
-	margin: 0;
-	padding: 0;
-}
 
-.cpb-faq dt {
+
+/*.cpb-faq dt {
 	background-image: url(../images/plus-icon-basic.png);
 	background-position: center right;
 	background-repeat: no-repeat;
 	padding-right: 60px;
 	box-sizing: border-box;
-}
-.cpb-faq dt.active {
+}*/
+/*.cpb-faq dt.active {
 	background-image: url(../images/minus-icon-basic.png);
-}
+}*/
 
 /* Media Hooks
 --------------------------------------------- */
