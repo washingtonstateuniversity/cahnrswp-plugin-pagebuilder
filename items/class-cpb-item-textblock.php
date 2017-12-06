@@ -63,6 +63,8 @@ class CPB_Item_Textblock extends CPB_Item {
 		
 		$adv .= $this->form_fields->checkbox_field( $this->get_input_name('is_callout'), 1, $settings['is_callout'], 'Is Callout' );
 		
+		$adv .= $this->form_fields->text_field( $this->get_input_name('csshook'), $settings['csshook'], 'CSS Hook' );
+		
 		return array('Basic' => $html , 'Advanced' => $adv );
 		
 	} // end form
@@ -86,6 +88,9 @@ class CPB_Item_Textblock extends CPB_Item {
 		$clean['list_style'] = ( ! empty( $settings['list_style'] ) ) ? sanitize_text_field( $settings['list_style'] ) : '';
 		
 		$clean['is_callout'] = ( ! empty( $settings['is_callout'] ) ) ? sanitize_text_field( $settings['is_callout'] ) : '';
+		
+		$clean['csshook'] = ( ! empty( $settings['csshook'] ) ) ? sanitize_text_field( $settings['csshook'] ) : '';
+		
 		
 		return $clean;
 		

@@ -24,15 +24,17 @@ class CPB_Item_Slideshow extends CPB_Item {
 		
 		$slides = do_shortcode( $content );
 		
+		//ob_start();
+		
+		//include dirname( dirname(__FILE__) ) . '/js/js-item-slideshow-gallery.js';
+		
+		//$js = ob_get_clean();
+		
 		ob_start();
 		
-		include dirname( dirname(__FILE__) ) . '/js/js-item-slideshow-gallery.js';
+		include cpb_plugin_dir('lib/displays/slideshow/basic.min.php');
 		
-		$js = ob_get_clean();
-		
-		ob_start();
-		
-		include dirname( dirname(__FILE__) ) . '/inc/inc-item-slideshow.php';
+		//include dirname( dirname(__FILE__) ) . '/inc/inc-item-slideshow.php';
 		
 		$html = ob_get_clean();
 		
@@ -96,11 +98,11 @@ class CPB_Item_Slideshow extends CPB_Item {
 		return $clean;
 	}
 	
-	public function css(){
+	//public function css(){
 		
-		ob_start();
+		//ob_start();
 		
-		include dirname( dirname(__FILE__) ) . '/css/css-item-slideshow.css';
+		//include dirname( dirname(__FILE__) ) . '/css/css-item-slideshow.css';
 		
 		/*$style = '.cpb-slideshow {position: relative}';
 		
@@ -114,10 +116,10 @@ class CPB_Item_Slideshow extends CPB_Item {
 		
 		$style .= '.cpb-slideshow.gallery-slideshow > nav a.next { position: absolute; right: 0; left:auto;}';*/
 		
-		$style = ob_get_clean();
+		//$style = ob_get_clean();
 		
-		return $style;
+		//return $style;
 		
-	} // end admin_css
+	//} // end admin_css
 	
 }
