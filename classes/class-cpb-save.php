@@ -147,7 +147,11 @@ class CPB_Save {
 			
 			$item_data = explode( '_' , $item_id );
 			
-			$item_type = $item_data[0];
+			$last_id = array_pop( $item_data );
+			
+			$item_type = implode('_', $item_data );
+			
+			//$item_type = $item_data[0];
 			
 			$settings = ( ! empty( $_POST['_cpb'][ $item_id ]['settings'] ) ) ? $_POST['_cpb'][ $item_id ]['settings'] : array();
 			

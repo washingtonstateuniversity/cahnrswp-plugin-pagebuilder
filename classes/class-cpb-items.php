@@ -402,7 +402,7 @@ class CPB_Items {
 				'file_path' => plugin_dir_path( dirname ( __FILE__ ) ) . 'items/social/class-cpb-item-social.php',
 				'priority'  => 8,
 			),
-			'azindex'        => array(
+			'az_index'        => array(
 				'class'   	=> 'CPB_Item_AZ_Index',
 				'file_path' => plugin_dir_path( dirname ( __FILE__ ) ) . 'items/a-z-index/class-cpb-item-a-z-index.php',
 				'priority'  => 8,
