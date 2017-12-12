@@ -4,7 +4,7 @@ class CPB_Item_AZ_Index extends CPB_Item {
 	
 	protected $name = 'A-Z Index';
 	
-	protected $slug = 'azindex';
+	protected $slug = 'az_index';
 	
 	protected $fields = array('title','img','link','excerpt','content');
 	
