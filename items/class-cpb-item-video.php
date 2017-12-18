@@ -61,7 +61,7 @@ class CPB_Item_Video extends CPB_Item {
 			
 		} // end if
 		
-		$html .= '<img src="' . plugins_url( 'images/spacer16x9.gif', dirname(__FILE__) ) . '" style="' . $vid_style . 'width:100%;display:block;background-color:#000;" />';
+		$html .= '<img src="' . plugins_url( 'images/spacer16x9.gif', dirname(__FILE__) ) . '" style="' . $vid_style . 'width:100%;display:block;background-color:#000;" alt=""/>';
 
 		//$html .= '<div style="position:absolute;width:100%;height:100%;background:#000;top:0;left:0;"></div>';
 
@@ -76,10 +76,12 @@ class CPB_Item_Video extends CPB_Item {
 		$html = '';
 
 		if ( ! empty( $settings['vid_id'] ) ) {
+			
+			$video_id = $this->get_video_id_from_url( $settings['vid_id'] );
 
 			$html .= '<img src="' . plugins_url( 'images/spacer16x9.gif', dirname(__FILE__) ) . '" style="width:100%;display:block" />';
 
-			$html .= '<iframe src="https://www.youtube.com/embed/' . $settings['vid_id'] . '?rel=0" frameborder="0" allowfullscreen style="' . $vid_style . '"></iframe>';
+			$html .= '<iframe src="https://www.youtube.com/embed/' . $video_id . '?rel=0" frameborder="0" allowfullscreen style="' . $vid_style . '"></iframe>';
 
 		} // end if
 
@@ -161,6 +163,32 @@ class CPB_Item_Video extends CPB_Item {
 		return $clean;
 		
 	}
+	
+	/*
+	 * @desc - Extracts video id from url
+	 * @return string - The video id.
+	*/
+	protected function get_video_id_from_url( $url ){
+		
+		$video_id = $url;
+		
+		if ( strpos( $url,'watch?v=' ) ){
+			
+			$url = explode( 'watch?v=', $url );
+			
+			$video_id = $url[1];
+			
+		} else if ( strpos( $url,'.be/' ) ){ //https://youtu.be/nkXGohB02V0
+			
+			$url = explode( '.be/', $url );
+			
+			$video_id = $url[1];
+			
+		} // End if
+			
+		return $video_id;
+		
+	} // end cwp_get_video_id_from_url
 	
 	
 }

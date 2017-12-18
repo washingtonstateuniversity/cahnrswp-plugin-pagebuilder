@@ -13,6 +13,12 @@ class CPB_Item_Image extends CPB_Item {
 		
 		$image_array = cpb_get_image_properties_array( $settings['img_id'] );
 		
+		if ( ! empty( $settings['alt'] ) ) {
+			
+			$image_array['alt'] = $settings['alt'];
+			
+		} // End if
+		
 		$html = '';
 		
 		if ( $settings['img_src'] ) {
@@ -35,6 +41,8 @@ class CPB_Item_Image extends CPB_Item {
 		$form = $this->form_fields->insert_media( $this->get_input_name(), $settings );
 		
 		$form .= '<hr/>';
+		
+		$form .= $this->form_fields->text_field( $this->get_input_name('alt'), $settings['alt'], 'Image Alt Text' );
 
 		$form .= $this->form_fields->text_field( $this->get_input_name('url'), $settings['url'], 'Link Image To:' );
 
@@ -52,6 +60,8 @@ class CPB_Item_Image extends CPB_Item {
 		$clean['img_id'] = ( ! empty( $settings['img_id'] ) ) ? sanitize_text_field( $settings['img_id'] ) : '';
 
 		$clean['url'] = ( ! empty( $settings['url'] ) ) ? sanitize_text_field( $settings['url'] ) : '';
+		
+		$clean['alt'] = ( ! empty( $settings['alt'] ) ) ? sanitize_text_field( $settings['alt'] ) : '';
 
 		return $clean;
 		
