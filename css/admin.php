@@ -803,6 +803,28 @@ margin-bottom: 1rem;
     border-top: 1px solid #84CAE4;
     cursor: pointer;
 }
+/* Multi-post-select
+* ----------------------------------------------------------
+*/
+.cpb-form-dropdown-multi-select {
+	max-height: 300px;
+	overflow-y: scroll;
+	overflow-x: hidden;
+	background-color: #fff;
+}
+.cpb-form-dropdown-multi-select li {
+	padding: 8px 12px;
+	border-bottom: 1px solid #ddd;
+	cursor: pointer;
+	margin: 0;
+}
+.cpb-form-dropdown-multi-select li:hover {
+	background-color: #eee;
+}
+.cpb-form-dropdown-multi-select li.selected {
+	background-color: #0074a2;
+	color: #fff;
+}
 
 
 

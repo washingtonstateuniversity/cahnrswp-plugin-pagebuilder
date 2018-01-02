@@ -1,10 +1,10 @@
 <?php
 
-function cpb_get_image_properties_array( $image_id ){
+function cpb_get_image_properties_array( $image_id, $image_size = 'single-post-thumbnail'){
 	
 	$image_array = array();
 	
-	$image = wp_get_attachment_image_src( $image_id , 'single-post-thumbnail' );
+	$image = wp_get_attachment_image_src( $image_id , $image_size );
 			
 	$image_array['alt'] = get_post_meta( $image_id, '_wp_attachment_image_alt', true);
 
@@ -14,7 +14,7 @@ function cpb_get_image_properties_array( $image_id ){
 	
 } // End cpb_get_image_properties_array
 
-function cpb_get_post_image_array( $post_id ){
+function cpb_get_post_image_array( $post_id, $image_size = 'single-post-thumbnail' ){
 	
 	$image_array = array();
 	
@@ -22,7 +22,7 @@ function cpb_get_post_image_array( $post_id ){
 		
 		$image_id = get_post_thumbnail_id( $post_id );
 		
-		$image_array = cpb_get_image_properties_array( $image_id );
+		$image_array = cpb_get_image_properties_array( $image_id, $image_size );
 		
 	} // End if
 	
@@ -152,3 +152,38 @@ function cpb_get_public_posts( $post_types = array(), $as_options = false, $incl
 	return $posts;
 	
 } // End cpb_get_posts
+
+
+function cpb_get_post_item( $post, $image_size = 'medium', $include_content = false ){
+	
+	$item = array();
+	
+	if ( is_numeric( $post ) ){
+		
+		$post = get_post( $post );
+		
+	} // End if
+	
+	if ( isset( $post->ID ) ){
+		
+		$post_image_array = cpb_get_post_image_array( $post->ID, 'medium' );
+		
+		if ( ! empty( $post_image_array ) ){
+			
+			$item['img'] = $post_image_array['src'];
+			
+			$item['img_alt'] = $post_image_array['alt'];
+			
+		} // End if
+		
+		$item['title'] = get_the_title( $post->ID );
+		
+		$item['excerpt'] = get_the_title( $post->ID );
+			
+		$item['link'] = get_post_permalink( $post->ID );
+		
+	} // End if
+	
+	return $item;
+	
+} // End cpb_get_post_item

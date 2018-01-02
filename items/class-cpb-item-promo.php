@@ -110,26 +110,17 @@ class CPB_Item_Promo extends CPB_Item {
 	
 	protected function item_select( $settings ){
 		
-		
 		$html = '';
 		
-		require_once plugin_dir_path( dirname ( __FILE__ ) ) . 'classes/class-cpb-query.php';
+		$ids = explode(',', $settings['post_ids'] );
 		
-		$query = new CPB_Query();
-		
-		$items = $query->get_remote_items( $settings , '' , $this->get_fields() );
-		
-		if ( $items ){
+		foreach( $ids as $post_id ){
 			
-			foreach( $items as $item ){
-				
-				$html .= $this->get_promo_display( $item , $settings );
-				
-			} // end foreach
+			$item = cpb_get_post_item( $post_id, 'medium' );
 			
-		} // end if
-		
-		$this->items = $items;
+			$html .= $this->get_promo_display( $item , $settings );
+			
+		} // End foreach
 		
 		return $html;
 		
@@ -269,7 +260,8 @@ class CPB_Item_Promo extends CPB_Item {
 			'selected' => $settings['promo_type'],
 			'title'   => 'Insert',
 			'desc'    => 'Insert a specific post/page',
-			'form'    => $this->form_fields->get_form_select_post( $this->get_input_name() , $settings ),
+			//'form'    => $this->form_fields->get_form_select_post( $this->get_input_name() , $settings ),
+			'form'    => $this->form_fields->get_insert_posts_field( $this->get_input_name(), $settings, array(), 'Select Content' ),
 			);
 		
 		$feed_form = array(
@@ -376,13 +368,13 @@ class CPB_Item_Promo extends CPB_Item {
 					$clean = array_merge( $clean , $form_clean );
 					
 					break;
-				case 'select':
+				//case 'select':
 				
-					$form_clean = $this->form_fields->get_form_select_post_clean( $settings );
+					//$form_clean = $this->form_fields->get_form_select_post_clean( $settings );
 				
-					$clean = array_merge( $clean , $form_clean );
+					//$clean = array_merge( $clean , $form_clean );
 					
-					break;
+					//break;
 				
 				case 'remote_feed':
 				
@@ -415,6 +407,8 @@ class CPB_Item_Promo extends CPB_Item {
 		$clean['as_lightbox'] = ( ! empty( $settings['as_lightbox'] ) ) ? sanitize_text_field( $settings['as_lightbox'] ) : 0;
 		
 		$clean['csshook'] = ( ! empty( $settings['csshook'] ) ) ? sanitize_text_field( $settings['csshook'] ) : '';
+		
+		$clean = array_merge( $clean, $this->form_fields->get_insert_posts_field_clean( $settings ) );
 
 		return $clean;
 		

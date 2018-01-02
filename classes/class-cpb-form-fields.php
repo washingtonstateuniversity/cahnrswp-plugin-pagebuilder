@@ -186,6 +186,58 @@ class CPB_Form_Fields {
 	} // end select
 	
 	
+	public function get_insert_posts_field( $name, $settings, $options, $label = false, $class = '', $prefix = '' ){
+		
+		$class .= ' cpb-full-width';
+		
+		if ( empty( $settings[ $prefix . 'post_ids' ] ) ) $settings[ $prefix . 'post_ids' ] = '';
+		
+		$id = $this->get_unique_id( $name );
+		
+		$selected_posts = explode(',', $settings[ $prefix . 'post_ids' ] );
+		
+		if ( ! $options ){
+			
+			$options = cpb_get_public_posts( array(), true, false );
+			
+		} // End if
+		
+		ob_start();
+		
+		if ( $label ) {
+			
+			include cpb_plugin_dir('lib/displays/form-fields/general/label.php');
+			
+		} 
+		
+		include cpb_plugin_dir('lib/displays/form-fields/multi-post-select/select-list.php');
+		
+		$select_field = ob_get_clean();
+		
+		return $this->wrap_field( $select_field, $class );
+		
+	} // End insert_posts_field
+	
+	
+	public function get_insert_posts_field_clean( $settings, $prefix = '' ){
+		
+		$clean = array();
+		
+		if ( ! empty( $settings[ $prefix . 'post_ids' ] ) ){
+			
+			$clean[ $prefix . 'post_ids' ] = sanitize_text_field( $settings[ $prefix . 'post_ids' ] );
+			
+		} else {
+			
+			$clean[ $prefix . 'post_ids' ] = '';
+			
+		}// End if
+		
+		return $clean;
+		
+	} // End get_insert_posts_field_clean
+	
+	
 	public function select_posts_field( $name, $values, $options, $label = false, $class = '' ) {
 		
 		if ( ! is_array( $values ) ) $values = array();
@@ -720,5 +772,14 @@ class CPB_Form_Fields {
 		return $tax;
 		
 	}
+	
+	
+	public function get_unique_id( $name ){
+		
+		$id = str_replace( array( '[',']' ), '_', $name ) . '_' . rand( 0, 1000000 );
+		
+		return $id;
+		
+	} // End
 	
 }

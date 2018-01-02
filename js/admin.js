@@ -446,6 +446,8 @@ CPB = {
 			
 			CPB.forms.select_post.init();
 			
+			CPB.forms.multi_select.init();
+			
 		},
 		
 		remove_item: function( ic ){
@@ -608,6 +610,78 @@ CPB = {
 				form.find('fieldset').eq( ic.index() ).addClass('active').prop('disabled', false);
 				
 			} // end if
+			
+		},
+		
+		multi_select: {
+			
+			init: function(){
+				
+				CPB.forms.multi_select.bind_events();
+				
+				CPB.forms.multi_select.apply_sort();
+				
+			},
+			
+			bind_events: function(){
+				
+				jQuery('body').on(
+					'click',
+					'.cpb-form-dropdown-multi-select li',
+					function(){
+						CPB.forms.multi_select.select( jQuery( this ) );
+					}
+				);
+				
+				
+			}, // end bind_events
+			
+			select: function( ic ){
+				
+				if ( ic.hasClass('selected') ){
+					
+					ic.removeClass('selected');
+					
+				} else {
+					
+					ic.addClass('selected');
+					
+				} // End if
+				
+				CPB.forms.multi_select.set_ids( ic );
+				
+			},
+			
+			set_ids: function( ic ){
+				
+				var ids = [];
+				
+				var drop_down = ic.closest('.cpb-form-dropdown-multi-select' );
+				
+				var input = drop_down.siblings('input');
+				
+				drop_down.find('li.selected').each( function(){
+					
+					ids.push( jQuery(this).data('postid') );
+					
+				});
+				
+				input.val( ids.join(',') );
+				
+			}, // End set_ids
+			
+			apply_sort: function(){
+				
+				jQuery('.cpb-form-dropdown-multi-select').sortable({
+					stop: function( event , ui ){ CPB.forms.multi_select.set_ids( ui.item ); }
+				}
+				);
+			
+				//jQuery('.cpb-form-dropdown-multi-select').sortable(//{ 
+					//stop: function( event , ui ){ /*CPB.forms.multi_select.set_ids( ic );*/ }, 
+				//});
+				
+			}
 			
 		},
 		
