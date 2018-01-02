@@ -1,6 +1,7 @@
 /*
 
-
+Displays
+- Post List
 Items
 - AZ Index
 - Banner Image
@@ -9,7 +10,30 @@ Items
 - FAQ
 - Tabs
 - Promo
+- Content Feed
 */
+.cpb-post-list-item.has-link  {
+	position: relative;
+}
+.cpb-post-list-item.has-link .cpb-title {
+	color: #981e32;
+}
+.cpb-post-list-item.has-link .cpb-link {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	display: block;
+	font-size: 0;
+}
+.cpb-post-list-item.has-link .cpb-link:hover {
+	background-color: rgba(0,0,0,0.1);
+	top: -8px;
+	bottom: -8px;
+	left: -8px;
+	right: -8px;
+} 
 /* Items
 --------------------------------------------- */
 /* Items: AZ Index ----- */
@@ -223,6 +247,9 @@ Items
 .cpb-promo.stack-vertical .cpb-image { width: auto;float:none;}
 		
 .cpb-promo.stack-vertical.has-image .cpb-promo-caption { margin-left: 0;}
+
+/* Items: Content Feed
+--------------------------------------------- */
 
 /* Layout 
 --------------------------------------------- */

@@ -412,7 +412,11 @@ class CPB_Items {
 				'file_path' => plugin_dir_path( dirname ( __FILE__ ) ) . 'items/tabs/class-cpb-item-tabs.php',
 				'priority'  => 8,
 			),
-			
+			'content_feed'        => array(
+				'class'   	=> 'CPB_Item_Content_Feed',
+				'file_path' => plugin_dir_path( dirname ( __FILE__ ) ) . 'items/class-cpb-item-content-feed.php',
+				'priority'  => 8,
+			),
 			
 		);
 		
