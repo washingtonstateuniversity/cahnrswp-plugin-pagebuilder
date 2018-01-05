@@ -26,8 +26,12 @@ class CPB_Item_Row extends CPB_Item {
 	protected function item( $settings , $content ){
 		
 		global $cpb_column_i;
+		
+		global $cpb_row_layout;
 
 		$cpb_column_i = 1;
+		
+		$cpb_row_layout = $settings['layout'];
 		
 		$classes = $this->get_item_class( $settings );
 		
