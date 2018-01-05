@@ -16,6 +16,10 @@ class CPB_Editor {
 	
 	public function get_editor( $post , $settings ){
 		
+		$post = apply_filters('cpb_editor_wp_post', $post, $settings );
+		
+		$settings = apply_filters('cpb_editor_settings', $settings, $post );
+		
 		if ( $settings['_cpb_pagebuilder'] === '0' ){
 			
 			$settings['_cpb_pagebuilder'] = 'default';
