@@ -178,7 +178,7 @@ function cpb_get_post_item( $post, $image_size = 'medium', $include_content = fa
 		
 		$item['title'] = get_the_title( $post->ID );
 		
-		$item['excerpt'] = get_the_title( $post->ID );
+		$item['excerpt'] = get_the_excerpt( $post->ID );
 			
 		$item['link'] = get_post_permalink( $post->ID );
 		
