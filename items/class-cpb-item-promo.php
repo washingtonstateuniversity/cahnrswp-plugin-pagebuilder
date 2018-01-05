@@ -238,7 +238,7 @@ class CPB_Item_Promo extends CPB_Item {
 			
 		} // end if
 		
-		return $html;
+		return apply_filters( 'cpb_item_promo_html', $html, $item, $settings );
 		
 	} // end 
 	
