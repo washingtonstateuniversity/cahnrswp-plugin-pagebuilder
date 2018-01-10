@@ -178,7 +178,11 @@ function cpb_get_post_item( $post, $image_size = 'medium', $include_content = fa
 		
 		$item['title'] = get_the_title( $post->ID );
 		
-		$item['excerpt'] = get_the_excerpt( $post->ID );
+		$item['excerpt'] = cpb_custom_excerpt( get_the_excerpt( $post->ID ), $post->post_content );
+		
+		if ( empty( $item['excerpt'] ) ){
+			
+		} // End if
 			
 		$item['link'] = get_post_permalink( $post->ID );
 		
@@ -187,3 +191,28 @@ function cpb_get_post_item( $post, $image_size = 'medium', $include_content = fa
 	return $item;
 	
 } // End cpb_get_post_item
+
+
+function cpb_custom_excerpt( $excerpt, $content, $words = 35 ){
+	
+	$excerpt = $text;
+	
+	if ( $excerpt ) return $excerpt;
+
+    $text = strip_shortcodes( $content );
+    $text = str_replace(']]>', ']]&gt;', $text);
+    $text = strip_tags($text);
+    $excerpt_length = apply_filters('excerpt_length', $words);
+    $excerpt_more = apply_filters('excerpt_more', ' ' . '[...]');
+    $words = preg_split("/[\n\r\t ]+/", $text, $excerpt_length + 1, PREG_SPLIT_NO_EMPTY);
+    if ( count($words) > $excerpt_length ) {
+            array_pop($words);
+            $text = implode(' ', $words);
+            $text = $text . $excerpt_more;
+    } else {
+            $text = implode(' ', $words);
+    }
+
+    return apply_filters('wp_trim_excerpt', $text, $content);
+	
+} // End cpb_custom_excerpt
