@@ -209,6 +209,8 @@ abstract class CPB_Item {
 		
 		$settings = ( $settings ) ? $settings : $this->get_settings();
 		
+		$settings = apply_filters( 'cpb_item_settings', $settings, $this );
+		
 		$content = ( $content ) ? $content : $this->get_content();
 		
 		$html = '';

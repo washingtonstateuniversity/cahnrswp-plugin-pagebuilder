@@ -408,6 +408,8 @@ class CPB_Item_Promo extends CPB_Item {
 		
 		$clean['csshook'] = ( ! empty( $settings['csshook'] ) ) ? sanitize_text_field( $settings['csshook'] ) : '';
 		
+		$clean['post_id'] = ( ! empty( $settings['post_id'] ) ) ? sanitize_text_field( $settings['post_id'] ) : '';
+		
 		$clean = array_merge( $clean, $this->form_fields->get_insert_posts_field_clean( $settings ) );
 
 		return $clean;

@@ -105,6 +105,8 @@ class CAHNRS_Pagebuilder_Plugin {
 			
 		} // end if
 		
+		include_once 'classes/class-cpb-legacy-support.php';
+		
 		include_once 'people/people.php';
 		
 		$this->add_items();
