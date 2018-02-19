@@ -22,6 +22,7 @@ class CPB_Item_Tabs extends CPB_Item {
 			if ( ! empty( $settings[ $prefix . '_title'] ) ){
 				
 				$tab = array(
+					'tag' => ( ! empty( $settings['tag'] ))? $settings['tag'] : 'h2',
 					'title' => $settings[ $prefix . '_title'],
 					'url' => ( ! empty( $settings[ $prefix . '_url'] ))? $settings[ $prefix . '_url'] : '',
 					'posts' => ( ! empty( $settings[ $prefix . '_posts'] ))? $settings[ $prefix . '_posts'] : '',
@@ -76,6 +77,12 @@ class CPB_Item_Tabs extends CPB_Item {
 		$html = '';
 		
 		$adv = $this->get_form_advanced( $settings , $content );
+		
+		$tags = $this->form_fields->get_header_tags();
+		
+		unset( $tags['strong'] );
+		
+		$html .= $this->form_fields->select_field( $this->get_input_name('tag') , $settings['tag'] , $tags , 'Tag Type' ); 
 		
 		
 		for ( $i = 1; $i < 6; $i++ ){
@@ -189,6 +196,7 @@ class CPB_Item_Tabs extends CPB_Item {
 			'csshook',
 			'textcolor',
 			'min_height',
+			'tag',
 		);
 		
 		for ( $i = 1; $i < 6; $i++ ){
