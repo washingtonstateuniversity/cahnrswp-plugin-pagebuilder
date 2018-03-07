@@ -669,6 +669,21 @@ cpb-slide.editor-slide {padding: 0.5rem; box-sizing: border-box; border-radius: 
 		padding-left: 0;
 		padding-right: 0;
 	}
+	.cpb-row.halves > .cpb-row-inner > .cpb-column.one.bg-color,
+	.cpb-row.halves > .cpb-row-inner > .cpb-column.two.bg-color,
+	.cpb-row.side-right > .cpb-row-inner > .cpb-column.one.bg-color,
+	.cpb-row.side-right > .cpb-row-inner > .cpb-column.two.bg-color,
+	.cpb-row.side-left > .cpb-row-inner > .cpb-column.one.bg-color,
+	.cpb-row.side-left > .cpb-row-inner > .cpb-column.two.bg-color,
+	.cpb-row.thirds > .cpb-row-inner > .cpb-column.one.bg-color,
+	.cpb-row.thirds > .cpb-row-inner > .cpb-column.two.bg-color,
+	.cpb-row.thirds > .cpb-row-inner > .cpb-column.three.bg-color,
+	.cpb-row.triptych > .cpb-row-inner > .cpb-column.one.bg-color,
+	.cpb-row.triptych > .cpb-row-inner > .cpb-column.two.bg-color, 
+	.cpb-row.triptych > .cpb-row-inner > .cpb-column.three.bg-color {
+		padding-right: 1rem;
+		padding-left: 1rem;
+	}
 	
 }
 
@@ -682,6 +697,13 @@ cpb-slide.editor-slide {padding: 0.5rem; box-sizing: border-box; border-radius: 
 		width: auto;
 		padding-left: 0;
 		padding-right: 0;
+	}
+	.cpb-row.quarters > .cpb-row-inner > .cpb-column.one.bg-color,
+	.cpb-row.quarters > .cpb-row-inner > .cpb-column.three.bg-color,
+	.cpb-row.quarters > .cpb-row-inner > .cpb-column.two.bg-color,
+	.cpb-row.quarters > .cpb-row-inner > .cpb-column.four.bg-color {
+		padding-right: 1rem;
+		padding-left: 1rem;
 	}
 }
 
