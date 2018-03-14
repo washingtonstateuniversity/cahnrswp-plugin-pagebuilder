@@ -178,7 +178,7 @@ function cpb_get_post_item( $post, $image_size = 'medium', $include_content = fa
 		
 		$item['title'] = get_the_title( $post->ID );
 		
-		$item['excerpt'] = cpb_custom_excerpt( get_the_excerpt( $post->ID ), $post->post_content );
+		$item['excerpt'] = cpb_custom_excerpt( $post->post_excerpt, $post->post_content );
 		
 		if ( empty( $item['excerpt'] ) ){
 			
@@ -195,9 +195,7 @@ function cpb_get_post_item( $post, $image_size = 'medium', $include_content = fa
 
 function cpb_custom_excerpt( $excerpt, $content, $words = 35 ){
 	
-	$excerpt = $text;
-	
-	if ( $excerpt ) return $excerpt;
+	if ( ! empty( $excerpt ) ) return $excerpt;
 
     $text = strip_shortcodes( $content );
     $text = str_replace(']]>', ']]&gt;', $text);
