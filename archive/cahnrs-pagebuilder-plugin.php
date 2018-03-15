@@ -1,12 +1,5 @@
 <?php
-/*
-Plugin Name: CAHNRS Pagebuilder 2.0
-Plugin URI: http://cahnrs.wsu.edu/communications
-Description: Builds customizable page layouts
-Author: cahnrscommunications, Danial Bleile
-Author URI: http://cahnrs.wsu.edu/communications
-Version: 2.4.4
-*/
+
 
 class CAHNRS_Pagebuilder_Plugin {
 	
