@@ -24,7 +24,7 @@ class Image_Shortcode {
 
 	public function __construct() {
 
-        \add_action( 'init', array( $this, 'register_shortcode') );
+        \add_action( 'init', array( $this, 'register_shortcode' ) );
 
     } // End __construct
 
@@ -35,14 +35,14 @@ class Image_Shortcode {
     */
     public function register_shortcode() {
 
-        \add_shortcode( 'image', array( $this, 'get_rendered_shortcode') );
+        \add_shortcode( 'image', array( $this, 'get_rendered_shortcode' ) );
 
         cpb_register_shortcode( 
             'image', 
             $args = array(
                 'form_callback'         => array( $this, 'get_shortcode_form' ),
                 'label'                 => 'Image', // Label of the item
-                'render_callback'       => array( $this, 'get_rendered_shortcode'), // Callback to render shortcode
+                'render_callback'       => array( $this, 'get_rendered_shortcode' ), // Callback to render shortcode
                 'default_atts'          => $this->default_settings,
                 'in_column'             => true, // Allow in column
             ) 
@@ -113,9 +113,9 @@ class Image_Shortcode {
 
 		$form .= '<hr/>';
 
-		$form .= $cpb_form->text_field( cpb_get_input_name( $id, true, 'alt'), $settings['alt'], 'Image Alt Text' );
+		$form .= $cpb_form->text_field( cpb_get_input_name( $id, true, 'alt' ), $settings['alt'], 'Image Alt Text' );
 
-		$form .= $cpb_form->text_field( cpb_get_input_name( $id, true, 'url'), $settings['url'], 'Link Image To:' );
+		$form .= $cpb_form->text_field( cpb_get_input_name( $id, true, 'url' ), $settings['url'], 'Link Image To:' );
 
         return $form;
 

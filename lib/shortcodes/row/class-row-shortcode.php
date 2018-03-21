@@ -37,9 +37,9 @@ class Row {
 
 	public function __construct() {
 
-        \add_action( 'init', array( $this, 'register_shortcode') );
+        \add_action( 'init', array( $this, 'register_shortcode' ) );
 
-        \add_filter('cpb_get_shortcode', array( $this, 'check_shortcode_columns'), 10, 2 );
+        \add_filter( 'cpb_get_shortcode', array( $this, 'check_shortcode_columns' ), 10, 2 );
 
     } // End __construct
 
@@ -58,7 +58,7 @@ class Row {
 
                 while( $dif > 0 ) {
 
-                    $shortcode['children'][] = cpb_get_shortcode('column');
+                    $shortcode['children'][] = cpb_get_shortcode( 'column' );
 
                     $dif--;
 
@@ -79,7 +79,7 @@ class Row {
     */
     public function register_shortcode() {
 
-        \add_shortcode( 'row', array( $this, 'get_rendered_shortcode') );
+        \add_shortcode( 'row', array( $this, 'get_rendered_shortcode' ) );
 
         cpb_register_shortcode( 
             'row', 
@@ -87,7 +87,7 @@ class Row {
                 'form_callback'         => array( $this, 'get_shortcode_form' ),
                 'sanitize_callback'     => array( $this, 'get_sanitize_shortcode_atts' ),
                 'editor_callback'       => array( $this, 'get_shortcode_editor' ), // Callback to render form
-                'allowed_children'      => array('column'), // Allowed child shortcodes
+                'allowed_children'      => array( 'column' ), // Allowed child shortcodes
                 'default_shortcode'     => 'column', // Default to this if no children
                 'default_atts'          => $this->default_settings,
                 'in_column'             => false, // Allow in column
@@ -173,43 +173,43 @@ class Row {
 
 		} // end for
 
-        $basic = '<input type="hidden" name="' . cpb_get_input_name( $id, true, 'layout') . '" value="' . $settings['layout'] . '" >';
+        $basic = '<input type="hidden" name="' . cpb_get_input_name( $id, true, 'layout' ) . '" value="' . $settings['layout'] . '" >';
 
 		$basic .= $cpb_form->hidden_field( cpb_get_input_name( $id, true, 'layout' ), $settings['layout'] );
 
-		$basic .= $cpb_form->text_field( cpb_get_input_name( $id, true, 'title'), $settings['title'], 'Title' );
+		$basic .= $cpb_form->text_field( cpb_get_input_name( $id, true, 'title' ), $settings['title'], 'Title' );
 
-		$basic .= $cpb_form->select_field( cpb_get_input_name( $id, true, 'title_tag'), $settings['title_tag'], $cpb_form->get_header_tags(), 'Title Tag' );
+		$basic .= $cpb_form->select_field( cpb_get_input_name( $id, true, 'title_tag' ), $settings['title_tag'], $cpb_form->get_header_tags(), 'Title Tag' );
 
-		$basic .= $cpb_form->select_field( cpb_get_input_name( $id, true, 'bgcolor'), $settings['bgcolor'], $cpb_form->get_wsu_colors(), 'Background Color' );
+		$basic .= $cpb_form->select_field( cpb_get_input_name( $id, true, 'bgcolor' ), $settings['bgcolor'], $cpb_form->get_wsu_colors(), 'Background Color' );
 
-		$basic .= $cpb_form->checkbox_field( cpb_get_input_name( $id, true, 'full_bleed'), 1, $settings['full_bleed'], 'Background Full Bleed Color' );
+		$basic .= $cpb_form->checkbox_field( cpb_get_input_name( $id, true, 'full_bleed' ), 1, $settings['full_bleed'], 'Background Full Bleed Color' );
 
-		$basic .= $cpb_form->select_field( cpb_get_input_name( $id, true, 'textcolor'), $settings['textcolor'], $cpb_form->get_wsu_colors(), 'Text Color' );
+		$basic .= $cpb_form->select_field( cpb_get_input_name( $id, true, 'textcolor' ), $settings['textcolor'], $cpb_form->get_wsu_colors(), 'Text Color' );
 
-		$layout = $cpb_form->select_field( cpb_get_input_name( $id, true, 'padding_top'), $settings['padding_top'], $p_values, 'Padding Top' );
+		$layout = $cpb_form->select_field( cpb_get_input_name( $id, true, 'padding_top' ), $settings['padding_top'], $p_values, 'Padding Top' );
 
-		$layout .= $cpb_form->select_field( cpb_get_input_name( $id, true, 'padding_bottom'), $settings['padding_bottom'], $p_values, 'Padding Bottom' );
+		$layout .= $cpb_form->select_field( cpb_get_input_name( $id, true, 'padding_bottom' ), $settings['padding_bottom'], $p_values, 'Padding Bottom' );
 
-		$layout .= $cpb_form->select_field( cpb_get_input_name( $id, true, 'padding_left'), $settings['padding_left'], $p_values, 'Padding Left' );
+		$layout .= $cpb_form->select_field( cpb_get_input_name( $id, true, 'padding_left' ), $settings['padding_left'], $p_values, 'Padding Left' );
 
-		$layout .= $cpb_form->select_field( cpb_get_input_name( $id, true, 'padding_right'), $settings['padding_right'], $p_values, 'Padding Right' );
+		$layout .= $cpb_form->select_field( cpb_get_input_name( $id, true, 'padding_right' ), $settings['padding_right'], $p_values, 'Padding Right' );
 
-		$layout .= $cpb_form->select_field( cpb_get_input_name( $id, true, 'padding'), $settings['padding'], $cpb_form->get_padding(), 'Padding (Old)' );
+		$layout .= $cpb_form->select_field( cpb_get_input_name( $id, true, 'padding' ), $settings['padding'], $cpb_form->get_padding(), 'Padding (Old)' );
 
-		$layout .= $cpb_form->text_field( cpb_get_input_name( $id, true, 'max_width'), $settings['max_width'], 'Max Width' );
+		$layout .= $cpb_form->text_field( cpb_get_input_name( $id, true, 'max_width' ), $settings['max_width'], 'Max Width' );
 
-		$adv = $cpb_form->select_field( cpb_get_input_name( $id, true, 'gutter'), $settings['gutter'], $cpb_form->get_gutters(), 'Gutter' );
+		$adv = $cpb_form->select_field( cpb_get_input_name( $id, true, 'gutter' ), $settings['gutter'], $cpb_form->get_gutters(), 'Gutter' );
 
-		$adv .= $cpb_form->text_field( cpb_get_input_name( $id, true, 'bg_src'), $settings['bg_src'], 'Background Image URL' );
+		$adv .= $cpb_form->text_field( cpb_get_input_name( $id, true, 'bg_src' ), $settings['bg_src'], 'Background Image URL' );
 
-		$adv .= $cpb_form->text_field( cpb_get_input_name( $id, true, 'min_height'), $settings['min_height'], 'Minimum Height (px)' );
+		$adv .= $cpb_form->text_field( cpb_get_input_name( $id, true, 'min_height' ), $settings['min_height'], 'Minimum Height (px)' );
 
-		$adv .= $cpb_form->text_field( cpb_get_input_name( $id, true, 'anchor'), $settings['anchor'], 'Anchor Name' );
+		$adv .= $cpb_form->text_field( cpb_get_input_name( $id, true, 'anchor' ), $settings['anchor'], 'Anchor Name' );
 
-		$adv .= $cpb_form->text_field( cpb_get_input_name( $id, true, 'csshook'), $settings['csshook'], 'CSS Hook' );
+		$adv .= $cpb_form->text_field( cpb_get_input_name( $id, true, 'csshook' ), $settings['csshook'], 'CSS Hook' );
 
-		return array('Basic' => $basic, 'Layout' => $layout, 'Advanced' => $adv );;
+		return array( 'Basic' => $basic, 'Layout' => $layout, 'Advanced' => $adv );;
 
     } // End get_shortcode_form
 
@@ -246,7 +246,7 @@ class Row {
         $child_keys = cpb_get_child_shortcode_ids( $children );
 
         // implode the child keys
-        $child_keys = \implode(',', $child_keys );
+        $child_keys = \implode( ',', $child_keys );
 
         // Get the edit button
         $edit_button = cpb_get_editor_edit_button();
@@ -258,7 +258,7 @@ class Row {
         \ob_start();
 
         // Include the html
-        include cpb_get_plugin_path('/lib/displays/editor/row-editor.php');
+        include cpb_get_plugin_path( '/lib/displays/editor/row-editor.php' );
 
         // Get the html
         $html = \ob_get_clean();

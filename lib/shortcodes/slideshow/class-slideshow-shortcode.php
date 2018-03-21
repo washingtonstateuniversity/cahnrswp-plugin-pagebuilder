@@ -22,7 +22,7 @@ class Slideshow_Shortcode {
 
 	public function __construct() {
 
-        \add_action( 'init', array( $this, 'register_shortcode') );
+        \add_action( 'init', array( $this, 'register_shortcode' ) );
 
     } // End __construct
 
@@ -33,17 +33,17 @@ class Slideshow_Shortcode {
     */
     public function register_shortcode() {
 
-        \add_shortcode( 'slideshow', array( $this, 'get_rendered_shortcode') );
+        \add_shortcode( 'slideshow', array( $this, 'get_rendered_shortcode' ) );
 
         cpb_register_shortcode( 
             'slideshow', 
             $args = array(
                 'form_callback'         => array( $this, 'get_shortcode_form' ),
                 'editor_callback'       => array( $this, 'get_shortcode_editor' ), // Callback to render form
-                'allowed_children'      => array('slide'), // Allowed child shortcodes
+                'allowed_children'      => array( 'slide' ), // Allowed child shortcodes
                 'default_shortcode'     => 'slide', // Default to this if no children
                 'label'                 => 'Slideshow', // Label of the item
-                'render_callback'       => array( $this, 'get_rendered_shortcode'), // Callback to render shortcode
+                'render_callback'       => array( $this, 'get_rendered_shortcode' ), // Callback to render shortcode
                 'default_atts'          => $this->default_settings,
                 'in_column'             => true, // Allow in column
             ) 
@@ -106,11 +106,11 @@ class Slideshow_Shortcode {
 			'college' => 'College'
 		);
 
-		$html = $cpb_form->text_field( cpb_get_input_name( $id, true, 'title'), $settings['title'], 'Title' ); 
+		$html = $cpb_form->text_field( cpb_get_input_name( $id, true, 'title' ), $settings['title'], 'Title' ); 
 
-		$html .= $cpb_form->select_field( cpb_get_input_name( $id, true, 'display_type'), $settings['display_type'], $displays, 'Display Type' );
+		$html .= $cpb_form->select_field( cpb_get_input_name( $id, true, 'display_type' ), $settings['display_type'], $displays, 'Display Type' );
 
-		return array('Basic' => $html );
+		return array( 'Basic' => $html );
 
     } // End get_shortcode_form
 
@@ -140,7 +140,7 @@ class Slideshow_Shortcode {
         $child_keys = cpb_get_child_shortcode_ids( $children );
 
         // implode the child keys
-        $child_keys = \implode(',', $child_keys );
+        $child_keys = \implode( ',', $child_keys );
 
         // Get the edit button
         $edit_button = cpb_get_editor_edit_button();

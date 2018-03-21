@@ -21,7 +21,7 @@ class Shortcodes {
 		$this->add_shortcodes();
 
 		// Add Registered shortcodes via filter
-		\add_action( 'init', array( $this, 'register_shortcodes'), 99 );
+		\add_action( 'init', array( $this, 'register_shortcodes' ), 99 );
 
 	} // End __construct
 
@@ -62,7 +62,7 @@ class Shortcodes {
 		* Shortcodes can be added via cpb_shortcode filter or 
 		* the cpb_register_shortcode() (lib/functions/public.php)  function
 		*/
-		$pagebuilder_shortcodes = \apply_filters('cpb_shortcodes', $pagebuilder_shortcodes );
+		$pagebuilder_shortcodes = \apply_filters( 'cpb_shortcodes', $pagebuilder_shortcodes );
 
 	} // End add_shortcodes
 

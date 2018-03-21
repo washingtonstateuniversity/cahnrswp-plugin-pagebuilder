@@ -97,7 +97,7 @@ class AJAX {
 
         } // End if
 
-        header('Content-Type: application/json; charset=utf-8', true);
+        header( 'Content-Type: application/json; charset=utf-8', true);
 
         echo \json_encode( $json );
 

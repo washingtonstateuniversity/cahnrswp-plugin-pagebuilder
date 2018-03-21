@@ -6,4 +6,4 @@
 	<?php if ( ! in_array( $id, $selected_posts ) ):?><li data-postid="<?php echo $id;?>"><?php echo $label;?></li><?php endif;?>
 	<?php endforeach;?>
 </ul>
-<input type="text" name="<?php echo $name;?>[<?php echo $prefix;?>post_ids]" value="<?php echo implode(',', $selected_posts );?>" />
+<input type="text" name="<?php echo $name;?>[<?php echo $prefix;?>post_ids]" value="<?php echo implode( ',', $selected_posts );?>" />

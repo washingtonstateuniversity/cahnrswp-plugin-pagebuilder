@@ -22,7 +22,7 @@ class Video_Shortcode {
 
 	public function __construct() {
 
-        \add_action( 'init', array( $this, 'register_shortcode') );
+        \add_action( 'init', array( $this, 'register_shortcode' ) );
 
     } // End __construct
 
@@ -33,15 +33,15 @@ class Video_Shortcode {
     */
     public function register_shortcode() {
 
-        \add_shortcode( 'video', array( $this, 'get_rendered_shortcode') );
+        \add_shortcode( 'video', array( $this, 'get_rendered_shortcode' ) );
 
         cpb_register_shortcode( 
             'video', 
             $args = array(
                 'form_callback'             => array( $this, 'get_shortcode_form' ),
                 'label'                     => 'Video', // Label of the item
-                'render_callback'           => array( $this, 'get_rendered_shortcode'), // Callback to render shortcode
-                'editor_render_callback'    => array( $this, 'get_editor_content'), // Callback to render shortcode
+                'render_callback'           => array( $this, 'get_rendered_shortcode' ), // Callback to render shortcode
+                'editor_render_callback'    => array( $this, 'get_editor_content' ), // Callback to render shortcode
                 'default_atts'              => $this->default_settings,
                 'in_column'                 => true, // Allow in column
             ) 
@@ -123,7 +123,7 @@ class Video_Shortcode {
 
 			} // end if
 
-			$vid_style = 'background-image:url(' . $src . ');background-position: center center;background-size:cover;';
+			$vid_style = 'background-image:url( ' . $src . ' );background-position: center center;background-size:cover;';
 
 		} else {
 

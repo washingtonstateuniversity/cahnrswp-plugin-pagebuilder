@@ -53,7 +53,7 @@ class Promo_Shortcode {
             $remote_query_defaults
         );
 
-        \add_action( 'init', array( $this, 'register_shortcode') );
+        \add_action( 'init', array( $this, 'register_shortcode' ) );
 
     } // End __construct
 
@@ -64,14 +64,14 @@ class Promo_Shortcode {
     */
     public function register_shortcode() {
 
-        \add_shortcode( 'promo', array( $this, 'get_rendered_shortcode') );
+        \add_shortcode( 'promo', array( $this, 'get_rendered_shortcode' ) );
 
         cpb_register_shortcode( 
             'promo', 
             $args = array(
                 'form_callback'         => array( $this, 'get_shortcode_form' ),
                 'label'                 => 'Promo', // Label of the item
-                'render_callback'       => array( $this, 'get_rendered_shortcode'), // Callback to render shortcode
+                'render_callback'       => array( $this, 'get_rendered_shortcode' ), // Callback to render shortcode
                 'default_atts'          => $this->default_settings,
                 'in_column'             => true, // Allow in column
             ) 
@@ -222,7 +222,7 @@ class Promo_Shortcode {
 
 		$query = cpb_get_query_class();
 
-		$promo_items = $query->get_local_items( $settings, '');
+		$promo_items = $query->get_local_items( $settings, '' );
 
 		return $promo_items;
 
@@ -233,7 +233,7 @@ class Promo_Shortcode {
 
 		$promo_items = array();
 
-		$ids = explode(',', $settings['post_ids'] );
+		$ids = explode( ',', $settings['post_ids'] );
 
 		foreach ( $ids as $post_id ) {
 
@@ -279,11 +279,11 @@ class Promo_Shortcode {
 
         $form_custom .= '<div class="cpb-form-two-thirds">';
 
-        $form_custom .= $cpb_form->text_field( cpb_get_input_name( $id, true, 'promo_title'), $settings['promo_title'], 'Title', 'cpb-full-width' );
+        $form_custom .= $cpb_form->text_field( cpb_get_input_name( $id, true, 'promo_title' ), $settings['promo_title'], 'Title', 'cpb-full-width' );
 
-        $form_custom .= $cpb_form->textarea_field( cpb_get_input_name( $id, true, 'excerpt'), $settings['excerpt'], 'Summary/Text', 'cpb-full-width' );
+        $form_custom .= $cpb_form->textarea_field( cpb_get_input_name( $id, true, 'excerpt' ), $settings['excerpt'], 'Summary/Text', 'cpb-full-width' );
 
-        $form_custom .= $cpb_form->text_field( cpb_get_input_name( $id, true, 'link'), $settings['link'], 'Link', 'cpb-full-width' );
+        $form_custom .= $cpb_form->text_field( cpb_get_input_name( $id, true, 'link' ), $settings['link'], 'Link', 'cpb-full-width' );
 
         $form_custom.= '</div>';
 
@@ -326,29 +326,29 @@ class Promo_Shortcode {
 
 		$html = $cpb_form->multi_form( array( $custom_form, $select_form, $feed_form, $remote_feed_form ) );
 
-		$display = $cpb_form->checkbox_field( cpb_get_input_name( $id, true, 'stack_vertical'), 1, $settings['stack_vertical'], 'Stack Vertical' );
+		$display = $cpb_form->checkbox_field( cpb_get_input_name( $id, true, 'stack_vertical' ), 1, $settings['stack_vertical'], 'Stack Vertical' );
 
 
 		$tags = $cpb_form->get_header_tags();
 		unset( $tags['strong'] );
-		$display .= $cpb_form->select_field( cpb_get_input_name( $id, true, 'tag'), $settings['tag'], $tags, 'Tag Type' ); 
+		$display .= $cpb_form->select_field( cpb_get_input_name( $id, true, 'tag' ), $settings['tag'], $tags, 'Tag Type' ); 
 
 		$img_ratio = array( 'spacer1x1' => 'Square', 'spacer3x4' => '3 x 4 ratio', 'spacer4x3' => '4 x 3 ratio' );
-		$display .= $cpb_form->select_field( cpb_get_input_name( $id, true, 'img_ratio'), $settings['img_ratio'], $img_ratio, 'Image Ratio' ); 
+		$display .= $cpb_form->select_field( cpb_get_input_name( $id, true, 'img_ratio' ), $settings['img_ratio'], $img_ratio, 'Image Ratio' ); 
 
 		$display .= '<hr/>';
 
-		$display .= $cpb_form->checkbox_field( cpb_get_input_name( $id, true, 'unset_img'), 1, $settings['unset_img'], 'Hide Image' );
+		$display .= $cpb_form->checkbox_field( cpb_get_input_name( $id, true, 'unset_img' ), 1, $settings['unset_img'], 'Hide Image' );
 
-		$display .= $cpb_form->checkbox_field( cpb_get_input_name( $id, true, 'unset_title'), 1, $settings['unset_title'], 'Hide Title' );
+		$display .= $cpb_form->checkbox_field( cpb_get_input_name( $id, true, 'unset_title' ), 1, $settings['unset_title'], 'Hide Title' );
 
-		$display .= $cpb_form->checkbox_field( cpb_get_input_name( $id, true, 'unset_excerpt'), 1, $settings['unset_excerpt'], 'Hide Summary' );
+		$display .= $cpb_form->checkbox_field( cpb_get_input_name( $id, true, 'unset_excerpt' ), 1, $settings['unset_excerpt'], 'Hide Summary' );
 
-		$display .= $cpb_form->checkbox_field( cpb_get_input_name( $id, true, 'unset_link'), 1, $settings['unset_link'], 'Remove Link' );
+		$display .= $cpb_form->checkbox_field( cpb_get_input_name( $id, true, 'unset_link' ), 1, $settings['unset_link'], 'Remove Link' );
 
-		$display .= $cpb_form->checkbox_field( cpb_get_input_name( $id, true, 'as_lightbox'), 1, $settings['as_lightbox'], 'Display Lightbox' );
+		$display .= $cpb_form->checkbox_field( cpb_get_input_name( $id, true, 'as_lightbox' ), 1, $settings['as_lightbox'], 'Display Lightbox' );
 
-		$adv = $cpb_form->text_field( cpb_get_input_name( $id, true, 'csshook'), $settings['csshook'], 'CSS Hook' ); 
+		$adv = $cpb_form->text_field( cpb_get_input_name( $id, true, 'csshook' ), $settings['csshook'], 'CSS Hook' ); 
 
 		return array( 'Source' => $html, 'Display' => $display, 'Advanced' => $adv );
 
@@ -361,9 +361,9 @@ class Promo_Shortcode {
 
 		$form .= '<hr/>';
 
-		$form .= $cpb_form->text_field( cpb_get_input_name( $id, true, 'alt'), $settings['alt'], 'Promo Alt Text' );
+		$form .= $cpb_form->text_field( cpb_get_input_name( $id, true, 'alt' ), $settings['alt'], 'Promo Alt Text' );
 
-		$form .= $cpb_form->text_field( cpb_get_input_name( $id, true, 'url'), $settings['url'], 'Link Promo To:' );
+		$form .= $cpb_form->text_field( cpb_get_input_name( $id, true, 'url' ), $settings['url'], 'Link Promo To:' );
 
         return $form;
 

@@ -23,7 +23,7 @@ class FAQ_Shortcode {
 
 	public function __construct() {
 
-        \add_action( 'init', array( $this, 'register_shortcode') );
+        \add_action( 'init', array( $this, 'register_shortcode' ) );
 
     } // End __construct
 
@@ -34,14 +34,14 @@ class FAQ_Shortcode {
     */
     public function register_shortcode() {
 
-        \add_shortcode( 'faq', array( $this, 'get_rendered_shortcode') );
+        \add_shortcode( 'faq', array( $this, 'get_rendered_shortcode' ) );
 
         cpb_register_shortcode( 
             'faq', 
             $args = array(
                 'form_callback'         => array( $this, 'get_shortcode_form' ),
                 'label'                 => 'FAQ', // Label of the item
-                'render_callback'       => array( $this, 'get_rendered_shortcode'), // Callback to render shortcode
+                'render_callback'       => array( $this, 'get_rendered_shortcode' ), // Callback to render shortcode
                 'default_atts'          => $this->default_settings,
                 'in_column'             => true, // Allow in column
                 'uses_wp_editor'        => true, // Uses WP Editor
@@ -75,7 +75,7 @@ class FAQ_Shortcode {
 
         \ob_start();
 
-        include cpb_get_plugin_path('/lib/displays/items/faq/faq.php');
+        include cpb_get_plugin_path( '/lib/displays/items/faq/faq.php' );
 
         $html .= \ob_get_clean();
 
@@ -97,9 +97,9 @@ class FAQ_Shortcode {
 
         $cpb_form = cpb_get_form_class();
 
-        $html = $cpb_form->text_field( cpb_get_input_name( $id, true, 'title'), $settings['title'], 'Title' ); 
+        $html = $cpb_form->text_field( cpb_get_input_name( $id, true, 'title' ), $settings['title'], 'Title' ); 
 
-		$html .= $cpb_form->select_field( cpb_get_input_name( $id, true, 'tag'), $settings['tag'], $cpb_form->get_header_tags( true ), 'Tag Type' ); 
+		$html .= $cpb_form->select_field( cpb_get_input_name( $id, true, 'tag' ), $settings['tag'], $cpb_form->get_header_tags( true ), 'Tag Type' ); 
 
 		ob_start();
 
@@ -108,13 +108,13 @@ class FAQ_Shortcode {
 		$html .= ob_get_clean();
 
 		$adv = $cpb_form->select_field( 
-			cpb_get_input_name( $id, true, 'textcolor'), 
+			cpb_get_input_name( $id, true, 'textcolor' ), 
 			$settings['textcolor'], 
 			$cpb_form->get_wsu_colors(), 
 			'Text Color' 
 			);
 
-		return array('Basic' => $html, 'Advanced' => $adv );
+		return array( 'Basic' => $html, 'Advanced' => $adv );
 
     } // End get_shortcode_form
 

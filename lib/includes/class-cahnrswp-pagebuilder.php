@@ -49,24 +49,24 @@ class CAHNRSWP_Pagebuilder {
         if ( \is_admin() ) {
 
             // Add Pagebuilder Editor
-            include cpb_get_plugin_path('/lib/includes/class-editor.php');
+            include cpb_get_plugin_path( '/lib/includes/class-editor.php' );
 
             // Add Pagebuilder Save
-            include cpb_get_plugin_path('/lib/includes/class-save.php');
+            include cpb_get_plugin_path( '/lib/includes/class-save.php' );
 
         } // End if
 
         // Add Pagebuilder shortcodes
-        include cpb_get_plugin_path('/lib/includes/class-shortcodes.php');
+        include cpb_get_plugin_path( '/lib/includes/class-shortcodes.php' );
 
         // Add CSS & JS
-        include cpb_get_plugin_path('/lib/includes/class-scripts.php');
+        include cpb_get_plugin_path( '/lib/includes/class-scripts.php' );
 
         // Add AJAX support
-        include cpb_get_plugin_path('/lib/includes/class-ajax.php');
+        include cpb_get_plugin_path( '/lib/includes/class-ajax.php' );
 
         // Add Customizer Script
-        //include cpb_get_plugin_path('includes/class-customizer.php');
+        //include cpb_get_plugin_path( 'includes/class-customizer.php' );
 
     } // End init_plugin
 

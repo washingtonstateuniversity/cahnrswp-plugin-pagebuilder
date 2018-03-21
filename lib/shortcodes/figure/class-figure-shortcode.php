@@ -23,7 +23,7 @@ class Figure_Shortcode {
 
 	public function __construct() {
 
-        \add_action( 'init', array( $this, 'register_shortcode') );
+        \add_action( 'init', array( $this, 'register_shortcode' ) );
 
     } // End __construct
 
@@ -34,13 +34,13 @@ class Figure_Shortcode {
     */
     public function register_shortcode() {
 
-        \add_shortcode( 'figure', array( $this, 'get_rendered_shortcode') );
+        \add_shortcode( 'figure', array( $this, 'get_rendered_shortcode' ) );
 
         cpb_register_shortcode( 
             'figure', 
             $args = array(
                 'label'                 => 'Figure/Caption', // Label of the item
-                'render_callback'       => array( $this, 'get_rendered_shortcode'), // Callback to render shortcode
+                'render_callback'       => array( $this, 'get_rendered_shortcode' ), // Callback to render shortcode
                 'form_callback'         => array( $this, 'get_shortcode_form' ),
                 'default_atts'          => $this->default_settings,
                 'in_column'             => true, // Allow in column
@@ -71,7 +71,7 @@ class Figure_Shortcode {
 
             \ob_start();
 
-            include cpb_get_plugin_path('/lib/displays/items/figure/figure.php');
+            include cpb_get_plugin_path( '/lib/displays/items/figure/figure.php' );
 
             $html .= \ob_get_clean();
 
@@ -99,7 +99,7 @@ class Figure_Shortcode {
 
 		$form .= '<hr/>';
 
-        $form .= $cpb_form->text_field( cpb_get_input_name( $id, true, 'caption'), $atts['caption'], 'Caption' );
+        $form .= $cpb_form->text_field( cpb_get_input_name( $id, true, 'caption' ), $atts['caption'], 'Caption' );
 
         return array( 'Basic' => $form );
 

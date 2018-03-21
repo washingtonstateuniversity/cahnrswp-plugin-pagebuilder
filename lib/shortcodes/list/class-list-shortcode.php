@@ -40,7 +40,7 @@ class List_Shortcode {
             $select_query_defautls 
         );
 
-        \add_action( 'init', array( $this, 'register_shortcode') );
+        \add_action( 'init', array( $this, 'register_shortcode' ) );
 
     } // End __construct
 
@@ -51,14 +51,14 @@ class List_Shortcode {
     */
     public function register_shortcode() {
 
-        \add_shortcode( 'list', array( $this, 'get_rendered_shortcode') );
+        \add_shortcode( 'list', array( $this, 'get_rendered_shortcode' ) );
 
         cpb_register_shortcode( 
             'list', 
             $args = array(
                 'form_callback'         => array( $this, 'get_shortcode_form' ),
                 'label'                 => 'Post/Page List', // Label of the item
-                'render_callback'       => array( $this, 'get_rendered_shortcode'), // Callback to render shortcode
+                'render_callback'       => array( $this, 'get_rendered_shortcode' ), // Callback to render shortcode
                 'default_atts'          => $this->default_settings,
                 'in_column'             => true, // Allow in column
             ) 
@@ -95,7 +95,7 @@ class List_Shortcode {
                     $post_items = $query->get_local_items( $atts, '' );
 					break;
 				case 'remote_feed':
-                    $post_items = $query->get_remote_items_feed( $atts, '');
+                    $post_items = $query->get_remote_items_feed( $atts, '' );
 					break;
 				default:
                     $post_items = array();
@@ -174,21 +174,21 @@ class List_Shortcode {
 			'form'    => $cpb_form->get_form_remote_feed( cpb_get_input_name( $id, true ), $settings ),
 			);
 
-		$display = $cpb_form->select_field( cpb_get_input_name( $id, true, 'columns'), $settings['columns'], array( 1 => 1, 2 => 2,3 => 3, 4 => 4, 5 => 5 ), 'Columns' );
+		$display = $cpb_form->select_field( cpb_get_input_name( $id, true, 'columns' ), $settings['columns'], array( 1 => 1, 2 => 2,3 => 3, 4 => 4, 5 => 5 ), 'Columns' );
 
         $excerpt_length = array( 'short' => 'Short', 'medium' => 'Medium', 'long' => 'Long', 'full' => 'Full' );
 
-		$display = $cpb_form->select_field( cpb_get_input_name( $id, true, 'excerpt_length'), $settings['excerpt_length'], $excerpt_length, 'Summary Length' );
+		$display = $cpb_form->select_field( cpb_get_input_name( $id, true, 'excerpt_length' ), $settings['excerpt_length'], $excerpt_length, 'Summary Length' );
 
 		$display .= '<hr/>';
 
-		$display .= $cpb_form->checkbox_field( cpb_get_input_name( $id, true, 'unset_img'), 1, $settings['unset_img'], 'Hide Image' );
+		$display .= $cpb_form->checkbox_field( cpb_get_input_name( $id, true, 'unset_img' ), 1, $settings['unset_img'], 'Hide Image' );
 
-		$display .= $cpb_form->checkbox_field( cpb_get_input_name( $id, true, 'unset_title'), 1, $settings['unset_title'], 'Hide Title' );
+		$display .= $cpb_form->checkbox_field( cpb_get_input_name( $id, true, 'unset_title' ), 1, $settings['unset_title'], 'Hide Title' );
 
-		$display .= $cpb_form->checkbox_field( cpb_get_input_name( $id, true, 'unset_excerpt'), 1, $settings['unset_excerpt'], 'Hide Summary' );
+		$display .= $cpb_form->checkbox_field( cpb_get_input_name( $id, true, 'unset_excerpt' ), 1, $settings['unset_excerpt'], 'Hide Summary' );
 
-		$display .= $cpb_form->checkbox_field( cpb_get_input_name( $id, true, 'unset_link'), 1, $settings['unset_link'], 'Remove Link' );
+		$display .= $cpb_form->checkbox_field( cpb_get_input_name( $id, true, 'unset_link' ), 1, $settings['unset_link'], 'Remove Link' );
 
 		$html = $cpb_form->multi_form( array( $select_form, $feed_form, $remote_feed_form ) );
 

@@ -26,7 +26,7 @@ class Textblock {
 
 	public function __construct() {
 
-        \add_action( 'init', array( $this, 'register_shortcode') );
+        \add_action( 'init', array( $this, 'register_shortcode' ) );
 
     } // End __construct
 
@@ -37,7 +37,7 @@ class Textblock {
     */
     public function register_shortcode() {
 
-        \add_shortcode( 'textblock', array( $this, 'get_rendered_shortcode') );
+        \add_shortcode( 'textblock', array( $this, 'get_rendered_shortcode' ) );
 
         cpb_register_shortcode( 
             'textblock', 
@@ -45,7 +45,7 @@ class Textblock {
                 'form_callback'         => array( $this, 'get_shortcode_form' ),
                 'sanitize_callback'     => array( $this, 'get_sanitize_shortcode_atts' ),
                 'label'                 => 'Textblock', // Label of the item
-                'render_callback'       => array( $this, 'get_rendered_shortcode'), // Callback to render shortcode
+                'render_callback'       => array( $this, 'get_rendered_shortcode' ), // Callback to render shortcode
                 'default_atts'          => $this->default_settings,
                 'in_column'             => true, // Allow in column
                 'uses_wp_editor'        => true, // Uses WP Editor
@@ -110,7 +110,7 @@ class Textblock {
 			'list-style-drop-down' 	=> 'Accordion',
 		);
 
-		$html = $cpb_form->text_field( cpb_get_input_name( $id, true, 'title'), $settings['title'], 'Title' );
+		$html = $cpb_form->text_field( cpb_get_input_name( $id, true, 'title' ), $settings['title'], 'Title' );
 
 		ob_start();
 
@@ -118,17 +118,17 @@ class Textblock {
 
 		$html .= ob_get_clean();
 
-		$adv = $cpb_form->select_field( cpb_get_input_name( $id, true, 'textcolor'), $settings['textcolor'], $cpb_form->get_wsu_colors(), 'Text Color' );
+		$adv = $cpb_form->select_field( cpb_get_input_name( $id, true, 'textcolor' ), $settings['textcolor'], $cpb_form->get_wsu_colors(), 'Text Color' );
 
-		$adv .= $cpb_form->select_field( cpb_get_input_name( $id, true, 'bgcolor'), $settings['bgcolor'], $cpb_form->get_wsu_colors(), 'Background Color' );
+		$adv .= $cpb_form->select_field( cpb_get_input_name( $id, true, 'bgcolor' ), $settings['bgcolor'], $cpb_form->get_wsu_colors(), 'Background Color' );
 
-		$adv .= $cpb_form->select_field( cpb_get_input_name( $id, true, 'list_style'), $settings['list_style'], $style_array, 'List Style' );
+		$adv .= $cpb_form->select_field( cpb_get_input_name( $id, true, 'list_style' ), $settings['list_style'], $style_array, 'List Style' );
 
-		$adv .= $cpb_form->checkbox_field( cpb_get_input_name( $id, true, 'is_callout'), 1, $settings['is_callout'], 'Is Callout' );
+		$adv .= $cpb_form->checkbox_field( cpb_get_input_name( $id, true, 'is_callout' ), 1, $settings['is_callout'], 'Is Callout' );
 
-		$adv .= $cpb_form->text_field( cpb_get_input_name( $id, true, 'csshook'), $settings['csshook'], 'CSS Hook' );
+		$adv .= $cpb_form->text_field( cpb_get_input_name( $id, true, 'csshook' ), $settings['csshook'], 'CSS Hook' );
 
-		return array('Basic' => $html, 'Advanced' => $adv );
+		return array( 'Basic' => $html, 'Advanced' => $adv );
 
 
     } // End get_shortcode_form

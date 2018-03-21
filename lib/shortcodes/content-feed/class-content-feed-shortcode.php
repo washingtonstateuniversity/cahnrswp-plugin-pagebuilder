@@ -32,7 +32,7 @@ class Content_Feed_Shortcode {
 
         $this->default_settings = array_merge( $this->default_settings, $local_query_defaults );
 
-        \add_action( 'init', array( $this, 'register_shortcode') );
+        \add_action( 'init', array( $this, 'register_shortcode' ) );
 
     } // End __construct
 
@@ -43,14 +43,14 @@ class Content_Feed_Shortcode {
     */
     public function register_shortcode() {
 
-        \add_shortcode( 'content_feed', array( $this, 'get_rendered_shortcode') );
+        \add_shortcode( 'content_feed', array( $this, 'get_rendered_shortcode' ) );
 
         cpb_register_shortcode( 
             'content_feed', 
             $args = array(
                 'form_callback'         => array( $this, 'get_shortcode_form' ),
                 'label'                 => 'Content Feed', // Label of the item
-                'render_callback'       => array( $this, 'get_rendered_shortcode'), // Callback to render shortcode
+                'render_callback'       => array( $this, 'get_rendered_shortcode' ), // Callback to render shortcode
                 'default_atts'          => $this->default_settings,
                 'in_column'             => true, // Allow in column
             ) 
@@ -124,7 +124,7 @@ class Content_Feed_Shortcode {
 
             \ob_start();
 
-            include cpb_get_plugin_path('/lib/displays/items/accordion/accordion.php');
+            include cpb_get_plugin_path( '/lib/displays/items/accordion/accordion.php' );
 
             $html .= \ob_get_clean();
 
@@ -153,7 +153,7 @@ class Content_Feed_Shortcode {
 
             \ob_start();
 
-            include cpb_get_plugin_path('/lib/displays/items/list/list.php');
+            include cpb_get_plugin_path( '/lib/displays/items/list/list.php' );
 
             $html .= \ob_get_clean();
 
@@ -208,21 +208,21 @@ class Content_Feed_Shortcode {
 
         $tags = $cpb_form->get_header_tags();
 
-        $display = $cpb_form->select_field( cpb_get_input_name( $id, true, 'display'), $settings['display'], $displays, 'Display As' ); 
+        $display = $cpb_form->select_field( cpb_get_input_name( $id, true, 'display' ), $settings['display'], $displays, 'Display As' ); 
 
-        $display .= $cpb_form->select_field( cpb_get_input_name( $id, true, 'tag'), $settings['tag'], $tags, 'Tag Type' ); 
+        $display .= $cpb_form->select_field( cpb_get_input_name( $id, true, 'tag' ), $settings['tag'], $tags, 'Tag Type' ); 
 
         $display .= '<hr/>';
 
-        $display .= $cpb_form->checkbox_field( cpb_get_input_name( $id, true, 'unset_title'), 1, $settings['unset_title'], 'Hide Title' );
+        $display .= $cpb_form->checkbox_field( cpb_get_input_name( $id, true, 'unset_title' ), 1, $settings['unset_title'], 'Hide Title' );
 
-        $display .= $cpb_form->checkbox_field( cpb_get_input_name( $id, true, 'unset_excerpt'), 1, $settings['unset_excerpt'], 'Hide Summary' );
+        $display .= $cpb_form->checkbox_field( cpb_get_input_name( $id, true, 'unset_excerpt' ), 1, $settings['unset_excerpt'], 'Hide Summary' );
 
-        $display .= $cpb_form->checkbox_field( cpb_get_input_name( $id, true, 'unset_link'), 1, $settings['unset_link'], 'Remove Link' );
+        $display .= $cpb_form->checkbox_field( cpb_get_input_name( $id, true, 'unset_link' ), 1, $settings['unset_link'], 'Remove Link' );
 
-        $display .= $cpb_form->checkbox_field( cpb_get_input_name( $id, true, 'as_lightbox'), 1, $settings['as_lightbox'], 'Display Lightbox' );
+        $display .= $cpb_form->checkbox_field( cpb_get_input_name( $id, true, 'as_lightbox' ), 1, $settings['as_lightbox'], 'Display Lightbox' );
 
-        $adv = $cpb_form->text_field( cpb_get_input_name( $id, true, 'csshook'), $settings['csshook'], 'CSS Hook' ); 
+        $adv = $cpb_form->text_field( cpb_get_input_name( $id, true, 'csshook' ), $settings['csshook'], 'CSS Hook' ); 
 
         return array( 'Source' => $html, 'Display' => $display, 'Advanced' => $adv );
 

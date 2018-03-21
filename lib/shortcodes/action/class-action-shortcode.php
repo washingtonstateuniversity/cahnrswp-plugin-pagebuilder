@@ -26,7 +26,7 @@ class Action {
 
 	public function __construct() {
 
-        \add_action( 'init', array( $this, 'register_shortcode') );
+        \add_action( 'init', array( $this, 'register_shortcode' ) );
 
     } // End __construct
 
@@ -37,14 +37,14 @@ class Action {
     */
     public function register_shortcode() {
 
-        \add_shortcode( 'action', array( $this, 'get_rendered_shortcode') );
+        \add_shortcode( 'action', array( $this, 'get_rendered_shortcode' ) );
 
         cpb_register_shortcode( 
             'action', 
             $args = array(
                 'form_callback'         => array( $this, 'get_shortcode_form' ),
                 'label'                 => 'Action Button', // Label of the item
-                'render_callback'       => array( $this, 'get_rendered_shortcode'), // Callback to render shortcode
+                'render_callback'       => array( $this, 'get_rendered_shortcode' ), // Callback to render shortcode
                 'default_atts'          => $this->default_settings,
                 'in_column'             => true, // Allow in column
             ) 
@@ -69,7 +69,7 @@ class Action {
         // Check default settings 
         $atts = \shortcode_atts( $this->default_settings, $atts, 'action' );
 
-        $class_array = array( 'cpb-action-button', 'cpb-action-button-item');
+        $class_array = array( 'cpb-action-button', 'cpb-action-button-item' );
 
         if ( ! empty( $atts['style'] ) ) {
 
@@ -126,15 +126,15 @@ class Action {
 
         $adv = '';
 
-		$html .= $cpb_form->text_field( cpb_get_input_name( $id, true, 'label'), $settings['label'], 'Label' );
+		$html .= $cpb_form->text_field( cpb_get_input_name( $id, true, 'label' ), $settings['label'], 'Label' );
 
-		$html .= $cpb_form->text_field( cpb_get_input_name( $id, true, 'link'), $settings['link'], 'Link' );
+		$html .= $cpb_form->text_field( cpb_get_input_name( $id, true, 'link' ), $settings['link'], 'Link' );
 
-		$html .= $cpb_form->text_field( cpb_get_input_name( $id, true, 'csshook'), $settings['csshook'], 'CSS Hook' );
+		$html .= $cpb_form->text_field( cpb_get_input_name( $id, true, 'csshook' ), $settings['csshook'], 'CSS Hook' );
 
-		$html .= $cpb_form->select_field( cpb_get_input_name( $id, true, 'style'), $settings['style'], $styles, 'Style' );
+		$html .= $cpb_form->select_field( cpb_get_input_name( $id, true, 'style' ), $settings['style'], $styles, 'Style' );
 
-		$adv .= $cpb_form->textarea_field( cpb_get_input_name( $id, true, 'caption'), $settings['caption'], 'Link Description' );
+		$adv .= $cpb_form->textarea_field( cpb_get_input_name( $id, true, 'caption' ), $settings['caption'], 'Link Description' );
 
 		return array( 'Basic' => $html, 'Advanced' => $adv );
 

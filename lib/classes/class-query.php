@@ -11,7 +11,7 @@ if ( ! defined( 'WPINC' ) ) {
 */
 class Query {
 
-	protected $fields = array('title','content','img','link','excerpt');
+	protected $fields = array( 'title','content','img','link','excerpt' );
 
 	public function get_fields() { return $this->fields; }
 

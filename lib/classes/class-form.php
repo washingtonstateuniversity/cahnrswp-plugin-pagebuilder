@@ -122,9 +122,17 @@ class Form {
 
 		$html = '<input type="text" name="' . $name . '" value="' . $value . '" />';
 
-		if ( $label ) $html = '<label>' . $label . '</label>' . $html;
+		if ( $label ) {
 
-		if ( $helper_text ) $html .= '<span class="cpb-helper-text">' . $helper_text . '</span>';
+			$html = '<label>' . $label . '</label>' . $html;
+
+		} // End if
+
+		if ( $helper_text ) {
+
+			$html .= '<span class="cpb-helper-text">' . $helper_text . '</span>';
+
+		} // End if
 
 		return $this->wrap_field( $html, $class );
 
@@ -138,7 +146,11 @@ class Form {
 
 		$html .= '</textarea>';
 
-		if ( $label ) $html = '<label>' . $label . '</label>' . $html;
+		if ( $label ) {
+
+			$html = '<label>' . $label . '</label>' . $html;
+
+		} // End if
 
 		return $this->wrap_field( $html, $class );
 
@@ -175,8 +187,6 @@ class Form {
 
 		$html .= '</select>';
 
-		//if ( $label ) $html = '<label for="' . $id . '">' . $label . '</label>' . $html;
-
 		if ( $label ) {
 
 			$html = '<label>' . $label . '</label>' . $html;
@@ -212,7 +222,7 @@ class Form {
 
 			} // end if
 
-			$selected = ( in_array( $op_value, $values ) )? 'selected="selected"' : '';
+			$selected = ( in_array( $op_value, $values ) ) ? 'selected="selected"' : '';
 
 			$option_html = '<option value="' . $op_value . '" ' . $selected . ' >' . $op_label . '</option>';
 
@@ -228,9 +238,13 @@ class Form {
 
 		} // end foreach
 
-		$html = '<select multiple name="' . $name . '" >' . implode('', $options_fields_selected ) . implode('', $options_fields ) . '</select>';
+		$html = '<select multiple name="' . $name . '" >' . implode( '', $options_fields_selected ) . implode( '', $options_fields ) . '</select>';
 
-		if ( $label ) $html = '<label for="' . $id . '">' . $label . '</label>' . $html;
+		if ( $label ) { 
+
+			$html = '<label for="' . $id . '">' . $label . '</label>' . $html;
+
+		} // End if
 
 		return $this->wrap_field( $html, $class );
 
@@ -241,11 +255,15 @@ class Form {
 
 		$class .= ' cpb-full-width';
 
-		if ( empty( $settings[ $prefix . 'post_ids' ] ) ) $settings[ $prefix . 'post_ids' ] = '';
+		if ( empty( $settings[ $prefix . 'post_ids' ] ) ) {
+
+			$settings[ $prefix . 'post_ids' ] = '';
+
+		} // End if
 
 		$id = $this->get_unique_id( $name );
 
-		$selected_posts = explode(',', $settings[ $prefix . 'post_ids' ] );
+		$selected_posts = explode( ',', $settings[ $prefix . 'post_ids' ] );
 
 		if ( ! $options ) {
 
@@ -257,11 +275,11 @@ class Form {
 
 		if ( $label ) {
 
-			include cpb_get_plugin_path('/lib/displays/form-fields/general/label.php');
+			include cpb_get_plugin_path( '/lib/displays/form-fields/general/label.php' );
 
 		}
 
-		include cpb_get_plugin_path('/lib/displays/form-fields/multi-post-select/select-list.php');
+		include cpb_get_plugin_path( '/lib/displays/form-fields/multi-post-select/select-list.php' );
 
 		$select_field = ob_get_clean();
 
@@ -291,7 +309,11 @@ class Form {
 
 	public function select_posts_field( $name, $values, $options, $label = false, $class = '' ) {
 
-		if ( ! is_array( $values ) ) $values = array();
+		if ( ! is_array( $values ) ) {
+
+			$values = array();
+
+		} // End if
 
 		$options_fields = array();
 
@@ -331,13 +353,17 @@ class Form {
 
 		$html .= '</div>';
 
-		$field_html = '<select name="" >' . implode('', $options_fields ) . '</select>';
+		$field_html = '<select name="" >' . implode( '', $options_fields ) . '</select>';
 
-		if ( $label ) $field_html = '<label for="' . $id . '">' . $label . '</label>' . $field_html;
+		if ( $label ) {
+
+			$field_html = '<label for="' . $id . '">' . $label . '</label>' . $field_html;
+
+		} // End if
 
 		$html .= $field_html;
 
-		$html .= $this->get_button('Add Post', 'cpb-select-post-updated-action') . '</div>';
+		$html .= $this->get_button( 'Add Post', 'cpb-select-post-updated-action' ) . '</div>';
 
 		return $this->wrap_field( $html, $class );
 
@@ -369,9 +395,17 @@ class Form {
 
 		$html = '<input type="checkbox" id="' . $id . '" name="' . $name . '" value="' . $value . '" ' . checked( $value, $current_value, false )  . ' />';
 
-		if ( $label ) $html .= '<label for="' . $id . '" class="' . $active . '">' . $label . '</label>' ;
+		if ( $label ) {
 
-		if ( $text ) $html .= '<br /><span class=".cpb-helper-text">' . $text . '</span>' ;
+			$html .= '<label for="' . $id . '" class="' . $active . '">' . $label . '</label>' ;
+
+		} // End if
+
+		if ( $text ) {
+
+			$html .= '<br /><span class=".cpb-helper-text">' . $text . '</span>' ;
+
+		} // End if
 
 		return $this->wrap_field( $html, $class, 'checkbox' );
 
@@ -389,7 +423,7 @@ class Form {
 
 		$html .= '</div>';
 
-		return $this->wrap_field( $html, $class, 'cpb-search');
+		return $this->wrap_field( $html, $class, 'cpb-search' );
 
 	}
 
@@ -403,7 +437,11 @@ class Form {
 
 			$html .= '</div>';
 
-			if ( $label ) $html = '<label>' . $label . '</label>' . $html;
+			if ( $label ) {
+
+				$html = '<label>' . $label . '</label>' . $html;
+
+			} // End if
 
 			$html .= '<span class="cpb-helper-text">URL of external site. NOTE: You must click <strong>update options</strong> before selecting options below.</span>';
 
@@ -431,7 +469,11 @@ class Form {
 
 	public function multi_form( $forms = array() ) {
 
-		if ( ! is_array( $forms ) ) $forms = array( $forms );
+		if ( ! is_array( $forms ) ) {
+
+			$forms = array( $forms );
+
+		} // End if
 
 		$options = '';
 
@@ -516,10 +558,29 @@ class Form {
 			'title' => 'Title',
 		);
 
-		if ( empty( $settings[ $prefix . 'post_type' ] ) ) $settings[ $prefix . 'post_type' ] = '';
-		if ( empty( $settings[ $prefix . 'taxonomy' ] ) ) $settings[ $prefix . 'taxonomy' ] = '';
-		if ( empty( $settings[ $prefix . 'terms' ] ) ) $settings[ $prefix . 'terms' ] = '';
-		if ( empty( $settings[ $prefix . 'count' ] ) ) $settings[ $prefix . 'count' ] = '';
+		if ( empty( $settings[ $prefix . 'post_type' ] ) ) {
+
+			$settings[ $prefix . 'post_type' ] = '';
+
+		} // End if
+
+		if ( empty( $settings[ $prefix . 'taxonomy' ] ) ) {
+
+			$settings[ $prefix . 'taxonomy' ] = '';
+
+		} // End if
+
+		if ( empty( $settings[ $prefix . 'terms' ] ) ) {
+
+			$settings[ $prefix . 'terms' ] = '';
+
+		} // End if
+
+		if ( empty( $settings[ $prefix . 'count' ] ) ) {
+
+			$settings[ $prefix . 'count' ] = '';
+
+		} // End if
 
 		$form = $this->select_field( $base_name. '[' . $prefix . 'post_type]', $settings[ $prefix . 'post_type' ], $this->get_post_types(), 'Post Type' );
 
@@ -558,10 +619,17 @@ class Form {
 
 	public function get_form_select_post( $base_name, $settings, $prefix = '' ) {
 
-		if ( empty( $settings[ $prefix . 'id' ] ) ) $settings[ $prefix . 'id' ] = '';
-		if ( empty( $settings[ $prefix . 'site_url' ] ) ) $settings[ $prefix . 'site_url' ] = get_site_url();
+		if ( empty( $settings[ $prefix . 'id' ] ) ) {
 
+			$settings[ $prefix . 'id' ] = '';
 
+		} // End if
+
+		if ( empty( $settings[ $prefix . 'site_url' ] ) ) {
+
+			$settings[ $prefix . 'site_url' ] = get_site_url();
+
+		} // End if
 
 		$url_helper = 'URL of the site to search';
 
@@ -779,7 +847,7 @@ class Form {
 
 		if ( $include_empty ) {
 
-			$tags = array_merge( array( '' => 'None'), $tags );
+			$tags = array_merge( array( '' => 'None' ), $tags );
 
 		} // End if
 
@@ -789,9 +857,13 @@ class Form {
 
 	public function get_post_types( $add_any = true, $exclude = true ) {
 
-		$exclude_types = array('revision','nav_menu_item','attachment');
+		$exclude_types = array( 'revision','nav_menu_item','attachment' );
 
-		if ( $exclude && ! is_array( $exclude ) ) $exclude = $exclude_types;
+		if ( $exclude && ! is_array( $exclude ) ) {
+
+			$exclude = $exclude_types;
+
+		} // End if
 
 		$p_types = get_post_types();
 

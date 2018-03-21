@@ -28,7 +28,7 @@ class Column {
 
 	public function __construct() {
 
-        \add_action( 'init', array( $this, 'register_shortcode') );
+        \add_action( 'init', array( $this, 'register_shortcode' ) );
 
     } // End __construct
 
@@ -39,7 +39,7 @@ class Column {
     */
     public function register_shortcode() {
 
-        \add_shortcode( 'column', array( $this, 'get_rendered_shortcode') );
+        \add_shortcode( 'column', array( $this, 'get_rendered_shortcode' ) );
 
         cpb_register_shortcode( 
             'column', 
@@ -156,7 +156,7 @@ class Column {
         $child_keys = cpb_get_child_shortcode_ids( $children );
 
         // Implode array
-        $child_keys = \implode(',', $child_keys );
+        $child_keys = \implode( ',', $child_keys );
 
         // Get the edit button
         $edit_button = cpb_get_editor_edit_button();
@@ -168,7 +168,7 @@ class Column {
         \ob_start();
 
         // Include the html for the column editor
-        include cpb_get_plugin_path('/lib/displays/editor/column-editor.php');
+        include cpb_get_plugin_path( '/lib/displays/editor/column-editor.php' );
 
         // Get the html
         $html = \ob_get_clean();

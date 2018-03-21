@@ -21,7 +21,7 @@ class Sidebar_Shortcode {
 
 	public function __construct() {
 
-        \add_action( 'init', array( $this, 'register_shortcode') );
+        \add_action( 'init', array( $this, 'register_shortcode' ) );
 
     } // End __construct
 
@@ -32,14 +32,14 @@ class Sidebar_Shortcode {
     */
     public function register_shortcode() {
 
-        \add_shortcode( 'sidebar', array( $this, 'get_rendered_shortcode') );
+        \add_shortcode( 'sidebar', array( $this, 'get_rendered_shortcode' ) );
 
         cpb_register_shortcode( 
             'sidebar', 
             $args = array(
                 'form_callback'         => array( $this, 'get_shortcode_form' ),
                 'label'                 => 'Sidebar (Widgets)', // Label of the item
-                'render_callback'       => array( $this, 'get_rendered_shortcode'), // Callback to render shortcode
+                'render_callback'       => array( $this, 'get_rendered_shortcode' ), // Callback to render shortcode
                 'default_atts'          => $this->default_settings,
                 'in_column'             => true, // Allow in column
             ) 
@@ -104,7 +104,7 @@ class Sidebar_Shortcode {
 
 		} // end foreach
 
-		$form = $cpb_form->select_field( cpb_get_input_name( $id, true, 'sidebar_id'), $settings['sidebar_id'], $sidebars, 'Select Sidebar' );
+		$form = $cpb_form->select_field( cpb_get_input_name( $id, true, 'sidebar_id' ), $settings['sidebar_id'], $sidebars, 'Select Sidebar' );
 
 		return $form;
 

@@ -2,7 +2,7 @@
 <div class="<?php echo $class ; ?>" data-requesturl="<?php echo $request_url ; ?>">
 	<?php if ( ! empty( $img_src ) ):?>
 	<div class="cpb-image">
-		<img style="background-image:url(<?php echo $img_src; ?>);background-position:center center;background-size:cover;" src="<?php echo cpb_get_plugin_url( 'lib/images/' . $img_ratio. '.gif') ; ?>" alt="<?php echo $img_alt ; ?>" />
+		<img style="background-image:url(<?php echo $img_src; ?>);background-position:center center;background-size:cover;" src="<?php echo cpb_get_plugin_url( 'lib/images/' . $img_ratio. '.gif' ) ; ?>" alt="<?php echo $img_alt ; ?>" />
 	</div>
 	<?php endif;?>
 	<div class="cpb-promo-caption">

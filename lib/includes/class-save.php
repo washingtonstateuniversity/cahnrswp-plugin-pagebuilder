@@ -13,7 +13,7 @@ class Save {
 
     public function __construct() {
 
-        \add_action( 'save_post', array( $this, 'do_save_layout') );
+        \add_action( 'save_post', array( $this, 'do_save_layout' ) );
 
     } // End 
 
@@ -49,7 +49,7 @@ class Save {
             );
 
             // No infinite loops here - good to avoid that
-            \remove_action( 'save_post', array( $this, 'do_save_layout') );
+            \remove_action( 'save_post', array( $this, 'do_save_layout' ) );
 
             // Update the post into the database
             wp_update_post( $post );

@@ -24,7 +24,7 @@ class Table_Shortcode {
 
 	public function __construct() {
 
-        \add_action( 'init', array( $this, 'register_shortcode') );
+        \add_action( 'init', array( $this, 'register_shortcode' ) );
 
     } // End __construct
 
@@ -35,14 +35,14 @@ class Table_Shortcode {
     */
     public function register_shortcode() {
 
-        \add_shortcode( 'cpbtable', array( $this, 'get_rendered_shortcode') );
+        \add_shortcode( 'cpbtable', array( $this, 'get_rendered_shortcode' ) );
 
         cpb_register_shortcode( 
             'cpbtable', 
             $args = array(
                 'form_callback'         => array( $this, 'get_shortcode_form' ),
                 'label'                 => 'Table', // Label of the item
-                'render_callback'       => array( $this, 'get_rendered_shortcode'), // Callback to render shortcode
+                'render_callback'       => array( $this, 'get_rendered_shortcode' ), // Callback to render shortcode
                 'default_atts'          => $this->default_settings,
                 'in_column'             => true, // Allow in column
             ) 
@@ -105,7 +105,7 @@ class Table_Shortcode {
 
 		$form .= '<hr/>';
 
-		$form .= $cpb_form->text_field( cpb_get_input_name( $id, true, 'caption'), $settings['caption'], 'Caption' );
+		$form .= $cpb_form->text_field( cpb_get_input_name( $id, true, 'caption' ), $settings['caption'], 'Caption' );
 
 		return $form; 
 

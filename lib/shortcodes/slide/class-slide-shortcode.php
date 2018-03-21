@@ -50,7 +50,7 @@ class Slide_Shortcode {
             $select_query_defaults
         );
 
-        \add_action( 'init', array( $this, 'register_shortcode') );
+        \add_action( 'init', array( $this, 'register_shortcode' ) );
 
     } // End __construct
 
@@ -61,14 +61,14 @@ class Slide_Shortcode {
     */
     public function register_shortcode() {
 
-        \add_shortcode( 'slide', array( $this, 'get_rendered_shortcode') );
+        \add_shortcode( 'slide', array( $this, 'get_rendered_shortcode' ) );
 
         cpb_register_shortcode( 
             'slide', 
             $args = array(
                 'form_callback'         => array( $this, 'get_shortcode_form' ),
                 'label'                 => 'Slide', // Label of the item
-                'render_callback'       => array( $this, 'get_rendered_shortcode'), // Callback to render shortcode
+                'render_callback'       => array( $this, 'get_rendered_shortcode' ), // Callback to render shortcode
                 'default_atts'          => $this->default_settings,
                 'in_column'             => true, // Allow in column
             ) 
@@ -154,7 +154,7 @@ class Slide_Shortcode {
 
 			$active = ( $cpb_slideshow['i'] === 1 )? ' active-slide' : '';
 			$bg_image = $item['img'];
-			$img = '<img class="slide_img_bg" src="' . cpb_get_plugin_url( 'lib/images/spacer1x1.gif' ) . '" style="background-image:url(' . $bg_image . ')" />';
+			$img = '<img class="slide_img_bg" src="' . cpb_get_plugin_url( 'lib/images/spacer1x1.gif' ) . '" style="background-image:url( ' . $bg_image . ' )" />';
 			$link = ( $item['link'] ) ? '<a href="' . $item['link'] . '" class="slide-link" /></a>' : '';
 			$title = $item['title'];
 			$excerpt = wp_trim_words( $item['excerpt'], 35 );
@@ -286,29 +286,29 @@ class Slide_Shortcode {
 		
 $html = $cpb_form->multi_form( array( $custom_form, $select_form, $feed_form, $remote_feed_form ) );
 		
-$display = $cpb_form->checkbox_field( cpb_get_input_name( $id, true, 'stack_vertical'), 1, $settings['stack_vertical'], 'Stack Vertical' );
+$display = $cpb_form->checkbox_field( cpb_get_input_name( $id, true, 'stack_vertical' ), 1, $settings['stack_vertical'], 'Stack Vertical' );
 		
 
 $tags = $cpb_form->get_header_tags();
 		unset( $tags['strong'] );
-		$display .= $cpb_form->select_field( cpb_get_input_name( $id, true, 'tag'), $settings['tag'], $tags, 'Tag Type' ); 
+		$display .= $cpb_form->select_field( cpb_get_input_name( $id, true, 'tag' ), $settings['tag'], $tags, 'Tag Type' ); 
 		
 $img_ratio = array( 'spacer1x1' => 'Square', 'spacer3x4' => '3 x 4 ratio', 'spacer4x3' => '4 x 3 ratio' );
-		$display .= $cpb_form->select_field( cpb_get_input_name( $id, true, 'img_ratio'), $settings['img_ratio'], $img_ratio, 'Image Ratio' ); 
+		$display .= $cpb_form->select_field( cpb_get_input_name( $id, true, 'img_ratio' ), $settings['img_ratio'], $img_ratio, 'Image Ratio' ); 
 		
 $display .= '<hr/>';
 		
-$display .= $cpb_form->checkbox_field( cpb_get_input_name( $id, true, 'unset_img'), 1, $settings['unset_img'], 'Hide Image' );
+$display .= $cpb_form->checkbox_field( cpb_get_input_name( $id, true, 'unset_img' ), 1, $settings['unset_img'], 'Hide Image' );
 		
-$display .= $cpb_form->checkbox_field( cpb_get_input_name( $id, true, 'unset_title'), 1, $settings['unset_title'], 'Hide Title' );
+$display .= $cpb_form->checkbox_field( cpb_get_input_name( $id, true, 'unset_title' ), 1, $settings['unset_title'], 'Hide Title' );
 		
-$display .= $cpb_form->checkbox_field( cpb_get_input_name( $id, true, 'unset_excerpt'), 1, $settings['unset_excerpt'], 'Hide Summary' );
+$display .= $cpb_form->checkbox_field( cpb_get_input_name( $id, true, 'unset_excerpt' ), 1, $settings['unset_excerpt'], 'Hide Summary' );
 		
-$display .= $cpb_form->checkbox_field( cpb_get_input_name( $id, true, 'unset_link'), 1, $settings['unset_link'], 'Remove Link' );
+$display .= $cpb_form->checkbox_field( cpb_get_input_name( $id, true, 'unset_link' ), 1, $settings['unset_link'], 'Remove Link' );
 		
-$display .= $cpb_form->checkbox_field( cpb_get_input_name( $id, true, 'as_lightbox'), 1, $settings['as_lightbox'], 'Display Lightbox' );
+$display .= $cpb_form->checkbox_field( cpb_get_input_name( $id, true, 'as_lightbox' ), 1, $settings['as_lightbox'], 'Display Lightbox' );
 		
-$adv = $cpb_form->text_field( cpb_get_input_name( $id, true, 'csshook'), $settings['csshook'], 'CSS Hook' ); 
+$adv = $cpb_form->text_field( cpb_get_input_name( $id, true, 'csshook' ), $settings['csshook'], 'CSS Hook' ); 
 		
 return array( 'Source' => $html /*, 'Display' => $display, 'Advanced' => $adv */ );
 
@@ -325,11 +325,11 @@ return array( 'Source' => $html /*, 'Display' => $display, 'Advanced' => $adv */
 		
         $form .= '<div class="cpb-form-two-thirds">';
 		
-	    $form .= $cpb_form->text_field( cpb_get_input_name( $id, true, 'item_title'), $settings['item_title'], 'Title', 'cpb-full-width' );
+	    $form .= $cpb_form->text_field( cpb_get_input_name( $id, true, 'item_title' ), $settings['item_title'], 'Title', 'cpb-full-width' );
 			
-        $form .= $cpb_form->textarea_field( cpb_get_input_name( $id, true, 'excerpt'), $settings['excerpt'], 'Summary/Text', 'cpb-full-width' );
+        $form .= $cpb_form->textarea_field( cpb_get_input_name( $id, true, 'excerpt' ), $settings['excerpt'], 'Summary/Text', 'cpb-full-width' );
 			
-        $form .= $cpb_form->text_field( cpb_get_input_name( $id, true, 'link'), $settings['link'], 'Link', 'cpb-full-width' );
+        $form .= $cpb_form->text_field( cpb_get_input_name( $id, true, 'link' ), $settings['link'], 'Link', 'cpb-full-width' );
 		
         $form .= '</div>';
 		

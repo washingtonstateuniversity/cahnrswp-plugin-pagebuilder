@@ -30,7 +30,7 @@ class Editor {
 	protected function add_actions() {
 
 		// Add editor to edit post page
-		\add_action( 'edit_form_after_title', array( $this, 'add_editor'), 1 );
+		\add_action( 'edit_form_after_title', array( $this, 'add_editor' ), 1 );
 
 	} // End add_actions
 
@@ -52,7 +52,7 @@ class Editor {
 
 		$cpb_shortcodes = cpb_get_shortcodes( false );
 
-		$content_shortcodes = cpb_get_shortcodes_from_content( $post->post_content, array('row'), 'row' );
+		$content_shortcodes = cpb_get_shortcodes_from_content( $post->post_content, array( 'row' ), 'row' );
 
 		$options_editor = $this->get_options_editor( $post );
 
@@ -185,7 +185,7 @@ class Editor {
 
 				$text_shortcode = cpb_get_shortcode( $text_editor, array(), '', false );
 
-				$text_shortcode['form_classes'] = array('cpb-blank-editor');
+				$text_shortcode['form_classes'] = array( 'cpb-blank-editor' );
 
 				$empty_editors .= cpb_get_editor_form_html( $text_shortcode ); 
 
@@ -284,7 +284,7 @@ class Editor {
 
 		$form_content = array( 'Select Item' => $shortcode_html );
 
-		$form_args = array('title' => 'Add Items & Widgets');
+		$form_args = array( 'title' => 'Add Items & Widgets' );
 
 		$html = cpb_get_editor_form_wrapper( 'cpb-add-item-form', $form_content, $form_args );
 

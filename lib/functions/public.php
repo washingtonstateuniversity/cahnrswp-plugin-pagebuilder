@@ -168,7 +168,7 @@ function cpb_register_shortcode( $slug, $args = array() ) {
 function cpb_get_shortcodes_from_content( $content, $shortcodes, $default_shortcode = false, $do_recursive = true ) {
 
     // Include parser class
-    include_once cpb_get_plugin_path('/lib/classes/class-shortcode-parser.php');
+    include_once cpb_get_plugin_path( '/lib/classes/class-shortcode-parser.php' );
 
     $shortcode_parser = new Shortcode_Parser();
 
@@ -228,7 +228,7 @@ function cpb_get_shortcode( $slug, $atts = array(), $content = '', $get_children
 
         } // End if
 
-        return apply_filters('cpb_get_shortcode', $shortcode, $get_children );
+        return apply_filters( 'cpb_get_shortcode', $shortcode, $get_children );
 
     } else {
 
@@ -403,7 +403,7 @@ function cpb_get_editor_html( $shortcodes, $is_recursive = true ) {
                 ob_start();
 
                 // Include the html
-                include cpb_get_plugin_path('/lib/displays/editor/generic-editor.php');
+                include cpb_get_plugin_path( '/lib/displays/editor/generic-editor.php' );
 
                 $html .= ob_get_clean();
 
@@ -481,7 +481,7 @@ function cpb_get_editor_edit_button() {
 
     ob_start();
 
-    include cpb_get_plugin_path('/lib/displays/editor/edit_button.php');
+    include cpb_get_plugin_path( '/lib/displays/editor/edit_button.php' );
 
     return ob_get_clean();
 
@@ -498,7 +498,7 @@ function cpb_get_editor_remove_button() {
 
     ob_start();
 
-    include cpb_get_plugin_path('/lib/displays/editor/remove_button.php');
+    include cpb_get_plugin_path( '/lib/displays/editor/remove_button.php' );
 
     return ob_get_clean();
 
@@ -622,7 +622,7 @@ function cpb_get_shortcodes_editor_form_html( $shortcodes, $as_array = false ) {
 
     if ( ! $as_array ) {
 
-        $editors = implode('', $editors );
+        $editors = implode( '', $editors );
 
     } // End if
 
@@ -729,7 +729,7 @@ function cpb_get_editor_form_wrapper( $id, $form_content, $form_args ) {
 */
 function cpb_get_form_class() {
 
-    include_once cpb_get_plugin_path('/lib/classes/class-form.php');
+    include_once cpb_get_plugin_path( '/lib/classes/class-form.php' );
 
     $cpb_form = new Form();
 
@@ -747,7 +747,7 @@ function cpb_get_form_class() {
 */
 function cpb_get_query_class() {
 
-    include_once cpb_get_plugin_path('/lib/classes/class-query.php');
+    include_once cpb_get_plugin_path( '/lib/classes/class-query.php' );
 
     $cpb_query = new Query();
 
@@ -794,47 +794,47 @@ function cpb_get_registered_layouts( $as_slug_label = false ) {
 		'single'            => array( 
 			'name'    => 'Single Column',
 			'columns' => array( 1 ),
-			'img' => cpb_get_plugin_url('lib/images/column-single-icon.gif'),
+			'img' => cpb_get_plugin_url( 'lib/images/column-single-icon.gif' ),
 			),
 		'halves'            => array( 
 			'name'    => 'Two Column',
 			'columns' => array( 0.5, 0.5 ),
-			'img' => cpb_get_plugin_url('lib/images/column-halves-icon.gif'),
+			'img' => cpb_get_plugin_url( 'lib/images/column-halves-icon.gif' ),
 			),
 		'side-right'        => array( 
 			'name'    => 'Two Column: Sidebar Right',
 			'columns' => array( 0.7, 0.3 ),
-			'img' => cpb_get_plugin_url('lib/images/column-two-sidebar-right-icon.gif'),
+			'img' => cpb_get_plugin_url( 'lib/images/column-two-sidebar-right-icon.gif' ),
 			),
 		'side-left'         => array( 
 			'name'    => 'Two Column: Sidbar Left',
 			'columns' => array( 0.3, 0.7 ),
-			'img' => cpb_get_plugin_url('lib/images/column-two-sidebar-left-icon.gif'),
+			'img' => cpb_get_plugin_url( 'lib/images/column-two-sidebar-left-icon.gif' ),
 			),
 		'thirds'            => array( 
 			'name'    => 'Three Column',
 			'columns' => array( 0.33, 0.33, 0.33 ),
-			'img' => cpb_get_plugin_url('lib/images/column-thirds-icon.gif'),
+			'img' => cpb_get_plugin_url( 'lib/images/column-thirds-icon.gif' ),
 			),
 		'thirds-half-left'  => array( 
 			'name'    => 'Three Column: Left 50%',
 			'columns' => array( 0.5, 0.25, 0.25 ),
-			'img' => cpb_get_plugin_url('lib/images/column-thirds-left-icon.gif'),
+			'img' => cpb_get_plugin_url( 'lib/images/column-thirds-left-icon.gif' ),
 			),
 		'thirds-half-right' => array( 
 			'name'    => 'Three Column: Right 50% ',
 			'columns' => array( 0.25, 0.25, 0.5 ),
-			'img' => cpb_get_plugin_url('lib/images/column-thirds-right-icon.gif'),
+			'img' => cpb_get_plugin_url( 'lib/images/column-thirds-right-icon.gif' ),
 			),
 		'triptych'          => array( 
 			'name'    => 'Three Column: Middle 50%',
 			'columns' => array( 0.25, 0.5, 0.25 ),
-			'img' => cpb_get_plugin_url('lib/images/column-thirds-middle-icon.gif'),
+			'img' => cpb_get_plugin_url( 'lib/images/column-thirds-middle-icon.gif' ),
 			),
 		'quarters'          => array( 
 			'name'    => 'Four Column',
 			'columns' => array( 0.25, 0.25, 0.25, 0.25 ),
-			'img' => cpb_get_plugin_url('lib/images/column-four-icon.gif'),
+			'img' => cpb_get_plugin_url( 'lib/images/column-four-icon.gif' ),
 			),
         );
 
@@ -870,7 +870,7 @@ function cpb_get_shortcode_type_from_key( $shortcode_key ) {
 
     $last_id = array_pop( $shortcode_data );
 
-    $type = implode('_', $shortcode_data );
+    $type = implode( '_', $shortcode_data );
 
     return $type;
 
@@ -944,7 +944,7 @@ function cpb_get_select_query_defaults( $prefix = '' ) {
 } // End cpb_get_local_query_defaults
 
 
-function cpb_get_image_properties_array( $image_id, $image_size = 'single-post-thumbnail') {
+function cpb_get_image_properties_array( $image_id, $image_size = 'single-post-thumbnail' ) {
 
 	$image_array = array();
 
