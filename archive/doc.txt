@@ -1,3 +1,0 @@
-Filters
-cpb_apply_post_types in classes/class-cpb-options
-Passes array of post types to apply builder.

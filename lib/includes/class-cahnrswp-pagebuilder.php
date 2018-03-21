@@ -31,7 +31,7 @@ class CAHNRSWP_Pagebuilder {
         \define( 'CWPPAGEBUILDERPATH', dirname( dirname( __DIR__ ) ) );
 
         // Set plugin url cinstant
-        \define( 'CWPPAGEBUILDERURL', \plugin_dir_url( __FILE__ ) );
+        \define( 'CWPPAGEBUILDERURL', \plugin_dir_url( dirname( dirname(__FILE__ ) ) ) );
 
     } // End set_constants
 
@@ -49,7 +49,10 @@ class CAHNRSWP_Pagebuilder {
         if ( \is_admin() ){
 
             // Add Pagebuilder Editor
-            //include cpb_get_plugin_path('includes/class-editor.php');
+            include cpb_get_plugin_path('/lib/includes/class-editor.php');
+
+            // Add Pagebuilder Save
+            include cpb_get_plugin_path('/lib/includes/class-save.php');
 
         } // End if
 
@@ -57,7 +60,10 @@ class CAHNRSWP_Pagebuilder {
         include cpb_get_plugin_path('/lib/includes/class-shortcodes.php');
 
         // Add CSS & JS
-        //include cpb_get_plugin_path('includes/class-scripts.php');
+        include cpb_get_plugin_path('/lib/includes/class-scripts.php');
+
+        // Add AJAX support
+        include cpb_get_plugin_path('/lib/includes/class-ajax.php');
 
         // Add Customizer Script
         //include cpb_get_plugin_path('includes/class-customizer.php');

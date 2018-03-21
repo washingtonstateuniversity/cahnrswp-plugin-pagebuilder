@@ -41,6 +41,19 @@ class Column {
 
         \add_shortcode( 'column', array( $this, 'get_rendered_shortcode') );
 
+        cpb_register_shortcode( 
+            'column', 
+            $args = array(
+                'form_callback'         => array( $this, 'get_shortcode_form' ),
+                'sanitize_callback'     => array( $this, 'get_sanitize_shortcode_atts' ),
+                'editor_callback'       => array( $this, 'get_shortcode_editor' ), // Callback to render form
+                'allowed_children'      => 'in_column', // Allowed child shortcodes,
+                'default_shortcode'     => 'textblock', // Default to this if no children
+                'default_atts'          => $this->default_settings,
+                'in_column'             => false, // Allow in column
+            ) 
+        );
+
     } // End register_shortcode
 
 
@@ -104,6 +117,63 @@ class Column {
     */
     public function get_shortcode_form( $atts, $content ){
 
+
+    } // End get_shortcode_form
+
+
+    /*
+    * @desc Get HTML for shortcode editor
+    * @since 3.0.0
+    *
+    * @param string $id Shortcode id
+    * @param array $atts Shortcode attributes
+    * @param string $content Shortcode content
+    * @param string $children Shortcode children
+    *
+    * @return string HTML shortcode form output
+    */
+    public function get_shortcode_editor( $id, $atts, $content, $children ){
+
+        // Column index global - This is used in the column shortcode to get column number.
+        global $cpb_column_i;
+
+        // Set index int value
+        $index_int = $cpb_column_i;
+
+        // Set index text value
+        $index = cpb_convert_int_to_string( $cpb_column_i );
+
+        // increment column global var
+        $cpb_column_i++;
+
+        // Get editor content html
+        $editor_content = cpb_get_editor_html( $children );
+
+        // Get input name
+        $input_name = cpb_get_input_name( $id );
+
+        // Get child kes as array
+        $child_keys = cpb_get_child_shortcode_ids( $children );
+
+        // Implode array
+        $child_keys = \implode(',', $child_keys );
+
+        // Get the edit button
+        $edit_button = cpb_get_editor_edit_button();
+
+        // Get the remove button
+        $remove_button = cpb_get_editor_remove_button();
+
+        // Start the output buffer
+        \ob_start();
+
+        // Include the html for the column editor
+        include cpb_get_plugin_path('/lib/displays/editor/column-editor.php');
+
+        // Get the html
+        $html = \ob_get_clean();
+
+        return $html; 
 
     } // End get_shortcode_form
 

@@ -1,3 +1,4 @@
+<?php namespace CAHNRSWP\Plugin\Pagebuilder; ?>
 <?php if ( ! empty( $settings['anchor'] ) ) : ?><a name="<?php echo esc_html( $settings['anchor'] ); ?>"></a><?php endif; ?>
 <div class="row <?php echo esc_html( $classes ); ?>" style="<?php echo esc_html( $style ); ?>">
     <?php if ( ! empty( $bg_src ) ) : ?><div class="row-bg-image recto verso unbound" style="background-image:url(<?php echo esc_url( $settings['bg_src'] );?> )"></div><?php endif; ?>
