@@ -123,7 +123,7 @@ class Post_Gallery_Shortcode {
 
                 $classes = implode(' ', $classes_array );
 
-                foreach( $post_items as $index => $post_item ) {
+                foreach ( $post_items as $index => $post_item ) {
 
                     $post_item = cpb_check_advanced_display( $post_item, $atts );
 

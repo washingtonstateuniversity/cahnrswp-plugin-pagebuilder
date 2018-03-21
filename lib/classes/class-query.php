@@ -98,7 +98,7 @@ class Query {
 
 			$terms = explode( ',', $settings['terms'] ); 
 
-			foreach( $terms as $term ) {
+			foreach ( $terms as $term ) {
 
 				$wp_term = \get_term_by( 'name', trim( $term ), $settings['taxonomy'] );
 
@@ -188,7 +188,7 @@ class Query {
 
 		if( is_array( $settings[ $prefix . 'remote_items' ] ) && ! empty( $settings[ $prefix . 'remote_items' ] ) ) {
 
-			foreach( $settings[ $prefix . 'remote_items' ] as $request_item ) {
+			foreach ( $settings[ $prefix . 'remote_items' ] as $request_item ) {
 
 				$url = $request_item['site'] . '/wp-json/posts/' . $request_item['id'];
 
@@ -268,7 +268,7 @@ class Query {
 
 				if ( $json ) {
 
-					foreach( $json as $json_item ) {
+					foreach ( $json as $json_item ) {
 
 						$item = array();
 

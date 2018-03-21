@@ -150,7 +150,7 @@ class Slide_Shortcode {
 
 		$html = '';
 
-		foreach( $items as $item ) {
+		foreach ( $items as $item ) {
 
 			$active = ( $cpb_slideshow['i'] === 1 )? ' active-slide' : '';
 			$bg_image = $item['img'];

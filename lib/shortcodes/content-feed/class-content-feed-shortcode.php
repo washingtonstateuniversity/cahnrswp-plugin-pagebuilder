@@ -116,7 +116,7 @@ class Content_Feed_Shortcode {
 
         $tag = $settings['tag'];
 
-		foreach( $post_items as $index => $post_item ) {
+		foreach ( $post_items as $index => $post_item ) {
 
             $title = $post_item['title'];
 
@@ -141,7 +141,7 @@ class Content_Feed_Shortcode {
 
         $tag = $settings['tag'];
 
-        foreach( $post_items as $index => $post_item ) {
+        foreach ( $post_items as $index => $post_item ) {
 
             $link_class = ( ! empty( $post_item['link'] ) )? 'has-link' : '';
 

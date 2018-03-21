@@ -2,7 +2,7 @@
 <fieldset id="cpb-add-row">
     <header>+ Add Row</header>
     <ul>
-    <?php foreach( $layouts as $slug => $label ) : ?><li class="add-row-item">
+    <?php foreach ( $layouts as $slug => $label ) : ?><li class="add-row-item">
             <div class="cpb-image">
                 <img class="img-<?php echo esc_html( $slug ); ?>-layout" src="<?php echo cpb_get_plugin_url('lib/images/spacer16x9.gif'); ?>" />
             </div>  

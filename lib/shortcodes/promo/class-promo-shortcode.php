@@ -138,7 +138,7 @@ class Promo_Shortcode {
 
             $tag = ( ! empty( $atts['tag'] ) ) ? $atts['tag'] : '';
 
-            foreach( $promo_items as $index => $promo_item ) {
+            foreach ( $promo_items as $index => $promo_item ) {
 
                 $promo_item = cpb_check_advanced_display( $promo_item, $atts );
 
@@ -235,7 +235,7 @@ class Promo_Shortcode {
 
 		$ids = explode(',', $settings['post_ids'] );
 
-		foreach( $ids as $post_id ) {
+		foreach ( $ids as $post_id ) {
 
 			$promo_items[] = cpb_get_post_item( $post_id, 'medium' );
 

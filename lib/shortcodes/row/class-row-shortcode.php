@@ -301,7 +301,7 @@ class Row {
             'min_height',
         );
 
-        foreach( $text_fields as $index => $field ) {
+        foreach ( $text_fields as $index => $field ) {
 
             if ( isset( $settings[ $field ] ) ) {
 
@@ -424,7 +424,7 @@ class Row {
 			'max_width'		=> 'max-width',
 		);
 
-		foreach( $settings as $key => $value ) {
+		foreach ( $settings as $key => $value ) {
 
 			if ( array_key_exists( $key, $valid ) && $value != 'default' && $value !== '' ) {
 

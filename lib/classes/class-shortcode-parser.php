@@ -44,7 +44,7 @@ class Shortcode_Parser {
         $split_content = $this->split_content( $content, $regex );
 
         // Loop through and add items	
-		foreach( $split_content as $index => $shortcode_content ) {
+		foreach ( $split_content as $index => $shortcode_content ) {
 
             $trimmed_content = trim ( $shortcode_content );
 
@@ -96,7 +96,7 @@ class Shortcode_Parser {
         $slugs = array();
 
         // Populate $slugs array with shortcode slugs as keys (needed for WP)
-		foreach( $allowed_shortcodes as $shortcode ) {
+		foreach ( $allowed_shortcodes as $shortcode ) {
 
 			$slugs[ $shortcode ] = true;
 

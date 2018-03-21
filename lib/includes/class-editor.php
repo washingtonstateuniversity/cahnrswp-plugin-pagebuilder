@@ -169,7 +169,7 @@ class Editor {
 
 		if ( is_array( $content_shortcodes_flat ) ) {
 
-			foreach( $content_shortcodes_flat as $index => $shortcode ) {
+			foreach ( $content_shortcodes_flat as $index => $shortcode ) {
 
 				$form_html .= cpb_get_editor_form_html( $shortcode ); 
 
@@ -179,7 +179,7 @@ class Editor {
 
 		$text_editors = array( 'textblock' );
 
-		foreach( $text_editors as $text_editor ) {
+		foreach ( $text_editors as $text_editor ) {
 
 			for ( $i = 0; $i < 10; $i++ ) {
 

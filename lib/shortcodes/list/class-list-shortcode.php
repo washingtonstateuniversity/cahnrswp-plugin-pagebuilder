@@ -107,7 +107,7 @@ class List_Shortcode {
 
                 $html .= '<ul class="cpb-list cpb-item">';
 
-                foreach( $post_items as $index => $post_item ) {
+                foreach ( $post_items as $index => $post_item ) {
 
                     $link = ( ! empty( $post_item['link'] ) ) ? $post_item['link'] : '';
 

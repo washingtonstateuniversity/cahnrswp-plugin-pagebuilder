@@ -152,7 +152,7 @@ class Save {
         if ( is_array( $shortcodes ) ) {
 
             // Loop through all shortcodes and convert to string
-            foreach( $shortcodes as $index => $shortcode ) {
+            foreach ( $shortcodes as $index => $shortcode ) {
 
                 // Convert shortcode array to string for save
                 $shortcode_string .= $this->get_to_shortcode_recursive( $shortcode );
@@ -222,7 +222,7 @@ class Save {
         if ( ! empty( $shortcode['children'] ) ) {
 
             // Loop through the children
-            foreach( $shortcode['children'] as $index => $child_shortcode ) {
+            foreach ( $shortcode['children'] as $index => $child_shortcode ) {
 
                 // Add string value to child shortcode content
                 $shortcode_content .= $this->get_to_shortcode_recursive( $child_shortcode );
@@ -287,7 +287,7 @@ class Save {
 
         $converted = array();
 
-        foreach( $shortcode_atts as $key => $value  ) {
+        foreach ( $shortcode_atts as $key => $value  ) {
 
             $converted[] = $key . '="' . $value . '"';
 
@@ -319,7 +319,7 @@ class Save {
         if ( is_array( $layout ) ) {
 
             // Loop through keys i.e. row_32305823508
-            foreach( $layout as $index => $shortcode_key ) {
+            foreach ( $layout as $index => $shortcode_key ) {
 
                 // Split key to get shortcode slug
                 $shortcode_slug = cpb_get_shortcode_type_from_key( $shortcode_key );
@@ -394,7 +394,7 @@ class Save {
         $to_save = array();
 
         // Loop through default settings
-        foreach( $shortcode['default_atts'] as $key => $default_value ) {
+        foreach ( $shortcode['default_atts'] as $key => $default_value ) {
 
             // Check if default setting is in save_settings
             if ( array_key_exists( $key, $save_settings ) ) {
@@ -435,7 +435,7 @@ class Save {
             $clean_settings = array();
 
             // Loop through values trying to save
-            foreach( $to_save as $key => $value ) {
+            foreach ( $to_save as $key => $value ) {
 
                 // Just some basic sanity
                 $clean_settings[ $key ] = sanitize_text_field( $value );  

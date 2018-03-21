@@ -98,7 +98,7 @@ class Sidebar_Shortcode {
 
 		$sidebars = array( 0 => 'None' );
 
-		foreach( $wp_registered_sidebars as $sidebar ) {
+		foreach ( $wp_registered_sidebars as $sidebar ) {
 
 			$sidebars[ $sidebar['id'] ] = $sidebar['name'];
 

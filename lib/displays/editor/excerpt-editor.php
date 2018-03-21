@@ -1,6 +1,6 @@
 <?php namespace CAHNRSWP\Plugin\Pagebuilder; ?>
 <div id="cpb-excerpt-options">
-    <?php foreach( $values as $key => $value ) : ?>
+    <?php foreach ( $values as $key => $value ) : ?>
 	<label class="<?php if ( $excerpt_type === $key ) echo 'active'; ?>" for="cpb-excerpt-option-<?php echo esc_html( $key ); ?>">
         <?php echo esc_html( $value ); ?>
     </label>

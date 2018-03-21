@@ -266,7 +266,7 @@ class Column {
 			'max_width'		=> 'max-width',
 		);
 
-		foreach( $settings as $key => $value ) {
+		foreach ( $settings as $key => $value ) {
 
 			if ( array_key_exists( $key, $valid ) && $value != 'default' && $value !== '' ) {
 

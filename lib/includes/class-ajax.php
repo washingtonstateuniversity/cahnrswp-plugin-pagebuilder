@@ -123,7 +123,7 @@ class AJAX {
 
         if ( ! empty( $_POST['_cpb']['items'] ) ) {
 
-            foreach( $_POST['_cpb']['items'] as $id => $slug ) {
+            foreach ( $_POST['_cpb']['items'] as $id => $slug ) {
 
                 if ( ! empty( $_POST['_cpb'][$id]['settings'] ) ) {
 

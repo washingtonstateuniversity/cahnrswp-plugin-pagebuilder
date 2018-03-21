@@ -79,7 +79,7 @@ function cpb_get_column_shortcodes( $as_slugs = true ) {
 
     $shortcodes = cpb_get_shortcodes( false );
 
-    foreach( $shortcodes as $key => $shortcode ) {
+    foreach ( $shortcodes as $key => $shortcode ) {
 
         if ( empty( $shortcode['in_column'] ) ) {
 
@@ -267,7 +267,7 @@ function cpb_get_rendered_shortcode( $slug, $atts, $content, $render_children = 
 
         if ( is_array( $shortcode['children'] ) ) {
 
-            foreach( $shortcode['children'] as $index => $child_shortcode ) {
+            foreach ( $shortcode['children'] as $index => $child_shortcode ) {
 
                 $inner_content .= cpb_get_rendered_shortcode( $child_shortcode['slug'], $child_shortcode['atts'], $shortcode['content'], $render_children, $is_editor );
 
@@ -333,7 +333,7 @@ function cpb_get_editor_html( $shortcodes, $is_recursive = true ) {
 
     if ( ! empty( $shortcodes ) ) {
 
-        foreach( $shortcodes as $shortcode ) {
+        foreach ( $shortcodes as $shortcode ) {
 
             if ( $shortcode['editor_callback'] ) {
 
@@ -573,7 +573,7 @@ function cpb_flatten_shortcode_array( $content_shortcodes ) {
 
     $shortcodes = array();
 
-    foreach( $content_shortcodes as $index => $shortcode ) {
+    foreach ( $content_shortcodes as $index => $shortcode ) {
 
         if ( ! empty( $shortcode['children'] ) ) {
 
@@ -614,7 +614,7 @@ function cpb_get_shortcodes_editor_form_html( $shortcodes, $as_array = false ) {
 
     $flat_shortcodes = cpb_flatten_shortcode_array( $shortcodes );
 
-    foreach( $flat_shortcodes as $index => $shortcode ) {
+    foreach ( $flat_shortcodes as $index => $shortcode ) {
 
         $editors[] = cpb_get_editor_form_html( $shortcode );
 
@@ -1075,7 +1075,7 @@ function cpb_get_public_posts( $post_types = array(), $as_options = false, $incl
 
     if ( ! empty( $posts_array ) ) {
 
-        foreach( $posts_array as $post_item ) {
+        foreach ( $posts_array as $post_item ) {
 
             if ( $as_options ) {
 

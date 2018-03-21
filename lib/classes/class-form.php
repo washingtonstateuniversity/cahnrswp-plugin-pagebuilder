@@ -11,7 +11,11 @@ if ( ! defined( 'WPINC' ) ) {
 */
 class Form {
 
-	public function get_remove_item_button() { return '<a href="#" class="cpb-remove-item-action">Remove</a>'; }
+	public function get_remove_item_button() { 
+	
+		return '<a href="#" class="cpb-remove-item-action">Remove</a>'; 
+
+	}
 
 	public function get_edit_item_button() { 
 	
@@ -21,17 +25,41 @@ class Form {
 
 	public function get_item_form( $id, $form, $args = array() ) {
 
-		if ( ! isset( $args['slug'] ) ) $args['slug'] = '';
+		if ( ! isset( $args['slug'] ) ) {
 
-		if ( ! isset( $args['class'] ) ) $args['class'] = '';
+			$args['slug'] = '';
 
-		if ( ! isset( $args['size'] ) ) $args['size'] = 'medium';
+		}
 
-		if ( ! isset( $args['default_label'] ) ) $args['default_label'] = 'Basic';
+		if ( ! isset( $args['class'] ) ){
 
-		if ( ! isset( $args['title'] ) ) $args['title'] = '';
+			$args['class'] = '';
 
-		if ( ! is_array( $form ) ) $form = array( $args['default_label'] => $form );
+		}
+
+		if ( ! isset( $args['size'] ) ){
+
+			$args['size'] = 'medium';
+
+		}
+
+		if ( ! isset( $args['default_label'] ) ){
+
+			$args['default_label'] = 'Basic';
+
+		}
+
+		if ( ! isset( $args['title'] ) ){
+
+			$args['title'] = '';
+
+		}
+
+		if ( ! is_array( $form ) ){
+
+			$form = array( $args['default_label'] => $form );
+
+		}
 
 		$html = '<div class="cpb-item-form-wrap"><fieldset id="' . $id . '" class="cpb-item-form ' . $args['class'] . ' cpb-form-' . $args['size'] . '" data-type="' . $args['slug'] . '">';
 
@@ -43,7 +71,7 @@ class Form {
 
 					$active = ' active';
 
-					foreach( $form as $label => $form_html ) {
+					foreach ( $form as $label => $form_html ) {
 
 						$html .= '<a href="#" class="cpb-tab-action ' . $active . '">' . $label . '</a>';
 
@@ -57,7 +85,7 @@ class Form {
 
 					$active = ' active';
 
-					foreach( $form as $label => $form_html ) {
+					foreach ( $form as $label => $form_html ) {
 
 						$html .= '<div class="cpb-item-section ' . $active . '">' . $form_html . '</div>';
 
@@ -78,7 +106,6 @@ class Form {
 		$html .= '</fieldset></div>';
 
 		return $html;
-
 
 	} // end get_lb_form
 
@@ -130,7 +157,7 @@ class Form {
 
 		$html = '<select name="' . $name . '" >';
 
-		foreach( $options as $op_value => $op_label ) {
+		foreach ( $options as $op_value => $op_label ) {
 
 			if ( is_array( $op_label ) ) {
 
@@ -165,7 +192,7 @@ class Form {
 
 		$options_fields = array();
 
-		foreach( $options as $op_value => $op_label ) {
+		foreach ( $options as $op_value => $op_label ) {
 
 			if ( is_array( $op_label ) ) {
 
@@ -260,7 +287,7 @@ class Form {
 
 		$options_fields = array();
 
-		foreach( $options as $op_value => $op_label ) {
+		foreach ( $options as $op_value => $op_label ) {
 
 			if ( is_array( $op_label ) ) {
 
@@ -284,7 +311,7 @@ class Form {
 
 		$html .= '<div class="cpb-select-post-selected">';
 
-		foreach( $values as $index => $value ) {
+		foreach ( $values as $index => $value ) {
 
 			if ( array_key_exists( $value, $options ) ) {
 
@@ -404,7 +431,7 @@ class Form {
 
 		$active_class = '';
 
-		foreach( $forms as $form ) {
+		foreach ( $forms as $form ) {
 
 			if ( $form['value'] == $form['selected'] ) {
 
@@ -542,7 +569,7 @@ class Form {
 
 		if ( is_array( $settings[ $prefix . 'remote_items'] ) ) {
 
-			foreach( $settings[ $prefix . 'remote_items'] as $post_id => $result ) {
+			foreach ( $settings[ $prefix . 'remote_items'] as $post_id => $result ) {
 
 				$form .= '<li class="cpb-form-item">' . $result['title'] . '<a href="#" class="cpb-form-item-remove"></a><input type="text" name="' .$base_name. '[' . $prefix . 'remote_items][' . $post_id . '][id]" value="' . $result['id'] . '" />';
 
@@ -618,9 +645,9 @@ class Form {
 
 		if ( is_array( $settings[ $prefix . 'remote_items'] ) ) {
 
-			foreach( $settings[ $prefix . 'remote_items'] as $key => $result ) {
+			foreach ( $settings[ $prefix . 'remote_items'] as $key => $result ) {
 
-				foreach( $result as $sub_key => $props ) {
+				foreach ( $result as $sub_key => $props ) {
 
 					$ca[ $prefix . 'remote_items'][ $key ][ $sub_key ] = sanitize_text_field( $props );
 
@@ -766,7 +793,7 @@ class Form {
 
 		} // end if
 
-		foreach( $p_types as $type ) {
+		foreach ( $p_types as $type ) {
 
 			if ( is_array( $exclude ) && in_array( $type, $exclude ) ) continue;
 
