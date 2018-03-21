@@ -11,15 +11,15 @@ if ( ! defined( 'WPINC' ) ) {
 */
 class Form {
 
-	public function get_remove_item_button() { 
-	
-		return '<a href="#" class="cpb-remove-item-action">Remove</a>'; 
+	public function get_remove_item_button() {
+
+		return '<a href="#" class="cpb-remove-item-action">Remove</a>';
 
 	}
 
-	public function get_edit_item_button() { 
-	
-		return '<a href="#" class="cpb-edit-item-action">Edit</a>'; 
+	public function get_edit_item_button() {
+
+		return '<a href="#" class="cpb-edit-item-action">Edit</a>';
 
 	}
 
@@ -31,31 +31,31 @@ class Form {
 
 		}
 
-		if ( ! isset( $args['class'] ) ){
+		if ( ! isset( $args['class'] ) ) {
 
 			$args['class'] = '';
 
 		}
 
-		if ( ! isset( $args['size'] ) ){
+		if ( ! isset( $args['size'] ) ) {
 
 			$args['size'] = 'medium';
 
 		}
 
-		if ( ! isset( $args['default_label'] ) ){
+		if ( ! isset( $args['default_label'] ) ) {
 
 			$args['default_label'] = 'Basic';
 
 		}
 
-		if ( ! isset( $args['title'] ) ){
+		if ( ! isset( $args['title'] ) ) {
 
 			$args['title'] = '';
 
 		}
 
-		if ( ! is_array( $form ) ){
+		if ( ! is_array( $form ) ) {
 
 			$form = array( $args['default_label'] => $form );
 
@@ -63,45 +63,45 @@ class Form {
 
 		$html = '<div class="cpb-item-form-wrap"><fieldset id="' . $id . '" class="cpb-item-form ' . $args['class'] . ' cpb-form-' . $args['size'] . '" data-type="' . $args['slug'] . '">';
 
-			$html .= '<header>' . $args['title'] . '<a href="#" class="cpb-close-form-action"></a></header>';
+		$html .= '<header>' . $args['title'] . '<a href="#" class="cpb-close-form-action"></a></header>';
 
-			$html .= '<div class="cpb-item-form-contents">';
+		$html .= '<div class="cpb-item-form-contents">';
 
-				$html .= '<nav class="cpb-tabs">';
+		$html .= '<nav class="cpb-tabs">';
 
-					$active = ' active';
+		$active = ' active';
 
-					foreach ( $form as $label => $form_html ) {
+		foreach ( $form as $label => $form_html ) {
 
-						$html .= '<a href="#" class="cpb-tab-action ' . $active . '">' . $label . '</a>';
+			$html .= '<a href="#" class="cpb-tab-action ' . $active . '">' . $label . '</a>';
 
-						$active = '';
+			$active = '';
 
-					} // end foreach
+		} // end foreach
 
-				$html .= '</nav>';
+		$html .= '</nav>';
 
-				$html .= '<div class="cpb-item-sections">';
+		$html .= '<div class="cpb-item-sections">';
 
-					$active = ' active';
+		$active = ' active';
 
-					foreach ( $form as $label => $form_html ) {
+		foreach ( $form as $label => $form_html ) {
 
-						$html .= '<div class="cpb-item-section ' . $active . '">' . $form_html . '</div>';
+			$html .= '<div class="cpb-item-section ' . $active . '">' . $form_html . '</div>';
 
-						$active = '';
+			$active = '';
 
-					} // end foreach
+		} // end foreach
 
-				$html .= '</div>';
+		$html .= '</div>';
 
-			$html .= '</div>';
+		$html .= '</div>';
 
-			$html .= '<footer><a href="#" class="cpb-close-form-action">Done</a></footer>';
+		$html .= '<footer><a href="#" class="cpb-close-form-action">Done</a></footer>';
 
-			$split_id = explode( '_', $id );
+		$split_id = explode( '_', $id );
 
-			$html .= '<input class="cpb-form-item-id" type="hidden" name="_cpb[items][' . $id . ']" value="' . $split_id[0] . '" />';
+		$html .= '<input class="cpb-form-item-id" type="hidden" name="_cpb[items][' . $id . ']" value="' . $split_id[0] . '" />';
 
 		$html .= '</fieldset></div>';
 
@@ -134,7 +134,7 @@ class Form {
 
 		$html = '<textarea name="' . $name . '">';
 
-			$html .= $value;
+		$html .= $value;
 
 		$html .= '</textarea>';
 
@@ -177,7 +177,11 @@ class Form {
 
 		//if ( $label ) $html = '<label for="' . $id . '">' . $label . '</label>' . $html;
 
-		if ( $label ) $html = '<label>' . $label . '</label>' . $html;
+		if ( $label ) {
+
+			$html = '<label>' . $label . '</label>' . $html;
+
+		} // End if
 
 		return $this->wrap_field( $html, $class );
 
@@ -186,7 +190,11 @@ class Form {
 
 	public function multi_select_field( $name, $values, $options, $label = false, $class = '' ) {
 
-		if ( ! is_array( $values ) ) $values = array();
+		if ( ! is_array( $values ) ) {
+
+			$values = array();
+
+		}
 
 		$options_fields_selected = array();
 
@@ -251,7 +259,7 @@ class Form {
 
 			include cpb_get_plugin_path('/lib/displays/form-fields/general/label.php');
 
-		} 
+		}
 
 		include cpb_get_plugin_path('/lib/displays/form-fields/multi-post-select/select-list.php');
 
@@ -483,15 +491,15 @@ class Form {
 
 		$html = '<div class="cwp-add-media-wrap">';
 
-			$img = ( ! empty( $settings[$prefix . 'img_src'] ) ) ? '<img src="' . $settings[$prefix . 'img_src'] . '" />' : '<div class="cpb-image-item-empty">No Image Set</div>';
+			$img = ( ! empty( $settings[ $prefix . 'img_src' ] ) ) ? '<img src="' . $settings[ $prefix . 'img_src' ] . '" />' : '<div class="cpb-image-item-empty">No Image Set</div>';
 
 			$html .= '<div class="cpb-add-media-img">' . $img . '</div>';
 
 			$html .= $this->button( 'Add Image', 'add-media-action' );
 
-			$html .= $this->hidden_field( $base_name . '[' . $prefix . 'img_src]', $settings[ $prefix . 'img_src'], 'cpb-add-media-src' );
+			$html .= $this->hidden_field( $base_name . '[' . $prefix . 'img_src]', $settings[ $prefix . 'img_src' ], 'cpb-add-media-src' );
 
-			$html .= $this->hidden_field( $base_name . '[' . $prefix . 'img_id]', $settings[$prefix . 'img_id'], 'cpb-add-media-id' );
+			$html .= $this->hidden_field( $base_name . '[' . $prefix . 'img_id]', $settings[ $prefix . 'img_id' ], 'cpb-add-media-id' );
 
 		$html .= '</div>';
 
@@ -508,24 +516,24 @@ class Form {
 			'title' => 'Title',
 		);
 
-		if ( empty( $settings[ $prefix . 'post_type'] ) ) $settings[ $prefix . 'post_type'] = '';
-		if ( empty( $settings[ $prefix . 'taxonomy'] ) ) $settings[ $prefix . 'taxonomy'] = '';
-		if ( empty( $settings[ $prefix . 'terms'] ) ) $settings[ $prefix . 'terms'] = '';
-		if ( empty( $settings[ $prefix . 'count'] ) ) $settings[ $prefix . 'count'] = '';
+		if ( empty( $settings[ $prefix . 'post_type' ] ) ) $settings[ $prefix . 'post_type' ] = '';
+		if ( empty( $settings[ $prefix . 'taxonomy' ] ) ) $settings[ $prefix . 'taxonomy' ] = '';
+		if ( empty( $settings[ $prefix . 'terms' ] ) ) $settings[ $prefix . 'terms' ] = '';
+		if ( empty( $settings[ $prefix . 'count' ] ) ) $settings[ $prefix . 'count' ] = '';
 
-		$form = $this->select_field( $base_name. '[' . $prefix . 'post_type]', $settings[ $prefix . 'post_type'], $this->get_post_types(), 'Post Type' );
+		$form = $this->select_field( $base_name. '[' . $prefix . 'post_type]', $settings[ $prefix . 'post_type' ], $this->get_post_types(), 'Post Type' );
 
-		$form .= $this->select_field( $base_name. '[' . $prefix . 'taxonomy]', $settings[ $prefix . 'taxonomy'], $this->get_taxonomies(), 'Taxonomy' );
+		$form .= $this->select_field( $base_name. '[' . $prefix . 'taxonomy]', $settings[ $prefix . 'taxonomy' ], $this->get_taxonomies(), 'Taxonomy' );
 
-		$form .= $this->text_field( $base_name. '[' . $prefix . 'terms]', $settings[ $prefix . 'terms'], 'Category/Tag Names' );
+		$form .= $this->text_field( $base_name. '[' . $prefix . 'terms]', $settings[ $prefix . 'terms' ], 'Category/Tag Names' );
 
-		$form .= $this->text_field( $base_name. '[' . $prefix . 'count]', $settings[ $prefix . 'count'], 'Number of Items' );
+		$form .= $this->text_field( $base_name. '[' . $prefix . 'count]', $settings[ $prefix . 'count' ], 'Number of Items' );
 
-		$form .= $this->text_field( $base_name. '[' . $prefix . 'offset]', $settings[ $prefix . 'offset'], 'Offset' );
+		$form .= $this->text_field( $base_name. '[' . $prefix . 'offset]', $settings[ $prefix . 'offset' ], 'Offset' );
 
-		$form .= $this->select_field( $base_name. '[' . $prefix . 'order_by]', $settings[ $prefix . 'order_by'], $order, 'Order By' );
+		$form .= $this->select_field( $base_name. '[' . $prefix . 'order_by]', $settings[ $prefix . 'order_by' ], $order, 'Order By' );
 
-		$form .= $this->checkbox_field( $base_name. '[' . $prefix . 'term_operator]', 'AND', $settings[ $prefix . 'term_operator'], 'Use AND Logic' );
+		$form .= $this->checkbox_field( $base_name. '[' . $prefix . 'term_operator]', 'AND', $settings[ $prefix . 'term_operator' ], 'Use AND Logic' );
 
 		return $form;
 
@@ -535,14 +543,14 @@ class Form {
 
 		$ca = array();
 
-		$ca[ $prefix . 'post_type'] = ( ! empty( $settings[ $prefix . 'post_type'] ) ) ? sanitize_text_field( $settings[ $prefix . 'post_type'] ) : '';
-		$ca[ $prefix . 'taxonomy'] = ( ! empty( $settings[ $prefix . 'taxonomy'] ) ) ? sanitize_text_field( $settings[ $prefix . 'taxonomy'] ) : '';
-		$ca[ $prefix . 'terms'] = ( ! empty( $settings[ $prefix . 'terms'] ) ) ? sanitize_text_field( $settings[ $prefix . 'terms'] ) : '';
-		$ca[ $prefix . 'count'] = ( ! empty( $settings[ $prefix . 'count'] ) ) ? sanitize_text_field( $settings[ $prefix . 'count'] ) : '';
-		$ca[ $prefix . 'offset'] = ( ! empty( $settings[ $prefix . 'offset'] ) ) ? sanitize_text_field( $settings[ $prefix . 'offset'] ) : '';
-		$ca[ $prefix . 'order_by'] = ( ! empty( $settings[ $prefix . 'order_by'] ) ) ? sanitize_text_field( $settings[ $prefix . 'order_by'] ) : '';
+		$ca[ $prefix . 'post_type' ] = ( ! empty( $settings[ $prefix . 'post_type' ] ) ) ? sanitize_text_field( $settings[ $prefix . 'post_type' ] ) : '';
+		$ca[ $prefix . 'taxonomy' ] = ( ! empty( $settings[ $prefix . 'taxonomy' ] ) ) ? sanitize_text_field( $settings[ $prefix . 'taxonomy' ] ) : '';
+		$ca[ $prefix . 'terms' ] = ( ! empty( $settings[ $prefix . 'terms' ] ) ) ? sanitize_text_field( $settings[ $prefix . 'terms' ] ) : '';
+		$ca[ $prefix . 'count' ] = ( ! empty( $settings[ $prefix . 'count' ] ) ) ? sanitize_text_field( $settings[ $prefix . 'count' ] ) : '';
+		$ca[ $prefix . 'offset' ] = ( ! empty( $settings[ $prefix . 'offset' ] ) ) ? sanitize_text_field( $settings[ $prefix . 'offset' ] ) : '';
+		$ca[ $prefix . 'order_by' ] = ( ! empty( $settings[ $prefix . 'order_by' ] ) ) ? sanitize_text_field( $settings[ $prefix . 'order_by' ] ) : '';
 
-		$ca[ $prefix . 'term_operator'] = ( ! empty( $settings[ $prefix . 'term_operator'] ) ) ? sanitize_text_field( $settings[ $prefix . 'term_operator'] ) : '';
+		$ca[ $prefix . 'term_operator' ] = ( ! empty( $settings[ $prefix . 'term_operator' ] ) ) ? sanitize_text_field( $settings[ $prefix . 'term_operator' ] ) : '';
 
 		return $ca;
 
@@ -550,16 +558,16 @@ class Form {
 
 	public function get_form_select_post( $base_name, $settings, $prefix = '' ) {
 
-		if ( empty( $settings[ $prefix . 'id'] ) ) $settings[ $prefix . 'id'] = '';
-		if ( empty( $settings[ $prefix . 'site_url'] ) ) $settings[ $prefix . 'site_url'] = get_site_url();
+		if ( empty( $settings[ $prefix . 'id' ] ) ) $settings[ $prefix . 'id' ] = '';
+		if ( empty( $settings[ $prefix . 'site_url' ] ) ) $settings[ $prefix . 'site_url' ] = get_site_url();
 
 
 
-		$url_helper = 'URL of the site to search'; 
+		$url_helper = 'URL of the site to search';
 
 		$form = '<div class="cpb-form-search-posts" data-basename="' . $base_name. '[' . $prefix . 'remote_items]' . '">';
 
-		$form .= $this->text_field( $base_name. '[' . $prefix . 'site_url]', $settings[ $prefix . 'site_url'], 'Search Site', 'cpb-select-site-url cpb-full-width', $url_helper );
+		$form .= $this->text_field( $base_name. '[' . $prefix . 'site_url]', $settings[ $prefix . 'site_url' ], 'Search Site', 'cpb-select-site-url cpb-full-width', $url_helper );
 
 		$form .= $this->search_field( 'cpb-select-post cpb-full-width'  );
 
@@ -567,11 +575,11 @@ class Form {
 
 		$form .= '<ul class="cpb-results-set">';
 
-		if ( is_array( $settings[ $prefix . 'remote_items'] ) ) {
+		if ( is_array( $settings[ $prefix . 'remote_items' ] ) ) {
 
-			foreach ( $settings[ $prefix . 'remote_items'] as $post_id => $result ) {
+			foreach ( $settings[ $prefix . 'remote_items' ] as $post_id => $result ) {
 
-				$form .= '<li class="cpb-form-item">' . $result['title'] . '<a href="#" class="cpb-form-item-remove"></a><input type="text" name="' .$base_name. '[' . $prefix . 'remote_items][' . $post_id . '][id]" value="' . $result['id'] . '" />';
+				$form .= '<li class="cpb-form-item">' . $result['title' ] . '<a href="#" class="cpb-form-item-remove"></a><input type="text" name="' .$base_name. '[' . $prefix . 'remote_items][' . $post_id . '][id]" value="' . $result['id'] . '" />';
 
 				$form .= '<input type="text" name="' .$base_name. '[' . $prefix . 'remote_items][' . $post_id . '][site]" value="' . $result['site'] . '" />';
 
@@ -585,7 +593,7 @@ class Form {
 
 		$form .= '</ul>';
 
-		$form .= $this->hidden_field( $base_name. '[' . $prefix . 'id]', $settings[ $prefix . 'id'], 'cpb-select-post-id' );
+		$form .= $this->hidden_field( $base_name . '[' . $prefix . 'id]', $settings[ $prefix . 'id' ], 'cpb-select-post-id' );
 
 		$form .= '</div>';
 
@@ -595,25 +603,25 @@ class Form {
 
 	public function get_form_remote_feed( $base_name, $settings, $prefix = '' ) {
 
-		$post_types = ( ! empty( $settings[ $prefix . 'post_type'] ) ) ? array( $settings[ $prefix . 'post_type'] => ucfirst ( $settings[ $prefix . 'post_type'] ) ): array();
+		$post_types = ( ! empty( $settings[ $prefix . 'post_type' ] ) ) ? array( $settings[ $prefix . 'post_type' ] => ucfirst ( $settings[ $prefix . 'post_type' ] ) ): array();
 
-		$taxonomies = ( ! empty( $settings[ $prefix . 'taxonomy'] ) ) ? array( $settings[ $prefix . 'taxonomy'] => ucfirst ( $settings[ $prefix . 'taxonomy'] ) ): array();
+		$taxonomies = ( ! empty( $settings[ $prefix . 'taxonomy' ] ) ) ? array( $settings[ $prefix . 'taxonomy' ] => ucfirst ( $settings[ $prefix . 'taxonomy' ] ) ): array();
 
 		$form = '<div class="cpb-form-remote-feed" data-basename="' . $base_name. '[' . $prefix . 'remote_items]' . '">';
 
 			$url_helper = 'URL of external site. NOTE: You must input url before selecting options below.';
 
-			$form .= $this->field_remote_feed_url( $base_name. '[' . $prefix . 'site_url]', $settings[ $prefix . 'site_url'], 'Source URL', 'cpb-select-site-url cpb-full-width' );
+			$form .= $this->field_remote_feed_url( $base_name. '[' . $prefix . 'site_url]', $settings[ $prefix . 'site_url' ], 'Source URL', 'cpb-select-site-url cpb-full-width' );
 
 			$form .= '<hr/>';
 
-			$form .= $this->select_field( $base_name. '[' . $prefix . 'post_type]', $settings[ $prefix . 'post_type'], $post_types, 'Post Type', 'cpb-remote-select-post-type cpb-field-min-width' );
+			$form .= $this->select_field( $base_name. '[' . $prefix . 'post_type]', $settings[ $prefix . 'post_type' ], $post_types, 'Post Type', 'cpb-remote-select-post-type cpb-field-min-width' );
 
-			$form .= $this->select_field( $base_name. '[' . $prefix . 'taxonomy]', $settings[ $prefix . 'taxonomy'], $taxonomies, 'Taxonomy', 'cpb-remote-select-taxonomy-type cpb-field-min-width' );
+			$form .= $this->select_field( $base_name. '[' . $prefix . 'taxonomy]', $settings[ $prefix . 'taxonomy' ], $taxonomies, 'Taxonomy', 'cpb-remote-select-taxonomy-type cpb-field-min-width' );
 
-			$form .= $this->text_field( $base_name. '[' . $prefix . 'terms]', $settings[ $prefix . 'terms'], 'Category/Tag Names' );
+			$form .= $this->text_field( $base_name. '[' . $prefix . 'terms]', $settings[ $prefix . 'terms' ], 'Category/Tag Names' );
 
-			$form .= $this->text_field( $base_name. '[' . $prefix . 'count]', $settings[ $prefix . 'count'], 'Number of Items' );
+			$form .= $this->text_field( $base_name. '[' . $prefix . 'count]', $settings[ $prefix . 'count' ], 'Number of Items' );
 
 		$form .= '</div>';
 
@@ -625,12 +633,12 @@ class Form {
 
 		$ca = array();
 
-		$ca[ $prefix . 'site_url'] = ( ! empty( $settings[ $prefix . 'site_url'] ) ) ? sanitize_text_field( $settings[ $prefix . 'site_url'] ) : '';
+		$ca[ $prefix . 'site_url' ] = ( ! empty( $settings[ $prefix . 'site_url' ] ) ) ? sanitize_text_field( $settings[ $prefix . 'site_url' ] ) : '';
 
-		$ca[ $prefix . 'post_type'] = ( ! empty( $settings[ $prefix . 'post_type'] ) ) ? sanitize_text_field( $settings[ $prefix . 'post_type'] ) : '';
-		$ca[ $prefix . 'taxonomy'] = ( ! empty( $settings[ $prefix . 'taxonomy'] ) ) ? sanitize_text_field( $settings[ $prefix . 'taxonomy'] ) : '';
-		$ca[ $prefix . 'terms'] = ( ! empty( $settings[ $prefix . 'terms'] ) ) ? sanitize_text_field( $settings[ $prefix . 'terms'] ) : '';
-		$ca[ $prefix . 'count'] = ( ! empty( $settings[ $prefix . 'count'] ) ) ? sanitize_text_field( $settings[ $prefix . 'count'] ) : '';
+		$ca[ $prefix . 'post_type' ] = ( ! empty( $settings[ $prefix . 'post_type' ] ) ) ? sanitize_text_field( $settings[ $prefix . 'post_type' ] ) : '';
+		$ca[ $prefix . 'taxonomy' ] = ( ! empty( $settings[ $prefix . 'taxonomy' ] ) ) ? sanitize_text_field( $settings[ $prefix . 'taxonomy' ] ) : '';
+		$ca[ $prefix . 'terms' ] = ( ! empty( $settings[ $prefix . 'terms' ] ) ) ? sanitize_text_field( $settings[ $prefix . 'terms' ] ) : '';
+		$ca[ $prefix . 'count' ] = ( ! empty( $settings[ $prefix . 'count' ] ) ) ? sanitize_text_field( $settings[ $prefix . 'count' ] ) : '';
 
 		return $ca;
 
@@ -641,15 +649,15 @@ class Form {
 
 		$ca = array();
 
-		$ca[ $prefix . 'site_url'] = ( ! empty( $settings[ $prefix . 'site_url'] ) ) ? sanitize_text_field( $settings[ $prefix . 'site_url'] ) : '';
+		$ca[ $prefix . 'site_url' ] = ( ! empty( $settings[ $prefix . 'site_url' ] ) ) ? sanitize_text_field( $settings[ $prefix . 'site_url' ] ) : '';
 
-		if ( is_array( $settings[ $prefix . 'remote_items'] ) ) {
+		if ( is_array( $settings[ $prefix . 'remote_items' ] ) ) {
 
-			foreach ( $settings[ $prefix . 'remote_items'] as $key => $result ) {
+			foreach ( $settings[ $prefix . 'remote_items' ] as $key => $result ) {
 
 				foreach ( $result as $sub_key => $props ) {
 
-					$ca[ $prefix . 'remote_items'][ $key ][ $sub_key ] = sanitize_text_field( $props );
+					$ca[ $prefix . 'remote_items' ][ $key ][ $sub_key ] = sanitize_text_field( $props );
 
 				} // end foreach
 
@@ -657,7 +665,7 @@ class Form {
 
 		} else {
 
-			$ca[ $prefix . 'remote_items'] = array();
+			$ca[ $prefix . 'remote_items' ] = array();
 
 		}
 
