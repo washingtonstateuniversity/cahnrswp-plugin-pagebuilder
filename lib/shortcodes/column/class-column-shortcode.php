@@ -26,7 +26,7 @@ class Column {
     );
 
 
-	public function __construct(){
+	public function __construct() {
 
         \add_action( 'init', array( $this, 'register_shortcode') );
 
@@ -37,7 +37,7 @@ class Column {
     * @desc Register column shortcode
     * @since 3.0.0
     */
-    public function register_shortcode(){
+    public function register_shortcode() {
 
         \add_shortcode( 'column', array( $this, 'get_rendered_shortcode') );
 
@@ -66,7 +66,7 @@ class Column {
     *
     * @return string HTML shortcode output
     */
-    public function get_rendered_shortcode( $atts, $content ){
+    public function get_rendered_shortcode( $atts, $content ) {
 
         // Column index global - This is used in the column shortcode to get column number.
         global $cpb_column_i;
@@ -83,7 +83,7 @@ class Column {
 
         // Column index global - This is used in the column shortcode to get column number.
         global $cpb_column_i;
-        
+
         // Column layout global
 		global $cpb_Column_layout;  
 
@@ -115,7 +115,7 @@ class Column {
     *
     * @return string HTML shortcode form output
     */
-    public function get_shortcode_form( $atts, $content ){
+    public function get_shortcode_form( $atts, $content ) {
 
 
     } // End get_shortcode_form
@@ -132,7 +132,7 @@ class Column {
     *
     * @return string HTML shortcode form output
     */
-    public function get_shortcode_editor( $id, $atts, $content, $children ){
+    public function get_shortcode_editor( $id, $atts, $content, $children ) {
 
         // Column index global - This is used in the column shortcode to get column number.
         global $cpb_column_i;
@@ -187,7 +187,7 @@ class Column {
     *
     * @return array Sanitized shortcode $atts
     */
-    public function get_sanitize_shortcode_atts( $atts ){
+    public function get_sanitize_shortcode_atts( $atts ) {
 
     } // End sanitize_shortcode
 
@@ -201,7 +201,7 @@ class Column {
     *
     * @return string Shortcode for saving in content
     */
-    public function get_to_shortcode( $atts, $content ){
+    public function get_to_shortcode( $atts, $content ) {
 
     } // End
 
@@ -214,16 +214,16 @@ class Column {
     *
     * @return string Column classes
     */
-    private function get_column_classes( $settings ){
-		
+    private function get_column_classes( $settings ) {
+
         $class = 'column ';
-        
+
         $index_list = 'zero,one,two,three,four,five,six,seven,eight,nine,ten';
-		
+
         $index_list = explode( ',', $index_list );
 
         $class .= ' ' . $index_list[ $settings['index'] ]; 
-		
+
 		if ( ! empty( $settings['bgcolor'] ) ) {
 
 			$class .= ' ' . $settings['bgcolor'] . '-back bg-color';
@@ -235,17 +235,17 @@ class Column {
 			$class .= ' ' . $settings['csshook'];
 
 		} // end if
-		
+
 		if ( ! empty( $settings['textcolor'] ) ) {
-			
+
 			$class .= ' ' . $settings['textcolor'] . '-text';
-			
+
 		} // end if
-		
+
 		return $class;
-		
+
     } // End get_item_class
-    
+
     /*
     * @desc Get column style
     * @since 3.0.0
@@ -254,10 +254,10 @@ class Column {
     *
     * @return array Column css
     */
-    protected function get_column_style( $settings ){
-		
+    protected function get_column_style( $settings ) {
+
 		$style = array();
-		
+
 		$valid = array(
 			'padding_top' => 'padding-top',
 			'padding_bottom' => 'padding-bottom',
@@ -265,21 +265,21 @@ class Column {
 			'padding_right' => 'padding-right',
 			'max_width'		=> 'max-width',
 		);
-		
-		foreach( $settings as $key => $value ){
 
-			if ( array_key_exists( $key, $valid ) && $value != 'default' && $value !== '' ){
-				
+		foreach( $settings as $key => $value ) {
+
+			if ( array_key_exists( $key, $valid ) && $value != 'default' && $value !== '' ) {
+
 				$css = $valid[ $key ];
-				
+
 				$style[] = $css . ':' . $value; 
-				
+
 			} // end if
-			
+
 		} // end foreach
-		
+
 		return $style;
-		
+
 	} // end get_item_style
 
 } // End Column

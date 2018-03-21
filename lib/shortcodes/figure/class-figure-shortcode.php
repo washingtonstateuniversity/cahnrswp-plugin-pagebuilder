@@ -21,7 +21,7 @@ class Figure_Shortcode {
     );
 
 
-	public function __construct(){
+	public function __construct() {
 
         \add_action( 'init', array( $this, 'register_shortcode') );
 
@@ -32,7 +32,7 @@ class Figure_Shortcode {
     * @desc Register figure shortcode
     * @since 3.0.0
     */
-    public function register_shortcode(){
+    public function register_shortcode() {
 
         \add_shortcode( 'figure', array( $this, 'get_rendered_shortcode') );
 
@@ -59,7 +59,7 @@ class Figure_Shortcode {
     *
     * @return string HTML shortcode output
     */
-    public function get_rendered_shortcode( $atts, $content ){
+    public function get_rendered_shortcode( $atts, $content ) {
 
         $html = '';
 
@@ -67,10 +67,10 @@ class Figure_Shortcode {
 
         $caption = $atts['caption'];
 
-        if ( ! empty( $img_src ) ){
+        if ( ! empty( $img_src ) ) {
 
             \ob_start();
-            
+
             include cpb_get_plugin_path('/lib/displays/items/figure/figure.php');
 
             $html .= \ob_get_clean();
@@ -91,16 +91,16 @@ class Figure_Shortcode {
     *
     * @return string HTML shortcode form output
     */
-    public function get_shortcode_form( $id, $atts, $content ){
+    public function get_shortcode_form( $id, $atts, $content ) {
 
         $cpb_form = cpb_get_form_class();
 
         $form = $cpb_form->insert_media( cpb_get_input_name( $id, true ), $atts );
-		
+
 		$form .= '<hr/>';
 
         $form .= $cpb_form->text_field( cpb_get_input_name( $id, true, 'caption'), $atts['caption'], 'Caption' );
-        
+
         return array( 'Basic' => $form );
 
     } // End get_shortcode_form

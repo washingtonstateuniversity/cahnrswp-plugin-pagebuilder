@@ -13,7 +13,7 @@ if ( ! defined( 'WPINC' ) ) {
 * 
 * @return string Full path
 */
-function cpb_get_plugin_path( $path = '' ){
+function cpb_get_plugin_path( $path = '' ) {
 
     $path = CWPPAGEBUILDERPATH . $path;
 
@@ -30,7 +30,7 @@ function cpb_get_plugin_path( $path = '' ){
 * 
 * @return string Full URL
 */
-function cpb_get_plugin_url( $path = '' ){
+function cpb_get_plugin_url( $path = '' ) {
 
     $path = CWPPAGEBUILDERURL . $path;
 
@@ -47,12 +47,12 @@ function cpb_get_plugin_url( $path = '' ){
 *
 * @return array Registered shortcodes
 */
-function cpb_get_shortcodes( $as_slugs = true ){
+function cpb_get_shortcodes( $as_slugs = true ) {
 
     // Set shortcodes as global scope
     global $pagebuilder_shortcodes;
-    
-    if ( $as_slugs ){
+
+    if ( $as_slugs ) {
 
         // Just return the keys
         return array_keys( $pagebuilder_shortcodes );
@@ -75,11 +75,11 @@ function cpb_get_shortcodes( $as_slugs = true ){
 *
 * @return array Registered shortcodes
 */
-function cpb_get_column_shortcodes( $as_slugs = true ){
+function cpb_get_column_shortcodes( $as_slugs = true ) {
 
     $shortcodes = cpb_get_shortcodes( false );
 
-    foreach( $shortcodes as $key => $shortcode ){
+    foreach( $shortcodes as $key => $shortcode ) {
 
         if ( empty( $shortcode['in_column'] ) ) {
 
@@ -88,8 +88,8 @@ function cpb_get_column_shortcodes( $as_slugs = true ){
         } // End if 
 
     } // End foreach
-    
-    if ( $as_slugs ){
+
+    if ( $as_slugs ) {
 
         // Just return the keys
         return array_keys( $shortcodes );
@@ -111,7 +111,7 @@ function cpb_get_column_shortcodes( $as_slugs = true ){
 * @param string $slug Shortcode slug
 * @param array $args Shortcode args
 */
-function cpb_register_shortcode( $slug, $args = array() ){
+function cpb_register_shortcode( $slug, $args = array() ) {
 
     // Set shortcodes as global scope
     global $pagebuilder_shortcodes;
@@ -165,7 +165,7 @@ function cpb_register_shortcode( $slug, $args = array() ){
 *
 * @return array Array of shortcodes with children
 */
-function cpb_get_shortcodes_from_content( $content, $shortcodes, $default_shortcode = false, $do_recursive = true ){
+function cpb_get_shortcodes_from_content( $content, $shortcodes, $default_shortcode = false, $do_recursive = true ) {
 
     // Include parser class
     include_once cpb_get_plugin_path('/lib/classes/class-shortcode-parser.php');
@@ -192,13 +192,13 @@ function cpb_get_shortcodes_from_content( $content, $shortcodes, $default_shortc
 *
 * @return array Array of shortcodes with children
 */
-function cpb_get_shortcode( $slug, $atts = array(), $content = '', $get_children = true ){
+function cpb_get_shortcode( $slug, $atts = array(), $content = '', $get_children = true ) {
 
     // Get registered shortcodes
     $registered_shortcodes = cpb_get_shortcodes( false );
 
     // if shortcode is registered by cpb_register_shortcode()
-    if ( array_key_exists( $slug, $registered_shortcodes ) ){
+    if ( array_key_exists( $slug, $registered_shortcodes ) ) {
 
         // Get the registered shortcode
         $shortcode = $registered_shortcodes[ $slug ];
@@ -251,7 +251,7 @@ function cpb_get_shortcode( $slug, $atts = array(), $content = '', $get_children
 *
 * @return string Rendered shortcode
 */
-function cpb_get_rendered_shortcode( $slug, $atts, $content, $render_children = true, $is_editor = false ){
+function cpb_get_rendered_shortcode( $slug, $atts, $content, $render_children = true, $is_editor = false ) {
 
     $html = '';
 
@@ -259,25 +259,25 @@ function cpb_get_rendered_shortcode( $slug, $atts, $content, $render_children = 
 
     $shortcode = cpb_get_shortcode( $slug, $atts, $content, $render_children );
 
-    if ( empty( $shortcode['allowed_children'] ) || empty( $shortcode['children'] ) ){
+    if ( empty( $shortcode['allowed_children'] ) || empty( $shortcode['children'] ) ) {
 
         $inner_content = $content;
 
     } else {
 
-        if ( is_array( $shortcode['children'] ) ){
+        if ( is_array( $shortcode['children'] ) ) {
 
-            foreach( $shortcode['children'] as $index => $child_shortcode ){
-    
+            foreach( $shortcode['children'] as $index => $child_shortcode ) {
+
                 $inner_content .= cpb_get_rendered_shortcode( $child_shortcode['slug'], $child_shortcode['atts'], $shortcode['content'], $render_children, $is_editor );
-    
+
             } // End foreach
-    
+
         } // End if
 
     } // End if
 
-    if ( $is_editor && $shortcode['editor_render_callback'] ){
+    if ( $is_editor && $shortcode['editor_render_callback'] ) {
 
         $html .= \call_user_func_array( 
             $shortcode['editor_render_callback'],
@@ -289,7 +289,7 @@ function cpb_get_rendered_shortcode( $slug, $atts, $content, $render_children = 
 
     } else {// End if
 
-        if ( $shortcode['render_callback'] ){
+        if ( $shortcode['render_callback'] ) {
 
             $html .= \call_user_func_array( 
                 $shortcode['render_callback'],
@@ -321,7 +321,7 @@ function cpb_get_rendered_shortcode( $slug, $atts, $content, $render_children = 
 *
 * @return string HTML for editor
 */
-function cpb_get_editor_html( $shortcodes, $is_recursive = true ){
+function cpb_get_editor_html( $shortcodes, $is_recursive = true ) {
 
     if ( ! empty( $shortcodes['id'] ) ) {
 
@@ -331,11 +331,11 @@ function cpb_get_editor_html( $shortcodes, $is_recursive = true ){
 
     $html = '';
 
-    if ( ! empty( $shortcodes ) ){
+    if ( ! empty( $shortcodes ) ) {
 
-        foreach( $shortcodes as $shortcode ){
+        foreach( $shortcodes as $shortcode ) {
 
-            if ( $shortcode['editor_callback'] ){
+            if ( $shortcode['editor_callback'] ) {
 
                 $html .= call_user_func_array( 
                     $shortcode['editor_callback'],
@@ -365,17 +365,17 @@ function cpb_get_editor_html( $shortcodes, $is_recursive = true ){
                 $name = $shortcode['label'];
 
                 // If it uses the WP Editor
-                if ( $shortcode['uses_wp_editor'] ){
+                if ( $shortcode['uses_wp_editor'] ) {
 
                     $classes[] = ' cpb-wp-editor';
 
                 } // End if
 
-                /*if ( defined( 'CWPPAGEBUILDER_DOING_AJAX' ) && ( true === CWPPAGEBUILDER_DOING_AJAX ) ){
+                /*if ( defined( 'CWPPAGEBUILDER_DOING_AJAX' ) && ( true === CWPPAGEBUILDER_DOING_AJAX ) ) {
 
                 // This is only allowed if this is an AJAX Call - rendering the shortcodes in the editor window could be bad
-            
-                    if ( $shortcode['render_callback'] ){
+
+                    if ( $shortcode['render_callback'] ) {
 
                         $shortcode_content = call_user_func_array( 
                             $shortcode['render_callback'],
@@ -384,7 +384,7 @@ function cpb_get_editor_html( $shortcodes, $is_recursive = true ){
                                 $shortcode['content'],
                             )
                         );
-        
+
                     } else {
 
                         $shortcode_content = $shortcode['content'];
@@ -394,7 +394,7 @@ function cpb_get_editor_html( $shortcodes, $is_recursive = true ){
                 } // End if */
 
                 $editor_content = '<iframe id="item-content-' . esc_html( $id ) . '" class="cpb-editor-content" data-id="' . esc_html( $id ) . '" src="about:blank" scrolling="no"></iframe>';
-			
+
 			    $editor_content .= '<textarea style="display:none;"></textarea>';
 
                 // Implode classes for use in html
@@ -426,13 +426,13 @@ function cpb_get_editor_html( $shortcodes, $is_recursive = true ){
 *
 * @return array Child shortcode slugs
 */
-function cpb_get_child_shortcode_slugs( $children ){
+function cpb_get_child_shortcode_slugs( $children ) {
 
     $child_keys = array();
 
     if ( ! empty( $children ) ) {
 
-        foreach ( $children as $index => $child ){
+        foreach ( $children as $index => $child ) {
 
             $child_keys[] = $child['slug'];
 
@@ -452,13 +452,13 @@ function cpb_get_child_shortcode_slugs( $children ){
 *
 * @return array Child shortcode ids
 */
-function cpb_get_child_shortcode_ids( $children ){
+function cpb_get_child_shortcode_ids( $children ) {
 
     $child_keys = array();
 
     if ( ! empty( $children ) ) {
 
-        foreach ( $children as $index => $child ){
+        foreach ( $children as $index => $child ) {
 
             $child_keys[] = $child['id'];
 
@@ -477,7 +477,7 @@ function cpb_get_child_shortcode_ids( $children ){
 *
 * @return string HTML for the button
 */
-function cpb_get_editor_edit_button(){
+function cpb_get_editor_edit_button() {
 
     ob_start();
 
@@ -494,7 +494,7 @@ function cpb_get_editor_edit_button(){
 *
 * @return string HTML for the button
 */
-function cpb_get_editor_remove_button(){
+function cpb_get_editor_remove_button() {
 
     ob_start();
 
@@ -516,22 +516,22 @@ function cpb_get_editor_remove_button(){
 *
 * @return string input name
 */
-function cpb_get_input_name( $id, $is_setting = true, $name = false, $prefix = false ){
-		
+function cpb_get_input_name( $id, $is_setting = true, $name = false, $prefix = false ) {
+
     $input_name = '_cpb[' . $id . ']';
-    
+
     if ( $is_setting ) $input_name .= '[settings]';
-    
-    if ( $name ){
-        
+
+    if ( $name ) {
+
         if ( $prefix ) $name = $prefix . '_' . $name;
-        
+
         $input_name .= '[' . $name . ']';
-        
+
     } // end if
-    
+
     return  $input_name;
-    
+
 } // end get_input_name
 
 /*
@@ -542,13 +542,13 @@ function cpb_get_input_name( $id, $is_setting = true, $name = false, $prefix = f
 *
 * @return string Converted number
 */
-function cpb_convert_int_to_string( $int ){
+function cpb_convert_int_to_string( $int ) {
 
     $index_list = 'zero,one,two,three,four,five,six,seven,eight,nine,ten';
-    
+
     $index_list = explode( ',', $index_list );
 
-    if ( ! empty( $index_list[ $int ] ) ){
+    if ( ! empty( $index_list[ $int ] ) ) {
 
         return $index_list[ $int ];
 
@@ -569,13 +569,13 @@ function cpb_convert_int_to_string( $int ){
 *
 * @return array Un-nested array of shortcodes
 */
-function cpb_flatten_shortcode_array( $content_shortcodes ){
+function cpb_flatten_shortcode_array( $content_shortcodes ) {
 
     $shortcodes = array();
 
-    foreach( $content_shortcodes as $index => $shortcode ){
+    foreach( $content_shortcodes as $index => $shortcode ) {
 
-        if ( ! empty( $shortcode['children'] ) ){
+        if ( ! empty( $shortcode['children'] ) ) {
 
             $child_shortcodes = cpb_flatten_shortcode_array( $shortcode['children'] );
 
@@ -602,7 +602,7 @@ function cpb_flatten_shortcode_array( $content_shortcodes ){
 *
 * @return array|string HTML for editor form
 */
-function cpb_get_shortcodes_editor_form_html( $shortcodes, $as_array = false ){
+function cpb_get_shortcodes_editor_form_html( $shortcodes, $as_array = false ) {
 
     $editors = array();
 
@@ -614,13 +614,13 @@ function cpb_get_shortcodes_editor_form_html( $shortcodes, $as_array = false ){
 
     $flat_shortcodes = cpb_flatten_shortcode_array( $shortcodes );
 
-    foreach( $flat_shortcodes as $index => $shortcode ){
+    foreach( $flat_shortcodes as $index => $shortcode ) {
 
         $editors[] = cpb_get_editor_form_html( $shortcode );
 
     } // End foreach
 
-    if ( ! $as_array ){
+    if ( ! $as_array ) {
 
         $editors = implode('', $editors );
 
@@ -639,16 +639,16 @@ function cpb_get_shortcodes_editor_form_html( $shortcodes, $as_array = false ){
 *
 * @return string HTML for editor form
 */
-function cpb_get_editor_form_html( $shortcode ){
+function cpb_get_editor_form_html( $shortcode ) {
 
     // IF this is an AJAX request and the from uses WP Editor return empty string
-    if ( defined( 'CWPPAGEBUILDER_DOING_AJAX' ) && $shortcode['uses_wp_editor'] ){
+    if ( defined( 'CWPPAGEBUILDER_DOING_AJAX' ) && $shortcode['uses_wp_editor'] ) {
 
         return '';
 
     } // End if
 
-    if ( $shortcode['form_callback'] ){
+    if ( $shortcode['form_callback'] ) {
 
         $form_content = call_user_func_array( 
             $shortcode['form_callback'],
@@ -676,7 +676,7 @@ function cpb_get_editor_form_html( $shortcode ){
     if ( ! empty( $shortcode['uses_wp_editor'] ) ) {
 
         $form_classes[] = 'cpb-wp-editor-item-form';
-        
+
     } // End if
 
     if ( ! empty( $shortcode['form_classes'] && is_array( $shortcode['form_classes'] ) ) ) {
@@ -709,7 +709,7 @@ function cpb_get_editor_form_html( $shortcode ){
 *
 * @return string HTML for editor form
 */
-function cpb_get_editor_form_wrapper( $id, $form_content, $form_args ){
+function cpb_get_editor_form_wrapper( $id, $form_content, $form_args ) {
 
     $cpb_form = cpb_get_form_class();
 
@@ -727,7 +727,7 @@ function cpb_get_editor_form_wrapper( $id, $form_content, $form_args ){
 *
 * @return Form Instance for editor form
 */
-function cpb_get_form_class(){
+function cpb_get_form_class() {
 
     include_once cpb_get_plugin_path('/lib/classes/class-form.php');
 
@@ -745,7 +745,7 @@ function cpb_get_form_class(){
 *
 * @return Query Instance
 */
-function cpb_get_query_class(){
+function cpb_get_query_class() {
 
     include_once cpb_get_plugin_path('/lib/classes/class-query.php');
 
@@ -764,11 +764,11 @@ function cpb_get_query_class(){
 *
 * @return array Layout
 */
-function cpb_get_registered_layout( $layout_slug ){
+function cpb_get_registered_layout( $layout_slug ) {
 
     $layouts = cpb_get_registered_layouts();
 
-    if ( array_key_exists( $layout_slug, $layouts ) ){
+    if ( array_key_exists( $layout_slug, $layouts ) ) {
 
         return $layouts[ $layout_slug ];
 
@@ -788,7 +788,7 @@ function cpb_get_registered_layout( $layout_slug ){
 *
 * @return array Layouts
 */
-function cpb_get_registered_layouts( $as_slug_label = false ){
+function cpb_get_registered_layouts( $as_slug_label = false ) {
 
     $layouts = array(
 		'single'            => array( 
@@ -798,46 +798,46 @@ function cpb_get_registered_layouts( $as_slug_label = false ){
 			),
 		'halves'            => array( 
 			'name'    => 'Two Column',
-			'columns' => array( 0.5 , 0.5 ),
+			'columns' => array( 0.5, 0.5 ),
 			'img' => cpb_get_plugin_url('lib/images/column-halves-icon.gif'),
 			),
 		'side-right'        => array( 
 			'name'    => 'Two Column: Sidebar Right',
-			'columns' => array( 0.7 , 0.3 ),
+			'columns' => array( 0.7, 0.3 ),
 			'img' => cpb_get_plugin_url('lib/images/column-two-sidebar-right-icon.gif'),
 			),
 		'side-left'         => array( 
 			'name'    => 'Two Column: Sidbar Left',
-			'columns' => array( 0.3 , 0.7 ),
+			'columns' => array( 0.3, 0.7 ),
 			'img' => cpb_get_plugin_url('lib/images/column-two-sidebar-left-icon.gif'),
 			),
 		'thirds'            => array( 
 			'name'    => 'Three Column',
-			'columns' => array( 0.33 , 0.33 , 0.33 ),
+			'columns' => array( 0.33, 0.33, 0.33 ),
 			'img' => cpb_get_plugin_url('lib/images/column-thirds-icon.gif'),
 			),
 		'thirds-half-left'  => array( 
 			'name'    => 'Three Column: Left 50%',
-			'columns' => array( 0.5 , 0.25 , 0.25 ),
+			'columns' => array( 0.5, 0.25, 0.25 ),
 			'img' => cpb_get_plugin_url('lib/images/column-thirds-left-icon.gif'),
 			),
 		'thirds-half-right' => array( 
 			'name'    => 'Three Column: Right 50% ',
-			'columns' => array( 0.25 , 0.25 , 0.5 ),
+			'columns' => array( 0.25, 0.25, 0.5 ),
 			'img' => cpb_get_plugin_url('lib/images/column-thirds-right-icon.gif'),
 			),
 		'triptych'          => array( 
 			'name'    => 'Three Column: Middle 50%',
-			'columns' => array( 0.25 , 0.5 , 0.25 ),
+			'columns' => array( 0.25, 0.5, 0.25 ),
 			'img' => cpb_get_plugin_url('lib/images/column-thirds-middle-icon.gif'),
 			),
 		'quarters'          => array( 
 			'name'    => 'Four Column',
-			'columns' => array( 0.25 , 0.25 , 0.25 , 0.25 ),
+			'columns' => array( 0.25, 0.25, 0.25, 0.25 ),
 			'img' => cpb_get_plugin_url('lib/images/column-four-icon.gif'),
 			),
         );
-        
+
     return apply_filters( 'cpb_layouts', $layouts );
 
 }
@@ -850,9 +850,9 @@ function cpb_get_registered_layouts( $as_slug_label = false ){
 *
 * @return string Shortcode to save
 */
-function cpb_get_to_shortcode( $shortcode_key ){
+function cpb_get_to_shortcode( $shortcode_key ) {
 
-    
+
 
 } // End cpb_get_to_shortcode
 
@@ -864,12 +864,12 @@ function cpb_get_to_shortcode( $shortcode_key ){
 *
 * @return string Shortcode type
 */
-function cpb_get_shortcode_type_from_key( $shortcode_key ){
+function cpb_get_shortcode_type_from_key( $shortcode_key ) {
 
-    $shortcode_data = explode( '_' , $shortcode_key );
-			
+    $shortcode_data = explode( '_', $shortcode_key );
+
     $last_id = array_pop( $shortcode_data );
-    
+
     $type = implode('_', $shortcode_data );
 
     return $type;
@@ -884,7 +884,7 @@ function cpb_get_shortcode_type_from_key( $shortcode_key ){
 *
 * @return array Defaults
 */
-function cpb_get_local_query_defaults( $prefix = '' ){
+function cpb_get_local_query_defaults( $prefix = '' ) {
 
     $defaults = array(
         $prefix . 'post_type'       => '',
@@ -909,7 +909,7 @@ function cpb_get_local_query_defaults( $prefix = '' ){
 *
 * @return array Defaults
 */
-function cpb_get_remote_query_defaults( $prefix = '' ){
+function cpb_get_remote_query_defaults( $prefix = '' ) {
 
     $defaults = array(
         $prefix . 'site_url'        => '',
@@ -932,7 +932,7 @@ function cpb_get_remote_query_defaults( $prefix = '' ){
 *
 * @return array Defaults
 */
-function cpb_get_select_query_defaults( $prefix = '' ){
+function cpb_get_select_query_defaults( $prefix = '' ) {
 
     $defaults = array(
         $prefix . 'site_url'        => '',
@@ -944,35 +944,35 @@ function cpb_get_select_query_defaults( $prefix = '' ){
 } // End cpb_get_local_query_defaults
 
 
-function cpb_get_image_properties_array( $image_id, $image_size = 'single-post-thumbnail'){
-	
+function cpb_get_image_properties_array( $image_id, $image_size = 'single-post-thumbnail') {
+
 	$image_array = array();
-	
-	$image = \wp_get_attachment_image_src( $image_id , $image_size );
-			
+
+	$image = \wp_get_attachment_image_src( $image_id, $image_size );
+
 	$image_array['alt'] = \get_post_meta( $image_id, '_wp_attachment_image_alt', true);
 
 	$image_array['src'] = $image[0];
-	
+
 	return $image_array;
-	
+
 } // End cpb_get_image_properties_array
 
 
-function cpb_get_post_image_array( $post_id, $image_size = 'single-post-thumbnail' ){
-	
+function cpb_get_post_image_array( $post_id, $image_size = 'single-post-thumbnail' ) {
+
 	$image_array = array();
-	
-	if ( \has_post_thumbnail( $post_id ) ){
-		
+
+	if ( \has_post_thumbnail( $post_id ) ) {
+
 		$image_id = \get_post_thumbnail_id( $post_id );
-		
+
 		$image_array = cpb_get_image_properties_array( $image_id, $image_size );
-		
+
 	} // End if
-	
+
 	return $image_array;
-	
+
 } // end cpb_get_post_image_array
 
 /*
@@ -985,36 +985,36 @@ function cpb_get_post_image_array( $post_id, $image_size = 'single-post-thumbnai
 *
 * @return array Modified Post Item array
 */
-function cpb_check_advanced_display( $post_item, $settings, $prefix = '' ){
-		
-    if ( ! empty( $post_item['title'] ) && ! empty( $settings[ $prefix . 'unset_title'] ) ){
-        
-        unset( $post_item['title'] );
-        
+function cpb_check_advanced_display( $post_item, $settings, $prefix = '' ) {
+
+    if ( ! empty( $post_item['title'] ) && ! empty( $settings[ $prefix . 'unset_title'] ) ) {
+
+    unset( $post_item['title'] );
+
     } // end if
-    
-    if ( ! empty( $post_item['excerpt'] ) && ! empty( $settings[ $prefix . 'unset_excerpt'] ) ){
-        
-        unset( $post_item['excerpt'] );
-        
+
+    if ( ! empty( $post_item['excerpt'] ) && ! empty( $settings[ $prefix . 'unset_excerpt'] ) ) {
+
+    unset( $post_item['excerpt'] );
+
     } // end if
-    
-    if ( ! empty( $post_item['img'] ) && ! empty( $settings[ $prefix . 'unset_img'] ) ){
-        
-        unset( $post_item['img'] );
-        
+
+    if ( ! empty( $post_item['img'] ) && ! empty( $settings[ $prefix . 'unset_img'] ) ) {
+
+    unset( $post_item['img'] );
+
     } // end if
-    
-    if ( ! empty( $post_item['link'] ) && ! empty( $settings[ $prefix . 'unset_link'] ) ){
-        
-        unset( $post_item['link'] );
-        
+
+    if ( ! empty( $post_item['link'] ) && ! empty( $settings[ $prefix . 'unset_link'] ) ) {
+
+    unset( $post_item['link'] );
+
     } // end if
-    
-    if ( ! empty( $post_item['excerpt'] ) && ! empty( $settings[ $prefix . 'excerpt_length'] ) ){
-        
-        switch( $settings[ $prefix . 'excerpt_length'] ){
-            
+
+    if ( ! empty( $post_item['excerpt'] ) && ! empty( $settings[ $prefix . 'excerpt_length'] ) ) {
+
+        switch( $settings[ $prefix . 'excerpt_length'] ) {
+
             case 'short':
                 $words = 15;
                 break;
@@ -1027,70 +1027,70 @@ function cpb_check_advanced_display( $post_item, $settings, $prefix = '' ){
             default:
                 $words = 25;
                 break;
-            
-        } // end switch
-        
-        if ( $words ){
-            
-            $post_item['excerpt'] = wp_trim_words( $post_item['excerpt'] , $words , '...' );
-            
+
+        } //end switch
+
+        if ( $words ) {
+
+        $post_item['excerpt'] = wp_trim_words( $post_item['excerpt'], $words, '...' );
+
         } // end if
-        
+
     } // end if
-    
+
     return $post_item;
-    
+
 } // End 
 
 
-function cpb_get_public_posts( $post_types = array(), $as_options = false, $include_empty = false ){
-	
-	$posts = array();
-	
-	if ( $include_empty ){
-		
-		$posts[''] = 'None Selected';
-		
-	} // End if
-	
-	if ( empty( $post_types ) ){
-	
-		$post_type_args = array(
-			'publicly_queryable' => true,
-		);
+function cpb_get_public_posts( $post_types = array(), $as_options = false, $include_empty = false ) {
 
-		$post_types = \get_post_types( $post_type_args );
-		
-	} // End if
-	
-	$args = array(
-		'post_status' 		=> 'publish',
-		'posts_per_page' 	=> -1,
-		'post_type' 		=> $post_types,
-	);
-	
-	$posts_array = get_posts( $args );
-	
-	//var_dump( $posts_array );
+    $posts = array();
 
-	if ( ! empty( $posts_array ) ) {
-		
-		foreach( $posts_array as $post_item ) {
+    if ( $include_empty ) {
 
-			if ( $as_options ){
-				
-				$posts[ $post_item->ID ] = $post_item->post_title;
-				
-			} else {
-				
-				$posts[ $$post_item->ID ] = $post_item;
-				
-			} //  End if
+        $posts[''] = 'None Selected';
 
-		} // End foreacd
-		
-	} // End if
-	
-	return $posts;
-	
+    } // end if
+
+    if ( empty( $post_types ) ) {
+
+        $post_type_args = array(
+                'publicly_queryable' => true,
+            );
+
+            $post_types = \get_post_types( $post_type_args );
+
+    } // end if
+
+    $args = array(
+        'post_status' 		=> 'publish',
+        'posts_per_page' 	=> -1,
+        'post_type' 		=> $post_types,
+    );
+
+    $posts_array = get_posts( $args );
+
+    //var_dump( $posts_array );
+
+    if ( ! empty( $posts_array ) ) {
+
+        foreach( $posts_array as $post_item ) {
+
+            if ( $as_options ) {
+
+                $posts[ $post_item->ID ] = $post_item->post_title;
+
+            } else {
+
+                $posts[ $$post_item->ID ] = $post_item;
+
+            }//  End if
+
+        } // End foreach
+
+    } // end if
+
+    return $posts;
+
 } // End cpb_get_posts

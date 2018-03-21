@@ -10,7 +10,7 @@
 					<<?php echo esc_html( $tag ); ?> class="cpb-title"><?php echo esc_html( $title ); ?></<?php echo esc_html( $tag ); ?>>	
             <?php endif; ?>
             <?php if ( ! empty( $excerpt ) ) : ?>
-						<div class="cpb-excerpt"><?php echo strip_shortcodes( wp_strip_all_tags( $excerpt , true ) ); ?></div>
+						<div class="cpb-excerpt"><?php echo strip_shortcodes( wp_strip_all_tags( $excerpt, true ) ); ?></div>
             <?php endif; ?>
 		</div>
 	</div>

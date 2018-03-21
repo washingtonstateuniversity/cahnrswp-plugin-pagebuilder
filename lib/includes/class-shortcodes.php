@@ -12,7 +12,7 @@ if ( ! defined( 'WPINC' ) ) {
 class Shortcodes {
 
 
-	public function __construct(){
+	public function __construct() {
 
 		// Add custom the_content filter
 		$this->add_content_filter();
@@ -30,7 +30,7 @@ class Shortcodes {
 	* @desc Add custom the_content filters to avoid abuse
 	* @since 3.0.0
 	*/
-	protected function add_content_filter(){
+	protected function add_content_filter() {
 
 		add_filter( 'cpb_the_content', 'wptexturize'        );
 		add_filter( 'cpb_the_content', 'convert_smilies'    );
@@ -46,7 +46,7 @@ class Shortcodes {
 	* @desc Register shortcodes use in cpb
 	* @since 3.0.0
 	*/
-	public function register_shortcodes(){
+	public function register_shortcodes() {
 
 		// Set shortcodes as global scope
 		global $pagebuilder_shortcodes;
@@ -55,7 +55,7 @@ class Shortcodes {
 
 			// Make sure this is set and is an array
 			$pagebuilder_shortcodes = array();
-	
+
 		} // End if
 
 		/*
@@ -70,7 +70,7 @@ class Shortcodes {
 	* @desc Add built in Shortcodes
 	* @since 3.0.0
 	*/
-	protected function add_shortcodes(){
+	protected function add_shortcodes() {
 
 		// Add row Shortcode
 		include_once cpb_get_plugin_path( '/lib/shortcodes/row/class-row-shortcode.php' );

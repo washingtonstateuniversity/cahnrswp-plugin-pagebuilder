@@ -12,7 +12,7 @@ if ( ! defined( 'WPINC' ) ) {
 class CAHNRSWP_Pagebuilder {
 
 
-    public function __construct(){
+    public function __construct() {
 
         $this->set_constants();
 
@@ -25,7 +25,7 @@ class CAHNRSWP_Pagebuilder {
     * @desc Set constants use in plugin funcitons. These should never be used direclty
     * @since 3.0.0
     */
-    protected function set_constants(){
+    protected function set_constants() {
 
         // Set plugin path constant
         \define( 'CWPPAGEBUILDERPATH', dirname( dirname( __DIR__ ) ) );
@@ -40,13 +40,13 @@ class CAHNRSWP_Pagebuilder {
     * @desc Start plugin script and load admin classes
     * @since 3.0.0
     */
-    protected function init_plugin(){
+    protected function init_plugin() {
 
         // Include global functions
         include CWPPAGEBUILDERPATH . '/lib/functions/public.php';
 
         // Check if is WP admin
-        if ( \is_admin() ){
+        if ( \is_admin() ) {
 
             // Add Pagebuilder Editor
             include cpb_get_plugin_path('/lib/includes/class-editor.php');

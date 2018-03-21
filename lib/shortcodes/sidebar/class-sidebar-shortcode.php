@@ -19,7 +19,7 @@ class Sidebar_Shortcode {
     );
 
 
-	public function __construct(){
+	public function __construct() {
 
         \add_action( 'init', array( $this, 'register_shortcode') );
 
@@ -30,7 +30,7 @@ class Sidebar_Shortcode {
     * @desc Register sidebar shortcode
     * @since 3.0.0
     */
-    public function register_shortcode(){
+    public function register_shortcode() {
 
         \add_shortcode( 'sidebar', array( $this, 'get_rendered_shortcode') );
 
@@ -57,25 +57,25 @@ class Sidebar_Shortcode {
     *
     * @return string HTML shortcode output
     */
-    public function get_rendered_shortcode( $atts, $content ){
+    public function get_rendered_shortcode( $atts, $content ) {
 
         $html = '';
 
         // Check default settings 
         $atts = \shortcode_atts( $this->default_settings, $atts, 'sidebar' );
-		
-		if ( ! empty( $atts['sidebar_id'] ) ){
-			
+
+		if ( ! empty( $atts['sidebar_id'] ) ) {
+
 			ob_start();
-		
+
 			dynamic_sidebar( $atts['sidebar_id'] );
-			
+
 			$sidebar = ob_get_clean();
-			
+
 			$html = do_shortcode( $sidebar );
-		
+
 		} // end if
-		
+
 		return $html;
 
     } // End get_rendered_shortcode
@@ -90,22 +90,22 @@ class Sidebar_Shortcode {
     *
     * @return string HTML shortcode form output
     */
-    public function get_shortcode_form( $id, $settings, $content ){
+    public function get_shortcode_form( $id, $settings, $content ) {
 
         $cpb_form = cpb_get_form_class();
 
         global $wp_registered_sidebars;
-		
+
 		$sidebars = array( 0 => 'None' );
-		
-		foreach( $wp_registered_sidebars as $sidebar ){
-			
+
+		foreach( $wp_registered_sidebars as $sidebar ) {
+
 			$sidebars[ $sidebar['id'] ] = $sidebar['name'];
-			
+
 		} // end foreach
-		
+
 		$form = $cpb_form->select_field( cpb_get_input_name( $id, true, 'sidebar_id'), $settings['sidebar_id'], $sidebars, 'Select Sidebar' );
-		
+
 		return $form;
 
     } // End get_shortcode_form

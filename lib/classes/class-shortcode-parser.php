@@ -21,7 +21,7 @@ class Shortcode_Parser {
     *
     * @return array Array of shortcodes with children
     */
-    public function get_shortcodes_from_content( $content, $allowed_shortcodes, $default_shortcode = false, $is_recursive = true ){
+    public function get_shortcodes_from_content( $content, $allowed_shortcodes, $default_shortcode = false, $is_recursive = true ) {
 
         // If has value in_column
         if ( 'in_column' === $allowed_shortcodes ) {
@@ -41,10 +41,10 @@ class Shortcode_Parser {
         $regex = $this->get_shortcode_regex( $allowed_shortcodes );
 
         // Split content to account for malformed shortcodes
-        $split_content = $this->split_content( $content , $regex );
+        $split_content = $this->split_content( $content, $regex );
 
         // Loop through and add items	
-		foreach( $split_content as $index => $shortcode_content ){
+		foreach( $split_content as $index => $shortcode_content ) {
 
             $trimmed_content = trim ( $shortcode_content );
 
@@ -54,7 +54,7 @@ class Shortcode_Parser {
             // Look for items
             \preg_match_all( $regex, $shortcode_content, $shortcode_data );
 
-            if ( ! empty( $shortcode_data[2] ) ){ // item found
+            if ( ! empty( $shortcode_data[2] ) ) { // item found
 
 				// Get the item
 				$shortcode = cpb_get_shortcode( 
@@ -62,21 +62,21 @@ class Shortcode_Parser {
                     \shortcode_parse_atts( $shortcode_data[3][0] ), 
                     $shortcode_data[5][0] 
                 );
-			
+
 			} else if ( $default_shortcode ) { // no items found and default exists set default
-			
-				$shortcode = cpb_get_shortcode( $default_shortcode, array() , $shortcode_content );
-			
+
+				$shortcode = cpb_get_shortcode( $default_shortcode, array(), $shortcode_content );
+
 			} else {
-				
+
 				$shortcode = false;
-				
+
 			}// end if
-			
+
 			if ( $shortcode ) $shortcodes[] = $shortcode;
-			
+
         } // end foreach
-        
+
         return $shortcodes;
 
     } // End get_shortcodes_from_content
@@ -90,7 +90,7 @@ class Shortcode_Parser {
     *
     * @return string Search regex
     */
-    protected function get_shortcode_regex( $allowed_shortcodes ){
+    protected function get_shortcode_regex( $allowed_shortcodes ) {
 
         // Create empty array to populate later
         $slugs = array();
@@ -133,7 +133,7 @@ class Shortcode_Parser {
     *
     * @return array Content split by shortcode instance
     */
-    protected function split_content( $content, $regex ){
+    protected function split_content( $content, $regex ) {
 
 		if ( '' == $content ) $content = ' ';
 
@@ -146,6 +146,6 @@ class Shortcode_Parser {
 		return $content_set;
 
     } // End split_content
-    
+
 
 } // End Shortcode_Parser

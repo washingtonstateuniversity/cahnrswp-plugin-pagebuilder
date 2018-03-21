@@ -35,7 +35,7 @@ class Row {
     );
 
 
-	public function __construct(){
+	public function __construct() {
 
         \add_action( 'init', array( $this, 'register_shortcode') );
 
@@ -44,19 +44,19 @@ class Row {
     } // End __construct
 
 
-    public function check_shortcode_columns( $shortcode, $get_children ){
+    public function check_shortcode_columns( $shortcode, $get_children ) {
 
-        if ( ( 'row' === $shortcode['slug'] ) && $get_children ){
+        if ( ( 'row' === $shortcode['slug'] ) && $get_children ) {
 
             $layout = cpb_get_registered_layout( $shortcode['atts']['layout'] );
 
             $children = $shortcode['children'];
 
-            if ( count( $layout['columns'] ) > count( $children ) ){
+            if ( count( $layout['columns'] ) > count( $children ) ) {
 
                 $dif = count( $layout['columns'] ) - count( $children );
 
-                while( $dif > 0 ){
+                while( $dif > 0 ) {
 
                     $shortcode['children'][] = cpb_get_shortcode('column');
 
@@ -77,7 +77,7 @@ class Row {
     * @desc Register row shortcode
     * @since 3.0.0
     */
-    public function register_shortcode(){
+    public function register_shortcode() {
 
         \add_shortcode( 'row', array( $this, 'get_rendered_shortcode') );
 
@@ -106,19 +106,19 @@ class Row {
     *
     * @return string HTML shortcode output
     */
-    public function get_rendered_shortcode( $atts, $content ){
+    public function get_rendered_shortcode( $atts, $content ) {
 
         $prefix = '';
 
         // Column index global - This is used in the column shortcode to get column number.
         global $cpb_column_i;
-        
+
         // Row layout global
 		global $cpb_row_layout;
 
         // Resetting column index to 1 since this is a new row
         $cpb_column_i = 1;
-        
+
         // Check default settings 
         $settings = \shortcode_atts( $this->default_settings, $atts, 'row' );
 
@@ -157,59 +157,59 @@ class Row {
     *
     * @return string HTML shortcode form output
     */
-    public function get_shortcode_form( $id, $settings, $content ){
+    public function get_shortcode_form( $id, $settings, $content ) {
 
         $cpb_form = cpb_get_form_class();
-        
+
         $p_values = array( 'default' => 'Not Set' );
-		
+
 		$p = 0;
-		
-		while( $p < 5 ){
-			
+
+		while( $p < 5 ) {
+
 			$p_values[ $p . 'rem' ] = $p . 'rem';
-			
+
 			$p = $p + 0.25;
-			
+
 		} // end for
 
         $basic = '<input type="hidden" name="' . cpb_get_input_name( $id, true, 'layout') . '" value="' . $settings['layout'] . '" >';
-		
+
 		$basic .= $cpb_form->hidden_field( cpb_get_input_name( $id, true, 'layout' ), $settings['layout'] );
-		
+
 		$basic .= $cpb_form->text_field( cpb_get_input_name( $id, true, 'title'), $settings['title'], 'Title' );
-		
-		$basic .= $cpb_form->select_field( cpb_get_input_name( $id, true, 'title_tag'), $settings['title_tag'], $cpb_form->get_header_tags() , 'Title Tag' );
-		
+
+		$basic .= $cpb_form->select_field( cpb_get_input_name( $id, true, 'title_tag'), $settings['title_tag'], $cpb_form->get_header_tags(), 'Title Tag' );
+
 		$basic .= $cpb_form->select_field( cpb_get_input_name( $id, true, 'bgcolor'), $settings['bgcolor'], $cpb_form->get_wsu_colors(), 'Background Color' );
-		
+
 		$basic .= $cpb_form->checkbox_field( cpb_get_input_name( $id, true, 'full_bleed'), 1, $settings['full_bleed'], 'Background Full Bleed Color' );
-		
+
 		$basic .= $cpb_form->select_field( cpb_get_input_name( $id, true, 'textcolor'), $settings['textcolor'], $cpb_form->get_wsu_colors(), 'Text Color' );
-		
+
 		$layout = $cpb_form->select_field( cpb_get_input_name( $id, true, 'padding_top'), $settings['padding_top'], $p_values, 'Padding Top' );
-		
+
 		$layout .= $cpb_form->select_field( cpb_get_input_name( $id, true, 'padding_bottom'), $settings['padding_bottom'], $p_values, 'Padding Bottom' );
-		
+
 		$layout .= $cpb_form->select_field( cpb_get_input_name( $id, true, 'padding_left'), $settings['padding_left'], $p_values, 'Padding Left' );
-		
+
 		$layout .= $cpb_form->select_field( cpb_get_input_name( $id, true, 'padding_right'), $settings['padding_right'], $p_values, 'Padding Right' );
-		
+
 		$layout .= $cpb_form->select_field( cpb_get_input_name( $id, true, 'padding'), $settings['padding'], $cpb_form->get_padding(), 'Padding (Old)' );
-		
+
 		$layout .= $cpb_form->text_field( cpb_get_input_name( $id, true, 'max_width'), $settings['max_width'], 'Max Width' );
-		
+
 		$adv = $cpb_form->select_field( cpb_get_input_name( $id, true, 'gutter'), $settings['gutter'], $cpb_form->get_gutters(), 'Gutter' );
-		
+
 		$adv .= $cpb_form->text_field( cpb_get_input_name( $id, true, 'bg_src'), $settings['bg_src'], 'Background Image URL' );
-		
+
 		$adv .= $cpb_form->text_field( cpb_get_input_name( $id, true, 'min_height'), $settings['min_height'], 'Minimum Height (px)' );
-		
-		$adv .= $cpb_form->text_field( cpb_get_input_name( $id, true, 'anchor') , $settings['anchor'] , 'Anchor Name' );
-		
+
+		$adv .= $cpb_form->text_field( cpb_get_input_name( $id, true, 'anchor'), $settings['anchor'], 'Anchor Name' );
+
 		$adv .= $cpb_form->text_field( cpb_get_input_name( $id, true, 'csshook'), $settings['csshook'], 'CSS Hook' );
 
-		return array('Basic' => $basic , 'Layout' => $layout, 'Advanced' => $adv );;
+		return array('Basic' => $basic, 'Layout' => $layout, 'Advanced' => $adv );;
 
     } // End get_shortcode_form
 
@@ -225,7 +225,7 @@ class Row {
     *
     * @return string HTML shortcode form output
     */
-    public function get_shortcode_editor( $id, $atts, $content, $children ){
+    public function get_shortcode_editor( $id, $atts, $content, $children ) {
 
         // Column index global - This is used in the column shortcode to get column number.
         global $cpb_column_i;
@@ -277,7 +277,7 @@ class Row {
     *
     * @return array Sanitized shortcode $atts
     */
-    public function get_sanitize_shortcode_atts( $settings ){
+    public function get_sanitize_shortcode_atts( $settings ) {
 
         $clean = array();
 
@@ -301,10 +301,10 @@ class Row {
             'min_height',
         );
 
-        foreach( $text_fields as $index => $field ){
+        foreach( $text_fields as $index => $field ) {
 
             if ( isset( $settings[ $field ] ) ) {
-                
+
                 $clean[ $field ] = sanitize_text_field( $settings[ $field ] );
 
             } // End if
@@ -312,7 +312,7 @@ class Row {
         } // End foreach
 
         return $clean;
-        
+
     } // End sanitize_shortcode
 
 
@@ -325,7 +325,7 @@ class Row {
     *
     * @return string Shortcode for saving in content
     */
-    public function get_to_shortcode( $atts, $content ){
+    public function get_to_shortcode( $atts, $content ) {
 
     } // End
 
@@ -338,72 +338,72 @@ class Row {
     *
     * @return string Row classes
     */
-    private function get_row_classes( $settings ){
-		
+    private function get_row_classes( $settings ) {
+
 		$class = '';
-		
+
 		if ( ! empty( $settings['bgcolor'] ) ) {
-			
+
 			$class .= ' ' . $settings['bgcolor'] . '-back';
-			
+
 			$class .= ' has-background-color';
-			
+
 		} // end if
 
 		if ( ! empty( $settings['textcolor'] ) ) {
-			
+
 			$class .= ' ' . $settings['textcolor'] . '-text';
-			
+
 		} // end if
 
 		if ( ! empty( $settings['padding'] ) ) {
-			
+
 			$class .= ' ' . $settings['padding'];
-			
+
 		} // end if
 
 		if ( ! empty( $settings['gutter'] ) ) {
-			
+
 			$class .= ' ' . $settings['gutter'];
-			
+
 		} // end if
 
 		if ( ! empty( $settings['csshook'] ) ) {
-			
+
 			$class .= ' ' . $settings['csshook'];
-			
+
 		} // end if
-		
+
 		if ( ! empty( $settings['layout'] ) ) {
-			
+
 			$class .= ' ' . $settings['layout'];
-			
+
         } // end if
 
         if ( ! empty( $settings['bg_src'] ) ) {
-			
+
 			$classes .= ' has-bg-image';
-			
+
         } // end if
-		
+
 		if ( ! empty( $settings['full_bleed'] ) ) {
-			
-			if ( ! empty( $settings['bg_src'] ) ){
-				
+
+			if ( ! empty( $settings['bg_src'] ) ) {
+
 				$class .= ' full-bleed-img';
-				
+
 			} else {
-				
+
 				$class .= ' full-bleed';
-				
+
 			} // end if
-			
+
 		} // end if
-		
+
 		return $class;
-		
+
     } // End get_item_class
-    
+
     /*
     * @desc Get row style
     * @since 3.0.0
@@ -412,10 +412,10 @@ class Row {
     *
     * @return array Row css
     */
-    protected function get_row_style( $settings ){
-		
+    protected function get_row_style( $settings ) {
+
 		$style = array();
-		
+
 		$valid = array(
 			'padding_top' => 'padding-top',
 			'padding_bottom' => 'padding-bottom',
@@ -423,21 +423,21 @@ class Row {
 			'padding_right' => 'padding-right',
 			'max_width'		=> 'max-width',
 		);
-		
-		foreach( $settings as $key => $value ){
 
-			if ( array_key_exists( $key, $valid ) && $value != 'default' && $value !== '' ){
-				
+		foreach( $settings as $key => $value ) {
+
+			if ( array_key_exists( $key, $valid ) && $value != 'default' && $value !== '' ) {
+
 				$css = $valid[ $key ];
-				
+
 				$style[] = $css . ':' . $value; 
-				
+
 			} // end if
-			
+
 		} // end foreach
-		
+
 		return $style;
-		
+
 	} // end get_item_style
 
 } // End Row

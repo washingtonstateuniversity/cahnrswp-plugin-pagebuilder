@@ -11,7 +11,7 @@ if ( ! defined( 'WPINC' ) ) {
 */
 class Save {
 
-    public function __construct(){
+    public function __construct() {
 
         \add_action( 'save_post', array( $this, 'do_save_layout') );
 
@@ -24,7 +24,7 @@ class Save {
     *
     * @param int $post_id WP post id
     */
-    public function do_save_layout( $post_id ){
+    public function do_save_layout( $post_id ) {
 
         // If can't save abort
         if ( ! $this->check_can_save( $post_id ) ) return;
@@ -33,7 +33,7 @@ class Save {
         $settings = $this->get_settings( $post_id );
 
         // If is set to builder and the layout isn't empty
-        if ( ( 'builder' === $settings['_cpb_pagebuilder'] ) && ! empty( $settings['_cpb']['layout'] ) ){
+        if ( ( 'builder' === $settings['_cpb_pagebuilder'] ) && ! empty( $settings['_cpb']['layout'] ) ) {
 
             // Get string html for shortcodes
             $shortcodes = $this->get_layout_shortcodes_recursive( $settings, $post_id );
@@ -67,8 +67,8 @@ class Save {
     *
     * @return bool Allow save
     */
-    protected function check_can_save( $post_id ){
-		
+    protected function check_can_save( $post_id ) {
+
 		// If this is an autosave, our form has not been submitted, so we don't want to do anything.
 		if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
 
@@ -94,17 +94,17 @@ class Save {
 			} // end if
 
 		} // end if
-		
+
 		if ( ! isset( $_POST['cahnrs_pagebuilder_key'] ) || ! wp_verify_nonce( $_POST['cahnrs_pagebuilder_key'], 'save_cahnrs_pagebuilder_' . $post_id ) ) {
-		  
+
 			 return false;
-		  
+
 		  }
-		
+
 		return true;
-		
+
     }
-    
+
 
     /*
     * @desc Get the save settings
@@ -114,7 +114,7 @@ class Save {
     *
     * @return array Settings with values
     */
-    protected function get_settings( $post_id ){
+    protected function get_settings( $post_id ) {
 
         $fields = array(
             '_cpb_excerpt'      => ( ! empty( $_POST['_cpb_excerpt'] ) ) ? sanitize_text_field( $_POST['_cpb_excerpt'] ) : '', 
@@ -137,7 +137,7 @@ class Save {
     *
     * @return array Nested Shortcodes to save
     */
-    protected function get_layout_shortcodes_recursive( $settings, $post_id ){
+    protected function get_layout_shortcodes_recursive( $settings, $post_id ) {
 
         // String for the shortcode to build
         $shortcode_string = '';
@@ -149,10 +149,10 @@ class Save {
         $shortcodes = $this->get_shortcode_array_recursive( $layout, $settings );
 
         // Let's make sure this is an array
-        if ( is_array( $shortcodes ) ){
+        if ( is_array( $shortcodes ) ) {
 
             // Loop through all shortcodes and convert to string
-            foreach( $shortcodes as $index => $shortcode ){
+            foreach( $shortcodes as $index => $shortcode ) {
 
                 // Convert shortcode array to string for save
                 $shortcode_string .= $this->get_to_shortcode_recursive( $shortcode );
@@ -181,7 +181,7 @@ class Save {
 		return $excerpt;
 
     } // end get_excerpt
-    
+
 
     /*
     * @desc Get the excerpt from the post
@@ -210,7 +210,7 @@ class Save {
     } // End get_excerpt_from_post
 
 
-    protected function get_to_shortcode_recursive( $shortcode ){
+    protected function get_to_shortcode_recursive( $shortcode ) {
 
         // We'll add the built shortcodes here
         $shortcode_string = '';
@@ -222,7 +222,7 @@ class Save {
         if ( ! empty( $shortcode['children'] ) ) {
 
             // Loop through the children
-            foreach( $shortcode['children'] as $index => $child_shortcode ){
+            foreach( $shortcode['children'] as $index => $child_shortcode ) {
 
                 // Add string value to child shortcode content
                 $shortcode_content .= $this->get_to_shortcode_recursive( $child_shortcode );
@@ -232,7 +232,7 @@ class Save {
         } // End if
 
         // Does this shortcode have a callback to build itself?
-        if ( ! empty( $shortcode['shortcode_callback'] ) ){
+        if ( ! empty( $shortcode['shortcode_callback'] ) ) {
 
             // Get shortcode string from callback
             $shortcode_string = \call_user_func_array( 
@@ -252,10 +252,10 @@ class Save {
             $atts = $this->get_convert_atts( $shortcode['atts'] );
 
             // If there are atts add them to the shortcode
-            if ( ! empty( $atts ) ){
+            if ( ! empty( $atts ) ) {
 
                 $shortcode_string .= ' ' . $atts . ' ';
-    
+
             } // End if
 
             // Does the shortcode have child content?
@@ -264,7 +264,7 @@ class Save {
                 // Add inner content ( $shortcode_content) and close the shortcode
                 $shortcode_string .= ']' . $shortcode_content . '[/' . $shortcode['slug'] . ']';
 
-            } else if ( ! empty( $shortcode['content'] ) ){ // Does the shortcode have content?
+            } else if ( ! empty( $shortcode['content'] ) ) { // Does the shortcode have content?
 
                 // Add the content
                 $shortcode_string .= ']' . $shortcode['content'] . '[/' . $shortcode['slug'] . ']'; 
@@ -283,11 +283,11 @@ class Save {
     } // End get_to_shortcode_recursive
 
 
-    protected function get_convert_atts( $shortcode_atts ){
+    protected function get_convert_atts( $shortcode_atts ) {
 
         $converted = array();
 
-        foreach( $shortcode_atts as $key => $value  ){
+        foreach( $shortcode_atts as $key => $value  ) {
 
             $converted[] = $key . '="' . $value . '"';
 
@@ -307,7 +307,7 @@ class Save {
     *
     * @return array Nested array of shortcodes
     */
-    protected function get_shortcode_array_recursive( $shortcodes_list, $settings ){
+    protected function get_shortcode_array_recursive( $shortcodes_list, $settings ) {
 
         // We'll populate this later
         $shortcodes = array();
@@ -316,10 +316,10 @@ class Save {
         $layout = explode( ',', $shortcodes_list );
 
         // Make sure we are dealing with an array here
-        if ( is_array( $layout ) ){
+        if ( is_array( $layout ) ) {
 
             // Loop through keys i.e. row_32305823508
-            foreach( $layout as $index => $shortcode_key ){
+            foreach( $layout as $index => $shortcode_key ) {
 
                 // Split key to get shortcode slug
                 $shortcode_slug = cpb_get_shortcode_type_from_key( $shortcode_key );
@@ -331,19 +331,19 @@ class Save {
                 $shortcode['id'] = $shortcode_key;
 
                 // Does this use a wp_editor in it?
-                if ( $shortcode['uses_wp_editor'] ){
+                if ( $shortcode['uses_wp_editor'] ) {
 
                     // WP Eitors use a special name pattern _cpb_content_.....ID
                     $content_key = '_cpb_content_' .  $shortcode_key;
 
                     // Check if it has content
-                    if ( ! empty( $_POST[ $content_key ] ) ){
+                    if ( ! empty( $_POST[ $content_key ] ) ) {
 
                         // Sanitize and add to content key
                         $shortcode['content'] = wp_kses_post( $_POST[ $content_key ] );
 
                     } // End if
-                     
+
                 } // End if
 
                 // Check if any settings have been sent with the $_POST request
@@ -353,12 +353,12 @@ class Save {
                 $shortcode['atts'] = $this->get_save_settings( $save_settings, $shortcode );
 
                 // Does this have any child items
-                if ( ! empty( $settings['_cpb'][ $shortcode_key ]['settings']['children'] ) ){
+                if ( ! empty( $settings['_cpb'][ $shortcode_key ]['settings']['children'] ) ) {
 
                     // Get the children
                     $children = $settings['_cpb'][ $shortcode_key ]['settings']['children'];
 
-                    if ( ! empty( $children ) ){
+                    if ( ! empty( $children ) ) {
 
                         // Get child shortcodes and add to the children key
                         $shortcode['children'] =  $this->get_shortcode_array_recursive( $children, $settings );
@@ -388,16 +388,16 @@ class Save {
     *
     * @return array Settings to save
     */
-    protected function get_save_settings( $save_settings, $shortcode ){
+    protected function get_save_settings( $save_settings, $shortcode ) {
 
         // Key = Value pairs to save after removing default and empty keys
         $to_save = array();
 
         // Loop through default settings
-        foreach( $shortcode['default_atts'] as $key => $default_value ){
+        foreach( $shortcode['default_atts'] as $key => $default_value ) {
 
             // Check if default setting is in save_settings
-            if ( array_key_exists( $key, $save_settings ) ){
+            if ( array_key_exists( $key, $save_settings ) ) {
 
                 // Get default value
                 $default_value = $shortcode['default_atts'][ $key ];
@@ -406,7 +406,7 @@ class Save {
                 $save_value = $save_settings[ $key ];
 
                 // If the save value is same as default, or is empty string, or is literally default do nothing
-                if ( ( $default_value !== $save_value ) && ( '' !== $save_value ) && ( 'default' !== $save_value ) ){
+                if ( ( $default_value !== $save_value ) && ( '' !== $save_value ) && ( 'default' !== $save_value ) ) {
 
                     // Otherwise add to to_save array
                     $to_save[ $key ] = $save_value;
@@ -424,7 +424,7 @@ class Save {
             $clean_settings = call_user_func_array( $shortcode['sanitize_callback'], array( $to_save ) );
 
             // Just checking to make sure this is is an array
-            if ( ! is_array( $clean_settings ) ){
+            if ( ! is_array( $clean_settings ) ) {
 
                 $clean_settings = array();
 
@@ -435,7 +435,7 @@ class Save {
             $clean_settings = array();
 
             // Loop through values trying to save
-            foreach( $to_save as $key => $value ){
+            foreach( $to_save as $key => $value ) {
 
                 // Just some basic sanity
                 $clean_settings[ $key ] = sanitize_text_field( $value );  

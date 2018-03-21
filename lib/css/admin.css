@@ -292,7 +292,7 @@ margin-bottom: 1rem;
 /* Forms
  * ----------------------------------------------------------
  */
- 
+
 #cpb-lb-bg {
 	background: rgba( 0,0,0,0.6 );
 	position: fixed;
@@ -327,7 +327,7 @@ margin-bottom: 1rem;
 
 
 .cpb-item-form-wrap .cpb-item-form-contents {
-	
+
 	padding: 1rem;
 }
 
@@ -789,8 +789,8 @@ margin-bottom: 1rem;
     box-sizing: border-box;
 }
  
- 
- .cpb-item.cpb-sublayout-item > .add-part-action {
+
+.cpb-item.cpb-sublayout-item > .add-part-action {
     display: inline-block;
     background: #2ea2cc;
     border-color: #0074a2;
@@ -840,7 +840,7 @@ margin-bottom: 1rem;
 	}
 	
 .cpb-row > header .cpb-remove-item-action {
-	display: inline-block;
+display: inline-block;
 	position: absolute;
 	top: 0;
 	right: 0;
@@ -903,7 +903,7 @@ margin-bottom: 1rem;
 .cpb-column {
 	
 	position: relative;
-	padding-bottom: 25px;
+padding-bottom: 25px;
 	}
 .cpb-column .cpb-column-inner {
 	margin: 0.5rem;
@@ -976,5 +976,5 @@ margin-bottom: 1rem;
 	}
  
 .cpb-column .cpb-column-inner > footer {
-	display: none;
+display: none;
 }

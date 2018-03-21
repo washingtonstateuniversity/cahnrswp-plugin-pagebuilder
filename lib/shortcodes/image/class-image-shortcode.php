@@ -22,7 +22,7 @@ class Image_Shortcode {
     );
 
 
-	public function __construct(){
+	public function __construct() {
 
         \add_action( 'init', array( $this, 'register_shortcode') );
 
@@ -33,7 +33,7 @@ class Image_Shortcode {
     * @desc Register image shortcode
     * @since 3.0.0
     */
-    public function register_shortcode(){
+    public function register_shortcode() {
 
         \add_shortcode( 'image', array( $this, 'get_rendered_shortcode') );
 
@@ -60,21 +60,21 @@ class Image_Shortcode {
     *
     * @return string HTML shortcode output
     */
-    public function get_rendered_shortcode( $atts, $content ){
+    public function get_rendered_shortcode( $atts, $content ) {
 
         $html = '';
 
         // Check default settings 
         $atts = \shortcode_atts( $this->default_settings, $atts, 'image' );
 
-        if ( ! empty( $atts['img_id'] ) ){
+        if ( ! empty( $atts['img_id'] ) ) {
 
             $image_array = cpb_get_image_properties_array( $atts['img_id'] );
-		
+
             if ( ! empty( $atts['alt'] ) ) {
-                
+
                 $image_array['alt'] = $atts['alt'];
-                
+
             } // End if
 
             $url = $atts['url'];
@@ -84,9 +84,9 @@ class Image_Shortcode {
             $alt = $image_array['alt'];
 
             ob_start();
-			
+
 			include  __DIR__ . '/image.php';
-			
+
 			$html .= ob_get_clean();
 
         } // End if
@@ -105,14 +105,14 @@ class Image_Shortcode {
     *
     * @return string HTML shortcode form output
     */
-    public function get_shortcode_form( $id, $settings, $content ){
+    public function get_shortcode_form( $id, $settings, $content ) {
 
         $cpb_form = cpb_get_form_class();
 
         $form = $cpb_form->insert_media( cpb_get_input_name( $id, true ), $settings );
-		
+
 		$form .= '<hr/>';
-		
+
 		$form .= $cpb_form->text_field( cpb_get_input_name( $id, true, 'alt'), $settings['alt'], 'Image Alt Text' );
 
 		$form .= $cpb_form->text_field( cpb_get_input_name( $id, true, 'url'), $settings['url'], 'Link Image To:' );

@@ -20,7 +20,7 @@ class Slideshow_Shortcode {
     );
 
 
-	public function __construct(){
+	public function __construct() {
 
         \add_action( 'init', array( $this, 'register_shortcode') );
 
@@ -31,7 +31,7 @@ class Slideshow_Shortcode {
     * @desc Register slideshow shortcode
     * @since 3.0.0
     */
-    public function register_shortcode(){
+    public function register_shortcode() {
 
         \add_shortcode( 'slideshow', array( $this, 'get_rendered_shortcode') );
 
@@ -61,7 +61,7 @@ class Slideshow_Shortcode {
     *
     * @return string HTML shortcode output
     */
-    public function get_rendered_shortcode( $atts, $content ){
+    public function get_rendered_shortcode( $atts, $content ) {
 
         $html = '';
 
@@ -69,20 +69,20 @@ class Slideshow_Shortcode {
         $atts = \shortcode_atts( $this->default_settings, $atts, 'slideshow' );
 
         global $cpb_slideshow;
-		
+
 		$cpb_slideshow = array(
 			'type' => $atts['display_type'],
 			'i'    => 1,
 		);
-		
+
 		$slides = do_shortcode( $content );
-		
+
 		\ob_start();
-		
+
 		include  __DIR__ . '/slideshow.php';
-		
+
 	    $html = \ob_get_clean();
-		
+
 		return $html;
 
     } // End get_rendered_shortcode
@@ -97,7 +97,7 @@ class Slideshow_Shortcode {
     *
     * @return string HTML shortcode form output
     */
-    public function get_shortcode_form( $id, $settings, $content ){
+    public function get_shortcode_form( $id, $settings, $content ) {
 
         $cpb_form = cpb_get_form_class();
 
@@ -105,11 +105,11 @@ class Slideshow_Shortcode {
 			'default' => 'Default',
 			'college' => 'College'
 		);
-		
-		$html = $cpb_form->text_field( cpb_get_input_name( $id, true, 'title') , $settings['title'] , 'Title' ); 
-		
-		$html .= $cpb_form->select_field( cpb_get_input_name( $id, true, 'display_type') , $settings['display_type'] , $displays , 'Display Type' );
-		
+
+		$html = $cpb_form->text_field( cpb_get_input_name( $id, true, 'title'), $settings['title'], 'Title' ); 
+
+		$html .= $cpb_form->select_field( cpb_get_input_name( $id, true, 'display_type'), $settings['display_type'], $displays, 'Display Type' );
+
 		return array('Basic' => $html );
 
     } // End get_shortcode_form
@@ -126,7 +126,7 @@ class Slideshow_Shortcode {
     *
     * @return string HTML shortcode form output
     */
-    public function get_shortcode_editor( $id, $atts, $content, $children ){
+    public function get_shortcode_editor( $id, $atts, $content, $children ) {
 
         $slug = 'slideshow';
 

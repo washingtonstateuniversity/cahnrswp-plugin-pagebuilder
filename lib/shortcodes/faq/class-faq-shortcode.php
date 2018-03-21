@@ -21,7 +21,7 @@ class FAQ_Shortcode {
     );
 
 
-	public function __construct(){
+	public function __construct() {
 
         \add_action( 'init', array( $this, 'register_shortcode') );
 
@@ -32,7 +32,7 @@ class FAQ_Shortcode {
     * @desc Register faq shortcode
     * @since 3.0.0
     */
-    public function register_shortcode(){
+    public function register_shortcode() {
 
         \add_shortcode( 'faq', array( $this, 'get_rendered_shortcode') );
 
@@ -60,7 +60,7 @@ class FAQ_Shortcode {
     *
     * @return string HTML shortcode output
     */
-    public function get_rendered_shortcode( $atts, $content ){
+    public function get_rendered_shortcode( $atts, $content ) {
 
         $html = '';
 
@@ -70,11 +70,11 @@ class FAQ_Shortcode {
         $tag = $atts['tag'];
 
         $title = $atts['title'];
-        
+
         $content =  apply_filters( 'cpb_the_content', \do_shortcode( $content ) );
 
         \ob_start();
-            
+
         include cpb_get_plugin_path('/lib/displays/items/faq/faq.php');
 
         $html .= \ob_get_clean();
@@ -93,28 +93,28 @@ class FAQ_Shortcode {
     *
     * @return string HTML shortcode form output
     */
-    public function get_shortcode_form( $id, $settings, $content ){
+    public function get_shortcode_form( $id, $settings, $content ) {
 
         $cpb_form = cpb_get_form_class();
 
         $html = $cpb_form->text_field( cpb_get_input_name( $id, true, 'title'), $settings['title'], 'Title' ); 
-		
-		$html .= $cpb_form->select_field( cpb_get_input_name( $id, true, 'tag') , $settings['tag'] , $cpb_form->get_header_tags( true ), 'Tag Type' ); 
-		
+
+		$html .= $cpb_form->select_field( cpb_get_input_name( $id, true, 'tag'), $settings['tag'], $cpb_form->get_header_tags( true ), 'Tag Type' ); 
+
 		ob_start();
-		
-		wp_editor( $content , '_cpb_content_' . $id );
-		
+
+		wp_editor( $content, '_cpb_content_' . $id );
+
 		$html .= ob_get_clean();
-		
+
 		$adv = $cpb_form->select_field( 
 			cpb_get_input_name( $id, true, 'textcolor'), 
 			$settings['textcolor'], 
 			$cpb_form->get_wsu_colors(), 
 			'Text Color' 
 			);
-		
-		return array('Basic' => $html , 'Advanced' => $adv );
+
+		return array('Basic' => $html, 'Advanced' => $adv );
 
     } // End get_shortcode_form
 
