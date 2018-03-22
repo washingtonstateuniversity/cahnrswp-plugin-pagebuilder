@@ -235,12 +235,11 @@ class Form {
 				$options_fields[] = $option_html;
 
 			} // End if
-
 		} // end foreach
 
 		$html = '<select multiple name="' . $name . '" >' . implode( '', $options_fields_selected ) . implode( '', $options_fields ) . '</select>';
 
-		if ( $label ) { 
+		if ( $label ) {
 
 			$html = '<label for="' . $id . '">' . $label . '</label>' . $html;
 
@@ -348,7 +347,6 @@ class Form {
 				$html .= '<label>' . $options[ $value ] . '</label><input type="text" name="' . $name . '[]" value="' . $value . '" />';
 
 			} // End if
-
 		} // End foreach
 
 		$html .= '</div>';
@@ -389,21 +387,21 @@ class Form {
 
 	public function checkbox_field( $name, $value, $current_value = false, $label = false, $class = '', $text = '' ) {
 
-		$active = ( $value == $current_value ) ? ' active' : '';
+		$active = ( $value === $current_value ) ? ' active' : '';
 
-		$id = str_replace( array( '[',']' ), '_', $name ) . '_' . rand( 0, 1000000 );
+		$id = str_replace( array( '[', ']' ), '_', $name ) . '_' . rand( 0, 1000000 );
 
 		$html = '<input type="checkbox" id="' . $id . '" name="' . $name . '" value="' . $value . '" ' . checked( $value, $current_value, false )  . ' />';
 
 		if ( $label ) {
 
-			$html .= '<label for="' . $id . '" class="' . $active . '">' . $label . '</label>' ;
+			$html .= '<label for="' . $id . '" class="' . $active . '">' . $label . '</label>';
 
 		} // End if
 
 		if ( $text ) {
 
-			$html .= '<br /><span class=".cpb-helper-text">' . $text . '</span>' ;
+			$html .= '<br /><span class=".cpb-helper-text">' . $text . '</span>';
 
 		} // End if
 
@@ -429,21 +427,21 @@ class Form {
 
 	public function field_remote_feed_url( $name, $value, $label = false, $class = '' ) {
 
-			$html = '<div class="cpb-field-remote-feed-url">';
+		$html = '<div class="cpb-field-remote-feed-url">';
 
-			$html .= '<input type="text" name="' . $name . '" value="' . $value . '" />';
+		$html .= '<input type="text" name="' . $name . '" value="' . $value . '" />';
 
-			$html .= '<a href="#" class="cpb-action-load-remote-feed-options cpb-basic-button">Update Options</a>';
+		$html .= '<a href="#" class="cpb-action-load-remote-feed-options cpb-basic-button">Update Options</a>';
 
-			$html .= '</div>';
+		$html .= '</div>';
 
-			if ( $label ) {
+		if ( $label ) {
 
-				$html = '<label>' . $label . '</label>' . $html;
+			$html = '<label>' . $label . '</label>' . $html;
 
-			} // End if
+		} // End if
 
-			$html .= '<span class="cpb-helper-text">URL of external site. NOTE: You must click <strong>update options</strong> before selecting options below.</span>';
+		$html .= '<span class="cpb-helper-text">URL of external site. NOTE: You must click <strong>update options</strong> before selecting options below.</span>';
 
 		return $this->wrap_field( $html, $class );
 
@@ -582,19 +580,19 @@ class Form {
 
 		} // End if
 
-		$form = $this->select_field( $base_name. '[' . $prefix . 'post_type]', $settings[ $prefix . 'post_type' ], $this->get_post_types(), 'Post Type' );
+		$form = $this->select_field( $base_name . '[' . $prefix . 'post_type]', $settings[ $prefix . 'post_type' ], $this->get_post_types(), 'Post Type' );
 
-		$form .= $this->select_field( $base_name. '[' . $prefix . 'taxonomy]', $settings[ $prefix . 'taxonomy' ], $this->get_taxonomies(), 'Taxonomy' );
+		$form .= $this->select_field( $base_name . '[' . $prefix . 'taxonomy]', $settings[ $prefix . 'taxonomy' ], $this->get_taxonomies(), 'Taxonomy' );
 
-		$form .= $this->text_field( $base_name. '[' . $prefix . 'terms]', $settings[ $prefix . 'terms' ], 'Category/Tag Names' );
+		$form .= $this->text_field( $base_name . '[' . $prefix . 'terms]', $settings[ $prefix . 'terms' ], 'Category/Tag Names' );
 
-		$form .= $this->text_field( $base_name. '[' . $prefix . 'count]', $settings[ $prefix . 'count' ], 'Number of Items' );
+		$form .= $this->text_field( $base_name . '[' . $prefix . 'count]', $settings[ $prefix . 'count' ], 'Number of Items' );
 
-		$form .= $this->text_field( $base_name. '[' . $prefix . 'offset]', $settings[ $prefix . 'offset' ], 'Offset' );
+		$form .= $this->text_field( $base_name . '[' . $prefix . 'offset]', $settings[ $prefix . 'offset' ], 'Offset' );
 
-		$form .= $this->select_field( $base_name. '[' . $prefix . 'order_by]', $settings[ $prefix . 'order_by' ], $order, 'Order By' );
+		$form .= $this->select_field( $base_name . '[' . $prefix . 'order_by]', $settings[ $prefix . 'order_by' ], $order, 'Order By' );
 
-		$form .= $this->checkbox_field( $base_name. '[' . $prefix . 'term_operator]', 'AND', $settings[ $prefix . 'term_operator' ], 'Use AND Logic' );
+		$form .= $this->checkbox_field( $base_name . '[' . $prefix . 'term_operator]', 'AND', $settings[ $prefix . 'term_operator' ], 'Use AND Logic' );
 
 		return $form;
 
@@ -633,11 +631,11 @@ class Form {
 
 		$url_helper = 'URL of the site to search';
 
-		$form = '<div class="cpb-form-search-posts" data-basename="' . $base_name. '[' . $prefix . 'remote_items]' . '">';
+		$form = '<div class="cpb-form-search-posts" data-basename="' . $base_name . '[' . $prefix . 'remote_items]' . '">';
 
-		$form .= $this->text_field( $base_name. '[' . $prefix . 'site_url]', $settings[ $prefix . 'site_url' ], 'Search Site', 'cpb-select-site-url cpb-full-width', $url_helper );
+		$form .= $this->text_field( $base_name . '[' . $prefix . 'site_url]', $settings[ $prefix . 'site_url' ], 'Search Site', 'cpb-select-site-url cpb-full-width', $url_helper );
 
-		$form .= $this->search_field( 'cpb-select-post cpb-full-width'  );
+		$form .= $this->search_field( 'cpb-select-post cpb-full-width' );
 
 		$form .= '<hr /><h4 style="margin: 0 2%;">Selected</h4>';
 
@@ -649,9 +647,9 @@ class Form {
 
 				$form .= '<li class="cpb-form-item">' . $result['title' ] . '<a href="#" class="cpb-form-item-remove"></a><input type="text" name="' .$base_name. '[' . $prefix . 'remote_items][' . $post_id . '][id]" value="' . $result['id'] . '" />';
 
-				$form .= '<input type="text" name="' .$base_name. '[' . $prefix . 'remote_items][' . $post_id . '][site]" value="' . $result['site'] . '" />';
+				$form .= '<input type="text" name="' . $base_name . '[' . $prefix . 'remote_items][' . $post_id . '][site]" value="' . $result['site'] . '" />';
 
-				$form .= '<input type="text" name="' .$base_name. '[' . $prefix . 'remote_items][' . $post_id . '][title]" value="' . $result['title'] . '" />';
+				$form .= '<input type="text" name="' . $base_name . '[' . $prefix . 'remote_items][' . $post_id . '][title]" value="' . $result['title'] . '" />';
 
 				$form .= '</li>';
 
@@ -671,25 +669,25 @@ class Form {
 
 	public function get_form_remote_feed( $base_name, $settings, $prefix = '' ) {
 
-		$post_types = ( ! empty( $settings[ $prefix . 'post_type' ] ) ) ? array( $settings[ $prefix . 'post_type' ] => ucfirst ( $settings[ $prefix . 'post_type' ] ) ): array();
+		$post_types = ( ! empty( $settings[ $prefix . 'post_type' ] ) ) ? array( $settings[ $prefix . 'post_type' ] => ucfirst ( $settings[ $prefix . 'post_type' ] ) ) : array();
 
-		$taxonomies = ( ! empty( $settings[ $prefix . 'taxonomy' ] ) ) ? array( $settings[ $prefix . 'taxonomy' ] => ucfirst ( $settings[ $prefix . 'taxonomy' ] ) ): array();
+		$taxonomies = ( ! empty( $settings[ $prefix . 'taxonomy' ] ) ) ? array( $settings[ $prefix . 'taxonomy' ] => ucfirst ( $settings[ $prefix . 'taxonomy' ] ) ) : array();
 
-		$form = '<div class="cpb-form-remote-feed" data-basename="' . $base_name. '[' . $prefix . 'remote_items]' . '">';
+		$form = '<div class="cpb-form-remote-feed" data-basename="' . $base_name . '[' . $prefix . 'remote_items]">';
 
 			$url_helper = 'URL of external site. NOTE: You must input url before selecting options below.';
 
-			$form .= $this->field_remote_feed_url( $base_name. '[' . $prefix . 'site_url]', $settings[ $prefix . 'site_url' ], 'Source URL', 'cpb-select-site-url cpb-full-width' );
+			$form .= $this->field_remote_feed_url( $base_name . '[' . $prefix . 'site_url]', $settings[ $prefix . 'site_url' ], 'Source URL', 'cpb-select-site-url cpb-full-width' );
 
 			$form .= '<hr/>';
 
-			$form .= $this->select_field( $base_name. '[' . $prefix . 'post_type]', $settings[ $prefix . 'post_type' ], $post_types, 'Post Type', 'cpb-remote-select-post-type cpb-field-min-width' );
+			$form .= $this->select_field( $base_name . '[' . $prefix . 'post_type]', $settings[ $prefix . 'post_type' ], $post_types, 'Post Type', 'cpb-remote-select-post-type cpb-field-min-width' );
 
-			$form .= $this->select_field( $base_name. '[' . $prefix . 'taxonomy]', $settings[ $prefix . 'taxonomy' ], $taxonomies, 'Taxonomy', 'cpb-remote-select-taxonomy-type cpb-field-min-width' );
+			$form .= $this->select_field( $base_name . '[' . $prefix . 'taxonomy]', $settings[ $prefix . 'taxonomy' ], $taxonomies, 'Taxonomy', 'cpb-remote-select-taxonomy-type cpb-field-min-width' );
 
-			$form .= $this->text_field( $base_name. '[' . $prefix . 'terms]', $settings[ $prefix . 'terms' ], 'Category/Tag Names' );
+			$form .= $this->text_field( $base_name . '[' . $prefix . 'terms]', $settings[ $prefix . 'terms' ], 'Category/Tag Names' );
 
-			$form .= $this->text_field( $base_name. '[' . $prefix . 'count]', $settings[ $prefix . 'count' ], 'Number of Items' );
+			$form .= $this->text_field( $base_name . '[' . $prefix . 'count]', $settings[ $prefix . 'count' ], 'Number of Items' );
 
 		$form .= '</div>';
 
@@ -728,9 +726,7 @@ class Form {
 					$ca[ $prefix . 'remote_items' ][ $key ][ $sub_key ] = sanitize_text_field( $props );
 
 				} // end foreach
-
 			} // end foreach
-
 		} else {
 
 			$ca[ $prefix . 'remote_items' ] = array();
@@ -748,57 +744,57 @@ class Form {
 		);
 
 		$values	= array(
-			'crimson'         => 'Crimson',
-			'crimson-er'      => 'Crimson: Accent',
-			'white'           => 'White',
-			'gray'            => 'Gray',
-			'gray-er'         => 'Gray: Accent',
-			'gray-lightest'   => 'Gray: Lightest',
-			'gray-lightly'    => 'Gray: Lightly',
-			'gray-lighter'    => 'Gray: Lighter',
-			'gray-light'      => 'Gray: Light',
-			'gray-dark'       => 'Gray: Dark',
-			'gray-darker'     => 'Gray: Darker',
-			'gray-darkest'    => 'Gray: Darkest',
-			'green'           => 'Green',
-			'green-er'        => 'Green: Accent',
-			'green-lightest'  => 'Green: Lightest',
-			'green-lightly'   => 'Green: Lightly',
-			'green-lighter'   => 'Green: Lighter',
-			'green-light'     => 'Green: Light',
-			'green-dark'      => 'Green: Dark',
-			'green-darker'    => 'Green: Darker',
-			'green-darkest'   => 'Green: Darkest',
-			'orange'          => 'Orange',
-			'orange-er'       => 'Orange: Accent',
-			'orange-lightest' => 'Orange: Lightest',
-			'orange-lightly'  => 'Orange: Lightly',
-			'orange-lighter'  => 'Orange: Lighter',
-			'orange-light'    => 'Orange: Light',
-			'orange-dark'     => 'Orange: Dark',
-			'orange-darker'   => 'Orange: Darker',
-			'orange-darkest'  => 'Orange: Darkest',
-			'blue'            => 'Blue',
-			'blue-er'         => 'Blue: Accent',
-			'blue-lightest'   => 'Blue: Lightest',
-			'blue-lightly'    => 'Blue: Lightly',
-			'blue-lighter'    => 'Blue: Lighter',
-			'blue-light'      => 'Blue: Light',
-			'blue-dark'       => 'Blue: Dark',
-			'blue-darker'     => 'Blue: Darker',
-			'blue-darkest'    => 'Blue: Darkest',
-			'yellow'          => 'Yellow',
-			'yellow-er'       => 'Yellow: Accent',
-			'yellow-lightest' => 'Yellow: Lightest',
-			'yellow-lightly'  => 'Yellow: Lightly',
-			'yellow-lighter'  => 'Yellow: Lighter',
-			'yellow-light'    => 'Yellow: Light',
-			'yellow-dark'     => 'Yellow: Dark',
-			'yellow-darker'   => 'Yellow: Darker',
-			'yellow-darkest'  => 'Yellow: Darkest',
+			'crimson'			=> 'Crimson',
+			'crimson-er'		=> 'Crimson: Accent',
+			'white'           	=> 'White',
+			'gray'            	=> 'Gray',
+			'gray-er'         	=> 'Gray: Accent',
+			'gray-lightest'   	=> 'Gray: Lightest',
+			'gray-lightly'    	=> 'Gray: Lightly',
+			'gray-lighter'    	=> 'Gray: Lighter',
+			'gray-light'      	=> 'Gray: Light',
+			'gray-dark'       	=> 'Gray: Dark',
+			'gray-darker'    	=> 'Gray: Darker',
+			'gray-darkest'   	=> 'Gray: Darkest',
+			'green'           	=> 'Green',
+			'green-er'       	=> 'Green: Accent',
+			'green-lightest'  	=> 'Green: Lightest',
+			'green-lightly'  	=> 'Green: Lightly',
+			'green-lighter'   	=> 'Green: Lighter',
+			'green-light'     	=> 'Green: Light',
+			'green-dark'      	=> 'Green: Dark',
+			'green-darker'    	=> 'Green: Darker',
+			'green-darkest'   	=> 'Green: Darkest',
+			'orange'          	=> 'Orange',
+			'orange-er'       	=> 'Orange: Accent',
+			'orange-lightest' 	=> 'Orange: Lightest',
+			'orange-lightly'  	=> 'Orange: Lightly',
+			'orange-lighter'  	=> 'Orange: Lighter',
+			'orange-light'    	=> 'Orange: Light',
+			'orange-dark'     	=> 'Orange: Dark',
+			'orange-darker'   	=> 'Orange: Darker',
+			'orange-darkest'  	=> 'Orange: Darkest',
+			'blue'            	=> 'Blue',
+			'blue-er'         	=> 'Blue: Accent',
+			'blue-lightest'   	=> 'Blue: Lightest',
+			'blue-lightly'    	=> 'Blue: Lightly',
+			'blue-lighter'    	=> 'Blue: Lighter',
+			'blue-light'      	=> 'Blue: Light',
+			'blue-dark'       	=> 'Blue: Dark',
+			'blue-darker'     	=> 'Blue: Darker',
+			'blue-darkest'    	=> 'Blue: Darkest',
+			'yellow'          	=> 'Yellow',
+			'yellow-er'       	=> 'Yellow: Accent',
+			'yellow-lightest' 	=> 'Yellow: Lightest',
+			'yellow-lightly'  	=> 'Yellow: Lightly',
+			'yellow-lighter'  	=> 'Yellow: Lighter',
+			'yellow-light'    	=> 'Yellow: Light',
+			'yellow-dark'     	=> 'Yellow: Dark',
+			'yellow-darker'   	=> 'Yellow: Darker',
+			'yellow-darkest'  	=> 'Yellow: Darkest',
 		);
 
-		switch( $subset ) {
+		switch ( $subset ) {
 
 			default:
 				$colors = array_merge( $colors, $values );
@@ -813,10 +809,10 @@ class Form {
 	public function get_padding() {
 
 		$values	= array(
-			'pad-ends'   => 'Pad ends',
-			'pad-top'    => 'Pad top',
-			'pad-bottom' => 'Pad bottom',
-			''           => 'No padding',
+			'pad-ends'   	=> 'Pad ends',
+			'pad-top'    	=> 'Pad top',
+			'pad-bottom' 	=> 'Pad bottom',
+			''           	=> 'No padding',
 		);
 
 		return $values;
@@ -837,12 +833,12 @@ class Form {
 	public function get_header_tags( $include_empty = false ) {
 
 		$tags = array(
-			'h2'     => 'H2',
-			'h3'     => 'H3',
-			'h4'     => 'H4',
-			'h5'     => 'H5',
-			'strong' => 'Bold',
-			'span'   => 'None',
+			'h2'     	=> 'H2',
+			'h3'     	=> 'H3',
+			'h4'     	=> 'H4',
+			'h5'     	=> 'H5',
+			'strong' 	=> 'Bold',
+			'span'   	=> 'None',
 		);
 
 		if ( $include_empty ) {
@@ -857,7 +853,7 @@ class Form {
 
 	public function get_post_types( $add_any = true, $exclude = true ) {
 
-		$exclude_types = array( 'revision','nav_menu_item','attachment' );
+		$exclude_types = array( 'revision', 'nav_menu_item', 'attachment' );
 
 		if ( $exclude && ! is_array( $exclude ) ) {
 
@@ -875,7 +871,11 @@ class Form {
 
 		foreach ( $p_types as $type ) {
 
-			if ( is_array( $exclude ) && in_array( $type, $exclude ) ) continue;
+			if ( is_array( $exclude ) && in_array( $type, $exclude ) ) {
+
+				continue;
+
+			} // End if
 
 			$post_types[ $type ] = ucfirst( $type );
 
@@ -889,7 +889,7 @@ class Form {
 
 		$tax = array(
 			'category' => 'Category',
-			'post_tag' => 'Tag'
+			'post_tag' => 'Tag',
 		);
 
 		return $tax;
@@ -899,7 +899,7 @@ class Form {
 
 	public function get_unique_id( $name ) {
 
-		$id = str_replace( array( '[',']' ), '_', $name ) . '_' . rand( 0, 1000000 );
+		$id = str_replace( array( '[', ']' ), '_', $name ) . '_' . rand( 0, 1000000 );
 
 		return $id;
 
