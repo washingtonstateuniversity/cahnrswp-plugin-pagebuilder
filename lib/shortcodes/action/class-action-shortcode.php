@@ -7,7 +7,7 @@ if ( ! defined( 'WPINC' ) ) {
 
 /*
 * @desc Class to handle Action Shortcode
-* @since 3.0.0 
+* @since 3.0.0
 */
 class Action {
 
@@ -39,15 +39,15 @@ class Action {
 
         \add_shortcode( 'action', array( $this, 'get_rendered_shortcode' ) );
 
-        cpb_register_shortcode( 
-            'action', 
+        cpb_register_shortcode(
+            'action',
             $args = array(
                 'form_callback'         => array( $this, 'get_shortcode_form' ),
                 'label'                 => 'Action Button', // Label of the item
                 'render_callback'       => array( $this, 'get_rendered_shortcode' ), // Callback to render shortcode
                 'default_atts'          => $this->default_settings,
                 'in_column'             => true, // Allow in column
-            ) 
+            )
         );
 
     } // End register_shortcode
@@ -66,7 +66,7 @@ class Action {
 
         $html = '';
 
-        // Check default settings 
+        // Check default settings
         $atts = \shortcode_atts( $this->default_settings, $atts, 'action' );
 
         $class_array = array( 'cpb-action-button', 'cpb-action-button-item' );

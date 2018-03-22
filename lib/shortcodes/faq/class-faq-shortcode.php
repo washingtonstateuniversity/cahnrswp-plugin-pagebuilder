@@ -7,7 +7,7 @@ if ( ! defined( 'WPINC' ) ) {
 
 /*
 * @desc Class to handle FAQ Shortcode
-* @since 3.0.0 
+* @since 3.0.0
 */
 class FAQ_Shortcode {
 
@@ -36,8 +36,8 @@ class FAQ_Shortcode {
 
         \add_shortcode( 'faq', array( $this, 'get_rendered_shortcode' ) );
 
-        cpb_register_shortcode( 
-            'faq', 
+        cpb_register_shortcode(
+            'faq',
             $args = array(
                 'form_callback'         => array( $this, 'get_shortcode_form' ),
                 'label'                 => 'FAQ', // Label of the item
@@ -45,7 +45,7 @@ class FAQ_Shortcode {
                 'default_atts'          => $this->default_settings,
                 'in_column'             => true, // Allow in column
                 'uses_wp_editor'        => true, // Uses WP Editor
-            ) 
+            )
         );
 
     } // End register_shortcode
@@ -64,7 +64,7 @@ class FAQ_Shortcode {
 
         $html = '';
 
-        // Check default settings 
+        // Check default settings
         $atts = \shortcode_atts( $this->default_settings, $atts, 'faq' );
 
         $tag = $atts['tag'];
@@ -97,9 +97,9 @@ class FAQ_Shortcode {
 
         $cpb_form = cpb_get_form_class();
 
-        $html = $cpb_form->text_field( cpb_get_input_name( $id, true, 'title' ), $settings['title'], 'Title' ); 
+        $html = $cpb_form->text_field( cpb_get_input_name( $id, true, 'title' ), $settings['title'], 'Title' );
 
-		$html .= $cpb_form->select_field( cpb_get_input_name( $id, true, 'tag' ), $settings['tag'], $cpb_form->get_header_tags( true ), 'Tag Type' ); 
+		$html .= $cpb_form->select_field( cpb_get_input_name( $id, true, 'tag' ), $settings['tag'], $cpb_form->get_header_tags( true ), 'Tag Type' );
 
 		ob_start();
 
@@ -107,11 +107,11 @@ class FAQ_Shortcode {
 
 		$html .= ob_get_clean();
 
-		$adv = $cpb_form->select_field( 
-			cpb_get_input_name( $id, true, 'textcolor' ), 
-			$settings['textcolor'], 
-			$cpb_form->get_wsu_colors(), 
-			'Text Color' 
+		$adv = $cpb_form->select_field(
+			cpb_get_input_name( $id, true, 'textcolor' ),
+			$settings['textcolor'],
+			$cpb_form->get_wsu_colors(),
+			'Text Color'
 			);
 
 		return array( 'Basic' => $html, 'Advanced' => $adv );

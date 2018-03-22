@@ -404,6 +404,7 @@ class Form {
 			$html .= '<br /><span class=".cpb-helper-text">' . $text . '</span>';
 
 		} // End if
+	
 
 		return $this->wrap_field( $html, $class, 'checkbox' );
 
@@ -541,7 +542,7 @@ class Form {
 
 			$html .= $this->hidden_field( $base_name . '[' . $prefix . 'img_id]', $settings[ $prefix . 'img_id' ], 'cpb-add-media-id' );
 
-		$html .= '</div>'; 
+		$html .= '</div>';
 
 		return $html;
 
@@ -550,10 +551,10 @@ class Form {
 	public function get_form_local_query( $base_name, $settings, $prefix = '' ) {
 
 		$order = array(
-			''		=> 'Not Set',
-			'date'	=> 'Date',
-			'rand'	=> 'Random',
-			'title'	=> 'Title',
+			''      => 'Not Set',
+			'date'  => 'Date',
+			'rand'  => 'Random',
+			'title' => 'Title',
 		);
 
 		if ( empty( $settings[ $prefix . 'post_type' ] ) ) {
@@ -742,55 +743,55 @@ class Form {
 			'' => 'None',
 		);
 
-		$values	= array(
-			'crimson'=> 'Crimson',
-			'crimson-er'	=> 'Crimson: Accent',
-			'white'	=> 'White',
-			'gray'	=> 'Gray',
-			'gray-er'	=> 'Gray: Accent',
-			'gray-lightest'	=> 'Gray: Lightest',
-			'gray-lightly'	=> 'Gray: Lightly',
-			'gray-lighter'	=> 'Gray: Lighter',
-			'gray-light'	=> 'Gray: Light',
-			'gray-dark'	=> 'Gray: Dark',
-			'gray-darker'	=> 'Gray: Darker',
-			'gray-darkest'	=> 'Gray: Darkest',
-			'green'	=> 'Green',
-			'green-er'	=> 'Green: Accent',
-			'green-lightest'	=> 'Green: Lightest',
-			'green-lightly'	=> 'Green: Lightly',
-			'green-lighter'	=> 'Green: Lighter',
-			'green-light'	=> 'Green: Light',
-			'green-dark'	=> 'Green: Dark',
-			'green-darker'	=> 'Green: Darker',
-			'green-darkest'	=> 'Green: Darkest',
-			'orange'	=> 'Orange',
-			'orange-er'	=> 'Orange: Accent',
-			'orange-lightest'	=> 'Orange: Lightest',
-			'orange-lightly'	=> 'Orange: Lightly',
-			'orange-lighter'	=> 'Orange: Lighter',
-			'orange-light'	=> 'Orange: Light',
-			'orange-dark'	=> 'Orange: Dark',
-			'orange-darker'	=> 'Orange: Darker',
-			'orange-darkest'	=> 'Orange: Darkest',
-			'blue' 	=> 'Blue',
-			'blue-er' 	=> 'Blue: Accent',
-			'blue-lightest'	=> 'Blue: Lightest',
-			'blue-lightly'	=> 'Blue: Lightly',
-			'blue-lighter'	=> 'Blue: Lighter',
-			'blue-light'=> 'Blue: Light',
-			'blue-dark'       		=> 'Blue: Dark',
-			'blue-darker'     		=> 'Blue: Darker',
-			'blue-darkest'    		=> 'Blue: Darkest',
-			'yellow'          		=> 'Yellow',
-			'yellow-er'       		=> 'Yellow: Accent',
-			'yellow-lightest' 		=> 'Yellow: Lightest',
-			'yellow-lightly'  		=> 'Yellow: Lightly',
-			'yellow-lighter'  		=> 'Yellow: Lighter',
-			'yellow-light'    		=> 'Yellow: Light',
-			'yellow-dark'     		=> 'Yellow: Dark',
-			'yellow-darker'   		=> 'Yellow: Darker',
-			'yellow-darkest'  		=> 'Yellow: Darkest',
+        $values	= array(
+			'crimson'         => 'Crimson',
+			'crimson-er'      => 'Crimson: Accent',
+			'white'           => 'White',
+			'gray'            => 'Gray',
+			'gray-er'         => 'Gray: Accent',
+			'gray-lightest'   => 'Gray: Lightest',
+			'gray-lightly'    => 'Gray: Lightly',
+			'gray-lighter'    => 'Gray: Lighter',
+			'gray-light'      => 'Gray: Light',
+			'gray-dark'       => 'Gray: Dark',
+			'gray-darker'     => 'Gray: Darker',
+			'gray-darkest'    => 'Gray: Darkest',
+			'green'           => 'Green',
+			'green-er'        => 'Green: Accent',
+			'green-lightest'  => 'Green: Lightest',
+			'green-lightly'   => 'Green: Lightly',
+			'green-lighter'   => 'Green: Lighter',
+			'green-light'     => 'Green: Light',
+			'green-dark'      => 'Green: Dark',
+			'green-darker'    => 'Green: Darker',
+			'green-darkest'   => 'Green: Darkest',
+			'orange'          => 'Orange',
+			'orange-er'       => 'Orange: Accent',
+			'orange-lightest' => 'Orange: Lightest',
+			'orange-lightly'  => 'Orange: Lightly',
+			'orange-lighter'  => 'Orange: Lighter',
+			'orange-light'    => 'Orange: Light',
+			'orange-dark'     => 'Orange: Dark',
+			'orange-darker'   => 'Orange: Darker',
+			'orange-darkest'  => 'Orange: Darkest',
+			'blue'            => 'Blue',
+			'blue-er'         => 'Blue: Accent',
+			'blue-lightest'   => 'Blue: Lightest',
+			'blue-lightly'    => 'Blue: Lightly',
+			'blue-lighter'    => 'Blue: Lighter',
+			'blue-light'      => 'Blue: Light',
+			'blue-dark'       => 'Blue: Dark',
+			'blue-darker'     => 'Blue: Darker',
+			'blue-darkest'    => 'Blue: Darkest',
+			'yellow'          => 'Yellow',
+			'yellow-er'       => 'Yellow: Accent',
+			'yellow-lightest' => 'Yellow: Lightest',
+			'yellow-lightly'  => 'Yellow: Lightly',
+			'yellow-lighter'  => 'Yellow: Lighter',
+			'yellow-light'    => 'Yellow: Light',
+			'yellow-dark'     => 'Yellow: Dark',
+			'yellow-darker'   => 'Yellow: Darker',
+			'yellow-darkest'  => 'Yellow: Darkest',
 		);
 
 		switch ( $subset ) {
@@ -808,10 +809,10 @@ class Form {
 	public function get_padding() {
 
 		$values	= array(
-			'pad-ends'   		=> 'Pad ends',
-			'pad-top'    		=> 'Pad top',
-			'pad-bottom' 		=> 'Pad bottom',
-			''           		=> 'No padding',
+            'pad-ends'   => 'Pad ends',
+            'pad-top'    => 'Pad top',
+            'pad-bottom' => 'Pad bottom',
+            ''           => 'No padding',
 		);
 
 		return $values;
@@ -821,8 +822,8 @@ class Form {
 	public function get_gutters() {
 
 		$values	= array(
-			'gutter'     	=> 'On',
-			'gutterless' 	=> 'Off',
+			'gutter'        => 'On',
+			'gutterless'    => 'Off',
 		);
 
 		return $values;
@@ -832,12 +833,12 @@ class Form {
 	public function get_header_tags( $include_empty = false ) {
 
 		$tags = array(
-			'h2'     		=> 'H2',
-			'h3'     		=> 'H3',
-			'h4'     		=> 'H4',
-			'h5'     		=> 'H5',
-			'strong' 		=> 'Bold',
-			'span'   		=> 'None',
+			'h2'     => 'H2',
+			'h3'     => 'H3',
+			'h4'     => 'H4',
+			'h5'     => 'H5',
+			'strong' => 'Bold',
+			'span'   => 'None',
 		);
 
 		if ( $include_empty ) {

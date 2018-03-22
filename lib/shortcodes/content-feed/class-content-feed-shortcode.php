@@ -7,7 +7,7 @@ if ( ! defined( 'WPINC' ) ) {
 
 /*
 * @desc Class to handle Content Feed Shortcode
-* @since 3.0.0 
+* @since 3.0.0
 */
 class Content_Feed_Shortcode {
 
@@ -45,15 +45,15 @@ class Content_Feed_Shortcode {
 
         \add_shortcode( 'content_feed', array( $this, 'get_rendered_shortcode' ) );
 
-        cpb_register_shortcode( 
-            'content_feed', 
+        cpb_register_shortcode(
+            'content_feed',
             $args = array(
                 'form_callback'         => array( $this, 'get_shortcode_form' ),
                 'label'                 => 'Content Feed', // Label of the item
                 'render_callback'       => array( $this, 'get_rendered_shortcode' ), // Callback to render shortcode
                 'default_atts'          => $this->default_settings,
                 'in_column'             => true, // Allow in column
-            ) 
+            )
         );
 
     } // End register_shortcode
@@ -72,7 +72,7 @@ class Content_Feed_Shortcode {
 
         $html = '';
 
-        // Check default settings 
+        // Check default settings
         $atts = \shortcode_atts( $this->default_settings, $atts, 'content_feed' );
 
         $post_items = array();
@@ -87,14 +87,14 @@ class Content_Feed_Shortcode {
 
 			} // end switch
 
-        } // end if 
+        } // end if
 
         switch( $atts['display'] ) {
 
 			case 'accordion':
 				$html .= $this->get_accordion_display( $post_items, $atts );
 				break;
-			case 'list': 
+			case 'list':
 				$html .= $this->get_list_display( $post_items, $atts );
 
         } // End switch
@@ -208,9 +208,9 @@ class Content_Feed_Shortcode {
 
         $tags = $cpb_form->get_header_tags();
 
-        $display = $cpb_form->select_field( cpb_get_input_name( $id, true, 'display' ), $settings['display'], $displays, 'Display As' ); 
+        $display = $cpb_form->select_field( cpb_get_input_name( $id, true, 'display' ), $settings['display'], $displays, 'Display As' );
 
-        $display .= $cpb_form->select_field( cpb_get_input_name( $id, true, 'tag' ), $settings['tag'], $tags, 'Tag Type' ); 
+        $display .= $cpb_form->select_field( cpb_get_input_name( $id, true, 'tag' ), $settings['tag'], $tags, 'Tag Type' );
 
         $display .= '<hr/>';
 
@@ -222,7 +222,7 @@ class Content_Feed_Shortcode {
 
         $display .= $cpb_form->checkbox_field( cpb_get_input_name( $id, true, 'as_lightbox' ), 1, $settings['as_lightbox'], 'Display Lightbox' );
 
-        $adv = $cpb_form->text_field( cpb_get_input_name( $id, true, 'csshook' ), $settings['csshook'], 'CSS Hook' ); 
+        $adv = $cpb_form->text_field( cpb_get_input_name( $id, true, 'csshook' ), $settings['csshook'], 'CSS Hook' );
 
         return array( 'Source' => $html, 'Display' => $display, 'Advanced' => $adv );
 

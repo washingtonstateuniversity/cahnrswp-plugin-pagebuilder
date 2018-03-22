@@ -7,7 +7,7 @@ if ( ! defined( 'WPINC' ) ) {
 
 /*
 * @desc Class to handle Slideshow Shortcode
-* @since 3.0.0 
+* @since 3.0.0
 */
 class Slideshow_Shortcode {
 
@@ -35,8 +35,8 @@ class Slideshow_Shortcode {
 
         \add_shortcode( 'slideshow', array( $this, 'get_rendered_shortcode' ) );
 
-        cpb_register_shortcode( 
-            'slideshow', 
+        cpb_register_shortcode(
+            'slideshow',
             $args = array(
                 'form_callback'         => array( $this, 'get_shortcode_form' ),
                 'editor_callback'       => array( $this, 'get_shortcode_editor' ), // Callback to render form
@@ -46,7 +46,7 @@ class Slideshow_Shortcode {
                 'render_callback'       => array( $this, 'get_rendered_shortcode' ), // Callback to render shortcode
                 'default_atts'          => $this->default_settings,
                 'in_column'             => true, // Allow in column
-            ) 
+            )
         );
 
     } // End register_shortcode
@@ -65,7 +65,7 @@ class Slideshow_Shortcode {
 
         $html = '';
 
-        // Check default settings 
+        // Check default settings
         $atts = \shortcode_atts( $this->default_settings, $atts, 'slideshow' );
 
         global $cpb_slideshow;
@@ -106,7 +106,7 @@ class Slideshow_Shortcode {
 			'college' => 'College'
 		);
 
-		$html = $cpb_form->text_field( cpb_get_input_name( $id, true, 'title' ), $settings['title'], 'Title' ); 
+		$html = $cpb_form->text_field( cpb_get_input_name( $id, true, 'title' ), $settings['title'], 'Title' );
 
 		$html .= $cpb_form->select_field( cpb_get_input_name( $id, true, 'display_type' ), $settings['display_type'], $displays, 'Display Type' );
 
@@ -157,7 +157,7 @@ class Slideshow_Shortcode {
         // Get the html
         $html = \ob_get_clean();
 
-        return $html; 
+        return $html;
 
     } // End get_shortcode_form
 

@@ -7,7 +7,7 @@ if ( ! defined( 'WPINC' ) ) {
 
 /*
 * @desc Class to Editor
-* @since 3.0.0 
+* @since 3.0.0
 */
 class Editor {
 
@@ -171,7 +171,7 @@ class Editor {
 
 			foreach ( $content_shortcodes_flat as $index => $shortcode ) {
 
-				$form_html .= cpb_get_editor_form_html( $shortcode ); 
+				$form_html .= cpb_get_editor_form_html( $shortcode );
 
 			} // End foreach
 
@@ -187,7 +187,7 @@ class Editor {
 
 				$text_shortcode['form_classes'] = array( 'cpb-blank-editor' );
 
-				$empty_editors .= cpb_get_editor_form_html( $text_shortcode ); 
+				$empty_editors .= cpb_get_editor_form_html( $text_shortcode );
 
 			} // end for
 

@@ -167,8 +167,8 @@ class Query {
 	protected function get_local_image_array( $post_id, $settings ) {
 
 		$image_array = array(
-			'alt' 	=> '',
-			'src' 	=> '',
+			'alt' => '',
+			'src' => '',
 		);
 
 		$img_id = \get_post_thumbnail_id( $post_id );
@@ -267,7 +267,6 @@ class Query {
 						//var_dump( $json['featured_image']['attachment_meta']['sizes'] );
 
 					} // end if
-
 				} // end if
 			} // end foreach
 		} // end if
@@ -288,7 +287,7 @@ class Query {
 
 		if ( ! empty( $settings[ $prefix . 'site_url' ] ) ) {
 
-			$query = $this->get_query_args_remote( $settings, $prefix = '' );
+			$query = $this->get_query_args_remote( $settings, '' );
 
 			if ( $query ) {
 
@@ -300,11 +299,11 @@ class Query {
 
 			} // End if
 
-			$response = \wp_remote_get( $url ) ;
+			$response = \wp_remote_get( $url );
 
 			if ( ! is_wp_error( $response ) ) {
 
-				$body = \wp_remote_retrieve_body($response);
+				$body = \wp_remote_retrieve_body( $response );
 
 				$json = \json_decode( $body, true );
 
@@ -332,7 +331,7 @@ class Query {
 
 						}
 
-						if ( ! empty( $json_item['post_images'])) {
+						if ( ! empty( $json_item['post_images'] ) ) {
 
 							$item['img'] = $json_item['post_images']['full'];
 
@@ -349,18 +348,15 @@ class Query {
 						$items[ $json_item['id'] ] = $item;
 
 					} // end foreach
-
 				} // end if
-
 			} // end if
-
 		} // end if
 
 		return $items;
 
 	} // end get_remote_items
 
-	protected function get_remote_img ( $item, $settings, $prefix = '' ) {
+	protected function get_remote_img( $item, $settings, $prefix = '' ) {
 
 		$size = ( ! empty( $settings[ $prefix . 'img_size' ] ) ) ? $settings[ $prefix . 'img_size' ] : 'medium';
 
@@ -375,12 +371,11 @@ class Query {
 				$url = $sizes[ $size ]['url'];
 
 			} // end if
-
 		} // end if
 
 		return $url;
 
-	} // eng eget_remote_img
+	} // eng get_remote_img
 
 	protected function get_query_args_remote( $settings, $prefix = '' ) {
 
@@ -394,7 +389,7 @@ class Query {
 
 		}
 
-		if ( ! empty( $settings[ $prefix . 'taxonomy' ] ) ) { 
+		if ( ! empty( $settings[ $prefix . 'taxonomy' ] ) ) {
 
 			$query[] = 'filter[taxonomy]=' . $settings[ $prefix . 'taxonomy' ];
 

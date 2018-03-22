@@ -7,7 +7,7 @@ if ( ! defined( 'WPINC' ) ) {
 
 /*
 * @desc Class to handle List Shortcode
-* @since 3.0.0 
+* @since 3.0.0
 */
 class List_Shortcode {
 
@@ -33,11 +33,11 @@ class List_Shortcode {
 
         $select_query_defautls = cpb_get_select_query_defaults();
 
-        $this->default_settings = array_merge( 
-            $this->default_settings, 
-            $local_query_defaults, 
+        $this->default_settings = array_merge(
+            $this->default_settings,
+            $local_query_defaults,
             $remote_query_defaults,
-            $select_query_defautls 
+            $select_query_defautls
         );
 
         \add_action( 'init', array( $this, 'register_shortcode' ) );
@@ -53,15 +53,15 @@ class List_Shortcode {
 
         \add_shortcode( 'list', array( $this, 'get_rendered_shortcode' ) );
 
-        cpb_register_shortcode( 
-            'list', 
+        cpb_register_shortcode(
+            'list',
             $args = array(
                 'form_callback'         => array( $this, 'get_shortcode_form' ),
                 'label'                 => 'Post/Page List', // Label of the item
                 'render_callback'       => array( $this, 'get_rendered_shortcode' ), // Callback to render shortcode
                 'default_atts'          => $this->default_settings,
                 'in_column'             => true, // Allow in column
-            ) 
+            )
         );
 
     } // End register_shortcode
@@ -80,7 +80,7 @@ class List_Shortcode {
 
         $html = '';
 
-        // Check default settings 
+        // Check default settings
         $atts = \shortcode_atts( $this->default_settings, $atts, 'list' );
 
         $post_items = array();

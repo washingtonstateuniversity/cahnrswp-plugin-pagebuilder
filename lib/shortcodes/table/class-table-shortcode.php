@@ -7,7 +7,7 @@ if ( ! defined( 'WPINC' ) ) {
 
 /*
 * @desc Class to handle Table Shortcode
-* @since 3.0.0 
+* @since 3.0.0
 */
 class Table_Shortcode {
 
@@ -37,15 +37,15 @@ class Table_Shortcode {
 
         \add_shortcode( 'cpbtable', array( $this, 'get_rendered_shortcode' ) );
 
-        cpb_register_shortcode( 
-            'cpbtable', 
+        cpb_register_shortcode(
+            'cpbtable',
             $args = array(
                 'form_callback'         => array( $this, 'get_shortcode_form' ),
                 'label'                 => 'Table', // Label of the item
                 'render_callback'       => array( $this, 'get_rendered_shortcode' ), // Callback to render shortcode
                 'default_atts'          => $this->default_settings,
                 'in_column'             => true, // Allow in column
-            ) 
+            )
         );
 
     } // End register_shortcode
@@ -64,7 +64,7 @@ class Table_Shortcode {
 
         $html = '';
 
-        // Check default settings 
+        // Check default settings
         $atts = \shortcode_atts( $this->default_settings, $atts, 'cpbtable' );
 
         $img_src = $atts['img_src'];
@@ -107,7 +107,7 @@ class Table_Shortcode {
 
 		$form .= $cpb_form->text_field( cpb_get_input_name( $id, true, 'caption' ), $settings['caption'], 'Caption' );
 
-		return $form; 
+		return $form;
 
     } // End get_shortcode_form
 

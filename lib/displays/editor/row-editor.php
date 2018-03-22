@@ -1,5 +1,5 @@
-<?php namespace CAHNRSWP\Plugin\Pagebuilder; ?>
-<div class="cpb-item cpb-row cpb-layout-item <?php echo esc_html( $layout ); ?>" data-id="<?php echo esc_html( $id ); ?>">
+<?php namespace CAHNRSWP\Plugin\Pagebuilder;
+?><div class="cpb-item cpb-row cpb-layout-item <?php echo esc_html( $layout ); ?>" data-id="<?php echo esc_html( $id ); ?>">
     <header class="cpb-row"><?php echo wp_kses_post( $edit_button ); ?><a class="cpb-move-item-action cpb-item-title" href="#">Row | <?php echo esc_html( $layout ); ?></a><?php echo wp_kses_post( $remove_button ); ?></header>
     <div class="cpb-set-wrap">
         <div class="cpb-child-set cpb-layout-set">

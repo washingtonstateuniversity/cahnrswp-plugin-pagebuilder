@@ -7,4 +7,3 @@
         <?php echo do_shortcode( $content ); ?>
     <?php if ( ! empty( $prefix ) ) : ?></div><?php endif; ?>
  </div>
-		

@@ -1,5 +1,5 @@
-<?php namespace CAHNRSWP\Plugin\Pagebuilder; ?>
-<div id="cpb-editor-layout" class="cpb-item">
+<?php namespace CAHNRSWP\Plugin\Pagebuilder;
+?><div id="cpb-editor-layout" class="cpb-item">
     <header></header>
     <div class="cpb-child-set cpb-layout-set">
 		<?php echo $editor_content; ?>	

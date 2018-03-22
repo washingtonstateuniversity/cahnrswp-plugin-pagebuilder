@@ -1,5 +1,6 @@
-<?php namespace CAHNRSWP\Plugin\Pagebuilder; ?>
-<div id="cpb-editor">
+<?php namespace CAHNRSWP\Plugin\Pagebuilder;
+
+?><div id="cpb-editor">
     <?php echo $options_editor; ?>
     <?php echo $layout_editor; ?>
     <?php echo $form_editor; ?>

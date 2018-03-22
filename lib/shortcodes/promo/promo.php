@@ -11,11 +11,11 @@
 	<?php endif;?>
 	<?php if ( ! empty( $subtitle ) ):?>
 			<div class="cpb-subtitle-wrapper"><div class="cpb-subtitle"><?php echo $subtitle; ?></div></div>
-	<?php endif;?>				
+	<?php endif;?>
 	<?php if ( ! empty( $excerpt ) ):?>
 			<div class="cpb-copy-wrapper"><div class="cpb-copy"><?php echo $excerpt ; ?></div></div>
 	<?php  endif;?>
-	<?php if ( ! empty( $link ) ):?>	
+	<?php if ( ! empty( $link ) ):?>
 		<div class="cpb-promo-link"><a href="<?php echo $link ; ?>" >Visit <?php echo $title ; ?></a></div>
 	<?php endif;?>
 	</div>

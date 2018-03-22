@@ -7,7 +7,7 @@ if ( ! defined( 'WPINC' ) ) {
 
 /*
 * @desc Class to handle Save
-* @since 3.0.0 
+* @since 3.0.0
 */
 class Save {
 
@@ -15,7 +15,7 @@ class Save {
 
         \add_action( 'save_post', array( $this, 'do_save_layout' ) );
 
-    } // End 
+    } // End
 
 
     /*
@@ -117,9 +117,9 @@ class Save {
     protected function get_settings( $post_id ) {
 
         $fields = array(
-            '_cpb_excerpt'      => ( ! empty( $_POST['_cpb_excerpt'] ) ) ? sanitize_text_field( $_POST['_cpb_excerpt'] ) : '', 
-            '_cpb_pagebuilder'  => ( ! empty( $_POST['_cpb_pagebuilder'] ) ) ? sanitize_text_field( $_POST['_cpb_pagebuilder'] ) : '',   
-            '_cpb_m_excerpt'    => ( ! empty( $_POST['_cpb_m_excerpt'] ) ) ? sanitize_text_field( $_POST['_cpb_m_excerpt'] ) : '',  
+            '_cpb_excerpt'      => ( ! empty( $_POST['_cpb_excerpt'] ) ) ? sanitize_text_field( $_POST['_cpb_excerpt'] ) : '',
+            '_cpb_pagebuilder'  => ( ! empty( $_POST['_cpb_pagebuilder'] ) ) ? sanitize_text_field( $_POST['_cpb_pagebuilder'] ) : '',
+            '_cpb_m_excerpt'    => ( ! empty( $_POST['_cpb_m_excerpt'] ) ) ? sanitize_text_field( $_POST['_cpb_m_excerpt'] ) : '',
             '_cpb'              => ( ! empty( $_POST['_cpb'] ) ) ? $_POST['_cpb'] : '',  // TO DO: Sanitize array
         );
 
@@ -142,7 +142,7 @@ class Save {
         // String for the shortcode to build
         $shortcode_string = '';
 
-        // Get the set layout 
+        // Get the set layout
         $layout = sanitize_text_field( $settings['_cpb']['layout'] );
 
         // Get the nested shortcode structure for the layout
@@ -235,7 +235,7 @@ class Save {
         if ( ! empty( $shortcode['shortcode_callback'] ) ) {
 
             // Get shortcode string from callback
-            $shortcode_string = \call_user_func_array( 
+            $shortcode_string = \call_user_func_array(
                 $shortcode['shortcode_callback'],
                 array(
                     $shortcode,
@@ -243,7 +243,7 @@ class Save {
                 )
             );
 
-        } else { // no shortcode callback 
+        } else { // no shortcode callback
 
             // Start the shortcode
             $shortcode_string = '[' . $shortcode['slug'];
@@ -267,7 +267,7 @@ class Save {
             } else if ( ! empty( $shortcode['content'] ) ) { // Does the shortcode have content?
 
                 // Add the content
-                $shortcode_string .= ']' . $shortcode['content'] . '[/' . $shortcode['slug'] . ']'; 
+                $shortcode_string .= ']' . $shortcode['content'] . '[/' . $shortcode['slug'] . ']';
 
             } else {
 
@@ -438,11 +438,11 @@ class Save {
             foreach ( $to_save as $key => $value ) {
 
                 // Just some basic sanity
-                $clean_settings[ $key ] = sanitize_text_field( $value );  
+                $clean_settings[ $key ] = sanitize_text_field( $value );
 
             } // End foreach
 
-        } // End if 
+        } // End if
 
         return $clean_settings;
 

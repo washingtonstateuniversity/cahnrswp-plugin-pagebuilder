@@ -1,5 +1,5 @@
-<?php namespace CAHNRSWP\Plugin\Pagebuilder; ?>
-<div id="cpb-editor-options">
+<?php namespace CAHNRSWP\Plugin\Pagebuilder;
+?><div id="cpb-editor-options">
 	<?php foreach ( $values as $key => $value ) : ?>
 	<label class="<?php if ( $cpb === $key ) echo 'active'; ?>" for="cpb-editor-option-<?php echo esc_html( $key ); ?>">
         <?php echo esc_html( $value ); ?>

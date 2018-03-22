@@ -7,7 +7,7 @@ if ( ! defined( 'WPINC' ) ) {
 
 /*
 * @desc Class to handle Row Shortcode
-* @since 3.0.0 
+* @since 3.0.0
 */
 class Row {
 
@@ -30,7 +30,7 @@ class Row {
         'padding_left'      => '',
         'padding_right'     => '',
         'full_bleed'        => '',
-        'bg_src'            => '',	
+        'bg_src'            => '',
         'min_height'        => '',
     );
 
@@ -81,8 +81,8 @@ class Row {
 
         \add_shortcode( 'row', array( $this, 'get_rendered_shortcode' ) );
 
-        cpb_register_shortcode( 
-            'row', 
+        cpb_register_shortcode(
+            'row',
             $args = array(
                 'form_callback'         => array( $this, 'get_shortcode_form' ),
                 'sanitize_callback'     => array( $this, 'get_sanitize_shortcode_atts' ),
@@ -91,7 +91,7 @@ class Row {
                 'default_shortcode'     => 'column', // Default to this if no children
                 'default_atts'          => $this->default_settings,
                 'in_column'             => false, // Allow in column
-            ) 
+            )
         );
 
     } // End register_shortcode
@@ -119,7 +119,7 @@ class Row {
         // Resetting column index to 1 since this is a new row
         $cpb_column_i = 1;
 
-        // Check default settings 
+        // Check default settings
         $settings = \shortcode_atts( $this->default_settings, $atts, 'row' );
 
         // Set global layout
@@ -263,7 +263,7 @@ class Row {
         // Get the html
         $html = \ob_get_clean();
 
-        return $html; 
+        return $html;
 
     } // End get_shortcode_form
 
@@ -430,7 +430,7 @@ class Row {
 
 				$css = $valid[ $key ];
 
-				$style[] = $css . ':' . $value; 
+				$style[] = $css . ':' . $value;
 
 			} // end if
 

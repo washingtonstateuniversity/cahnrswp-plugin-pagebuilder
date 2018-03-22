@@ -7,7 +7,7 @@ if ( ! defined( 'WPINC' ) ) {
 
 /*
 * @desc Class to handle Promo Shortcode
-* @since 3.0.0 
+* @since 3.0.0
 */
 class Promo_Shortcode {
 
@@ -18,9 +18,9 @@ class Promo_Shortcode {
         'promo_type'        =>  '',
         'img_src'           =>  '',
         'img_id'            => '',
-        'link'              => '',		
-        'promo_title'       =>  '',		
-        'subtitle'          => '',			
+        'link'              => '',
+        'promo_title'       =>  '',
+        'subtitle'          => '',
         'excerpt'           => '',
         'columns'           => '4',
         'tag'               => 'h2',
@@ -30,8 +30,8 @@ class Promo_Shortcode {
         'unset_img'         => '0',
         'unset_link'        => '0',
         'stack_vertical'    => '0',
-        'as_lightbox'       => '0',	
-        'csshook'           => '',	
+        'as_lightbox'       => '0',
+        'csshook'           => '',
         'post_id'           => '',
         'offset'            => '',
     );
@@ -47,9 +47,9 @@ class Promo_Shortcode {
 
         $select_query_defautls = cpb_get_select_query_defaults();
 
-        $this->default_settings = array_merge( 
-            $this->default_settings, 
-            $local_query_defaults, 
+        $this->default_settings = array_merge(
+            $this->default_settings,
+            $local_query_defaults,
             $remote_query_defaults
         );
 
@@ -66,15 +66,15 @@ class Promo_Shortcode {
 
         \add_shortcode( 'promo', array( $this, 'get_rendered_shortcode' ) );
 
-        cpb_register_shortcode( 
-            'promo', 
+        cpb_register_shortcode(
+            'promo',
             $args = array(
                 'form_callback'         => array( $this, 'get_shortcode_form' ),
                 'label'                 => 'Promo', // Label of the item
                 'render_callback'       => array( $this, 'get_rendered_shortcode' ), // Callback to render shortcode
                 'default_atts'          => $this->default_settings,
                 'in_column'             => true, // Allow in column
-            ) 
+            )
         );
 
     } // End register_shortcode
@@ -93,7 +93,7 @@ class Promo_Shortcode {
 
         $html = '';
 
-        // Check default settings 
+        // Check default settings
         $atts = \shortcode_atts( $this->default_settings, $atts, 'promo' );
 
         $promo_items = array();
@@ -331,10 +331,10 @@ class Promo_Shortcode {
 
 		$tags = $cpb_form->get_header_tags();
 		unset( $tags['strong'] );
-		$display .= $cpb_form->select_field( cpb_get_input_name( $id, true, 'tag' ), $settings['tag'], $tags, 'Tag Type' ); 
+		$display .= $cpb_form->select_field( cpb_get_input_name( $id, true, 'tag' ), $settings['tag'], $tags, 'Tag Type' );
 
 		$img_ratio = array( 'spacer1x1' => 'Square', 'spacer3x4' => '3 x 4 ratio', 'spacer4x3' => '4 x 3 ratio' );
-		$display .= $cpb_form->select_field( cpb_get_input_name( $id, true, 'img_ratio' ), $settings['img_ratio'], $img_ratio, 'Image Ratio' ); 
+		$display .= $cpb_form->select_field( cpb_get_input_name( $id, true, 'img_ratio' ), $settings['img_ratio'], $img_ratio, 'Image Ratio' );
 
 		$display .= '<hr/>';
 
@@ -348,7 +348,7 @@ class Promo_Shortcode {
 
 		$display .= $cpb_form->checkbox_field( cpb_get_input_name( $id, true, 'as_lightbox' ), 1, $settings['as_lightbox'], 'Display Lightbox' );
 
-		$adv = $cpb_form->text_field( cpb_get_input_name( $id, true, 'csshook' ), $settings['csshook'], 'CSS Hook' ); 
+		$adv = $cpb_form->text_field( cpb_get_input_name( $id, true, 'csshook' ), $settings['csshook'], 'CSS Hook' );
 
 		return array( 'Source' => $html, 'Display' => $display, 'Advanced' => $adv );
 

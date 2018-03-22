@@ -7,7 +7,7 @@ if ( ! defined( 'WPINC' ) ) {
 
 /*
 * @desc Class to handle Textblock Shortcode
-* @since 3.0.0 
+* @since 3.0.0
 */
 class Textblock {
 
@@ -39,8 +39,8 @@ class Textblock {
 
         \add_shortcode( 'textblock', array( $this, 'get_rendered_shortcode' ) );
 
-        cpb_register_shortcode( 
-            'textblock', 
+        cpb_register_shortcode(
+            'textblock',
             $args = array(
                 'form_callback'         => array( $this, 'get_shortcode_form' ),
                 'sanitize_callback'     => array( $this, 'get_sanitize_shortcode_atts' ),
@@ -49,7 +49,7 @@ class Textblock {
                 'default_atts'          => $this->default_settings,
                 'in_column'             => true, // Allow in column
                 'uses_wp_editor'        => true, // Uses WP Editor
-            ) 
+            )
         );
 
     } // End register_shortcode
@@ -66,7 +66,7 @@ class Textblock {
     */
     public function get_rendered_shortcode( $atts, $content ) {
 
-        // Check default settings 
+        // Check default settings
         $settings = \shortcode_atts( $this->default_settings, $atts, 'textblock' );
 
         $content = do_shortcode( $this->get_more_content( $content, $settings ) );

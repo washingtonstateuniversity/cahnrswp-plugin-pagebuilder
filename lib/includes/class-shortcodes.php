@@ -7,7 +7,7 @@ if ( ! defined( 'WPINC' ) ) {
 
 /*
 * @desc Class to handle Shortcodes
-* @since 3.0.0 
+* @since 3.0.0
 */
 class Shortcodes {
 
@@ -26,7 +26,7 @@ class Shortcodes {
 	} // End __construct
 
 
-	/* 
+	/*
 	* @desc Add custom the_content filters to avoid abuse
 	* @since 3.0.0
 	*/
@@ -59,7 +59,7 @@ class Shortcodes {
 		} // End if
 
 		/*
-		* Shortcodes can be added via cpb_shortcode filter or 
+		* Shortcodes can be added via cpb_shortcode filter or
 		* the cpb_register_shortcode() (lib/functions/public.php)  function
 		*/
 		$pagebuilder_shortcodes = \apply_filters( 'cpb_shortcodes', $pagebuilder_shortcodes );

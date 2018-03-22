@@ -7,7 +7,7 @@ if ( ! defined( 'WPINC' ) ) {
 
 /*
 * @desc Class to handle Subtitle Shortcode
-* @since 3.0.0 
+* @since 3.0.0
 */
 class Subtitle_Shortcode {
 
@@ -40,15 +40,15 @@ class Subtitle_Shortcode {
 
         \add_shortcode( 'subtitle', array( $this, 'get_rendered_shortcode' ) );
 
-        cpb_register_shortcode( 
-            'subtitle', 
+        cpb_register_shortcode(
+            'subtitle',
             $args = array(
                 'form_callback'         => array( $this, 'get_shortcode_form' ),
                 'label'                 => 'Subtitle', // Label of the item
                 'render_callback'       => array( $this, 'get_rendered_shortcode' ), // Callback to render shortcode
                 'default_atts'          => $this->default_settings,
                 'in_column'             => true, // Allow in column
-            ) 
+            )
         );
 
     } // End register_shortcode
@@ -67,7 +67,7 @@ class Subtitle_Shortcode {
 
         $html = '';
 
-        // Check default settings 
+        // Check default settings
         $atts = \shortcode_atts( $this->default_settings, $atts, 'subtitle' );
 
 		$classes_array = array( 'cpb-subtitle' );
@@ -132,7 +132,7 @@ class Subtitle_Shortcode {
 
 		$html = $cpb_form->text_field( cpb_get_input_name( $id, true, 'title' ), $settings['title'], 'Title' );
 
-		$html .= $cpb_form->select_field( cpb_get_input_name( $id, true, 'tag' ), $settings['tag'], $cpb_form->get_header_tags(), 'Tag Type' ); 
+		$html .= $cpb_form->select_field( cpb_get_input_name( $id, true, 'tag' ), $settings['tag'], $cpb_form->get_header_tags(), 'Tag Type' );
 
 		$adv = $cpb_form->select_field( cpb_get_input_name( $id, true, 'textcolor' ), $settings['textcolor'], $cpb_form->get_wsu_colors(), 'Text Color' );
 
@@ -140,7 +140,7 @@ class Subtitle_Shortcode {
 
 		$adv .= $cpb_form->text_field( cpb_get_input_name( $id, true, 'anchor' ), $settings['anchor'], 'Anchor Name' );
 
-		$adv .= $cpb_form->text_field( cpb_get_input_name( $id, true, 'csshook' ), $settings['csshook'], 'CSS Hook' ); 
+		$adv .= $cpb_form->text_field( cpb_get_input_name( $id, true, 'csshook' ), $settings['csshook'], 'CSS Hook' );
 
 		$adv .= $cpb_form->select_field( cpb_get_input_name( $id, true, 'style' ), $settings['style'], $styles, 'Style' );
 

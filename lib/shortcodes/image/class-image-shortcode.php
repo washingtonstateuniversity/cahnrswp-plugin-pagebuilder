@@ -7,7 +7,7 @@ if ( ! defined( 'WPINC' ) ) {
 
 /*
 * @desc Class to handle Image Shortcode
-* @since 3.0.0 
+* @since 3.0.0
 */
 class Image_Shortcode {
 
@@ -37,15 +37,15 @@ class Image_Shortcode {
 
         \add_shortcode( 'image', array( $this, 'get_rendered_shortcode' ) );
 
-        cpb_register_shortcode( 
-            'image', 
+        cpb_register_shortcode(
+            'image',
             $args = array(
                 'form_callback'         => array( $this, 'get_shortcode_form' ),
                 'label'                 => 'Image', // Label of the item
                 'render_callback'       => array( $this, 'get_rendered_shortcode' ), // Callback to render shortcode
                 'default_atts'          => $this->default_settings,
                 'in_column'             => true, // Allow in column
-            ) 
+            )
         );
 
     } // End register_shortcode
@@ -64,7 +64,7 @@ class Image_Shortcode {
 
         $html = '';
 
-        // Check default settings 
+        // Check default settings
         $atts = \shortcode_atts( $this->default_settings, $atts, 'image' );
 
         if ( ! empty( $atts['img_id'] ) ) {

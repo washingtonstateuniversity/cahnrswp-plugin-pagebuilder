@@ -7,7 +7,7 @@ if ( ! defined( 'WPINC' ) ) {
 
 /*
 * @desc Class to handle Scripts
-* @since 3.0.0 
+* @since 3.0.0
 */
 class Scripts {
 
@@ -18,7 +18,7 @@ class Scripts {
 
         \add_action( 'wp_enqueue_scripts', array( $this, 'add_public_scripts' ), 10, 1 );
 
-    } // End 
+    } // End
 
 
     /*

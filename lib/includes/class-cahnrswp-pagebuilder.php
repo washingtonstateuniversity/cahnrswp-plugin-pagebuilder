@@ -7,7 +7,7 @@ if ( ! defined( 'WPINC' ) ) {
 
 /*
 * @desc Class to handle init of the plugin
-* @sicne 3.0.0 
+* @sicne 3.0.0
 */
 class CAHNRSWP_Pagebuilder {
 
@@ -36,7 +36,7 @@ class CAHNRSWP_Pagebuilder {
     } // End set_constants
 
 
-    /* 
+    /*
     * @desc Start plugin script and load admin classes
     * @since 3.0.0
     */

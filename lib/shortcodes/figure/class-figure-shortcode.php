@@ -7,7 +7,7 @@ if ( ! defined( 'WPINC' ) ) {
 
 /*
 * @desc Class to handle Figure Shortcode
-* @since 3.0.0 
+* @since 3.0.0
 */
 class Figure_Shortcode {
 
@@ -36,15 +36,15 @@ class Figure_Shortcode {
 
         \add_shortcode( 'figure', array( $this, 'get_rendered_shortcode' ) );
 
-        cpb_register_shortcode( 
-            'figure', 
+        cpb_register_shortcode(
+            'figure',
             $args = array(
                 'label'                 => 'Figure/Caption', // Label of the item
                 'render_callback'       => array( $this, 'get_rendered_shortcode' ), // Callback to render shortcode
                 'form_callback'         => array( $this, 'get_shortcode_form' ),
                 'default_atts'          => $this->default_settings,
                 'in_column'             => true, // Allow in column
-            ) 
+            )
         );
 
     } // End register_shortcode

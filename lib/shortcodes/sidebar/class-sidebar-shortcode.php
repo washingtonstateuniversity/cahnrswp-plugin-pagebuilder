@@ -7,7 +7,7 @@ if ( ! defined( 'WPINC' ) ) {
 
 /*
 * @desc Class to handle Sidebar Shortcode
-* @since 3.0.0 
+* @since 3.0.0
 */
 class Sidebar_Shortcode {
 
@@ -34,15 +34,15 @@ class Sidebar_Shortcode {
 
         \add_shortcode( 'sidebar', array( $this, 'get_rendered_shortcode' ) );
 
-        cpb_register_shortcode( 
-            'sidebar', 
+        cpb_register_shortcode(
+            'sidebar',
             $args = array(
                 'form_callback'         => array( $this, 'get_shortcode_form' ),
                 'label'                 => 'Sidebar (Widgets)', // Label of the item
                 'render_callback'       => array( $this, 'get_rendered_shortcode' ), // Callback to render shortcode
                 'default_atts'          => $this->default_settings,
                 'in_column'             => true, // Allow in column
-            ) 
+            )
         );
 
     } // End register_shortcode
@@ -61,7 +61,7 @@ class Sidebar_Shortcode {
 
         $html = '';
 
-        // Check default settings 
+        // Check default settings
         $atts = \shortcode_atts( $this->default_settings, $atts, 'sidebar' );
 
 		if ( ! empty( $atts['sidebar_id'] ) ) {

@@ -7,7 +7,7 @@ if ( ! defined( 'WPINC' ) ) {
 
 /*
 * @desc Class to handle Post Gallery Shortcode
-* @since 3.0.0 
+* @since 3.0.0
 */
 class Post_Gallery_Shortcode {
 
@@ -35,11 +35,11 @@ class Post_Gallery_Shortcode {
 
         $select_query_defautls = cpb_get_select_query_defaults();
 
-        $this->default_settings = array_merge( 
-            $this->default_settings, 
-            $local_query_defaults, 
+        $this->default_settings = array_merge(
+            $this->default_settings,
+            $local_query_defaults,
             $remote_query_defaults,
-            $select_query_defautls 
+            $select_query_defautls
         );
 
         \add_action( 'init', array( $this, 'register_shortcode' ) );
@@ -55,15 +55,15 @@ class Post_Gallery_Shortcode {
 
         \add_shortcode( 'postgallery', array( $this, 'get_rendered_shortcode' ) );
 
-        cpb_register_shortcode( 
-            'postgallery', 
+        cpb_register_shortcode(
+            'postgallery',
             $args = array(
                 'form_callback'         => array( $this, 'get_shortcode_form' ),
                 'label'                 => 'Post Gallery', // Label of the item
                 'render_callback'       => array( $this, 'get_rendered_shortcode' ), // Callback to render shortcode
                 'default_atts'          => $this->default_settings,
                 'in_column'             => true, // Allow in column
-            ) 
+            )
         );
 
     } // End register_shortcode
@@ -82,7 +82,7 @@ class Post_Gallery_Shortcode {
 
         $html = '';
 
-        // Check default settings 
+        // Check default settings
         $atts = \shortcode_atts( $this->default_settings, $atts, 'postgallery' );
 
         $post_items = array();
@@ -208,7 +208,7 @@ class Post_Gallery_Shortcode {
 
 		$tags = $cpb_form->get_header_tags();
 		unset( $tags['strong'] );
-		$display .= $cpb_form->select_field( cpb_get_input_name( $id, true, 'tag' ), $settings['tag'], $tags, 'Tag Type' ); 
+		$display .= $cpb_form->select_field( cpb_get_input_name( $id, true, 'tag' ), $settings['tag'], $tags, 'Tag Type' );
 
 		$display .= '<hr/>';
 

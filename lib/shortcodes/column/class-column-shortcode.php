@@ -7,7 +7,7 @@ if ( ! defined( 'WPINC' ) ) {
 
 /*
 * @desc Class to handle Column Shortcode
-* @since 3.0.0 
+* @since 3.0.0
 */
 class Column {
 
@@ -41,8 +41,8 @@ class Column {
 
         \add_shortcode( 'column', array( $this, 'get_rendered_shortcode' ) );
 
-        cpb_register_shortcode( 
-            'column', 
+        cpb_register_shortcode(
+            'column',
             $args = array(
                 'form_callback'         => array( $this, 'get_shortcode_form' ),
                 'sanitize_callback'     => array( $this, 'get_sanitize_shortcode_atts' ),
@@ -51,7 +51,7 @@ class Column {
                 'default_shortcode'     => 'textblock', // Default to this if no children
                 'default_atts'          => $this->default_settings,
                 'in_column'             => false, // Allow in column
-            ) 
+            )
         );
 
     } // End register_shortcode
@@ -73,7 +73,7 @@ class Column {
 
         $atts['index'] = $cpb_column_i;
 
-        // Check default settings 
+        // Check default settings
         $settings = \shortcode_atts( $this->default_settings, $atts, 'column' );
 
         // Set column classes
@@ -85,7 +85,7 @@ class Column {
         global $cpb_column_i;
 
         // Column layout global
-		global $cpb_Column_layout;  
+		global $cpb_Column_layout;
 
         // Get the style array
         $style_array = $this->get_column_style( $settings );
@@ -173,7 +173,7 @@ class Column {
         // Get the html
         $html = \ob_get_clean();
 
-        return $html; 
+        return $html;
 
     } // End get_shortcode_form
 
@@ -222,7 +222,7 @@ class Column {
 
         $index_list = explode( ',', $index_list );
 
-        $class .= ' ' . $index_list[ $settings['index'] ]; 
+        $class .= ' ' . $index_list[ $settings['index'] ];
 
 		if ( ! empty( $settings['bgcolor'] ) ) {
 
@@ -272,7 +272,7 @@ class Column {
 
 				$css = $valid[ $key ];
 
-				$style[] = $css . ':' . $value; 
+				$style[] = $css . ':' . $value;
 
 			} // end if
 

@@ -7,7 +7,7 @@ if ( ! defined( 'WPINC' ) ) {
 
 /*
 * @desc Class to handle ajax calls
-* @since 3.0.0 
+* @since 3.0.0
 */
 class AJAX {
 
@@ -18,7 +18,7 @@ class AJAX {
 
     }
 
-    /* 
+    /*
     * @desc Hanlde editor ajax calls
     * @since 3.0.0
     *
@@ -47,7 +47,8 @@ class AJAX {
 					break;
 
 				case 'search_posts':
-					break;
+                    break;
+
 				case 'remote_request':
 					break;
 
@@ -64,7 +65,7 @@ class AJAX {
     * @desc Get part from ajax request
     * @since 3.0.0
     *
-    * @return json Part 
+    * @return json Part
     */
     protected function get_part() {
 
@@ -72,7 +73,7 @@ class AJAX {
 
         if ( ! empty( $_POST['slug'] ) ) {
 
-            $slug = sanitize_text_field( $_POST['slug'] ); 
+            $slug = sanitize_text_field( $_POST['slug'] );
 
             // TO DO: Need to sanitize this - use shortcode sanitize_callback
             $settings = ( ! empty( $_POST['settings'] ) ) ? $_POST['settings'] : array();

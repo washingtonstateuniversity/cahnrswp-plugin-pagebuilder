@@ -7,7 +7,7 @@ if ( ! defined( 'WPINC' ) ) {
 
 /*
 * @desc Class to handle Video Shortcode
-* @since 3.0.0 
+* @since 3.0.0
 */
 class Video_Shortcode {
 
@@ -35,8 +35,8 @@ class Video_Shortcode {
 
         \add_shortcode( 'video', array( $this, 'get_rendered_shortcode' ) );
 
-        cpb_register_shortcode( 
-            'video', 
+        cpb_register_shortcode(
+            'video',
             $args = array(
                 'form_callback'             => array( $this, 'get_shortcode_form' ),
                 'label'                     => 'Video', // Label of the item
@@ -44,7 +44,7 @@ class Video_Shortcode {
                 'editor_render_callback'    => array( $this, 'get_editor_content' ), // Callback to render shortcode
                 'default_atts'              => $this->default_settings,
                 'in_column'                 => true, // Allow in column
-            ) 
+            )
         );
 
     } // End register_shortcode
@@ -63,7 +63,7 @@ class Video_Shortcode {
 
         $html = '';
 
-        // Check default settings 
+        // Check default settings
         $atts = \shortcode_atts( $this->default_settings, $atts, 'video' );
 
 
@@ -143,7 +143,7 @@ class Video_Shortcode {
     /*
 	 * @desc - Extracts video id from url
      * @since 3.0.0
-     * 
+     *
 	 * @return string - The video id.
 	*/
 	protected function get_video_id_from_url( $url ) {
