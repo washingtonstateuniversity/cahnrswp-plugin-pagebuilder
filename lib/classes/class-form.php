@@ -222,11 +222,11 @@ class Form {
 
 			} // end if
 
-			$selected = ( in_array( $op_value, $values ) ) ? 'selected="selected"' : '';
+			$selected = ( in_array( $op_value, $value, true ) ) ? 'selected="selected"' : '';
 
 			$option_html = '<option value="' . $op_value . '" ' . $selected . ' >' . $op_label . '</option>';
 
-			if ( in_array( $op_value, $values ) ) {
+			if ( in_array( $op_value, $values, true ) ) {
 
 				$options_fields_selected[] = $option_html;
 
@@ -391,7 +391,7 @@ class Form {
 
 		$id = str_replace( array( '[', ']' ), '_', $name ) . '_' . rand( 0, 1000000 );
 
-		$html = '<input type="checkbox" id="' . $id . '" name="' . $name . '" value="' . $value . '" ' . checked( $value, $current_value, false )  . ' />';
+		$html = '<input type="checkbox" id="' . $id . '" name="' . $name . '" value="' . $value . '" ' . checked( $value, $current_value, false ) . ' />';
 
 		if ( $label ) {
 
@@ -481,7 +481,7 @@ class Form {
 
 		foreach ( $forms as $form ) {
 
-			if ( $form['value'] == $form['selected'] ) {
+			if ( $form['value'] === $form['selected'] ) {
 
 				$disabled = '';
 
@@ -550,10 +550,10 @@ class Form {
 	public function get_form_local_query( $base_name, $settings, $prefix = '' ) {
 
 		$order = array(
-			'' 		=> 'Not Set',
-			'date'	=> 'Date',
-			'rand' 	=> 'Random',
-			'title' => 'Title',
+			'' 			=> 'Not Set',
+			'date'		=> 'Date',
+			'rand' 		=> 'Random',
+			'title' 	=> 'Title',
 		);
 
 		if ( empty( $settings[ $prefix . 'post_type' ] ) ) {
@@ -631,7 +631,7 @@ class Form {
 
 		$url_helper = 'URL of the site to search';
 
-		$form = '<div class="cpb-form-search-posts" data-basename="' . $base_name . '[' . $prefix . 'remote_items]' . '">';
+		$form = '<div class="cpb-form-search-posts" data-basename="' . $base_name . '[' . $prefix . 'remote_items]">';
 
 		$form .= $this->text_field( $base_name . '[' . $prefix . 'site_url]', $settings[ $prefix . 'site_url' ], 'Search Site', 'cpb-select-site-url cpb-full-width', $url_helper );
 
@@ -645,7 +645,7 @@ class Form {
 
 			foreach ( $settings[ $prefix . 'remote_items' ] as $post_id => $result ) {
 
-				$form .= '<li class="cpb-form-item">' . $result['title' ] . '<a href="#" class="cpb-form-item-remove"></a><input type="text" name="' .$base_name. '[' . $prefix . 'remote_items][' . $post_id . '][id]" value="' . $result['id'] . '" />';
+				$form .= '<li class="cpb-form-item">' . $result['title'] . '<a href="#" class="cpb-form-item-remove"></a><input type="text" name="' . $base_name . '[' . $prefix . 'remote_items][' . $post_id . '][id]" value="' . $result['id'] . '" />';
 
 				$form .= '<input type="text" name="' . $base_name . '[' . $prefix . 'remote_items][' . $post_id . '][site]" value="' . $result['site'] . '" />';
 
@@ -654,7 +654,6 @@ class Form {
 				$form .= '</li>';
 
 			} // end foreach
-
 		} // end if
 
 		$form .= '</ul>';
@@ -669,9 +668,9 @@ class Form {
 
 	public function get_form_remote_feed( $base_name, $settings, $prefix = '' ) {
 
-		$post_types = ( ! empty( $settings[ $prefix . 'post_type' ] ) ) ? array( $settings[ $prefix . 'post_type' ] => ucfirst ( $settings[ $prefix . 'post_type' ] ) ) : array();
+		$post_types = ( ! empty( $settings[ $prefix . 'post_type' ] ) ) ? array( $settings[ $prefix . 'post_type' ] => ucfirst( $settings[ $prefix . 'post_type' ] ) ) : array();
 
-		$taxonomies = ( ! empty( $settings[ $prefix . 'taxonomy' ] ) ) ? array( $settings[ $prefix . 'taxonomy' ] => ucfirst ( $settings[ $prefix . 'taxonomy' ] ) ) : array();
+		$taxonomies = ( ! empty( $settings[ $prefix . 'taxonomy' ] ) ) ? array( $settings[ $prefix . 'taxonomy' ] => ucfirst( $settings[ $prefix . 'taxonomy' ] ) ) : array();
 
 		$form = '<div class="cpb-form-remote-feed" data-basename="' . $base_name . '[' . $prefix . 'remote_items]">';
 
@@ -744,54 +743,54 @@ class Form {
 		);
 
 		$values	= array(
-			'crimson'			=> 'Crimson',
-			'crimson-er'		=> 'Crimson: Accent',
-			'white'           	=> 'White',
-			'gray'            	=> 'Gray',
-			'gray-er'         	=> 'Gray: Accent',
-			'gray-lightest'   	=> 'Gray: Lightest',
-			'gray-lightly'    	=> 'Gray: Lightly',
-			'gray-lighter'    	=> 'Gray: Lighter',
-			'gray-light'      	=> 'Gray: Light',
-			'gray-dark'       	=> 'Gray: Dark',
-			'gray-darker'    	=> 'Gray: Darker',
-			'gray-darkest'   	=> 'Gray: Darkest',
-			'green'           	=> 'Green',
-			'green-er'       	=> 'Green: Accent',
-			'green-lightest'  	=> 'Green: Lightest',
-			'green-lightly'  	=> 'Green: Lightly',
-			'green-lighter'   	=> 'Green: Lighter',
-			'green-light'     	=> 'Green: Light',
-			'green-dark'      	=> 'Green: Dark',
-			'green-darker'    	=> 'Green: Darker',
-			'green-darkest'   	=> 'Green: Darkest',
-			'orange'          	=> 'Orange',
-			'orange-er'       	=> 'Orange: Accent',
-			'orange-lightest' 	=> 'Orange: Lightest',
-			'orange-lightly'  	=> 'Orange: Lightly',
-			'orange-lighter'  	=> 'Orange: Lighter',
-			'orange-light'    	=> 'Orange: Light',
-			'orange-dark'     	=> 'Orange: Dark',
-			'orange-darker'   	=> 'Orange: Darker',
-			'orange-darkest'  	=> 'Orange: Darkest',
-			'blue'            	=> 'Blue',
-			'blue-er'         	=> 'Blue: Accent',
-			'blue-lightest'   	=> 'Blue: Lightest',
-			'blue-lightly'    	=> 'Blue: Lightly',
-			'blue-lighter'    	=> 'Blue: Lighter',
-			'blue-light'      	=> 'Blue: Light',
-			'blue-dark'       	=> 'Blue: Dark',
-			'blue-darker'     	=> 'Blue: Darker',
-			'blue-darkest'    	=> 'Blue: Darkest',
-			'yellow'          	=> 'Yellow',
-			'yellow-er'       	=> 'Yellow: Accent',
-			'yellow-lightest' 	=> 'Yellow: Lightest',
-			'yellow-lightly'  	=> 'Yellow: Lightly',
-			'yellow-lighter'  	=> 'Yellow: Lighter',
-			'yellow-light'    	=> 'Yellow: Light',
-			'yellow-dark'     	=> 'Yellow: Dark',
-			'yellow-darker'   	=> 'Yellow: Darker',
-			'yellow-darkest'  	=> 'Yellow: Darkest',
+			'crimson'				=> 'Crimson',
+			'crimson-er'			=> 'Crimson: Accent',
+			'white'           		=> 'White',
+			'gray'            		=> 'Gray',
+			'gray-er'         		=> 'Gray: Accent',
+			'gray-lightest'   		=> 'Gray: Lightest',
+			'gray-lightly'    		=> 'Gray: Lightly',
+			'gray-lighter'    		=> 'Gray: Lighter',
+			'gray-light'      		=> 'Gray: Light',
+			'gray-dark'       		=> 'Gray: Dark',
+			'gray-darker'    		=> 'Gray: Darker',
+			'gray-darkest'   		=> 'Gray: Darkest',
+			'green'           		=> 'Green',
+			'green-er'       		=> 'Green: Accent',
+			'green-lightest'  		=> 'Green: Lightest',
+			'green-lightly'  		=> 'Green: Lightly',
+			'green-lighter'   		=> 'Green: Lighter',
+			'green-light'     		=> 'Green: Light',
+			'green-dark'      		=> 'Green: Dark',
+			'green-darker'    		=> 'Green: Darker',
+			'green-darkest'   		=> 'Green: Darkest',
+			'orange'          		=> 'Orange',
+			'orange-er'       		=> 'Orange: Accent',
+			'orange-lightest' 		=> 'Orange: Lightest',
+			'orange-lightly'  		=> 'Orange: Lightly',
+			'orange-lighter'  		=> 'Orange: Lighter',
+			'orange-light'    		=> 'Orange: Light',
+			'orange-dark'     		=> 'Orange: Dark',
+			'orange-darker'   		=> 'Orange: Darker',
+			'orange-darkest'  		=> 'Orange: Darkest',
+			'blue'            		=> 'Blue',
+			'blue-er'         		=> 'Blue: Accent',
+			'blue-lightest'   		=> 'Blue: Lightest',
+			'blue-lightly'    		=> 'Blue: Lightly',
+			'blue-lighter'    		=> 'Blue: Lighter',
+			'blue-light'      		=> 'Blue: Light',
+			'blue-dark'       		=> 'Blue: Dark',
+			'blue-darker'     		=> 'Blue: Darker',
+			'blue-darkest'    		=> 'Blue: Darkest',
+			'yellow'          		=> 'Yellow',
+			'yellow-er'       		=> 'Yellow: Accent',
+			'yellow-lightest' 		=> 'Yellow: Lightest',
+			'yellow-lightly'  		=> 'Yellow: Lightly',
+			'yellow-lighter'  		=> 'Yellow: Lighter',
+			'yellow-light'    		=> 'Yellow: Light',
+			'yellow-dark'     		=> 'Yellow: Dark',
+			'yellow-darker'   		=> 'Yellow: Darker',
+			'yellow-darkest'  		=> 'Yellow: Darkest',
 		);
 
 		switch ( $subset ) {
@@ -809,10 +808,10 @@ class Form {
 	public function get_padding() {
 
 		$values	= array(
-			'pad-ends'   	=> 'Pad ends',
-			'pad-top'    	=> 'Pad top',
-			'pad-bottom' 	=> 'Pad bottom',
-			''           	=> 'No padding',
+			'pad-ends'   		=> 'Pad ends',
+			'pad-top'    		=> 'Pad top',
+			'pad-bottom' 		=> 'Pad bottom',
+			''           		=> 'No padding',
 		);
 
 		return $values;
@@ -822,8 +821,8 @@ class Form {
 	public function get_gutters() {
 
 		$values	= array(
-			'gutter'     => 'On',
-			'gutterless' => 'Off',
+			'gutter'     	=> 'On',
+			'gutterless' 	=> 'Off',
 		);
 
 		return $values;
@@ -833,12 +832,12 @@ class Form {
 	public function get_header_tags( $include_empty = false ) {
 
 		$tags = array(
-			'h2'     	=> 'H2',
-			'h3'     	=> 'H3',
-			'h4'     	=> 'H4',
-			'h5'     	=> 'H5',
-			'strong' 	=> 'Bold',
-			'span'   	=> 'None',
+			'h2'     		=> 'H2',
+			'h3'     		=> 'H3',
+			'h4'     		=> 'H4',
+			'h5'     		=> 'H5',
+			'strong' 		=> 'Bold',
+			'span'   		=> 'None',
 		);
 
 		if ( $include_empty ) {
@@ -871,7 +870,7 @@ class Form {
 
 		foreach ( $p_types as $type ) {
 
-			if ( is_array( $exclude ) && in_array( $type, $exclude ) ) {
+			if ( is_array( $exclude ) && in_array( $type, $exclude, true ) ) {
 
 				continue;
 
