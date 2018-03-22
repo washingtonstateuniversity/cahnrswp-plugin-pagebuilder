@@ -394,7 +394,7 @@ class Query {
 
 		}
 
-		if ( ! empty( $settings[ $prefix . 'taxonomy' ] ) ) {
+		if ( ! empty( $settings[ $prefix . 'taxonomy' ] ) ) { 
 
 			$query[] = 'filter[taxonomy]=' . $settings[ $prefix . 'taxonomy' ];
 

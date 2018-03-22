@@ -541,7 +541,7 @@ class Form {
 
 			$html .= $this->hidden_field( $base_name . '[' . $prefix . 'img_id]', $settings[ $prefix . 'img_id' ], 'cpb-add-media-id' );
 
-		$html .= '</div>';
+		$html .= '</div>'; 
 
 		return $html;
 
