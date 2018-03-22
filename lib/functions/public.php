@@ -273,7 +273,6 @@ function cpb_get_rendered_shortcode( $slug, $atts, $content, $render_children = 
 			foreach ( $shortcode['children'] as $index => $child_shortcode ) {
 
 				$inner_content .= cpb_get_rendered_shortcode( $child_shortcode['slug'], $child_shortcode['atts'], $shortcode['content'], $render_children, $is_editor );
-				
 			} // End foreach
 		} // End if
 	} // End if
@@ -295,8 +294,8 @@ function cpb_get_rendered_shortcode( $slug, $atts, $content, $render_children = 
 			$html .= \call_user_func_array(
 				$shortcode['render_callback'],
 				array(
-				$shortcode['atts'],
-				$inner_content,
+					$shortcode['atts'],
+					$inner_content,
 				)
 			);
 
@@ -305,7 +304,6 @@ function cpb_get_rendered_shortcode( $slug, $atts, $content, $render_children = 
 			$html .= '';
 
 		} // End if
-
 	} // End if
 
 	//return 'test';
@@ -336,17 +334,17 @@ function cpb_get_editor_html( $shortcodes, $is_recursive = true ) {
 
 		foreach ( $shortcodes as $shortcode ) {
 
-		if ( $shortcode['editor_callback'] ) {
+			if ( $shortcode['editor_callback'] ) {
 
-			$html .= call_user_func_array(
-				$shortcode['editor_callback'],
-				array(
-					$shortcode['id'],
-					$shortcode['atts'],
-					$shortcode['content'],
-					$shortcode['children'],
-				)
-			);
+				$html .= call_user_func_array(
+					$shortcode['editor_callback'],
+					array(
+						$shortcode['id'],
+						$shortcode['atts'],
+						$shortcode['content'],
+						$shortcode['children'],
+					)
+				);
 
 			} else {
 
@@ -368,7 +366,7 @@ function cpb_get_editor_html( $shortcodes, $is_recursive = true ) {
 				// If it uses the WP Editor
 				if ( $shortcode['uses_wp_editor'] ) {
 
-				$classes[] = ' cpb-wp-editor';
+					$classes[] = ' cpb-wp-editor';
 
 				} // End if
 
@@ -517,7 +515,11 @@ function cpb_get_input_name( $id, $is_setting = true, $name = false, $prefix = f
 
 	$input_name = '_cpb[' . $id . ']';
 
-	if ( $is_setting ) $input_name .= '[settings]';
+	if ( $is_setting ) {
+
+		$input_name .= '[settings]';
+
+	} // End if
 
 	if ( $name ) {
 
@@ -795,12 +797,12 @@ function cpb_get_registered_layouts( $as_slug_label = false ) {
 		'single' => array(
 			'name'    => 'Single Column',
 			'columns' => array( 1 ),
-			'img'     => cpb_get_plugin_url( 'lib/images/column-single-icon.gif' )
+			'img'     => cpb_get_plugin_url( 'lib/images/column-single-icon.gif' ),
 		),
 		'halves' => array(
 			'name'    => 'Two Column',
 			'columns' => array( 0.5, 0.5 ),
-			'img'     => cpb_get_plugin_url( 'lib/images/column-halves-icon.gif' )
+			'img'     => cpb_get_plugin_url( 'lib/images/column-halves-icon.gif' ),
 		),
 		'side-right' => array(
 			'name'    => 'Two Column: Sidebar Right',
@@ -1012,7 +1014,7 @@ function cpb_check_advanced_display( $post_item, $settings, $prefix = '' ) {
 
 	if ( ! empty( $post_item['excerpt'] ) && ! empty( $settings[ $prefix . 'excerpt_length' ] ) ) {
 
-		switch( $settings[ $prefix . 'excerpt_length' ] ) {
+		switch ( $settings[ $prefix . 'excerpt_length' ] ) {
 
 			case 'short':
 				$words = 15;
@@ -1031,7 +1033,7 @@ function cpb_check_advanced_display( $post_item, $settings, $prefix = '' ) {
 
 		if ( $words ) {
 
-		$post_item['excerpt'] = wp_trim_words( $post_item['excerpt'], $words, '...' );
+			$post_item['excerpt'] = wp_trim_words( $post_item['excerpt'], $words, '...' );
 
 		} // end if
 	} // end if
@@ -1054,17 +1056,17 @@ function cpb_get_public_posts( $post_types = array(), $as_options = false, $incl
 	if ( empty( $post_types ) ) {
 
 		$post_type_args = array(
-				'publicly_queryable' => true,
-			);
+			'publicly_queryable' => true,
+		);
 
 		$post_types = \get_post_types( $post_type_args );
 
 	} // end if
 
 	$args = array(
-		'post_status' 		=> 'publish',
-		'posts_per_page'	=> -1,
-		'post_type'			=> $post_types,
+		'post_status'     => 'publish',
+		'posts_per_page'  => -1,
+		'post_type'       => $post_types,
 	);
 
 	$posts_array = get_posts( $args );

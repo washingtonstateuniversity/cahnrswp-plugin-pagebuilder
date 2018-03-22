@@ -32,11 +32,11 @@ class Shortcodes {
 	*/
 	protected function add_content_filter() {
 
-		add_filter( 'cpb_the_content', 'wptexturize'        );
-		add_filter( 'cpb_the_content', 'convert_smilies'    );
-		add_filter( 'cpb_the_content', 'convert_chars'      );
-		add_filter( 'cpb_the_content', 'wpautop'            );
-		add_filter( 'cpb_the_content', 'shortcode_unautop'  );
+		add_filter( 'cpb_the_content', 'wptexturize' );
+		add_filter( 'cpb_the_content', 'convert_smilies' );
+		add_filter( 'cpb_the_content', 'convert_chars' );
+		add_filter( 'cpb_the_content', 'wpautop' );
+		add_filter( 'cpb_the_content', 'shortcode_unautop' );
 		add_filter( 'cpb_the_content', 'prepend_attachment' );
 
 	} // End add_content_filter

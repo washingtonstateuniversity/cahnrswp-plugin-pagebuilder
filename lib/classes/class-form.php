@@ -404,7 +404,6 @@ class Form {
 			$html .= '<br /><span class=".cpb-helper-text">' . $text . '</span>';
 
 		} // End if
-	
 
 		return $this->wrap_field( $html, $class, 'checkbox' );
 
@@ -743,7 +742,7 @@ class Form {
 			'' => 'None',
 		);
 
-        $values	= array(
+		$values	= array(
 			'crimson'         => 'Crimson',
 			'crimson-er'      => 'Crimson: Accent',
 			'white'           => 'White',
@@ -809,10 +808,10 @@ class Form {
 	public function get_padding() {
 
 		$values	= array(
-            'pad-ends'   => 'Pad ends',
-            'pad-top'    => 'Pad top',
-            'pad-bottom' => 'Pad bottom',
-            ''           => 'No padding',
+			'pad-ends'   => 'Pad ends',
+			'pad-top'    => 'Pad top',
+			'pad-bottom' => 'Pad bottom',
+		   ''           => 'No padding',
 		);
 
 		return $values;

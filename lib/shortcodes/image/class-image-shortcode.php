@@ -11,105 +11,105 @@ if ( ! defined( 'WPINC' ) ) {
 */
 class Image_Shortcode {
 
-    protected $prefix = '';
+	protected $prefix = '';
 
-    // @var array $default_settings Array of default settings
-    protected $default_settings = array(
-        'img_src'   => '',
-        'img_id'    => '',
-        'url'       => '',
-        'alt'       => '',
-    );
+	// @var array $default_settings Array of default settings
+	protected $default_settings = array(
+		'img_src'   => '',
+		'img_id'    => '',
+		'url'       => '',
+		'alt'       => '',
+	);
 
 
 	public function __construct() {
 
-        \add_action( 'init', array( $this, 'register_shortcode' ) );
+		\add_action( 'init', array( $this, 'register_shortcode' ) );
 
-    } // End __construct
-
-
-    /*
-    * @desc Register image shortcode
-    * @since 3.0.0
-    */
-    public function register_shortcode() {
-
-        \add_shortcode( 'image', array( $this, 'get_rendered_shortcode' ) );
-
-        cpb_register_shortcode(
-            'image',
-            $args = array(
-                'form_callback'         => array( $this, 'get_shortcode_form' ),
-                'label'                 => 'Image', // Label of the item
-                'render_callback'       => array( $this, 'get_rendered_shortcode' ), // Callback to render shortcode
-                'default_atts'          => $this->default_settings,
-                'in_column'             => true, // Allow in column
-            )
-        );
-
-    } // End register_shortcode
+	} // End __construct
 
 
-    /*
-    * @desc Render the shortcode
-    * @since 3.0.0
-    *
-    * @param array $atts Shortcode attributes
-    * @param string $content Shortcode content
-    *
-    * @return string HTML shortcode output
-    */
-    public function get_rendered_shortcode( $atts, $content ) {
+	/*
+	* @desc Register image shortcode
+	* @since 3.0.0
+	*/
+	public function register_shortcode() {
 
-        $html = '';
+		\add_shortcode( 'image', array( $this, 'get_rendered_shortcode' ) );
 
-        // Check default settings
-        $atts = \shortcode_atts( $this->default_settings, $atts, 'image' );
+		cpb_register_shortcode(
+			'image',
+			$args = array(
+				'form_callback'         => array( $this, 'get_shortcode_form' ),
+				'label'                 => 'Image', // Label of the item
+				'render_callback'       => array( $this, 'get_rendered_shortcode' ), // Callback to render shortcode
+				'default_atts'          => $this->default_settings,
+				'in_column'             => true, // Allow in column
+			)
+		);
 
-        if ( ! empty( $atts['img_id'] ) ) {
+	} // End register_shortcode
 
-            $image_array = cpb_get_image_properties_array( $atts['img_id'] );
 
-            if ( ! empty( $atts['alt'] ) ) {
+	/*
+	* @desc Render the shortcode
+	* @since 3.0.0
+	*
+	* @param array $atts Shortcode attributes
+	* @param string $content Shortcode content
+	*
+	* @return string HTML shortcode output
+	*/
+	public function get_rendered_shortcode( $atts, $content ) {
 
-                $image_array['alt'] = $atts['alt'];
+		$html = '';
 
-            } // End if
+		// Check default settings
+		$atts = \shortcode_atts( $this->default_settings, $atts, 'image' );
 
-            $url = $atts['url'];
+		if ( ! empty( $atts['img_id'] ) ) {
 
-            $img_src = $atts['img_src'];
+			$image_array = cpb_get_image_properties_array( $atts['img_id'] );
 
-            $alt = $image_array['alt'];
+			if ( ! empty( $atts['alt'] ) ) {
 
-            ob_start();
+				$image_array['alt'] = $atts['alt'];
 
-			include  __DIR__ . '/image.php';
+			} // End if
+
+			$url = $atts['url'];
+
+			$img_src = $atts['img_src'];
+
+			$alt = $image_array['alt'];
+
+			ob_start();
+
+			include __DIR__ . '/image.php';
 
 			$html .= ob_get_clean();
 
-        } // End if
+		} // End if
 
-        return $html;
+		return $html;
 
-    } // End get_rendered_shortcode
+	} // End get_rendered_shortcode
 
 
-    /*
-    * @desc Get HTML for shortcode form
-    * @since 3.0.0
-    *
-    * @param array $atts Shortcode attributes
-    * @param string $content Shortcode content
-    *
-    * @return string HTML shortcode form output
-    */
-    public function get_shortcode_form( $id, $settings, $content ) {
+	/*
+	* @desc Get HTML for shortcode form
+	* @since 3.0.0
+	*
+	* @param array $atts Shortcode attributes
+	* @param string $content Shortcode content
+	*
+	* @return string HTML shortcode form output
+	*/
+	public function get_shortcode_form( $id, $settings, $content ) {
 
-        $cpb_form = cpb_get_form_class();
+		$cpb_form = cpb_get_form_class();
 
-        $form = $cpb_form->insert_media( cpb_get_input_name( $id, true ), $settings );
+		$form = $cpb_form->insert_media( cpb_get_input_name( $id, true ), $settings );
 
 		$form .= '<hr/>';
 
@@ -117,9 +117,9 @@ class Image_Shortcode {
 
 		$form .= $cpb_form->text_field( cpb_get_input_name( $id, true, 'url' ), $settings['url'], 'Link Image To:' );
 
-        return $form;
+		return $form;
 
-    } // End get_shortcode_form
+	} // End get_shortcode_form
 
 } // End Image
 

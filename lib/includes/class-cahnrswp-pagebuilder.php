@@ -12,63 +12,63 @@ if ( ! defined( 'WPINC' ) ) {
 class CAHNRSWP_Pagebuilder {
 
 
-    public function __construct() {
+	public function __construct() {
 
-        $this->set_constants();
+		$this->set_constants();
 
-        $this->init_plugin();
+		$this->init_plugin();
 
-    } // End construct
-
-
-    /*
-    * @desc Set constants use in plugin funcitons. These should never be used direclty
-    * @since 3.0.0
-    */
-    protected function set_constants() {
-
-        // Set plugin path constant
-        \define( 'CWPPAGEBUILDERPATH', dirname( dirname( __DIR__ ) ) );
-
-        // Set plugin url cinstant
-        \define( 'CWPPAGEBUILDERURL', \plugin_dir_url( dirname( dirname(__FILE__ ) ) ) );
-
-    } // End set_constants
+	} // End construct
 
 
-    /*
-    * @desc Start plugin script and load admin classes
-    * @since 3.0.0
-    */
-    protected function init_plugin() {
+	/*
+	* @desc Set constants use in plugin funcitons. These should never be used direclty
+	* @since 3.0.0
+	*/
+	protected function set_constants() {
 
-        // Include global functions
-        include CWPPAGEBUILDERPATH . '/lib/functions/public.php';
+		// Set plugin path constant
+		\define( 'CWPPAGEBUILDERPATH', dirname( dirname( __DIR__ ) ) );
 
-        // Check if is WP admin
-        if ( \is_admin() ) {
+		// Set plugin url cinstant
+		\define( 'CWPPAGEBUILDERURL', \plugin_dir_url( dirname( dirname( __FILE__ ) ) ) );
 
-            // Add Pagebuilder Editor
-            include cpb_get_plugin_path( '/lib/includes/class-editor.php' );
+	} // End set_constants
 
-            // Add Pagebuilder Save
-            include cpb_get_plugin_path( '/lib/includes/class-save.php' );
 
-        } // End if
+	/*
+	* @desc Start plugin script and load admin classes
+	* @since 3.0.0
+	*/
+	protected function init_plugin() {
 
-        // Add Pagebuilder shortcodes
-        include cpb_get_plugin_path( '/lib/includes/class-shortcodes.php' );
+		// Include global functions
+		include CWPPAGEBUILDERPATH . '/lib/functions/public.php';
 
-        // Add CSS & JS
-        include cpb_get_plugin_path( '/lib/includes/class-scripts.php' );
+		// Check if is WP admin
+		if ( \is_admin() ) {
 
-        // Add AJAX support
-        include cpb_get_plugin_path( '/lib/includes/class-ajax.php' );
+			// Add Pagebuilder Editor
+			include cpb_get_plugin_path( '/lib/includes/class-editor.php' );
 
-        // Add Customizer Script
-        //include cpb_get_plugin_path( 'includes/class-customizer.php' );
+			// Add Pagebuilder Save
+			include cpb_get_plugin_path( '/lib/includes/class-save.php' );
 
-    } // End init_plugin
+		} // End if
+
+		// Add Pagebuilder shortcodes
+		include cpb_get_plugin_path( '/lib/includes/class-shortcodes.php' );
+
+		// Add CSS & JS
+		include cpb_get_plugin_path( '/lib/includes/class-scripts.php' );
+
+		// Add AJAX support
+		include cpb_get_plugin_path( '/lib/includes/class-ajax.php' );
+
+		// Add Customizer Script
+		//include cpb_get_plugin_path( 'includes/class-customizer.php' );
+
+	} // End init_plugin
 
 
 } // End CAHNRSWP_Pagebuilder

@@ -11,58 +11,58 @@ if ( ! defined( 'WPINC' ) ) {
 */
 class Sidebar_Shortcode {
 
-    protected $prefix = '';
+	protected $prefix = '';
 
-    // @var array $default_settings Array of default settings
-    protected $default_settings = array(
-        'sidebar_id' => '',
-    );
+	// @var array $default_settings Array of default settings
+	protected $default_settings = array(
+		'sidebar_id' => '',
+	);
 
 
 	public function __construct() {
 
-        \add_action( 'init', array( $this, 'register_shortcode' ) );
+		\add_action( 'init', array( $this, 'register_shortcode' ) );
 
-    } // End __construct
-
-
-    /*
-    * @desc Register sidebar shortcode
-    * @since 3.0.0
-    */
-    public function register_shortcode() {
-
-        \add_shortcode( 'sidebar', array( $this, 'get_rendered_shortcode' ) );
-
-        cpb_register_shortcode(
-            'sidebar',
-            $args = array(
-                'form_callback'         => array( $this, 'get_shortcode_form' ),
-                'label'                 => 'Sidebar (Widgets)', // Label of the item
-                'render_callback'       => array( $this, 'get_rendered_shortcode' ), // Callback to render shortcode
-                'default_atts'          => $this->default_settings,
-                'in_column'             => true, // Allow in column
-            )
-        );
-
-    } // End register_shortcode
+	} // End __construct
 
 
-    /*
-    * @desc Render the shortcode
-    * @since 3.0.0
-    *
-    * @param array $atts Shortcode attributes
-    * @param string $content Shortcode content
-    *
-    * @return string HTML shortcode output
-    */
-    public function get_rendered_shortcode( $atts, $content ) {
+	/*
+	* @desc Register sidebar shortcode
+	* @since 3.0.0
+	*/
+	public function register_shortcode() {
 
-        $html = '';
+		\add_shortcode( 'sidebar', array( $this, 'get_rendered_shortcode' ) );
 
-        // Check default settings
-        $atts = \shortcode_atts( $this->default_settings, $atts, 'sidebar' );
+		cpb_register_shortcode(
+			'sidebar',
+			$args = array(
+				'form_callback'         => array( $this, 'get_shortcode_form' ),
+				'label'                 => 'Sidebar (Widgets)', // Label of the item
+				'render_callback'       => array( $this, 'get_rendered_shortcode' ), // Callback to render shortcode
+				'default_atts'          => $this->default_settings,
+				'in_column'             => true, // Allow in column
+			)
+		);
+
+	} // End register_shortcode
+
+
+	/*
+	* @desc Render the shortcode
+	* @since 3.0.0
+	*
+	* @param array $atts Shortcode attributes
+	* @param string $content Shortcode content
+	*
+	* @return string HTML shortcode output
+	*/
+	public function get_rendered_shortcode( $atts, $content ) {
+
+		$html = '';
+
+		// Check default settings
+		$atts = \shortcode_atts( $this->default_settings, $atts, 'sidebar' );
 
 		if ( ! empty( $atts['sidebar_id'] ) ) {
 
@@ -78,23 +78,23 @@ class Sidebar_Shortcode {
 
 		return $html;
 
-    } // End get_rendered_shortcode
+	} // End get_rendered_shortcode
 
 
-    /*
-    * @desc Get HTML for shortcode form
-    * @since 3.0.0
-    *
-    * @param array $atts Shortcode attributes
-    * @param string $content Shortcode content
-    *
-    * @return string HTML shortcode form output
-    */
-    public function get_shortcode_form( $id, $settings, $content ) {
+	/*
+	* @desc Get HTML for shortcode form
+	* @since 3.0.0
+	*
+	* @param array $atts Shortcode attributes
+	* @param string $content Shortcode content
+	*
+	* @return string HTML shortcode form output
+	*/
+	public function get_shortcode_form( $id, $settings, $content ) {
 
-        $cpb_form = cpb_get_form_class();
+		$cpb_form = cpb_get_form_class();
 
-        global $wp_registered_sidebars;
+		global $wp_registered_sidebars;
 
 		$sidebars = array( 0 => 'None' );
 
@@ -108,7 +108,7 @@ class Sidebar_Shortcode {
 
 		return $form;
 
-    } // End get_shortcode_form
+	} // End get_shortcode_form
 
 } // End Sidebar
 

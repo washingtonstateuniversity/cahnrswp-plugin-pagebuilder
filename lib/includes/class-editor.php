@@ -83,7 +83,10 @@ class Editor {
 	*/
 	protected function get_options_editor( $post ) {
 
-		$values = array( 'default' => 'Default Editor', 'builder' => 'Layout Editor' );
+		$values = array( 
+			'default' => 'Default Editor', 
+			'builder' => 'Layout Editor', 
+		);
 
 		$cpb = \get_post_meta( $post->ID, '_cpb_pagebuilder', true );
 
@@ -100,12 +103,6 @@ class Editor {
 			$cpb = 'builder';
 
 		}; // End if
-
-		if ( 'builder' === $cpb ) {
-
-			//\remove_post_type_support( $post->post_type, 'editor' );
-
-		} // End if
 
 		\ob_start();
 
@@ -174,7 +171,6 @@ class Editor {
 				$form_html .= cpb_get_editor_form_html( $shortcode );
 
 			} // End foreach
-
 		} // End if
 
 		$text_editors = array( 'textblock' );
@@ -190,7 +186,6 @@ class Editor {
 				$empty_editors .= cpb_get_editor_form_html( $text_shortcode );
 
 			} // end for
-
 		} // end foreach
 
 		\ob_start();

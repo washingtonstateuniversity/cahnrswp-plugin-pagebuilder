@@ -11,161 +11,159 @@ if ( ! defined( 'WPINC' ) ) {
 */
 class Row {
 
-    protected $prefix = '';
+	protected $prefix = '';
 
-    // @var array $default_settings Array of default settings
-    protected $default_settings = array(
-        'title'             => '',
-        'title_tag'         => 'h2',
-        'layout'            => 'single',
-        'bgcolor'           => '',
-        'textcolor'         => '',
-        'padding'           => 'pad-bottom',
-        'max_width'         => '',
-        'gutter'            => 'gutter',
-        'csshook'           => '',
-        'anchor'            => '',
-        'padding_top'       => '',
-        'padding_bottom'    => '',
-        'padding_left'      => '',
-        'padding_right'     => '',
-        'full_bleed'        => '',
-        'bg_src'            => '',
-        'min_height'        => '',
-    );
+	// @var array $default_settings Array of default settings
+	protected $default_settings = array(
+		'title'             => '',
+		'title_tag'         => 'h2',
+		'layout'            => 'single',
+		'bgcolor'           => '',
+		'textcolor'         => '',
+		'padding'           => 'pad-bottom',
+		'max_width'         => '',
+		'gutter'            => 'gutter',
+		'csshook'           => '',
+		'anchor'            => '',
+		'padding_top'       => '',
+		'padding_bottom'    => '',
+		'padding_left'      => '',
+		'padding_right'     => '',
+		'full_bleed'        => '',
+		'bg_src'            => '',
+		'min_height'        => '',
+	);
 
 
 	public function __construct() {
 
-        \add_action( 'init', array( $this, 'register_shortcode' ) );
+		\add_action( 'init', array( $this, 'register_shortcode' ) );
 
-        \add_filter( 'cpb_get_shortcode', array( $this, 'check_shortcode_columns' ), 10, 2 );
+		\add_filter( 'cpb_get_shortcode', array( $this, 'check_shortcode_columns' ), 10, 2 );
 
-    } // End __construct
-
-
-    public function check_shortcode_columns( $shortcode, $get_children ) {
-
-        if ( ( 'row' === $shortcode['slug'] ) && $get_children ) {
-
-            $layout = cpb_get_registered_layout( $shortcode['atts']['layout'] );
-
-            $children = $shortcode['children'];
-
-            if ( count( $layout['columns'] ) > count( $children ) ) {
-
-                $dif = count( $layout['columns'] ) - count( $children );
-
-                while( $dif > 0 ) {
-
-                    $shortcode['children'][] = cpb_get_shortcode( 'column' );
-
-                    $dif--;
-
-                } // End while
-
-            } // End if
-
-        } // End if
-
-        return $shortcode;
-
-    } // End check_shortcode_columns
+	} // End __construct
 
 
-    /*
-    * @desc Register row shortcode
-    * @since 3.0.0
-    */
-    public function register_shortcode() {
+	public function check_shortcode_columns( $shortcode, $get_children ) {
 
-        \add_shortcode( 'row', array( $this, 'get_rendered_shortcode' ) );
+		if ( ( 'row' === $shortcode['slug'] ) && $get_children ) {
 
-        cpb_register_shortcode(
-            'row',
-            $args = array(
-                'form_callback'         => array( $this, 'get_shortcode_form' ),
-                'sanitize_callback'     => array( $this, 'get_sanitize_shortcode_atts' ),
-                'editor_callback'       => array( $this, 'get_shortcode_editor' ), // Callback to render form
-                'allowed_children'      => array( 'column' ), // Allowed child shortcodes
-                'default_shortcode'     => 'column', // Default to this if no children
-                'default_atts'          => $this->default_settings,
-                'in_column'             => false, // Allow in column
-            )
-        );
+			$layout = cpb_get_registered_layout( $shortcode['atts']['layout'] );
 
-    } // End register_shortcode
+			$children = $shortcode['children'];
+
+			if ( count( $layout['columns'] ) > count( $children ) ) {
+
+				$dif = count( $layout['columns'] ) - count( $children );
+
+				while ( $dif > 0 ) {
+
+					$shortcode['children'][] = cpb_get_shortcode( 'column' );
+
+					$dif--;
+
+				} // End while
+			} // End if
+		} // End if
+
+		return $shortcode;
+
+	} // End check_shortcode_columns
 
 
-    /*
-    * @desc Render the shortcode
-    * @since 3.0.0
-    *
-    * @param array $atts Shortcode attributes
-    * @param string $content Shortcode content
-    *
-    * @return string HTML shortcode output
-    */
-    public function get_rendered_shortcode( $atts, $content ) {
+	/*
+	* @desc Register row shortcode
+	* @since 3.0.0
+	*/
+	public function register_shortcode() {
 
-        $prefix = '';
+		\add_shortcode( 'row', array( $this, 'get_rendered_shortcode' ) );
 
-        // Column index global - This is used in the column shortcode to get column number.
-        global $cpb_column_i;
+		cpb_register_shortcode(
+			'row',
+			$args = array(
+				'form_callback'         => array( $this, 'get_shortcode_form' ),
+				'sanitize_callback'     => array( $this, 'get_sanitize_shortcode_atts' ),
+				'editor_callback'       => array( $this, 'get_shortcode_editor' ), // Callback to render form
+				'allowed_children'      => array( 'column' ), // Allowed child shortcodes
+				'default_shortcode'     => 'column', // Default to this if no children
+				'default_atts'          => $this->default_settings,
+				'in_column'             => false, // Allow in column
+			)
+		);
 
-        // Row layout global
+	} // End register_shortcode
+
+
+	/*
+	* @desc Render the shortcode
+	* @since 3.0.0
+	*
+	* @param array $atts Shortcode attributes
+	* @param string $content Shortcode content
+	*
+	* @return string HTML shortcode output
+	*/
+	public function get_rendered_shortcode( $atts, $content ) {
+
+		$prefix = '';
+
+		// Column index global - This is used in the column shortcode to get column number.
+		global $cpb_column_i;
+
+		// Row layout global
 		global $cpb_row_layout;
 
-        // Resetting column index to 1 since this is a new row
-        $cpb_column_i = 1;
+		// Resetting column index to 1 since this is a new row
+		$cpb_column_i = 1;
 
-        // Check default settings
-        $settings = \shortcode_atts( $this->default_settings, $atts, 'row' );
+		// Check default settings
+		$settings = \shortcode_atts( $this->default_settings, $atts, 'row' );
 
-        // Set global layout
-        $cpb_row_layout = $settings['layout'];
+		// Set global layout
+		$cpb_row_layout = $settings['layout'];
 
-        // Set row classes
-        $classes = $this->get_row_classes( $settings );
+		// Set row classes
+		$classes = $this->get_row_classes( $settings );
 
-        // Get the style array
-        $style_array = $this->get_row_style( $settings );
+		// Get the style array
+		$style_array = $this->get_row_style( $settings );
 
-        // Implode the array to string
-        $style = implode( ';', $style_array );
+		// Implode the array to string
+		$style = implode( ';', $style_array );
 
-        $prefix = $this->prefix;
+		$prefix = $this->prefix;
 
-        \ob_start();
+		\ob_start();
 
-        include  __DIR__ . '/row.php';
+		include __DIR__ . '/row.php';
 
-        $html = \ob_get_clean();
+		$html = \ob_get_clean();
 
-        return $html;
+		return $html;
 
-    } // End get_rendered_shortcode
+	} // End get_rendered_shortcode
 
 
-    /*
-    * @desc Get HTML for shortcode form
-    * @since 3.0.0
-    *
-    * @param string $id Shortcode Id
-    * @param array $settings Shortcode attributes
-    * @param string $content Shortcode content
-    *
-    * @return string HTML shortcode form output
-    */
-    public function get_shortcode_form( $id, $settings, $content ) {
+	/*
+	* @desc Get HTML for shortcode form
+	* @since 3.0.0
+	*
+	* @param string $id Shortcode Id
+	* @param array $settings Shortcode attributes
+	* @param string $content Shortcode content
+	*
+	* @return string HTML shortcode form output
+	*/
+	public function get_shortcode_form( $id, $settings, $content ) {
 
-        $cpb_form = cpb_get_form_class();
+		$cpb_form = cpb_get_form_class();
 
-        $p_values = array( 'default' => 'Not Set' );
+		$p_values = array( 'default' => 'Not Set' );
 
 		$p = 0;
 
-		while( $p < 5 ) {
+		while ( $p < 5 ) {
 
 			$p_values[ $p . 'rem' ] = $p . 'rem';
 
@@ -173,7 +171,7 @@ class Row {
 
 		} // end for
 
-        $basic = '<input type="hidden" name="' . cpb_get_input_name( $id, true, 'layout' ) . '" value="' . $settings['layout'] . '" >';
+		$basic = '<input type="hidden" name="' . cpb_get_input_name( $id, true, 'layout' ) . '" value="' . $settings['layout'] . '" >';
 
 		$basic .= $cpb_form->hidden_field( cpb_get_input_name( $id, true, 'layout' ), $settings['layout'] );
 
@@ -209,136 +207,139 @@ class Row {
 
 		$adv .= $cpb_form->text_field( cpb_get_input_name( $id, true, 'csshook' ), $settings['csshook'], 'CSS Hook' );
 
-		return array( 'Basic' => $basic, 'Layout' => $layout, 'Advanced' => $adv );;
+		return array( 
+			'Basic' => $basic,
+			'Layout' => $layout,
+			'Advanced' => $adv,
+		);
 
-    } // End get_shortcode_form
-
-
-    /*
-    * @desc Get HTML for shortcode editor
-    * @since 3.0.0
-    *
-    * @param string $id Shortcode id
-    * @param array $atts Shortcode attributes
-    * @param string $content Shortcode content
-    * @param string $children Shortcode children
-    *
-    * @return string HTML shortcode form output
-    */
-    public function get_shortcode_editor( $id, $atts, $content, $children ) {
-
-        // Column index global - This is used in the column shortcode to get column number.
-        global $cpb_column_i;
-
-        // Resetting column index to 1 since this is a new row
-        $cpb_column_i = 1;
-
-        // Set layout for the row
-        $layout = $atts['layout'];
-
-        // Get the editor content
-        $editor_content = cpb_get_editor_html( $children );
-
-        // Get the input name
-        $input_name = cpb_get_input_name( $id );
-
-        // Get the child keys
-        $child_keys = cpb_get_child_shortcode_ids( $children );
-
-        // implode the child keys
-        $child_keys = \implode( ',', $child_keys );
-
-        // Get the edit button
-        $edit_button = cpb_get_editor_edit_button();
-
-        // Get the remove button
-        $remove_button = cpb_get_editor_remove_button();
-
-        // Start output buffer
-        \ob_start();
-
-        // Include the html
-        include cpb_get_plugin_path( '/lib/displays/editor/row-editor.php' );
-
-        // Get the html
-        $html = \ob_get_clean();
-
-        return $html;
-
-    } // End get_shortcode_form
+	} // End get_shortcode_form
 
 
-    /*
-    * @desc Get stanitized output for $atts
-    * @since 3.0.0
-    *
-    * @param array $atts Shortcode attributes
-    * @param string $content Shortcode content
-    *
-    * @return array Sanitized shortcode $atts
-    */
-    public function get_sanitize_shortcode_atts( $settings ) {
+	/*
+	* @desc Get HTML for shortcode editor
+	* @since 3.0.0
+	*
+	* @param string $id Shortcode id
+	* @param array $atts Shortcode attributes
+	* @param string $content Shortcode content
+	* @param string $children Shortcode children
+	*
+	* @return string HTML shortcode form output
+	*/
+	public function get_shortcode_editor( $id, $atts, $content, $children ) {
 
-        $clean = array();
+		// Column index global - This is used in the column shortcode to get column number.
+		global $cpb_column_i;
 
-        $text_fields = array(
-            'title',
-            'title_tag',
-            'layout',
-            'bgcolor',
-            'textcolor',
-            'padding',
-            'max_width',
-            'gutter',
-            'csshook',
-            'anchor',
-            'padding_top',
-            'padding_bottom',
-            'padding_left',
-            'padding_right',
-            'full_bleed',
-            'bg_src',
-            'min_height',
-        );
+		// Resetting column index to 1 since this is a new row
+		$cpb_column_i = 1;
 
-        foreach ( $text_fields as $index => $field ) {
+		// Set layout for the row
+		$layout = $atts['layout'];
 
-            if ( isset( $settings[ $field ] ) ) {
+		// Get the editor content
+		$editor_content = cpb_get_editor_html( $children );
 
-                $clean[ $field ] = sanitize_text_field( $settings[ $field ] );
+		// Get the input name
+		$input_name = cpb_get_input_name( $id );
 
-            } // End if
+		// Get the child keys
+		$child_keys = cpb_get_child_shortcode_ids( $children );
 
-        } // End foreach
+		// implode the child keys
+		$child_keys = \implode( ',', $child_keys );
 
-        return $clean;
+		// Get the edit button
+		$edit_button = cpb_get_editor_edit_button();
 
-    } // End sanitize_shortcode
+		// Get the remove button
+		$remove_button = cpb_get_editor_remove_button();
 
+		// Start output buffer
+		\ob_start();
 
-    /*
-    * @desc Get shortcode for use in save
-    * @since 3.0.0
-    *
-    * @param array $atts Shortcode attributes
-    * @param string $content Shortcode content
-    *
-    * @return string Shortcode for saving in content
-    */
-    public function get_to_shortcode( $atts, $content ) {
+		// Include the html
+		include cpb_get_plugin_path( '/lib/displays/editor/row-editor.php' );
 
-    } // End
+		// Get the html
+		$html = \ob_get_clean();
+
+		return $html;
+
+	} // End get_shortcode_form
 
 
-    /*
-    * @desc Get row classes
-    * @since 3.0.0
-    *
-    * @param array $settings Row attributes
-    *
-    * @return string Row classes
-    */
-    private function get_row_classes( $settings ) {
+	/*
+	* @desc Get stanitized output for $atts
+	* @since 3.0.0
+	*
+	* @param array $atts Shortcode attributes
+	* @param string $content Shortcode content
+	*
+	* @return array Sanitized shortcode $atts
+	*/
+	public function get_sanitize_shortcode_atts( $settings ) {
+
+		$clean = array();
+
+		$text_fields = array(
+			'title',
+			'title_tag',
+			'layout',
+			'bgcolor',
+			'textcolor',
+			'padding',
+			'max_width',
+			'gutter',
+			'csshook',
+			'anchor',
+			'padding_top',
+			'padding_bottom',
+			'padding_left',
+			'padding_right',
+			'full_bleed',
+			'bg_src',
+			'min_height',
+		);
+
+		foreach ( $text_fields as $index => $field ) {
+
+			if ( isset( $settings[ $field ] ) ) {
+
+				$clean[ $field ] = sanitize_text_field( $settings[ $field ] );
+
+			} // End if
+		} // End foreach
+
+		return $clean;
+
+	} // End sanitize_shortcode
+
+
+	/*
+	* @desc Get shortcode for use in save
+	* @since 3.0.0
+	*
+	* @param array $atts Shortcode attributes
+	* @param string $content Shortcode content
+	*
+	* @return string Shortcode for saving in content
+	*/
+	public function get_to_shortcode( $atts, $content ) {
+
+	} // End
+
+
+	/*
+	* @desc Get row classes
+	* @since 3.0.0
+	*
+	* @param array $settings Row attributes
+	*
+	* @return string Row classes
+	*/
+	private function get_row_classes( $settings ) {
 
 		$class = '';
 
@@ -378,13 +379,13 @@ class Row {
 
 			$class .= ' ' . $settings['layout'];
 
-        } // end if
+		} // end if
 
-        if ( ! empty( $settings['bg_src'] ) ) {
+		if ( ! empty( $settings['bg_src'] ) ) {
 
 			$classes .= ' has-bg-image';
 
-        } // end if
+		} // end if
 
 		if ( ! empty( $settings['full_bleed'] ) ) {
 
@@ -397,22 +398,21 @@ class Row {
 				$class .= ' full-bleed';
 
 			} // end if
-
 		} // end if
 
 		return $class;
 
-    } // End get_item_class
+	} // End get_item_class
 
-    /*
-    * @desc Get row style
-    * @since 3.0.0
-    *
-    * @param array $settings Row attributes
-    *
-    * @return array Row css
-    */
-    protected function get_row_style( $settings ) {
+	/*
+	* @desc Get row style
+	* @since 3.0.0
+	*
+	* @param array $settings Row attributes
+	*
+	* @return array Row css
+	*/
+	protected function get_row_style( $settings ) {
 
 		$style = array();
 
@@ -426,14 +426,13 @@ class Row {
 
 		foreach ( $settings as $key => $value ) {
 
-			if ( array_key_exists( $key, $valid ) && $value != 'default' && $value !== '' ) {
+			if ( array_key_exists( $key, $valid ) && $value !== 'default' && $value !== '' ) {
 
 				$css = $valid[ $key ];
 
 				$style[] = $css . ':' . $value;
 
 			} // end if
-
 		} // end foreach
 
 		return $style;
