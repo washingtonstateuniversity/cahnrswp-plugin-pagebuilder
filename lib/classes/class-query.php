@@ -13,10 +13,10 @@ class Query {
 
 	protected $fields = array( 'title', 'content', 'img', 'link', 'excerpt' );
 
-	public function get_fields() { 
+	public function get_fields() {
 
-		return $this->fields; 
-	
+		return $this->fields;
+
 	}
 
 	public function get_local_items( $settings, $prefix = '', $fields = false ) {
@@ -41,25 +41,25 @@ class Query {
 
 				$item = array();
 
-				if ( in_array( 'title', $fields ) ) {
-					
+				if ( in_array( 'title', $fields, true ) ) {
+
 					$item['title'] = get_the_title();
 
 				}
 
-				if ( in_array( 'content', $fields ) ) {
-					
+				if ( in_array( 'content', $fields, true ) ) {
+
 					$item['content'] = get_the_content();
 
 				}
 
-				if ( in_array( 'excerpt', $fields ) ) {
-					
+				if ( in_array( 'excerpt', $fields, true ) ) {
+
 					$item['excerpt'] = $this->get_local_excerpt( $the_query->post->ID, $settings );
 
 				}
 
-				if ( in_array( 'img', $fields ) ) {
+				if ( in_array( 'img', $fields, true ) ) {
 
 					$image = $this->get_local_image_array( $the_query->post->ID, $settings );
 
@@ -69,7 +69,7 @@ class Query {
 
 				} // End if
 
-				if ( in_array( 'link', $fields ) ) {
+				if ( in_array( 'link', $fields, true ) ) {
 
 					$item['link'] = \get_post_permalink();
 
@@ -78,36 +78,35 @@ class Query {
 				$items[ $the_query->post->ID ] = $item;
 
 			} // end while
-
 		} // end if
 
 		return $items;
 
 	}
 
-	public function get_query_args( $settings,  $prefix = '', $defaults = array() ) {
+	public function get_query_args( $settings, $prefix = '', $defaults = array() ) {
 
 		$args = array();
 
-		$args['post_type'] = ( ! empty( $settings[ $prefix . 'post_type'] ) ) ? $settings[ $prefix . 'post_type'] : 'post';
+		$args['post_type'] = ( ! empty( $settings[ $prefix . 'post_type' ] ) ) ? $settings[ $prefix . 'post_type' ] : 'post';
 
-		$args['posts_per_page'] = ( ! empty( $settings[ $prefix . 'count'] ) ) ? $settings[ $prefix . 'count'] : 5;
+		$args['posts_per_page'] = ( ! empty( $settings[ $prefix . 'count' ] ) ) ? $settings[ $prefix . 'count' ] : 5;
 
-		if ( ! empty( $settings[ $prefix . 'offset'] ) ) {
+		if ( ! empty( $settings[ $prefix . 'offset' ] ) ) {
 
-			$args['offset'] = $settings[ $prefix . 'offset'];
-
-		} // end if
-
-		if ( ! empty( $settings[ $prefix . 'order_by'] ) ) {
-
-			$args['orderby'] = $settings[ $prefix . 'order_by'];
+			$args['offset'] = $settings[ $prefix . 'offset' ];
 
 		} // end if
 
-		if ( ! empty( $settings[ $prefix . 'order'] ) ) {
+		if ( ! empty( $settings[ $prefix . 'order_by' ] ) ) {
 
-			$args['order'] = $settings[ $prefix . 'order'];
+			$args['orderby'] = $settings[ $prefix . 'order_by' ];
+
+		} // end if
+
+		if ( ! empty( $settings[ $prefix . 'order' ] ) ) {
+
+			$args['order'] = $settings[ $prefix . 'order' ];
 
 		} // end if
 
@@ -178,14 +177,13 @@ class Query {
 
 			$image = \wp_get_attachment_image_src( $img_id, 'single-post-thumbnail' );
 
-			$image_array['alt'] = \get_post_meta( $img_id, '_wp_attachment_image_alt', true);
+			$image_array['alt'] = \get_post_meta( $img_id, '_wp_attachment_image_alt', true );
 
 			$image_array['src'] = $image[0];
 
 		} // end if
 
 		return $image_array;
-
 
 	} // End get_local_image_array
 
@@ -207,14 +205,14 @@ class Query {
 	public function get_remote_items( $settings, $prefix = '', $fields = false ) {
 
 		if ( ! $fields ) {
-			
+
 			$fields = $this->get_fields();
 
 		}
 
 		$items = array();
 
-		if( is_array( $settings[ $prefix . 'remote_items' ] ) && ! empty( $settings[ $prefix . 'remote_items' ] ) ) {
+		if ( is_array( $settings[ $prefix . 'remote_items' ] ) && ! empty( $settings[ $prefix . 'remote_items' ] ) ) {
 
 			foreach ( $settings[ $prefix . 'remote_items' ] as $request_item ) {
 
@@ -222,11 +220,11 @@ class Query {
 
 				//var_dump( url );
 
-				$response = \wp_remote_get( $url ) ;
+				$response = \wp_remote_get( $url );
 
 				if ( ! is_wp_error( $response ) ) {
 
-					$body = \wp_remote_retrieve_body($response);
+					$body = \wp_remote_retrieve_body( $response );
 
 					$json = \json_decode( $body, true );
 
@@ -234,31 +232,31 @@ class Query {
 
 						$item = array();
 
-						if ( in_array( 'title', $fields ) ) {
+						if ( in_array( 'title', $fields, true ) ) {
 
 							$item['title'] = $json['title'];
 
 						}
 
-						if ( in_array( 'content', $fields ) ) {
-							
+						if ( in_array( 'content', $fields, true ) ) {
+
 							$item['content'] = $json['content'];
 
 						}
 
-						if ( in_array( 'excerpt', $fields ) ) {
-							
+						if ( in_array( 'excerpt', $fields, true ) ) {
+
 							$item['excerpt'] = $json['excerpt'];
 
 						}
 
-						if ( in_array( 'img', $fields ) ) {
+						if ( in_array( 'img', $fields, true ) ) {
 
 							 $item['img'] = $this->get_remote_img( $json, $settings );
 
 						} // end if
 
-						if ( in_array( 'link', $fields ) ) {
+						if ( in_array( 'link', $fields, true ) ) {
 
 							$item['link'] = $json['link'];
 
@@ -272,7 +270,6 @@ class Query {
 
 				} // end if
 			} // end foreach
-
 		} // end if
 
 		return $items;
@@ -317,20 +314,20 @@ class Query {
 
 						$item = array();
 
-						if ( in_array( 'title', $fields ) ) {
-							
+						if ( in_array( 'title', $fields, true ) ) {
+
 							$item['title'] = $json_item['title']['rendered'];
 
 						}
 
-						if ( in_array( 'content', $fields ) ) {
-							
+						if ( in_array( 'content', $fields, true ) ) {
+
 							$item['content'] = $json_item['content']['rendered'];
 
 						}
 
-						if ( in_array( 'excerpt', $fields ) ) {
-							
+						if ( in_array( 'excerpt', $fields, true ) ) {
+
 							$item['excerpt'] = $json_item['excerpt']['rendered'];
 
 						}
@@ -343,10 +340,10 @@ class Query {
 
 						} // End if
 
-						if ( in_array( 'link', $fields ) ) {
-							
+						if ( in_array( 'link', $fields, true ) ) {
+
 							$item['link'] = $json_item['link'];
-						
+
 						}
 
 						$items[ $json_item['id'] ] = $item;
@@ -365,7 +362,7 @@ class Query {
 
 	protected function get_remote_img ( $item, $settings, $prefix = '' ) {
 
-		$size = ( ! empty( $settings[ $prefix . 'img_size'] ) ) ? $settings[ $prefix . 'img_size'] : 'medium';
+		$size = ( ! empty( $settings[ $prefix . 'img_size' ] ) ) ? $settings[ $prefix . 'img_size' ] : 'medium';
 
 		$url = '';
 
@@ -391,27 +388,27 @@ class Query {
 
 		$query = array();
 
-		if ( ! empty( $settings[ $prefix . 'post_type'] ) ) {
-			
-			$query[] = 'type=' . $settings[ $prefix . 'post_type'];
+		if ( ! empty( $settings[ $prefix . 'post_type' ] ) ) {
+
+			$query[] = 'type=' . $settings[ $prefix . 'post_type' ];
 
 		}
 
-		if ( ! empty( $settings[ $prefix . 'taxonomy'] ) ) {
-			
-			$query[] = 'filter[taxonomy]=' . $settings[ $prefix . 'taxonomy'];
+		if ( ! empty( $settings[ $prefix . 'taxonomy' ] ) ) {
+
+			$query[] = 'filter[taxonomy]=' . $settings[ $prefix . 'taxonomy' ];
 
 		}
 
-		if ( ! empty( $settings[ $prefix . 'terms'] ) ) {
-			
-			$query[] = 'filter[term]=' . $settings[ $prefix . 'terms'];
+		if ( ! empty( $settings[ $prefix . 'terms' ] ) ) {
+
+			$query[] = 'filter[term]=' . $settings[ $prefix . 'terms' ];
 
 		}
 
-		if ( ! empty( $settings[ $prefix . 'count'] ) ) {
-			
-			$query[] = 'filter[posts_per_page]=' . $settings[ $prefix . 'count'];
+		if ( ! empty( $settings[ $prefix . 'count' ] ) ) {
+
+			$query[] = 'filter[posts_per_page]=' . $settings[ $prefix . 'count' ];
 
 		}
 
