@@ -30,10 +30,11 @@ class AJAX {
 
 		$this->check_nounce();
 
+		//@codingStandardsIgnoreStart Already checked nonce
 		if ( ! empty( $_POST['service'] ) ) {
 
 			switch ( $_POST['service'] ) {
-
+				// @codingStandardsIgnoreEnd
 				case 'get_part':
 					$this->get_part();
 					break;
@@ -53,7 +54,6 @@ class AJAX {
 					break;
 
 			} // end switch
-
 		} // end service
 
 		die();
@@ -71,6 +71,7 @@ class AJAX {
 
 		$json = array();
 
+		//@codingStandardsIgnoreStart Already checked nonce
 		if ( ! empty( $_POST['slug'] ) ) {
 
 			$slug = sanitize_text_field( $_POST['slug'] );
@@ -81,6 +82,7 @@ class AJAX {
 			$content = ( ! empty( $_POST['content'] ) ) ? wp_kses_post( $_POST['content'] ) : '';
 
 			$get_children = ( isset( $_POST['get_children'] ) ) ? $_POST['get_children'] : true;
+			// @codingStandardsIgnoreEnd
 
 			$shortcode = cpb_get_shortcode( $slug, $settings, $content, $get_children );
 
@@ -99,7 +101,7 @@ class AJAX {
 
 		header( 'Content-Type: application/json; charset=utf-8', true );
 
-		echo \json_encode( $json );
+		echo \wp_json_encode( $json );
 
 	} // End get_part
 
@@ -125,6 +127,7 @@ class AJAX {
 
 		$shortcodes = array();
 
+		//@codingStandardsIgnoreStart Already checked nonce
 		if ( ! empty( $_POST['_cpb']['items'] ) ) {
 
 			foreach ( $_POST['_cpb']['items'] as $id => $slug ) {
@@ -148,6 +151,7 @@ class AJAX {
 					$content = '';
 
 				}// End if
+				// @codingStandardsIgnoreEnd
 
 				$rendered_shortcode = cpb_get_rendered_shortcode( $slug, $settings, $content, true, true );
 

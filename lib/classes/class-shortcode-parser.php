@@ -67,7 +67,7 @@ class Shortcode_Parser {
 					$shortcode_data[5][0]
 				);
 
-			} else if ( $default_shortcode ) { // no items found and default exists set default
+			} elseif ( $default_shortcode ) { // no items found and default exists set default
 
 				$shortcode = cpb_get_shortcode( $default_shortcode, array(), $shortcode_content );
 
@@ -115,13 +115,13 @@ class Shortcode_Parser {
 		// Temporarily write tags to temp
 		$temp = $shortcode_tags;
 
-		// Override with custom set
+		// @codingStandardsIgnoreStart Override with custom set
 		$shortcode_tags = $slugs;
 
 		// Get regex code using WP function
 		$regex = \get_shortcode_regex();
 
-		// Set back to original
+		// @codingStandardsIgnoreEnd Set back to original
 		$shortcode_tags = $temp;
 
 		$regex = '/' . $regex . '/';
@@ -142,7 +142,7 @@ class Shortcode_Parser {
 	*/
 	protected function split_content( $content, $regex ) {
 
-		if ( '' == $content ) {
+		if ( '' === $content ) {
 
 			$content = ' ';
 

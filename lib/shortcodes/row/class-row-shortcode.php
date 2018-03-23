@@ -207,9 +207,9 @@ class Row {
 
 		$adv .= $cpb_form->text_field( cpb_get_input_name( $id, true, 'csshook' ), $settings['csshook'], 'CSS Hook' );
 
-		return array( 
-			'Basic' => $basic,
-			'Layout' => $layout,
+		return array(
+			'Basic'    => $basic,
+			'Layout'   => $layout,
 			'Advanced' => $adv,
 		);
 
@@ -417,16 +417,16 @@ class Row {
 		$style = array();
 
 		$valid = array(
-			'padding_top' => 'padding-top',
+			'padding_top'    => 'padding-top',
 			'padding_bottom' => 'padding-bottom',
-			'padding_left' => 'padding-left',
-			'padding_right' => 'padding-right',
-			'max_width'		=> 'max-width',
+			'padding_left'   => 'padding-left',
+			'padding_right'  => 'padding-right',
+			'max_width'      => 'max-width',
 		);
 
 		foreach ( $settings as $key => $value ) {
 
-			if ( array_key_exists( $key, $valid ) && $value !== 'default' && $value !== '' ) {
+			if ( array_key_exists( $key, $valid ) && 'default' !== $value && '' !== $value ) {
 
 				$css = $valid[ $key ];
 

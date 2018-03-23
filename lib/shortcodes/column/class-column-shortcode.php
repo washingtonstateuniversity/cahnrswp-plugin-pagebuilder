@@ -85,7 +85,7 @@ class Column {
 		global $cpb_column_i;
 
 		// Column layout global
-		global $cpb_Column_layout;
+		global $cpb_column_layout;
 
 		// Get the style array
 		$style_array = $this->get_column_style( $settings );
@@ -267,7 +267,7 @@ class Column {
 
 		foreach ( $settings as $key => $value ) {
 
-			if ( array_key_exists( $key, $valid ) && $value !== 'default' && $value !== '' ) {
+			if ( array_key_exists( $key, $valid ) && 'default' !== $value && '' !== $value ) {
 
 				$css = $valid[ $key ];
 

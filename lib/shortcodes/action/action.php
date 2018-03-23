@@ -1,4 +1,4 @@
-<?php namespace CAHNRSWP\Plugin\Pagebuilder; 
+<?php namespace CAHNRSWP\Plugin\Pagebuilder;
 
 ?><a href="<?php echo esc_url( $link ); ?>" class="<?php echo esc_html( $classes ); ?>">
 	<span class="link-title"><?php echo esc_html( $label ); ?></span>

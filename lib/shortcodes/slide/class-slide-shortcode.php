@@ -15,11 +15,11 @@ class Slide_Shortcode {
 
 	// @var array $default_settings Array of default settings
 	protected $default_settings = array(
-		'slide_type'        =>  '',
-		'img_src'           =>  '',
+		'slide_type'        => '',
+		'img_src'           => '',
 		'img_id'            => '',
 		'link'              => '',
-		'item_title'        =>  '',
+		'item_title'        => '',
 		'subtitle'          => '',
 		'excerpt'           => '',
 		'columns'           => '4',
@@ -150,7 +150,7 @@ class Slide_Shortcode {
 
 		foreach ( $items as $item ) {
 
-			$active = ( 1 === $cpb_slideshow['i'] )? ' active-slide' : '';
+			$active = ( 1 === $cpb_slideshow['i'] ) ? ' active-slide' : '';
 			$bg_image = $item['img'];
 			$img = '<img class="slide_img_bg" src="' . cpb_get_plugin_url( 'lib/images/spacer1x1.gif' ) . '" style="background-image:url( ' . $bg_image . ' )" />';
 			$link = ( $item['link'] ) ? '<a href="' . $item['link'] . '" class="slide-link" /></a>' : '';
@@ -176,7 +176,7 @@ class Slide_Shortcode {
 
 		$promo_item = array();
 
-		$promo_item['img'] = ( ! empty( $settings['img_src'] )) ? $settings['img_src'] : '';
+		$promo_item['img'] = ( ! empty( $settings['img_src'] ) ) ? $settings['img_src'] : '';
 
 		if ( ! empty( $settings['img_id'] ) ) {
 
@@ -290,7 +290,7 @@ class Slide_Shortcode {
 		unset( $tags['strong'] );
 		$display .= $cpb_form->select_field( cpb_get_input_name( $id, true, 'tag' ), $settings['tag'], $tags, 'Tag Type' );
 
-		$img_ratio = array( 
+		$img_ratio = array(
 			'spacer1x1' => 'Square',
 			'spacer3x4' => '3 x 4 ratio',
 			'spacer4x3' => '4 x 3 ratio',

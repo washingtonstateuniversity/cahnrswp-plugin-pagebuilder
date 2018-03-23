@@ -9,6 +9,6 @@
 			</div>
 	<?php endif; ?>
 	<?php if ( ! empty( $excerpt ) ) : ?>
-			<div class="cpb-excerpt"><?php echo strip_shortcodes( wp_strip_all_tags( $excerpt, true ) ); ?></div>
+			<div class="cpb-excerpt"><?php echo wp_kses_post( strip_shortcodes( wp_strip_all_tags( $excerpt, true ) ) ); ?></div>
 	<?php endif; ?>
 </li>

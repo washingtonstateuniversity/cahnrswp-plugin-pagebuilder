@@ -80,6 +80,12 @@ class Save {
 
 		} // end if
 
+		if ( ! isset( $_POST['cahnrs_pagebuilder_key'] ) || ! wp_verify_nonce( $_POST['cahnrs_pagebuilder_key'], 'save_cahnrs_pagebuilder_' . $post_id ) ) {
+
+			return false;
+
+		}
+
 		// Check the user's permissions.
 		if ( isset( $_POST['post_type'] ) && 'page' === $_POST['post_type'] ) {
 
@@ -97,12 +103,6 @@ class Save {
 			} // end if
 		} // end if
 
-		if ( ! isset( $_POST['cahnrs_pagebuilder_key'] ) || ! wp_verify_nonce( $_POST['cahnrs_pagebuilder_key'], 'save_cahnrs_pagebuilder_' . $post_id ) ) {
-
-			return false;
-
-		}
-
 		return true;
 
 	}
@@ -118,12 +118,14 @@ class Save {
 	*/
 	protected function get_settings( $post_id ) {
 
+		//@codingStandardsIgnoreStart Already checked nonce
 		$fields = array(
 			'_cpb_excerpt'      => ( ! empty( $_POST['_cpb_excerpt'] ) ) ? sanitize_text_field( $_POST['_cpb_excerpt'] ) : '',
 			'_cpb_pagebuilder'  => ( ! empty( $_POST['_cpb_pagebuilder'] ) ) ? sanitize_text_field( $_POST['_cpb_pagebuilder'] ) : '',
 			'_cpb_m_excerpt'    => ( ! empty( $_POST['_cpb_m_excerpt'] ) ) ? sanitize_text_field( $_POST['_cpb_m_excerpt'] ) : '',
 			'_cpb'              => ( ! empty( $_POST['_cpb'] ) ) ? $_POST['_cpb'] : '',  // TO DO: Sanitize array
 		);
+		// @codingStandardsIgnoreEnd
 
 		return $fields;
 
@@ -286,7 +288,7 @@ class Save {
 
 		$converted = array();
 
-		foreach ( $shortcode_atts as $key => $value  ) {
+		foreach ( $shortcode_atts as $key => $value ) {
 
 			$converted[] = $key . '="' . $value . '"';
 
@@ -333,13 +335,13 @@ class Save {
 				if ( $shortcode['uses_wp_editor'] ) {
 
 					// WP Eitors use a special name pattern _cpb_content_.....ID
-					$content_key = '_cpb_content_' .  $shortcode_key;
+					$content_key = '_cpb_content_' . $shortcode_key;
 
-					// Check if it has content
 					if ( ! empty( $_POST[ $content_key ] ) ) {
 
-						// Sanitize and add to content key
+						// @codingStandardsIgnoreStart Already checked nonce
 						$shortcode['content'] = wp_kses_post( $_POST[ $content_key ] );
+						// @codingStandardsIgnoreEnd
 
 					} // End if
 				} // End if
@@ -359,7 +361,7 @@ class Save {
 					if ( ! empty( $children ) ) {
 
 						// Get child shortcodes and add to the children key
-						$shortcode['children'] =  $this->get_shortcode_array_recursive( $children, $settings );
+						$shortcode['children'] = $this->get_shortcode_array_recursive( $children, $settings );
 
 					} // End if
 				} // End if
@@ -408,9 +410,7 @@ class Save {
 					$to_save[ $key ] = $save_value;
 
 				} // End if
-
 			} // End if
-
 		} // End foreach
 
 		// Does this shortcode have a callback to sanitize the settings?
@@ -425,7 +425,6 @@ class Save {
 				$clean_settings = array();
 
 			} // End if
-
 		} else { // No sanitize callback - well fine then, let's just make it up
 
 			$clean_settings = array();
@@ -437,7 +436,6 @@ class Save {
 				$clean_settings[ $key ] = sanitize_text_field( $value );
 
 			} // End foreach
-
 		} // End if
 
 		return $clean_settings;

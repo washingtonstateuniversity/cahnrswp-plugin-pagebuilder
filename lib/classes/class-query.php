@@ -252,7 +252,7 @@ class Query {
 
 						if ( in_array( 'img', $fields, true ) ) {
 
-							 $item['img'] = $this->get_remote_img( $json, $settings );
+							$item['img'] = $this->get_remote_img( $json, $settings );
 
 						} // end if
 

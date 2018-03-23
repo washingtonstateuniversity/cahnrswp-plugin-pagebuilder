@@ -4,7 +4,7 @@
 	<div class="cpb-column-inner">
 		<header><?php echo wp_kses_post( $edit_button ); ?><a class="cpb-move-item-action cpb-item-title" href="#">Column <span class="cpb-column-index"><?php echo esc_html( $index_int ); ?></span></a></header>
 		<div class="cpb-child-set cpb-child-set-items">
-		    <?php echo $editor_content; ?>
+			<?php echo wp_kses_post( $editor_content ); ?>
 		</div>
 		<a href="#" class="add-item-action">+ Add Item</a>
 		<footer><?php echo wp_kses_post( $edit_button ); ?><a class="cpb-move-item-action cpb-item-title" href="#">Column <span class="cpb-column-index"><?php echo esc_html( $index_int ); ?></span></a></footer>

@@ -142,7 +142,7 @@ class Content_Feed_Shortcode {
 
 		foreach ( $post_items as $index => $post_item ) {
 
-			$link_class = ( ! empty( $post_item['link'] ) )? 'has-link' : '';
+			$link_class = ( ! empty( $post_item['link'] ) ) ? 'has-link' : '';
 
 			$title = $post_item['title'];
 
@@ -223,7 +223,7 @@ class Content_Feed_Shortcode {
 
 		$adv = $cpb_form->text_field( cpb_get_input_name( $id, true, 'csshook' ), $settings['csshook'], 'CSS Hook' );
 
-		return array( 
+		return array(
 			'Source'   => $html,
 			'Display'  => $display,
 			'Advanced' => $adv,

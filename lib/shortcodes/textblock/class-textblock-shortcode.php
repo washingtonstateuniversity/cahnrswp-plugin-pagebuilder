@@ -11,103 +11,103 @@ if ( ! defined( 'WPINC' ) ) {
 */
 class Textblock {
 
-    protected $prefix = '';
+	protected $prefix = '';
 
-    // @var array $default_settings Array of default settings
-    protected $default_settings = array(
-        'is_callout'         => '',
-        'bgcolor'           => '',
-        'textcolor'         => '',
-        'csshook'           => '',
-        'list_style'        => '',
-        'title'             => '',
-    );
+	// @var array $default_settings Array of default settings
+	protected $default_settings = array(
+		'is_callout'         => '',
+		'bgcolor'           => '',
+		'textcolor'         => '',
+		'csshook'           => '',
+		'list_style'        => '',
+		'title'             => '',
+	);
 
 
 	public function __construct() {
 
-        \add_action( 'init', array( $this, 'register_shortcode' ) );
+		\add_action( 'init', array( $this, 'register_shortcode' ) );
 
-    } // End __construct
-
-
-    /*
-    * @desc Register textblock shortcode
-    * @since 3.0.0
-    */
-    public function register_shortcode() {
-
-        \add_shortcode( 'textblock', array( $this, 'get_rendered_shortcode' ) );
-
-        cpb_register_shortcode(
-            'textblock',
-            $args = array(
-                'form_callback'         => array( $this, 'get_shortcode_form' ),
-                'sanitize_callback'     => array( $this, 'get_sanitize_shortcode_atts' ),
-                'label'                 => 'Textblock', // Label of the item
-                'render_callback'       => array( $this, 'get_rendered_shortcode' ), // Callback to render shortcode
-                'default_atts'          => $this->default_settings,
-                'in_column'             => true, // Allow in column
-                'uses_wp_editor'        => true, // Uses WP Editor
-            )
-        );
-
-    } // End register_shortcode
+	} // End __construct
 
 
-    /*
-    * @desc Render the shortcode
-    * @since 3.0.0
-    *
-    * @param array $atts Shortcode attributes
-    * @param string $content Shortcode content
-    *
-    * @return string HTML shortcode output
-    */
-    public function get_rendered_shortcode( $atts, $content ) {
+	/*
+	* @desc Register textblock shortcode
+	* @since 3.0.0
+	*/
+	public function register_shortcode() {
 
-        // Check default settings
-        $settings = \shortcode_atts( $this->default_settings, $atts, 'textblock' );
+		\add_shortcode( 'textblock', array( $this, 'get_rendered_shortcode' ) );
 
-        $content = do_shortcode( $this->get_more_content( $content, $settings ) );
+		cpb_register_shortcode(
+			'textblock',
+			$args = array(
+				'form_callback'         => array( $this, 'get_shortcode_form' ),
+				'sanitize_callback'     => array( $this, 'get_sanitize_shortcode_atts' ),
+				'label'                 => 'Textblock', // Label of the item
+				'render_callback'       => array( $this, 'get_rendered_shortcode' ), // Callback to render shortcode
+				'default_atts'          => $this->default_settings,
+				'in_column'             => true, // Allow in column
+				'uses_wp_editor'        => true, // Uses WP Editor
+			)
+		);
 
-        $content = apply_filters( 'cpb_the_content', $content );
-
-        //TO DO: Need to work out applying the content filter here
-
-        // Set textblock classes
-        $classes = $this->get_textblock_classes( $settings );
-
-        $prefix = $this->prefix;
-
-        \ob_start();
-
-        include  __DIR__ . '/textblock.php';
-
-        $html = \ob_get_clean();
-
-        return $html;
-
-    } // End get_rendered_shortcode
+	} // End register_shortcode
 
 
-    /*
-    * @desc Get HTML for shortcode form
-    * @since 3.0.0
-    *
-    * @param array $atts Shortcode attributes
-    * @param string $content Shortcode content
-    *
-    * @return string HTML shortcode form output
-    */
-    public function get_shortcode_form( $id, $settings, $content ) {
+	/*
+	* @desc Render the shortcode
+	* @since 3.0.0
+	*
+	* @param array $atts Shortcode attributes
+	* @param string $content Shortcode content
+	*
+	* @return string HTML shortcode output
+	*/
+	public function get_rendered_shortcode( $atts, $content ) {
 
-        $cpb_form = cpb_get_form_class();
+		// Check default settings
+		$settings = \shortcode_atts( $this->default_settings, $atts, 'textblock' );
 
-        $style_array = array(
-			'' 						=> 'Default',
-			'list-style-arrows' 	=> 'Arrows',
-			'list-style-drop-down' 	=> 'Accordion',
+		$content = do_shortcode( $this->get_more_content( $content, $settings ) );
+
+		$content = apply_filters( 'cpb_the_content', $content );
+
+		//TO DO: Need to work out applying the content filter here
+
+		// Set textblock classes
+		$classes = $this->get_textblock_classes( $settings );
+
+		$prefix = $this->prefix;
+
+		\ob_start();
+
+		include  __DIR__ . '/textblock.php';
+
+		$html = \ob_get_clean();
+
+		return $html;
+
+	} // End get_rendered_shortcode
+
+
+	/*
+	* @desc Get HTML for shortcode form
+	* @since 3.0.0
+	*
+	* @param array $atts Shortcode attributes
+	* @param string $content Shortcode content
+	*
+	* @return string HTML shortcode form output
+	*/
+	public function get_shortcode_form( $id, $settings, $content ) {
+
+		$cpb_form = cpb_get_form_class();
+
+		$style_array = array(
+			''                      => 'Default',
+			'list-style-arrows'     => 'Arrows',
+			'list-style-drop-down'  => 'Accordion',
 		);
 
 		$html = $cpb_form->text_field( cpb_get_input_name( $id, true, 'title' ), $settings['title'], 'Title' );
@@ -130,74 +130,93 @@ class Textblock {
 
 		return array( 'Basic' => $html, 'Advanced' => $adv );
 
-
-    } // End get_shortcode_form
-
-
-    /*
-    * @desc Get stanitized output for $atts
-    * @since 3.0.0
-    *
-    * @param array $atts Shortcode attributes
-    * @param string $content Shortcode content
-    *
-    * @return array Sanitized shortcode $atts
-    */
-    public function get_sanitize_shortcode_atts( $atts ) {
-
-    } // End sanitize_shortcode
+	} // End get_shortcode_form
 
 
-    /*
-    * @desc Get shortcode for use in save
-    * @since 3.0.0
-    *
-    * @param array $atts Shortcode attributes
-    * @param string $content Shortcode content
-    *
-    * @return string Shortcode for saving in content
-    */
-    public function get_to_shortcode( $atts, $content ) {
+	/*
+	* @desc Get stanitized output for $atts
+	* @since 3.0.0
+	*
+	* @param array $atts Shortcode attributes
+	* @param string $content Shortcode content
+	*
+	* @return array Sanitized shortcode $atts
+	*/
+	public function get_sanitize_shortcode_atts( $atts ) {
 
-    } // End
+	} // End sanitize_shortcode
 
 
-    /*
-    * @desc Get textblock classes
-    * @since 3.0.0
-    *
-    * @param array $settings Textblock attributes
-    *
-    * @return string Textblock classes
-    */
-    private function get_textblock_classes( $settings ) {
+	/*
+	* @desc Get shortcode for use in save
+	* @since 3.0.0
+	*
+	* @param array $atts Shortcode attributes
+	* @param string $content Shortcode content
+	*
+	* @return string Shortcode for saving in content
+	*/
+	public function get_to_shortcode( $atts, $content ) {
 
-        $class = array();
+	} // End
 
-        if ( ! empty( $settings['textcolor'] ) ) $class[] = $settings['textcolor'] . '-text';
 
-        if ( ! empty( $settings['is_callout'] ) ) $class[] = 'is-callout';
+	/*
+	* @desc Get textblock classes
+	* @since 3.0.0
+	*
+	* @param array $settings Textblock attributes
+	*
+	* @return string Textblock classes
+	*/
+	private function get_textblock_classes( $settings ) {
 
-        if ( ! empty( $settings['csshook'] ) ) $class[] = $settings['csshook'];
+		$class = array();
 
-        if ( ! empty( $settings['bgcolor'] ) ) $class[] = $settings['bgcolor'] . '-back';
+		if ( ! empty( $settings['textcolor'] ) ) {
 
-        if ( ! empty( $settings['list_style'] ) ) $class[] = $settings['list_style'];
+			$class[] = $settings['textcolor'] . '-text';
+
+		} // End if
+
+		if ( ! empty( $settings['is_callout'] ) ) {
+
+			$class[] = 'is-callout';
+
+		} // End if
+
+		if ( ! empty( $settings['csshook'] ) ) {
+
+			$class[] = $settings['csshook'];
+
+		} // End if
+
+		if ( ! empty( $settings['bgcolor'] ) ) {
+
+			$class[] = $settings['bgcolor'] . '-back';
+
+		} // End if
+
+		if ( ! empty( $settings['list_style'] ) ) {
+
+			$class[] = $settings['list_style'];
+
+		} // End if
 
 		return implode( ' ', $class );
 
-    } // End get_item_class
+	} // End get_item_class
 
 
-    /*
-    * @desc Split content by more span
-    * @since 3.0.0
-    *
-    * @param array $settings Textblock attributes
-    *
-    * @return array Textblock css
-    */
-    private function get_more_content( $content, $settings ) {
+	/*
+	* @desc Split content by more span
+	* @since 3.0.0
+	*
+	* @param array $settings Textblock attributes
+	*
+	* @return array Textblock css
+	*/
+	private function get_more_content( $content, $settings ) {
 
 		if ( strpos( $content, '<span id="more-' ) !== false ) {
 

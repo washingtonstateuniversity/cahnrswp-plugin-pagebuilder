@@ -199,14 +199,14 @@ class Post_Gallery_Shortcode {
 			'form'    => $cpb_form->get_form_remote_feed( cpb_get_input_name( $id, true ), $settings ),
 		);
 
-		$display = $cpb_form->select_field( 
-			cpb_get_input_name( 
+		$display = $cpb_form->select_field(
+			cpb_get_input_name(
 				$id,
 				true,
 				'columns'
 			), 
 			$settings['columns'],
-			array( 
+			array(
 				1 => 1,
 				2 => 2,
 				3 => 3,
@@ -216,8 +216,7 @@ class Post_Gallery_Shortcode {
 			'Columns'
 		);
 
-
-		$excerpt_length = array( 
+		$excerpt_length = array(
 			'short'  => 'Short',
 			'medium' => 'Medium',
 			'long'   => 'Long',
@@ -242,7 +241,10 @@ class Post_Gallery_Shortcode {
 
 		$html = $cpb_form->multi_form( array( $select_form, $feed_form, $remote_feed_form ) );
 
-		return array( 'Source' => $html, 'Display' => $display );
+		return array(
+			'Source'  => $html,
+			'Display' => $display
+		);
 
 	} // End get_shortcode_form
 

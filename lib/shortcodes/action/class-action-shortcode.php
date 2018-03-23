@@ -144,7 +144,7 @@ class Action {
 
 		$adv .= $cpb_form->textarea_field( cpb_get_input_name( $id, true, 'caption' ), $settings['caption'], 'Link Description' );
 
-		return array( 
+		return array(
 			'Basic'    => $html,
 			'Advanced' => $adv,
 		);

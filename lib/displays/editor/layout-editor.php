@@ -3,7 +3,11 @@
 ?><div id="cpb-editor-layout" class="cpb-item">
 	<header></header>
 	<div class="cpb-child-set cpb-layout-set">
-		<?php echo $editor_content; ?>	
+		<?php 
+		// @codingStandardsIgnoreStart Already escaped
+		echo $editor_content; 
+		// @codingStandardsIgnoreEnd
+		?>	
 	</div>
 	<footer></footer>
 	<fieldset>

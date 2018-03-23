@@ -68,7 +68,9 @@ class Editor {
 
 		$html = \ob_get_clean();
 
+		// @codingStandardsIgnoreStart Already escaped
 		echo $html;
+		// @codingStandardsIgnoreEnd
 
 	} // End add_editor
 
@@ -83,7 +85,7 @@ class Editor {
 	*/
 	protected function get_options_editor( $post ) {
 
-		$values = array( 
+		$values = array(
 			'default' => 'Default Editor', 
 			'builder' => 'Layout Editor', 
 		);

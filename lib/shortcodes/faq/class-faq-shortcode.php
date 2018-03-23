@@ -71,7 +71,7 @@ class FAQ_Shortcode {
 
 		$title = $atts['title'];
 
-		$content =  apply_filters( 'cpb_the_content', \do_shortcode( $content ) );
+		$content = apply_filters( 'cpb_the_content', \do_shortcode( $content ) );
 
 		\ob_start();
 
@@ -111,10 +111,10 @@ class FAQ_Shortcode {
 			cpb_get_input_name( $id, true, 'textcolor' ),
 			$settings['textcolor'],
 			$cpb_form->get_wsu_colors(),
-			'Text Color',
+			'Text Color'
 		);
 
-		return array( 
+		return array(
 			'Basic' => $html,
 			'Advanced' => $adv,
 		);

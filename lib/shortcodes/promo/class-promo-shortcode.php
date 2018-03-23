@@ -15,11 +15,11 @@ class Promo_Shortcode {
 
 	// @var array $default_settings Array of default settings
 	protected $default_settings = array(
-		'promo_type'        =>  '',
-		'img_src'           =>  '',
+		'promo_type'        => '',
+		'img_src'           => '',
 		'img_id'            => '',
 		'link'              => '',
-		'promo_title'       =>  '',
+		'promo_title'       => '',
 		'subtitle'          => '',
 		'excerpt'           => '',
 		'columns'           => '4',
@@ -114,8 +114,8 @@ class Promo_Shortcode {
 				case 'remote_feed':
 					$promo_items = $this->get_remote_items( $atts );
 					break;
-			} // end switch
 
+			} // end switch
 		} // end if
 
 		if ( ! empty( $promo_items ) && is_array( $promo_items ) ) {
@@ -147,7 +147,7 @@ class Promo_Shortcode {
 				$promo_item = cpb_check_advanced_display( $promo_item, $atts );
 
 				if ( ! empty( $promo_item['img'] ) ) {
-					
+
 					$classes_array[] = 'has-image';
 
 				} // End if
@@ -204,7 +204,7 @@ class Promo_Shortcode {
 
 		$promo_item['img'] = ( ! empty( $settings['img_src'] ) ) ? $settings['img_src'] : '';
 
-		if ( ! empty( $settings['img_id'] )) {
+		if ( ! empty( $settings['img_id'] ) ) {
 
 			$image_array = cpb_get_image_properties_array( $settings['img_id'] );
 
@@ -339,12 +339,12 @@ class Promo_Shortcode {
 		unset( $tags['strong'] );
 		$display .= $cpb_form->select_field( cpb_get_input_name( $id, true, 'tag' ), $settings['tag'], $tags, 'Tag Type' );
 
-		$img_ratio = array( 
+		$img_ratio = array(
 			'spacer1x1' => 'Square',
 			'spacer3x4' => '3 x 4 ratio',
 			'spacer4x3' => '4 x 3 ratio',
 		);
-	
+
 		$display .= $cpb_form->select_field( cpb_get_input_name( $id, true, 'img_ratio' ), $settings['img_ratio'], $img_ratio, 'Image Ratio' );
 
 		$display .= '<hr/>';
@@ -361,7 +361,7 @@ class Promo_Shortcode {
 
 		$adv = $cpb_form->text_field( cpb_get_input_name( $id, true, 'csshook' ), $settings['csshook'], 'CSS Hook' );
 
-		return array( 
+		return array(
 			'Source'   => $html,
 			'Display'  => $display,
 			'Advanced' => $adv,

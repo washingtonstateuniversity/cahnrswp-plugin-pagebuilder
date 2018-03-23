@@ -126,13 +126,13 @@ function cpb_register_shortcode( $slug, $args = array() ) {
 	$default_args = array(
 		'id'                        => '', // ID set later
 	   	'label'                     => '', // Label of the item
-	   	'render_callback'           => false, // Callback to render shortcode
+		'render_callback'           => false, // Callback to render shortcode
 	   	'editor_render_callback'    => false, // Override editor content display
 		'form_callback'             => false, // Callback to render form
-	   	'sanitize_callback'         => false, // Callback to sanitize from inputs
-	   	'editor_callback'           => false, // Callback to render form
-	   	'shortcode_callback'        => false, // Callback to build custom shortcode
-	  	'allowed_children'          => array(), // Allowed child shortcodes
+		'sanitize_callback'         => false, // Callback to sanitize from inputs
+		'editor_callback'           => false, // Callback to render form
+		'shortcode_callback'        => false, // Callback to build custom shortcode
+		'allowed_children'          => array(), // Allowed child shortcodes
 		'default_shortcode'         => false, // Default to this if no children
 		'children'                  => array(), // Shortcode children
 		'default_atts'              => array(), // Default Atts
@@ -953,7 +953,7 @@ function cpb_get_image_properties_array( $image_id, $image_size = 'single-post-t
 
 	$image_array['alt'] = \get_post_meta( $image_id, '_wp_attachment_image_alt', true );
 
-	$image_array['src'] = $image[ 0 ];
+	$image_array['src'] = $image[0];
 
 	return $image_array;
 

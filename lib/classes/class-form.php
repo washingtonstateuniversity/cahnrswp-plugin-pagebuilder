@@ -811,7 +811,7 @@ class Form {
 			'pad-ends'   => 'Pad ends',
 			'pad-top'    => 'Pad top',
 			'pad-bottom' => 'Pad bottom',
-		   ''           => 'No padding',
+			''           => 'No padding',
 		);
 
 		return $values;
@@ -821,8 +821,8 @@ class Form {
 	public function get_gutters() {
 
 		$values	= array(
-			'gutter'        => 'On',
-			'gutterless'    => 'Off',
+			'gutter'     => 'On',
+			'gutterless' => 'Off',
 		);
 
 		return $values;
