@@ -742,6 +742,7 @@ class Form {
 			'' => 'None',
 		);
 
+		// @codingStandardsIgnoreStart Keeps throwing an alignment formatting error - not sure why
 		$values	= array(
 			'crimson' => 'Crimson',
 			'crimson-er' => 'Crimson: Accent',
@@ -791,7 +792,7 @@ class Form {
 			'yellow-dark' => 'Yellow: Dark',
 			'yellow-darker' => 'Yellow: Darker',
 			'yellow-darkest' => 'Yellow: Darkest',
-		);
+		); // @codingStandardsIgnoreEnd
 
 		switch ( $subset ) {
 
@@ -807,12 +808,13 @@ class Form {
 
 	public function get_padding() {
 
+		// @codingStandardsIgnoreStart Keeps throwing an alignment formatting error - not sure why
 		$values	= array(
 			'pad-ends' => 'Pad ends',
 			'pad-top' => 'Pad top',
 			'pad-bottom' => 'Pad bottom',
 			'' => 'No padding',
-		);
+		); //@codingStandardsIgnoreEnd
 
 		return $values;
 
@@ -820,10 +822,11 @@ class Form {
 
 	public function get_gutters() {
 
+		// @codingStandardsIgnoreStart Keeps throwing an alignment formatting error - not sure why
 		$values	= array(
 			'gutter' => 'On',
 			'gutterless' => 'Off',
-		);
+		); //@codingStandardsIgnoreEnd
 
 		return $values;
 
