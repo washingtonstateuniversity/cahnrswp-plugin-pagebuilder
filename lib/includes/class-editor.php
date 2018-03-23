@@ -7,12 +7,12 @@ if ( ! defined( 'WPINC' ) ) {
 
 /*
 * @desc Class to Editor
-* @since 3.0.0 
+* @since 3.0.0
 */
 class Editor {
 
 
-	public function __construct(){
+	public function __construct() {
 
 		// Add plugin actions
 		$this->add_actions();
@@ -27,10 +27,10 @@ class Editor {
 	* @desc Add WP actions for the plugin
 	* @since 3.0.0
 	*/
-	protected function add_actions(){
+	protected function add_actions() {
 
 		// Add editor to edit post page
-		\add_action( 'edit_form_after_title', array( $this, 'add_editor'), 1 );
+		\add_action( 'edit_form_after_title', array( $this, 'add_editor' ), 1 );
 
 	} // End add_actions
 
@@ -39,7 +39,7 @@ class Editor {
 	* @desc Add WP filters for the plugin
 	* @since 3.0.0
 	*/
-	protected function add_filters(){
+	protected function add_filters() {
 
 	} // End add_actions
 
@@ -48,11 +48,11 @@ class Editor {
 	* @desc Add Editor to post type
 	* @since 3.0.0
 	*/
-	public function add_editor( $post ){
+	public function add_editor( $post ) {
 
 		$cpb_shortcodes = cpb_get_shortcodes( false );
 
-		$content_shortcodes = cpb_get_shortcodes_from_content( $post->post_content, array('row'), 'row' );
+		$content_shortcodes = cpb_get_shortcodes_from_content( $post->post_content, array( 'row' ), 'row' );
 
 		$options_editor = $this->get_options_editor( $post );
 
@@ -61,18 +61,20 @@ class Editor {
 		$form_editor = $this->get_form_editor( $content_shortcodes );
 
 		$excerpt_editor = $this->get_excerpt_editor( $post );
-		
+
 		\ob_start();
 
 		include cpb_get_plugin_path( '/lib/displays/editor/editor.php' );
 
 		$html = \ob_get_clean();
 
+		// @codingStandardsIgnoreStart Already escaped
 		echo $html;
+		// @codingStandardsIgnoreEnd
 
 	} // End add_editor
 
-	
+
 	/*
 	* @desc Get HTML for layout editor
 	* @since 3.0.0
@@ -81,31 +83,28 @@ class Editor {
 	*
 	* @return string HTML of layout editor
 	*/
-	protected function get_options_editor( $post ){
+	protected function get_options_editor( $post ) {
 
-		$values = array( 'default' => 'Default Editor' , 'builder' => 'Layout Editor' );
+		$values = array(
+			'default' => 'Default Editor',
+			'builder' => 'Layout Editor',
+		);
 
-		$cpb = \get_post_meta( $post->ID , '_cpb_pagebuilder' , true );
+		$cpb = \get_post_meta( $post->ID, '_cpb_pagebuilder', true );
 
-		if ( '' === $cpb ){
-			
+		if ( '' === $cpb ) {
+
 			$cpb = 'builder';
-			
-		} else if ( '0' === $cpb ){
-			
+
+		} elseif ( '0' === $cpb ) {
+
 			$cpb = 'default';
-			
-		} else if ( '1' === $cpb ){
-			
+
+		} elseif ( '1' === $cpb ) {
+
 			$cpb = 'builder';
-			
+
 		}; // End if
-
-		if ( 'builder' === $cpb ){
-
-			//\remove_post_type_support( $post->post_type, 'editor' );
-
-		} // End if
 
 		\ob_start();
 
@@ -126,7 +125,7 @@ class Editor {
 	*
 	* @return string HTML of layout editor
 	*/
-	protected function get_layout_editor( $content_shortcodes ){
+	protected function get_layout_editor( $content_shortcodes ) {
 
 		$child_ids = array();
 
@@ -159,7 +158,7 @@ class Editor {
 	*
 	* @return string HTML of form editor
 	*/
-	protected function get_form_editor( $content_shortcodes ){
+	protected function get_form_editor( $content_shortcodes ) {
 
 		$content_shortcodes_flat = cpb_flatten_shortcode_array( $content_shortcodes );
 
@@ -167,30 +166,28 @@ class Editor {
 
 		$empty_editors = '';
 
-		if ( is_array( $content_shortcodes_flat ) ){
+		if ( is_array( $content_shortcodes_flat ) ) {
 
-			foreach( $content_shortcodes_flat as $index => $shortcode ){
+			foreach ( $content_shortcodes_flat as $index => $shortcode ) {
 
-				$form_html .= cpb_get_editor_form_html( $shortcode ); 
+				$form_html .= cpb_get_editor_form_html( $shortcode );
 
 			} // End foreach
-
 		} // End if
 
 		$text_editors = array( 'textblock' );
 
-		foreach( $text_editors as $text_editor ){
-				
-			for ( $i = 0; $i < 10; $i++ ){
-				
+		foreach ( $text_editors as $text_editor ) {
+
+			for ( $i = 0; $i < 10; $i++ ) {
+
 				$text_shortcode = cpb_get_shortcode( $text_editor, array(), '', false );
 
-				$text_shortcode['form_classes'] = array('cpb-blank-editor');
-				
-				$empty_editors .= cpb_get_editor_form_html( $text_shortcode ); 
-			
+				$text_shortcode['form_classes'] = array( 'cpb-blank-editor' );
+
+				$empty_editors .= cpb_get_editor_form_html( $text_shortcode );
+
 			} // end for
-			
 		} // end foreach
 
 		\ob_start();
@@ -212,17 +209,17 @@ class Editor {
 	*
 	* @return string HTML of editor
 	*/
-	protected function get_excerpt_editor( $post ){
+	protected function get_excerpt_editor( $post ) {
 
-		$excerpt_type = \get_post_meta( $post->ID , '_cpb_m_excerpt' , true );
+		$excerpt_type = \get_post_meta( $post->ID, '_cpb_m_excerpt', true );
 
-		if ( '' === $excerpt_type ){
+		if ( '' === $excerpt_type ) {
 
 			$excerpt_type = 0;
 
 		} // End if
-		
-		$values = array( 'Default Excerpt' , 'Custom Excerpt' );
+
+		$values = array( 'Default Excerpt', 'Custom Excerpt' );
 
 		\ob_start();
 
@@ -241,7 +238,7 @@ class Editor {
 	*
 	* @return string HTML for form
 	*/
-	protected function get_add_row_form(){
+	protected function get_add_row_form() {
 
 		$layouts = array(
 			'single' => 'Single Column',
@@ -254,7 +251,7 @@ class Editor {
 			'triptych' => 'Three Column: Middle 50%',
 			'quarters' => 'Four Column',
 		);
-		
+
 		\ob_start();
 
 		include cpb_get_plugin_path( '/lib/displays/editor/add-row-editor.php' );
@@ -262,7 +259,7 @@ class Editor {
 		$html = \ob_get_clean();
 
 		return $html;
-		
+
 	} // end get_add_row_form
 
 
@@ -272,7 +269,7 @@ class Editor {
 	*
 	* @return string HTML for form
 	*/
-	protected function get_add_shortcode_form(){
+	protected function get_add_shortcode_form() {
 
 		$shortcodes = cpb_get_shortcodes( false );
 
@@ -284,12 +281,12 @@ class Editor {
 
 		$form_content = array( 'Select Item' => $shortcode_html );
 
-		$form_args = array('title' => 'Add Items & Widgets');
+		$form_args = array( 'title' => 'Add Items & Widgets' );
 
 		$html = cpb_get_editor_form_wrapper( 'cpb-add-item-form', $form_content, $form_args );
 
 		return $html;
-		
+
 	} // end get_add_row_form
 
 

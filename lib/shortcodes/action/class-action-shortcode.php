@@ -7,138 +7,149 @@ if ( ! defined( 'WPINC' ) ) {
 
 /*
 * @desc Class to handle Action Shortcode
-* @since 3.0.0 
+* @since 3.0.0
 */
 class Action {
 
-    protected $prefix = '';
+	protected $prefix = '';
 
-    // @var array $default_settings Array of default settings
-    protected $default_settings = array(
-        'label'         => '',
-        'link'          => '#',
-        'textcolor'     => '',
-        'csshook'       => '',
-        'style'         => '',
-        'caption'       => '',
-    );
-
-
-	public function __construct(){
-
-        \add_action( 'init', array( $this, 'register_shortcode') );
-
-    } // End __construct
+	// @var array $default_settings Array of default settings
+	protected $default_settings = array(
+		'label'         => '',
+		'link'          => '#',
+		'textcolor'     => '',
+		'csshook'       => '',
+		'style'         => '',
+		'caption'       => '',
+	);
 
 
-    /*
-    * @desc Register action shortcode
-    * @since 3.0.0
-    */
-    public function register_shortcode(){
+	public function __construct() {
 
-        \add_shortcode( 'action', array( $this, 'get_rendered_shortcode') );
+		\add_action( 'init', array( $this, 'register_shortcode' ) );
 
-        cpb_register_shortcode( 
-            'action', 
-            $args = array(
-                'form_callback'         => array( $this, 'get_shortcode_form' ),
-                'label'                 => 'Action Button', // Label of the item
-                'render_callback'       => array( $this, 'get_rendered_shortcode'), // Callback to render shortcode
-                'default_atts'          => $this->default_settings,
-                'in_column'             => true, // Allow in column
-            ) 
-        );
-
-    } // End register_shortcode
+	} // End __construct
 
 
-    /*
-    * @desc Render the shortcode
-    * @since 3.0.0
-    *
-    * @param array $atts Shortcode attributes
-    * @param string $content Shortcode content
-    *
-    * @return string HTML shortcode output
-    */
-    public function get_rendered_shortcode( $atts, $content ){
+	/*
+	* @desc Register action shortcode
+	* @since 3.0.0
+	*/
+	public function register_shortcode() {
 
-        $html = '';
+		\add_shortcode( 'action', array( $this, 'get_rendered_shortcode' ) );
 
-        // Check default settings 
-        $atts = \shortcode_atts( $this->default_settings, $atts, 'action' );
+		cpb_register_shortcode(
+			'action',
+			$args = array(
+				'form_callback'         => array( $this, 'get_shortcode_form' ),
+				'label'                 => 'Action Button', // Label of the item
+				'render_callback'       => array( $this, 'get_rendered_shortcode' ), // Callback to render shortcode
+				'default_atts'          => $this->default_settings,
+				'in_column'             => true, // Allow in column
+			)
+		);
 
-        $class_array = array( 'cpb-action-button', 'cpb-action-button-item');
+	} // End register_shortcode
 
-        if ( ! empty( $atts['style'] ) ){
-			
+
+	/*
+	* @desc Render the shortcode
+	* @since 3.0.0
+	*
+	* @param array $atts Shortcode attributes
+	* @param string $content Shortcode content
+	*
+	* @return string HTML shortcode output
+	*/
+	public function get_rendered_shortcode( $atts, $content ) {
+
+		$html = '';
+
+		// Check default settings
+		$atts = \shortcode_atts( $this->default_settings, $atts, 'action' );
+
+		$class_array = array( 'cpb-action-button', 'cpb-action-button-item' );
+
+		if ( ! empty( $atts['style'] ) ) {
+
 			$class_array[] = $atts['style'];
-			
-        } // End if
-        
-        if ( ! empty( $atts['caption'] ) ) $class_array[] = 'has-caption';
-		
-        if ( ! empty( $atts['csshook'] ) ) $class_array[] = $atts['csshook'];
-        
-        $classes = implode( ' ', $class_array );
 
-        $link = $atts['link'];
+		} // End if
 
-        $label = $atts['label'];
+		if ( ! empty( $atts['caption'] ) ) {
 
-        $caption = $atts['caption'];
+			$class_array[] = 'has-caption';
 
-        if ( ! empty( $label ) ){
+		} // End if
 
-            \ob_start();
+		if ( ! empty( $atts['csshook'] ) ) {
 
-            include  __DIR__ . '/action.php';
+			$class_array[] = $atts['csshook'];
 
-            $html .= \ob_get_clean();
+		} // End if
 
-        } // End if
+		$classes = implode( ' ', $class_array );
 
-        return $html;
+		$link = $atts['link'];
 
-    } // End get_rendered_shortcode
+		$label = $atts['label'];
+
+		$caption = $atts['caption'];
+
+		if ( ! empty( $label ) ) {
+
+			\ob_start();
+
+			include __DIR__ . '/action.php';
+
+			$html .= \ob_get_clean();
+
+		} // End if
+
+		return $html;
+
+	} // End get_rendered_shortcode
 
 
-    /*
-    * @desc Get HTML for shortcode form
-    * @since 3.0.0
-    *
-    * @param array $atts Shortcode attributes
-    * @param string $content Shortcode content
-    *
-    * @return string HTML shortcode form output
-    */
-    public function get_shortcode_form( $id, $settings, $content ){
+	/*
+	* @desc Get HTML for shortcode form
+	* @since 3.0.0
+	*
+	* @param array $atts Shortcode attributes
+	* @param string $content Shortcode content
+	*
+	* @return string HTML shortcode form output
+	*/
+	public function get_shortcode_form( $id, $settings, $content ) {
 
-        $cpb_form = cpb_get_form_class();
+		$cpb_form = cpb_get_form_class();
 
-        $styles = array(
-			''					=> 'None',
-			'in-page-action'  	=> 'In Page Button',
-        );
-        
-        $html = '';
+		$styles = array(
+			''                => 'None',
+			'in-page-action'  => 'In Page Button',
+		);
 
-        $adv = '';
-		
-		$html .= $cpb_form->text_field( cpb_get_input_name( $id, true, 'label'), $settings['label'], 'Label' );
+		$html = '';
 
-		$html .= $cpb_form->text_field( cpb_get_input_name( $id, true, 'link'), $settings['link'], 'Link' );
+		$adv = '';
 
-		$html .= $cpb_form->text_field( cpb_get_input_name( $id, true, 'csshook'), $settings['csshook'], 'CSS Hook' );
-		
-		$html .= $cpb_form->select_field( cpb_get_input_name( $id, true, 'style'), $settings['style'], $styles, 'Style' );
-		
-		$adv .= $cpb_form->textarea_field( cpb_get_input_name( $id, true, 'caption'), $settings['caption'], 'Link Description' );
-		
-		return array( 'Basic' => $html, 'Advanced' => $adv );
+		$html .= $cpb_form->text_field( cpb_get_input_name( $id, true, 'label' ), $settings['label'], 'Label' );
 
-    } // End get_shortcode_form
+		$html .= $cpb_form->text_field( cpb_get_input_name( $id, true, 'link' ), $settings['link'], 'Link' );
+
+		$html .= $cpb_form->text_field( cpb_get_input_name( $id, true, 'csshook' ), $settings['csshook'], 'CSS Hook' );
+
+		$html .= $cpb_form->select_field( cpb_get_input_name( $id, true, 'style' ), $settings['style'], $styles, 'Style' );
+
+		$adv .= $cpb_form->textarea_field( cpb_get_input_name( $id, true, 'caption' ), $settings['caption'], 'Link Description' );
+
+		return array(
+			'Basic'    => $html,
+			'Advanced' => $adv,
+		);
+
+	} // End get_shortcode_form
 
 } // End Action
 
