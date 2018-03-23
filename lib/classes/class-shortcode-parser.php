@@ -121,8 +121,8 @@ class Shortcode_Parser {
 		// Get regex code using WP function
 		$regex = \get_shortcode_regex();
 
-		// @codingStandardsIgnoreEnd Set back to original
 		$shortcode_tags = $temp;
+		// @codingStandardsIgnoreEnd Set back to original
 
 		$regex = '/' . $regex . '/';
 

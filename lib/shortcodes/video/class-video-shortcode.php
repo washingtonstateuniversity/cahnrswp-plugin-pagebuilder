@@ -66,7 +66,6 @@ class Video_Shortcode {
 		// Check default settings
 		$atts = \shortcode_atts( $this->default_settings, $atts, 'video' );
 
-
 		if ( ! empty( $atts['vid_id'] ) ) {
 
 			$html .= '<div class="cpb-video-wrapper" style="position: relative">';
@@ -189,7 +188,7 @@ class Video_Shortcode {
 			'title'   => 'YouTube Video',
 			'desc'    => 'Display YouTube video by ID',
 			'form'    => $cpb_form->text_field( cpb_get_input_name( $id, true, 'vid_id' ), $settings['vid_id'], 'YouTube Video ID' ),
-			);
+		);
 
 		$vimeo_form = array(
 			'name'    => cpb_get_input_name( $id, true, 'vid_type' ),
@@ -198,7 +197,7 @@ class Video_Shortcode {
 			'title'   => 'Vimeo Video',
 			'desc'    => 'Display Vimeo video by ID',
 			'form'    => $cpb_form->text_field( cpb_get_input_name( $id, true, 'vid_id' ), $settings['vid_id'], 'Vimeo Video ID' ),
-			);
+		);
 
 		$html = $cpb_form->multi_form( array( $youtube_form, $vimeo_form ) );
 

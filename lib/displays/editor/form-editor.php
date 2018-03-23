@@ -1,4 +1,4 @@
-<?php 
+<?php
 // @codingStandardsIgnoreStart Already escaped elseware
 ?><div id="cpb-editor-forms">
 	<?php echo $form_html; ?>

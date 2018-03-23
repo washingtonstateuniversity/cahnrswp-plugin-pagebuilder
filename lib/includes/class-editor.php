@@ -86,8 +86,8 @@ class Editor {
 	protected function get_options_editor( $post ) {
 
 		$values = array(
-			'default' => 'Default Editor', 
-			'builder' => 'Layout Editor', 
+			'default' => 'Default Editor',
+			'builder' => 'Layout Editor',
 		);
 
 		$cpb = \get_post_meta( $post->ID, '_cpb_pagebuilder', true );

@@ -204,7 +204,7 @@ class Post_Gallery_Shortcode {
 				$id,
 				true,
 				'columns'
-			), 
+			),
 			$settings['columns'],
 			array(
 				1 => 1,
@@ -243,7 +243,7 @@ class Post_Gallery_Shortcode {
 
 		return array(
 			'Source'  => $html,
-			'Display' => $display
+			'Display' => $display,
 		);
 
 	} // End get_shortcode_form

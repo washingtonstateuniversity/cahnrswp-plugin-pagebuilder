@@ -152,7 +152,7 @@ class Slideshow_Shortcode {
 		\ob_start();
 
 		// Include the html
-		include  __DIR__ . '/slideshow-editor.php';
+		include __DIR__ . '/slideshow-editor.php';
 
 		// Get the html
 		$html = \ob_get_clean();

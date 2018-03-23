@@ -108,6 +108,7 @@ class AJAX {
 
 	protected function check_nounce() {
 
+		//@codingStandardsIgnoreStart
 		if ( empty( $_POST['ajax-post-id'] ) ) {
 
 			die();
@@ -115,6 +116,7 @@ class AJAX {
 		}
 
 		$post_id = $_POST['ajax-post-id'];
+		// @codingStandardsIgnoreEnd
 
 		\check_ajax_referer( 'cahnrs_pb_ajax_' . $post_id, 'ajax-nonce' );
 

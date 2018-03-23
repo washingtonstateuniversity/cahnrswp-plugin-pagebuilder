@@ -125,9 +125,9 @@ function cpb_register_shortcode( $slug, $args = array() ) {
 	// Set default Args
 	$default_args = array(
 		'id'                        => '', // ID set later
-	   	'label'                     => '', // Label of the item
+		'label'                     => '', // Label of the item
 		'render_callback'           => false, // Callback to render shortcode
-	   	'editor_render_callback'    => false, // Override editor content display
+		'editor_render_callback'    => false, // Override editor content display
 		'form_callback'             => false, // Callback to render form
 		'sanitize_callback'         => false, // Callback to sanitize from inputs
 		'editor_callback'           => false, // Callback to render form

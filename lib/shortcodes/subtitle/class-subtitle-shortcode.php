@@ -146,7 +146,7 @@ class Subtitle_Shortcode {
 
 		return array(
 			'Basic'    => $html,
-			'Advanced' => $adv
+			'Advanced' => $adv,
 		);
 
 	} // End get_shortcode_form

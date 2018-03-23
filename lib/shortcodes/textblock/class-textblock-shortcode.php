@@ -82,7 +82,7 @@ class Textblock {
 
 		\ob_start();
 
-		include  __DIR__ . '/textblock.php';
+		include __DIR__ . '/textblock.php';
 
 		$html = \ob_get_clean();
 
@@ -128,7 +128,10 @@ class Textblock {
 
 		$adv .= $cpb_form->text_field( cpb_get_input_name( $id, true, 'csshook' ), $settings['csshook'], 'CSS Hook' );
 
-		return array( 'Basic' => $html, 'Advanced' => $adv );
+		return array(
+			'Basic' => $html,
+			'Advanced' => $adv,
+		);
 
 	} // End get_shortcode_form
 
@@ -230,7 +233,7 @@ class Textblock {
 
 			$new_content .= '<div class="cpb-more-content-continue">' . $content_parts[1] . '</div>';
 
-			$new_content .=  $link . '</div>';
+			$new_content .= $link . '</div>';
 
 			$content = $new_content;
 

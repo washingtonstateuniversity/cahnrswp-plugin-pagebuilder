@@ -337,13 +337,13 @@ class Save {
 					// WP Eitors use a special name pattern _cpb_content_.....ID
 					$content_key = '_cpb_content_' . $shortcode_key;
 
+					// @codingStandardsIgnoreStart Already checked noncee
 					if ( ! empty( $_POST[ $content_key ] ) ) {
 
-						// @codingStandardsIgnoreStart Already checked nonce
 						$shortcode['content'] = wp_kses_post( $_POST[ $content_key ] );
-						// @codingStandardsIgnoreEnd
 
 					} // End if
+					// @codingStandardsIgnoreEnd
 				} // End if
 
 				// Check if any settings have been sent with the $_POST request
