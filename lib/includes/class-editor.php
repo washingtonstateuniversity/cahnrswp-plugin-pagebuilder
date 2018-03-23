@@ -96,11 +96,11 @@ class Editor {
 
 			$cpb = 'builder';
 
-		} else if ( '0' === $cpb ) {
+		} elseif ( '0' === $cpb ) {
 
 			$cpb = 'default';
 
-		} else if ( '1' === $cpb ) {
+		} elseif ( '1' === $cpb ) {
 
 			$cpb = 'builder';
 

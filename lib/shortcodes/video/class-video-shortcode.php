@@ -155,7 +155,7 @@ class Video_Shortcode {
 
 			$video_id = $url[1];
 
-		} else if ( strpos( $url, '.be/' ) ) { //https://youtu.be/nkXGohB02V0
+		} elseif ( strpos( $url, '.be/' ) ) { //https://youtu.be/nkXGohB02V0
 
 			$url = explode( '.be/', $url );
 

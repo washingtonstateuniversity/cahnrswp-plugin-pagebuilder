@@ -266,7 +266,7 @@ class Save {
 				// Add inner content ( $shortcode_content) and close the shortcode
 				$shortcode_string .= ']' . $shortcode_content . '[/' . $shortcode['slug'] . ']';
 
-			} else if ( ! empty( $shortcode['content'] ) ) { // Does the shortcode have content?
+			} elseif ( ! empty( $shortcode['content'] ) ) { // Does the shortcode have content?
 
 				// Add the content
 				$shortcode_string .= ']' . $shortcode['content'] . '[/' . $shortcode['slug'] . ']';
