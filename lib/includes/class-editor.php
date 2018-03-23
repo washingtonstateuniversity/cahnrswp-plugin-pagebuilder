@@ -50,27 +50,37 @@ class Editor {
 	*/
 	public function add_editor( $post ) {
 
-		$cpb_shortcodes = cpb_get_shortcodes( false );
+		$customizer_key = 'cpb_enable_post_type_' . $post->post_type;
 
-		$content_shortcodes = cpb_get_shortcodes_from_content( $post->post_content, array( 'row' ), 'row' );
+		$default = ( 'page' === $post->post_type ) ? 1 : 0;
 
-		$options_editor = $this->get_options_editor( $post );
+		$is_enabled = get_theme_mod( $customizer_key, $default );
 
-		$layout_editor = $this->get_layout_editor( $content_shortcodes );
+		if ( ! empty( $is_enabled ) ) {
 
-		$form_editor = $this->get_form_editor( $content_shortcodes );
+			$cpb_shortcodes = cpb_get_shortcodes( false );
 
-		$excerpt_editor = $this->get_excerpt_editor( $post );
+			$content_shortcodes = cpb_get_shortcodes_from_content( $post->post_content, array( 'row' ), 'row' );
 
-		\ob_start();
+			$options_editor = $this->get_options_editor( $post );
 
-		include cpb_get_plugin_path( '/lib/displays/editor/editor.php' );
+			$layout_editor = $this->get_layout_editor( $content_shortcodes );
 
-		$html = \ob_get_clean();
+			$form_editor = $this->get_form_editor( $content_shortcodes );
 
-		// @codingStandardsIgnoreStart Already escaped
-		echo $html;
-		// @codingStandardsIgnoreEnd
+			$excerpt_editor = $this->get_excerpt_editor( $post );
+
+			\ob_start();
+
+			include cpb_get_plugin_path( '/lib/displays/editor/editor.php' );
+
+			$html = \ob_get_clean();
+
+			// @codingStandardsIgnoreStart Already escaped
+			echo $html;
+			// @codingStandardsIgnoreEnd
+
+		} // End if
 
 	} // End add_editor
 
@@ -271,7 +281,7 @@ class Editor {
 	*/
 	protected function get_add_shortcode_form() {
 
-		$shortcodes = cpb_get_shortcodes( false );
+		$shortcodes = cpb_get_shortcodes( false, true );
 
 		\ob_start();
 

@@ -976,5 +976,34 @@ padding-bottom: 25px;
 	}
 
 .cpb-column .cpb-column-inner > footer {
-display: none;
+	display: none;
+}
+
+/* ------------ Add Row Editor ------------------- */
+#cpb-add-row .img-single-layout {
+	background-image: url('../images/column-single-icon.gif');
+}
+#cpb-add-row .img-halves-layout {
+	background-image: url('../images/column-halves-icon.gif');
+}
+#cpb-add-row .img-side-right-layout {
+	background-image: url('../images/column-two-sidebar-right-icon.gif');
+}
+#cpb-add-row .img-side-left-layout {
+	background-image: url('../images/column-two-sidebar-left-icon.gif');
+}
+#cpb-add-row .img-thirds-layout {
+	background-image: url('../images/column-thirds-icon.gif');
+}
+#cpb-add-row .img-thirds-half-left-layout {
+	background-image: url('../images/column-thirds-left-icon.gif');
+}
+#cpb-add-row .img-triptych-layout {
+	background-image: url('../images/column-thirds-middle-icon.gif');
+}
+#cpb-add-row .img-thirds-half-right-layout {
+	background-image: url('../images/column-thirds-right-icon.gif');
+}
+#cpb-add-row .img-quarters-layout {
+	background-image: url('../images/column-four-icon.gif');
 }

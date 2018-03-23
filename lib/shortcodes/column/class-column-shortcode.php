@@ -215,7 +215,7 @@ class Column {
 	*/
 	private function get_column_classes( $settings ) {
 
-		$class = 'column ';
+		$class = 'cpb-column ';
 
 		$index_list = 'zero,one,two,three,four,five,six,seven,eight,nine,ten';
 
