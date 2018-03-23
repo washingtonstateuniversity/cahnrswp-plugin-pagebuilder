@@ -20,7 +20,7 @@
 			// @codingStandardsIgnoreEnd
 
 		} // end foreach
-	}; ?>
+}; ?>
 	</div></div>
 <?php endforeach; ?>
 </div>
