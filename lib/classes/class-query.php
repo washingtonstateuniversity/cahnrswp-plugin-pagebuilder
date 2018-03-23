@@ -190,17 +190,51 @@ class Query {
 	protected function get_local_excerpt( $post_id, $settings ) {
 
 		// TO DO: Rewrite excerpt call here
-		$excerpt = \get_the_excerpt();
-
-		if ( ! $excerpt ) {
-
-			$excerpt = \wp_trim_words( strip_shortcodes( wp_strip_all_tags( get_the_content(), true ) ), 35, '...' );
-
-		} // end if
+		$excerpt = $this->get_excerpt_from_post_id( $post_id );
 
 		return $excerpt;
 
 	} // end get_local_excerpt
+
+
+	/*
+	* @desc  Get the excerpt from the post
+	* @since 0.0.3
+	*
+	* @param WP_Post $post WP Post object
+	*
+	* @return string Post excerpt
+	*/
+	protected function get_excerpt_from_post_id( $post_id ) {
+
+		$post = get_post( $post_id );
+
+		// If this has an excerpt let's just use that
+		if ( isset( $post->post_excerpt ) && ! empty( $post->post_excerpt ) ) {
+
+			// bam done
+			return $post->post_excerpt;
+
+		} else { // OK so someone didn't set an excerpt, let's make one
+
+			// We'll start with the post content
+			$excerpt = $post->post_content;
+
+			// Remove shortcodes but keep text inbetween ]...[/
+			$excerpt = \preg_replace( '~(?:\[/?)[^/\]]+/?\]~s', '', $excerpt );
+
+			// Remove HTML tags and script/style
+			$excerpt = \wp_strip_all_tags( $excerpt );
+
+			// Shorten to 35 words and convert special characters
+			$excerpt = \htmlspecialchars( \wp_trim_words( $excerpt, 35 ) );
+
+			return $excerpt;
+
+		}// End if
+
+	} // End get_excerpt_from_post
+
 
 	public function get_remote_items( $settings, $prefix = '', $fields = false ) {
 
