@@ -66,7 +66,7 @@ class CAHNRSWP_Pagebuilder {
 		include cpb_get_plugin_path( '/lib/includes/class-ajax.php' );
 
 		// Add Customizer Script
-		//include cpb_get_plugin_path( 'includes/class-customizer.php' );
+		include cpb_get_plugin_path( '/lib/includes/class-customizer.php' );
 
 	} // End init_plugin
 

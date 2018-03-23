@@ -47,20 +47,34 @@ function cpb_get_plugin_url( $path = '' ) {
 *
 * @return array Registered shortcodes
 */
-function cpb_get_shortcodes( $as_slugs = true ) {
+function cpb_get_shortcodes( $as_slugs = true, $in_column = false ) {
 
 	// Set shortcodes as global scope
 	global $pagebuilder_shortcodes;
 
+	$shortcodes = $pagebuilder_shortcodes;
+
+	if ( $in_column ) {
+
+		foreach ( $shortcodes as $key => $settings ) {
+
+			if ( empty( $settings['in_column'] ) ) {
+
+				unset( $shortcodes[ $key ] );
+
+			} // End if
+		} // End foreach
+	} // End if
+
 	if ( $as_slugs ) {
 
 		// Just return the keys
-		return array_keys( $pagebuilder_shortcodes );
+		return array_keys( $shortcodes );
 
 	} else {
 
 		// Return everything
-		return $pagebuilder_shortcodes;
+		return $shortcodes;
 
 	} // End if
 

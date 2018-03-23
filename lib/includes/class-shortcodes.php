@@ -123,6 +123,9 @@ class Shortcodes {
 		// Add Image shortcode
 		include_once cpb_get_plugin_path( '/lib/shortcodes/video/class-video-shortcode.php' );
 
+		// Add Image shortcode
+		include_once cpb_get_plugin_path( '/lib/shortcodes/tabs/class-tabs-shortcode.php' );
+
 	} // End add_shortcodes
 
 

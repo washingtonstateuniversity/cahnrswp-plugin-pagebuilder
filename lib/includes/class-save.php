@@ -316,6 +316,8 @@ class Save {
 		// Split the layout by comma
 		$layout = explode( ',', $shortcodes_list );
 
+		array_filter( $layout );
+
 		// Make sure we are dealing with an array here
 		if ( is_array( $layout ) ) {
 
