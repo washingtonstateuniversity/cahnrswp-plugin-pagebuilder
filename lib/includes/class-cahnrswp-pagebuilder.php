@@ -68,7 +68,27 @@ class CAHNRSWP_Pagebuilder {
 		// Add Customizer Script
 		include cpb_get_plugin_path( '/lib/includes/class-customizer.php' );
 
+		add_filter( 'the_content', array( $this, 'do_remove_p' ), 1 );
+
 	} // End init_plugin
+
+	/*
+	* @desc Removes extra p that WordPress likes to add
+	* @since 3.0.0
+	*
+	* @param string $content Post content
+	*
+	* @return string Post content with shortcodes built out
+	*/
+	public function do_remove_p( $content ) {
+
+		remove_filter( 'the_content', array( $this, 'do_remove_p' ), 1 );
+
+		$content = do_shortcode( $content );
+
+		return $content;
+
+	} // End do_remove_p
 
 
 } // End CAHNRSWP_Pagebuilder

@@ -696,7 +696,7 @@ function cpb_get_editor_form_html( $shortcode ) {
 
 	} // End if
 
-	if ( ! empty( $shortcode['form_classes'] && is_array( $shortcode['form_classes'] ) ) ) {
+	if ( ! empty( $shortcode['form_classes'] ) && is_array( $shortcode['form_classes'] ) ) {
 
 		$form_classes = array_merge( $form_classes, $shortcode['form_classes'] );
 

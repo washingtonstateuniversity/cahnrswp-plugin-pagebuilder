@@ -126,6 +126,9 @@ class Shortcodes {
 		// Add Image shortcode
 		include_once cpb_get_plugin_path( '/lib/shortcodes/tabs/class-tabs-shortcode.php' );
 
+		// Add Image shortcode
+		include_once cpb_get_plugin_path( '/lib/shortcodes/social/class-social-shortcode.php' );
+
 	} // End add_shortcodes
 
 

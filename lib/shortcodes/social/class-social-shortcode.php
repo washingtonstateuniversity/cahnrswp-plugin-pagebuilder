@@ -279,7 +279,7 @@ class Social_Shortcode {
 
 		$html .= $cpb_form->text_field( cpb_get_input_name( $id, true, 'csshook' ), $settings['csshook'], 'CSS Hook' );
 
-		return $form;
+		return $html;
 
 	} // End get_shortcode_form
 

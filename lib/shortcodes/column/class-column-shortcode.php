@@ -97,7 +97,7 @@ class Column {
 
 		\ob_start();
 
-		include __DIR__ . '/column.php';
+		include __DIR__ . '/column.min.php';
 
 		$html = \ob_get_clean();
 

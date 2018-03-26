@@ -101,7 +101,7 @@ class Action {
 
 			\ob_start();
 
-			include __DIR__ . '/action.php';
+			include __DIR__ . '/action.min.php';
 
 			$html .= \ob_get_clean();
 
