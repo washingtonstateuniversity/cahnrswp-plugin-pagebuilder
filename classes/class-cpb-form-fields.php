@@ -134,7 +134,7 @@ class CPB_Form_Fields {
 
 		$html .= '</select>';
 
-		if ( $label ) $html = '<label for="' . $id . '">' . $label . '</label>' . $html;
+		if ( $label ) $html = '<label>' . $label . '</label>' . $html;
 
 		return $this->wrap_field( $html, $class );
 
@@ -418,7 +418,7 @@ class CPB_Form_Fields {
 			
 			$subforms .= '<fieldset class="' . $active . '"' . $disabled . '>';
 			
-			$subforms .= '<div class="title">Option: ' . $form[title] . ' <a href="#" class="close-multi-form-action">Close</a></div><hr/>';
+			$subforms .= '<div class="title">Option: ' . $form['title'] . ' <a href="#" class="close-multi-form-action">Close</a></div><hr/>';
 			
 			$subforms .= $form['form'] . '</fieldset>';
 			

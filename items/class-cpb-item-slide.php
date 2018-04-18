@@ -63,7 +63,7 @@ class CPB_Item_Slide extends CPB_Item {
 	}// end item
 	
 	
-	public function get_gallery_slide_html( $items , $settings ) {
+	public function get_gallery_slide_html( $items, $settings, $cpb_slideshow ) {
 		
 		global $cpb_slideshow;
 		
@@ -71,7 +71,16 @@ class CPB_Item_Slide extends CPB_Item {
 		
 		foreach( $items as $item ){
 			
-			$active = ( $cpb_slideshow['i'] === 1 )? ' active-slide' : '';
+			if ( ! empty( $cpb_slideshow['randomize'] ) ){
+
+				$active = ( $cpb_slideshow['active'] === $cpb_slideshow['i'] )? ' active-slide' : '';
+
+			} else {
+
+				$active = ( 1 === $cpb_slideshow['i'] )? ' active-slide' : '';
+
+			} // End if
+			
 			$bg_image = $item['img'];
 			$img = '<img class="slide_img_bg" src="' . plugins_url( 'images/spacer1x1.gif', dirname(__FILE__) ) . '" style="background-image:url(' . $bg_image . ')" />';
 			$link = ( $item['link'] ) ? '<a href="' . $item['link'] . '" class="slide-link" /></a>' : '';
@@ -398,7 +407,7 @@ class CPB_Item_Slide extends CPB_Item {
 		
 	}
 	
-	/*public function css(){
+	public function css(){
 		
 		$style = '.cpb-slide.editor-slide {padding: 0.5rem; box-sizing: border-box; border-radius: 3px; margin-bottom: 1rem;}';
 		
@@ -409,10 +418,6 @@ class CPB_Item_Slide extends CPB_Item {
 		$style .= '.cpb-slide.editor-slide .copy { margin-left: 135px; color: #555;}';
 		
 		$style .= '.cpb-slide.editor-slide .copy h4 { margin: 0;padding: 0;}';
-		
-		$style .= '.cpb-slideshow .slide.gallery-slide {padding-bottom: 56.25%;position: relative;}';
-		
-		$style .= '.cpb-slideshow .slide.gallery-slide .slide-image {position: absolute;top:0;left:0;width: 100%;height:100%;background-size:cover;background-position: center center;}';
 		
 		$style .= '@media (max-width:400px){';
 		
@@ -428,7 +433,7 @@ class CPB_Item_Slide extends CPB_Item {
 		
 		return $style;
 		
-	} // end admin_css*/
+	} // end admin_css
 	
 	
 }

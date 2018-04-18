@@ -355,7 +355,7 @@ abstract class CPB_Item {
 			
 			$form_args = array( 'slug' => $this->get_slug() , 'class' => $form_class , 'title' => $this->get_name() , 'size' => $this->get_form_size() );
 		
-			$html .= $this->form_fields->get_item_form( $this->get_id() , $this->form( $settings , $content ) , $form_args );
+			$html = $this->form_fields->get_item_form( $this->get_id() , $this->form( $settings , $content ) , $form_args );
 		
 		} // end if
 			
