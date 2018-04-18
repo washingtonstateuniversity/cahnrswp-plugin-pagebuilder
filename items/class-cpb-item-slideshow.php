@@ -17,9 +17,15 @@ class CPB_Item_Slideshow extends CPB_Item {
 		
 		global $cpb_slideshow;
 		
+		$slide_count = substr_count( $content, '[slide' );
+
+		$active = rand(1, $slide_count );
+
 		$cpb_slideshow = array(
 			'type' => $settings['dislay_type'],
 			'i'    => 1,
+			'active' => $active,
+			'randomize' => $settings['randomize'],
 		);
 		
 		$slides = do_shortcode( $content );
@@ -55,11 +61,19 @@ class CPB_Item_Slideshow extends CPB_Item {
 		
 		$html .= $this->form_fields->select_field( $this->get_input_name('display_type') , $settings['display_type'] , $displays , 'Display Type' );
 		
+		$html .= $this->form_fields->checkbox_field( $this->get_input_name( 'randomize' ), 1, $settings['randomize'], 'Randomize' );
+
 		return array('Basic' => $html );
 		
 	} // end form
 	
 	protected function editor( $settings , $content ){
+
+		$base_settings = array(
+			'layout' => '',
+		);
+
+		$settings = array_merge( $base_settings, $settings );
 		
 		$html = '<div class="cpb-item cpb-content-item cpb-sublayout-item cpb-' . $this->get_slug() . ' cpb-layout-item ' . $settings['layout'] . '" data-id="' . $this->get_id() . '">';
 		
@@ -95,6 +109,8 @@ class CPB_Item_Slideshow extends CPB_Item {
 		
 		$clean['dislay_type'] = ( ! empty( $settings['dislay_type'] ) )? sanitize_text_field( $settings['dislay_type'] ) : 'gallery-slideshow';
 		
+		$clean['randomize'] = ( ! empty( $settings['randomize'] ) )? sanitize_text_field( $settings['randomize'] ) : '';
+
 		return $clean;
 	}
 	
