@@ -445,7 +445,7 @@ abstract class CPB_Item {
 			
 			$editor_content .= '<iframe id="item-content-' . $this->get_id() . '" class="cpb-editor-content" data-id="' . $this->get_id() . '" src="about:blank" scrolling="no"></iframe>';
 			
-			$editor_content .= '<textarea style="display:none;">' . htmlspecialchars( $this->the_item( $this->get_settings() , $this->get_content() ) ) . '</textarea>';
+			$editor_content .= '<textarea style="display:none;"></textarea>';
 			
 			//$editor_content .= '<iframe id="item-content-' . $this->get_id() . '" class="cpb-editor-content" data-id="' . $this->get_id() . '" src="' . get_site_url() . '?cpb-get-template=editor-iframe" scrolling="no"></iframe>';
 			
