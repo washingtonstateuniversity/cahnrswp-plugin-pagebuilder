@@ -216,6 +216,27 @@ margin-bottom: 1rem;
 	background-repeat: no-repeat;
 }
 
+.cpb-content-item.cpb-sublayout-item > header > .cpb-edit-item-action {
+	display: inline-block;
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 35px;
+	width: 34px;
+	background-color: transparent;
+	border: none;
+	border-right: 1px solid #eee;
+	font-size: 0;
+	background-image: url(http://local-cahnrs.wsu.edu/builder/wp-content/plugins/cahnrswp-plugin-pagebuilder/images/edit-icon.png);
+	background-position: center center;
+	background-repeat: no-repeat;
+}
+
+.cpb-item.cpb-sublayout-item > header > .cpb-item-title {
+	padding: 0 1rem;
+	margin: 0 25px;
+}
+
 .cpb-content-item.active  .cpb-edit-item-action {
 	display: block;
 }
@@ -754,7 +775,7 @@ margin-bottom: 1rem;
     /* background-color: #999; */
     border-right: 1px solid #eee;
     font-size: 0;
-    background-image: url(http://devsite.wpdev.cahnrs.wsu.edu/bees/wp-content/plugins/cahnrswp-plugin-pagebuilder/images/edit-icon.png);
+    background-image: url(<?php echo plugins_url( '/images/edit-icon.png', dirname(__FILE__) ); ?>);
     background-position: center center;
     background-repeat: no-repeat;
     background-size: 12px auto;
@@ -770,7 +791,7 @@ margin-bottom: 1rem;
     /* background-color: #999; */
     border-left: 1px solid #bcbcbc;
     font-size: 0;
-    background-image: url(http://devsite.wpdev.cahnrs.wsu.edu/bees/wp-content/plugins/cahnrswp-plugin-pagebuilder/images/close-icon.png);
+    background-image: url(<?php echo plugins_url( '/images/close-icon-blue.png', dirname(__FILE__) ); ?>);
     background-position: center center;
     background-repeat: no-repeat;
     background-size: 12px auto;
